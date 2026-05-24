@@ -9,7 +9,7 @@ sys.path.insert(0, str(ROOT / "src"))
 sys.path.insert(0, str(ROOT / "scripts"))
 
 from evaluate_seed import evaluation_summary
-from sec_item_extractor.contracts import evaluation_gate, recovery_action_contract, warning_category
+from sec_item_extractor.contracts import evaluation_gate, recovery_action_contract, retry_policy_contract, warning_category
 
 
 class ContractTests(unittest.TestCase):
@@ -56,6 +56,15 @@ class ContractTests(unittest.TestCase):
 
         self.assertTrue(summary["evaluation_gate"]["passed"])
         self.assertEqual(summary["gold_boundary"]["failed_checks"], 0)
+        self.assertEqual(summary["retry_policy"]["contract_version"], "retry_policy_v1")
+
+    def test_retry_policy_is_bounded_and_deterministic(self):
+        policy = retry_policy_contract()
+
+        self.assertEqual(policy["mode"], "bounded_deterministic")
+        self.assertFalse(policy["llm_enabled"])
+        self.assertIn("candidate_start_ranking", [step["name"] for step in policy["steps"]])
+        self.assertIn("recovery_action_runner", [step["name"] for step in policy["steps"]])
 
 
 class GoldDatasetPlanTests(unittest.TestCase):

@@ -265,3 +265,9 @@ testing 方面開始去對全item抽取，而不是只會單一幾個item
 ```text
 可以，先把1-5做好
 ```
+
+## Retry Policy Contract Request
+
+```text
+可以補RetryPolicy，另外先確認working tree是否有未處理的部分
+```

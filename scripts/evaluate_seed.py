@@ -10,7 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from sec_item_extractor import extract_items
-from sec_item_extractor.contracts import evaluation_gate, warning_category_counts
+from sec_item_extractor.contracts import evaluation_gate, retry_policy_contract, warning_category_counts
 
 
 MANIFEST_PATH = ROOT / "fixtures" / "gold" / "seed_filings.json"
@@ -126,6 +126,7 @@ def evaluation_summary(payload: dict, gold_payload: dict | None = None) -> dict:
         "confidence_level_counts": payload["summary"]["confidence_level_counts"],
         "warning_counts": payload["summary"]["warning_counts"],
         "warning_category_counts": payload["summary"]["warning_category_counts"],
+        "retry_policy": retry_policy_contract(),
         "evaluation_gate": gate,
     }
     if gold_payload:
