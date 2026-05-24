@@ -15,21 +15,21 @@ Missing filings: 0
 | `aapl_2023_10k` | AAPL | 2023 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 0.90 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / medium 0.75 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 |
 | `msft_2014_10k` | MSFT | 2014 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 |
 | `msft_2023_10k` | MSFT | 2023 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 0.90 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 |
-| `jpm_2014_10k` | JPM | 2014 | partial | success / high 1.00 | success / high 1.00 | success / high 0.90 | not_present / high 1.00 | success / high 1.00 | success / high 0.90 | success / high 1.00 | success / high 1.00 | failed / low 0.20 | success / high 0.90 | success / high 0.90 | success / high 0.90 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 | success / high 1.00 | failed / low 0.20 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 0.90 | not_present / high 1.00 |
-| `jpm_2023_10k` | JPM | 2023 | partial | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | failed / low 0.20 | success / high 0.90 | success / high 0.90 | success / high 0.90 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 0.90 | not_present / high 1.00 |
+| `jpm_2014_10k` | JPM | 2014 | success | success / high 1.00 | success / high 1.00 | success / high 0.90 | not_present / high 1.00 | success / high 1.00 | success / high 0.90 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 0.90 | success / high 0.90 | success / high 0.90 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 0.90 | not_present / high 1.00 |
+| `jpm_2023_10k` | JPM | 2023 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 0.90 | success / high 0.90 | success / high 0.90 | success / high 0.90 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 0.90 | not_present / high 1.00 |
 | `bac_2014_10k` | BAC | 2014 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / medium 0.80 | success / high 0.90 | success / high 0.90 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 0.90 | not_present / high 1.00 |
 | `bac_2023_10k` | BAC | 2023 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 0.90 | success / medium 0.80 | success / high 0.90 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 0.90 |
-| `unh_2014_10k` | UNH | 2014 | success | success / high 1.00 | success / high 1.00 | success / medium 0.75 | not_present / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 0.85 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 |
+| `unh_2014_10k` | UNH | 2014 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 | success / high 0.85 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 0.85 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 |
 | `unh_2023_10k` | UNH | 2023 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 0.85 | success / high 0.85 | success / high 1.00 | success / high 1.00 | success / high 0.85 | success / high 0.85 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 |
 | `jnj_2014_10k` | JNJ | 2014 | success | success / high 1.00 | success / high 0.90 | success / high 1.00 | not_present / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / medium 0.75 | success / high 0.90 | success / high 0.90 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 |
 | `jnj_2023_10k` | JNJ | 2023 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 0.90 | success / high 1.00 | success / high 0.90 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 |
 | `xom_2014_10k` | XOM | 2014 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 0.90 | success / high 0.90 | success / high 0.90 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 |
 | `xom_2023_10k` | XOM | 2023 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 | success / high 0.90 | success / high 0.90 | success / high 0.90 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 |
-| `cvx_2014_10k` | CVX | 2014 | partial | success / high 1.00 | success / high 1.00 | success / high 1.00 | failed / low 0.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | failed / low 0.20 | success / high 0.90 | success / high 0.90 | success / high 0.90 | success / high 1.00 | success / high 1.00 | success / high 1.00 | failed / low 0.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | failed / low 0.20 | failed / low 0.00 |
+| `cvx_2014_10k` | CVX | 2014 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / medium 0.80 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 0.90 | success / high 0.90 | success / high 0.90 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / medium 0.80 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / medium 0.80 |
 | `cvx_2023_10k` | CVX | 2023 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 0.85 | success / medium 0.75 | success / high 0.90 | success / high 0.90 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 0.90 | success / high 1.00 | success / high 1.00 |
-| `wmt_2014_10k` | WMT | 2014 | partial | success / high 1.00 | success / high 1.00 | success / high 1.00 | failed / low 0.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 0.90 | success / high 0.90 | success / high 0.90 | success / high 1.00 | success / high 1.00 | success / high 1.00 | failed / low 0.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | failed / low 0.20 | failed / low 0.00 |
-| `wmt_2023_10k` | WMT | 2023 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 0.90 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / medium 0.75 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 |
-| `amzn_2014_10k` | AMZN | 2014 | partial | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 | success / high 0.85 | success / high 0.85 | success / high 1.00 | success / high 1.00 | success / high 0.90 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 0.90 | failed / low 0.20 | not_present / high 1.00 | success / high 0.85 | success / high 0.85 | success / high 0.85 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 |
+| `wmt_2014_10k` | WMT | 2014 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / medium 0.80 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 0.90 | success / high 0.90 | success / high 0.90 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / medium 0.80 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / medium 0.80 |
+| `wmt_2023_10k` | WMT | 2023 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 0.90 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 |
+| `amzn_2014_10k` | AMZN | 2014 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 | success / high 0.85 | success / high 0.85 | success / high 1.00 | success / high 1.00 | success / high 0.90 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 0.90 | success / medium 0.75 | not_present / high 1.00 | success / high 0.85 | success / high 0.85 | success / high 0.85 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 |
 | `amzn_2023_10k` | AMZN | 2023 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 0.85 | success / high 0.85 | success / high 1.00 | success / high 1.00 | success / high 0.90 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / medium 0.75 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 0.85 | success / high 1.00 | success / high 1.00 | success / high 1.00 |
 
 ## Details
@@ -1475,18 +1475,18 @@ End snippet:
 
 - Status: `success`
 - Confidence: `high` `0.90`
-- Text length: `39`
+- Text length: `23`
 - Warnings: `Section length is outside the expected first-pass range.`
-- Start evidence: `PART II Item 6 ITEM 6. [RESERVED]`
-- End evidence: `PART II Item 7 ITEM 7. MANAGEMENT’S DISCUSSION AND ANALYSIS OF FINANCIAL CONDITION AND RESULTS OF OPERATIONS`
+- Start evidence: `Item 6. [Reserved]`
+- End evidence: `Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations`
 
 Start snippet:
 
-> PART II Item 6 ITEM 6. [RESERVED] 39
+> Item 6. [Reserved] 39
 
 End snippet:
 
-> PART II Item 6 ITEM 6. [RESERVED] 39
+> Item 6. [Reserved] 39
 
 #### Item 7
 
@@ -1730,7 +1730,7 @@ End snippet:
 
 - Ticker: `JPM`
 - Fiscal year: `2014`
-- Overall status: `partial`
+- Overall status: `success`
 - Candidate count: `40`
 - TOC confidence: `medium`
 - TOC items: `1, 1A, 1B, 2, 3, 4, 5, 6, 7, 7A, 8, 9, 9A, 9B, 10, 11, 12, 13, 14, 15`
@@ -1896,19 +1896,20 @@ End snippet:
 
 #### Item 6
 
-- Status: `failed`
-- Confidence: `low` `0.20`
-- Text length: `0`
-- Warnings: `Start heading was found, but no legal end boundary was found.`
-- Start evidence: `Item 6 Selected financial data`
+- Status: `success`
+- Confidence: `high` `1.00`
+- Text length: `156`
+- Warnings: none
+- Start evidence: `ITEM 6: SELECTED FINANCIAL DATA`
+- End evidence: `ITEM 7: MANAGEMENT’S DISCUSSION AND ANALYSIS OF FINANCIAL CONDITION AND RESULTS OF OPERATIONS`
 
 Start snippet:
 
-> 
+> ITEM 6: SELECTED FINANCIAL DATA For five-year selected financial data, see “Five-year summary of consolidated financial highlights (unaudited)” on page 62.
 
 End snippet:
 
-> 
+> ITEM 6: SELECTED FINANCIAL DATA For five-year selected financial data, see “Five-year summary of consolidated financial highlights (unaudited)” on page 62.
 
 #### Item 7
 
@@ -2049,19 +2050,20 @@ End snippet:
 
 #### Item 11
 
-- Status: `failed`
-- Confidence: `low` `0.20`
-- Text length: `0`
-- Warnings: `Start heading was found, but no legal end boundary was found.`
-- Start evidence: `Item 11 Executive compensation`
+- Status: `success`
+- Confidence: `high` `1.00`
+- Text length: `45`
+- Warnings: none
+- Start evidence: `ITEM 11: EXECUTIVE COMPENSATION`
+- End evidence: `ITEM 12: SECURITY OWNERSHIP OF CERTAIN BENEFICIAL OWNERS AND MANAGEMENT AND RELATED STOCKHOLDER MATTERS`
 
 Start snippet:
 
-> 
+> ITEM 11: EXECUTIVE COMPENSATION See Item 10.
 
 End snippet:
 
-> 
+> ITEM 11: EXECUTIVE COMPENSATION See Item 10.
 
 #### Item 12
 
@@ -2150,7 +2152,7 @@ End snippet:
 
 - Ticker: `JPM`
 - Fiscal year: `2023`
-- Overall status: `partial`
+- Overall status: `success`
 - Candidate count: `43`
 - TOC confidence: `medium`
 - TOC items: `1, 1A, 1B, 2, 3, 4, 5, 6, 7, 7A, 8, 9, 9A, 9B, 9C, 10, 11, 12, 13, 14, 15`
@@ -2319,19 +2321,20 @@ End snippet:
 
 #### Item 6
 
-- Status: `failed`
-- Confidence: `low` `0.20`
-- Text length: `0`
-- Warnings: `Start heading was found, but no legal end boundary was found.`
+- Status: `success`
+- Confidence: `high` `0.90`
+- Text length: `21`
+- Warnings: `Section length is outside the expected first-pass range.`
 - Start evidence: `Item 6. Reserved`
+- End evidence: `Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations.`
 
 Start snippet:
 
-> 
+> Item 6. Reserved 35
 
 End snippet:
 
-> 
+> Item 6. Reserved 35
 
 #### Item 7
 
@@ -3494,20 +3497,19 @@ End snippet:
 #### Item 1B
 
 - Status: `success`
-- Confidence: `medium` `0.75`
-- Text length: `132985`
-- Warnings: `Start heading has TOC-like signals.`, `Section length is outside the expected first-pass range.`
-- Start evidence: `Item 1B. Unresolved Staff Comments`
+- Confidence: `high` `1.00`
+- Text length: `41`
+- Warnings: none
+- Start evidence: `ITEM 1B. UNRESOLVED STAFF COMMENTS`
 - End evidence: `ITEM 2. PROPERTIES`
-- Recommended actions: `inspect_only:start_toc_like_signal`
 
 Start snippet:
 
-> Item 1B. Unresolved Staff Comments 24 Item 2. Properties 24 Item 3. Legal Proceedings 24 Item 4. Mine Safety Disclosures 24 Part II Item 5. Market for Registrant's Common Equity, Related Stockholder Matters and Issuer Purchases of Equity Securities 24 Item...
+> ITEM 1B. UNRESOLVED STAFF COMMENTS None.
 
 End snippet:
 
-> ...he future. Downgrades in our credit ratings, should they occur, could materially increase our costs of or ability to access funds in the debt and capital markets and otherwise materially increase our operating costs. ITEM 1B. UNRESOLVED STAFF COMMENTS None.
+> ITEM 1B. UNRESOLVED STAFF COMMENTS None.
 
 #### Item 1C
 
@@ -3527,15 +3529,16 @@ End snippet:
 #### Item 2
 
 - Status: `success`
-- Confidence: `high` `1.00`
-- Text length: `353`
-- Warnings: none
-- Start evidence: `ITEM 2. PROPERTIES`
+- Confidence: `high` `0.85`
+- Text length: `133299`
+- Warnings: `Start heading has TOC-like signals.`
+- Start evidence: `Item 2. Properties`
 - End evidence: `ITEM 3. LEGAL PROCEEDINGS`
+- Recommended actions: `inspect_only:start_toc_like_signal`
 
 Start snippet:
 
-> ITEM 2. PROPERTIES To support our business operations in the United States and other countries we own and lease real properties. Our various reportable segments use these facilities for their respective business purposes, and we believe these current facili...
+> Item 2. Properties 24 Item 3. Legal Proceedings 24 Item 4. Mine Safety Disclosures 24 Part II Item 5. Market for Registrant's Common Equity, Related Stockholder Matters and Issuer Purchases of Equity Securities 24 Item 6. Selected Financial Data 28 Item 7....
 
 End snippet:
 
@@ -5954,7 +5957,7 @@ End snippet:
 
 - Ticker: `CVX`
 - Fiscal year: `2014`
-- Overall status: `partial`
+- Overall status: `success`
 - Candidate count: `20`
 - TOC confidence: `none`
 - TOC items: `none`
@@ -6012,10 +6015,10 @@ End snippet:
 
 #### Item 1C
 
-- Status: `failed`
-- Confidence: `low` `0.00`
+- Status: `not_present`
+- Confidence: `medium` `0.80`
 - Text length: `0`
-- Warnings: `No heading candidate found for requested item.`
+- Warnings: none
 
 Start snippet:
 
@@ -6095,19 +6098,20 @@ End snippet:
 
 #### Item 6
 
-- Status: `failed`
-- Confidence: `low` `0.20`
-- Text length: `0`
-- Warnings: `Start heading was found, but no legal end boundary was found.`
+- Status: `success`
+- Confidence: `high` `1.00`
+- Text length: `117`
+- Warnings: none
 - Start evidence: `Item 6. Selected Financial Data`
+- End evidence: `Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations`
 
 Start snippet:
 
-> 
+> Item 6. Selected Financial Data The selected financial data for years 2010 through 2014 are presented on page FS-60.
 
 End snippet:
 
-> 
+> Item 6. Selected Financial Data The selected financial data for years 2010 through 2014 are presented on page FS-60.
 
 #### Item 7
 
@@ -6216,10 +6220,10 @@ End snippet:
 
 #### Item 9C
 
-- Status: `failed`
-- Confidence: `low` `0.00`
+- Status: `not_present`
+- Confidence: `medium` `0.80`
 - Text length: `0`
-- Warnings: `No heading candidate found for requested item.`
+- Warnings: none
 
 Start snippet:
 
@@ -6316,26 +6320,27 @@ End snippet:
 
 #### Item 15
 
-- Status: `failed`
-- Confidence: `low` `0.20`
-- Text length: `0`
-- Warnings: `Start heading was found, but no legal end boundary was found.`
+- Status: `success`
+- Confidence: `high` `1.00`
+- Text length: `1886`
+- Warnings: none
 - Start evidence: `PART IV Item 15. Exhibits, Financial Statement Schedules`
+- End evidence: `SIGNATURES`
 
 Start snippet:
 
-> 
+> PART IV Item 15. Exhibits, Financial Statement Schedules (a) The following documents are filed as part of this report: (1) Financial Statements: Page(s) Report of Independent Registered Public Accounting Firm — PricewaterhouseCoopers LLP FS--22 Consolidated...
 
 End snippet:
 
-> 
+> ...ons to deferred income tax expense 1,192 2,665 5,471 Reduction of deferred income tax expense (2,071 ) (937 ) (1,124 ) Balance at December 31 $ 16,292 $ 17,171 $ 15,443 * See also Note 16 to the Consolidated Financial Statements, beginning on page FS-45. 28
 
 #### Item 16
 
-- Status: `failed`
-- Confidence: `low` `0.00`
+- Status: `not_present`
+- Confidence: `medium` `0.80`
 - Text length: `0`
-- Warnings: `No heading candidate found for requested item.`
+- Warnings: none
 
 Start snippet:
 
@@ -6781,7 +6786,7 @@ End snippet:
 
 - Ticker: `WMT`
 - Fiscal year: `2014`
-- Overall status: `partial`
+- Overall status: `success`
 - Candidate count: `20`
 - TOC confidence: `none`
 - TOC items: `none`
@@ -6839,10 +6844,10 @@ End snippet:
 
 #### Item 1C
 
-- Status: `failed`
-- Confidence: `low` `0.00`
+- Status: `not_present`
+- Confidence: `medium` `0.80`
 - Text length: `0`
-- Warnings: `No heading candidate found for requested item.`
+- Warnings: none
 
 Start snippet:
 
@@ -7044,10 +7049,10 @@ End snippet:
 
 #### Item 9C
 
-- Status: `failed`
-- Confidence: `low` `0.00`
+- Status: `not_present`
+- Confidence: `medium` `0.80`
 - Text length: `0`
-- Warnings: `No heading candidate found for requested item.`
+- Warnings: none
 
 Start snippet:
 
@@ -7144,26 +7149,27 @@ End snippet:
 
 #### Item 15
 
-- Status: `failed`
-- Confidence: `low` `0.20`
-- Text length: `0`
-- Warnings: `Start heading was found, but no legal end boundary was found.`
+- Status: `success`
+- Confidence: `high` `1.00`
+- Text length: `885`
+- Warnings: none
 - Start evidence: `PART IV ITEM 15. EXHIBITS, FINANCIAL STATEMENT SCHEDULES`
+- End evidence: `SIGNATURES`
 
 Start snippet:
 
-> 
+> PART IV ITEM 15. EXHIBITS, FINANCIAL STATEMENT SCHEDULES (a) Documents filed as part of this report are as follows: 1. Financial Statements: See the Financial Statements incorporated herein by reference to the portions of our Annual Report to Shareholders f...
 
 End snippet:
 
-> 
+> ...required exhibits are included at the end of the Form 10-K or are incorporated herein by reference and are described in the Exhibit Index immediately preceding the first exhibit to this Annual Report on Form 10-K. (b) Financial Statement Schedules None. 31
 
 #### Item 16
 
-- Status: `failed`
-- Confidence: `low` `0.00`
+- Status: `not_present`
+- Confidence: `medium` `0.80`
 - Text length: `0`
-- Warnings: `No heading candidate found for requested item.`
+- Warnings: none
 
 Start snippet:
 
@@ -7448,20 +7454,19 @@ End snippet:
 #### Item 9B
 
 - Status: `success`
-- Confidence: `medium` `0.75`
-- Text length: `340213`
-- Warnings: `Start heading has TOC-like signals.`, `Section length is outside the expected first-pass range.`
-- Start evidence: `Item 9B Other Information`
+- Confidence: `high` `1.00`
+- Text length: `34`
+- Warnings: none
+- Start evidence: `ITEM 9B. OTHER INFORMATION`
 - End evidence: `ITEM 9C. DISCLOSURE REGARDING FOREIGN JURISDICTIONS THAT PREVENT INSPECTIONS`
-- Recommended actions: `inspect_only:start_toc_like_signal`
 
 Start snippet:
 
-> Item 9B Other Information 81 Item 9C Disclosure Regarding Foreign Jurisdictions that Prevent Inspections 81 Part III Item 10 Directors, Executive Officers and Corporate Governance 82 Item 11 Executive Compensation 82 Item 12 Security Ownership of Certain Be...
+> ITEM 9B. OTHER INFORMATION None.
 
 End snippet:
 
-> ...g our financial system, including our general ledger and other applications, in stages. This financial system will continue to be a significant component of our internal control over financial reporting as it is implemented. ITEM 9B. OTHER INFORMATION None.
+> ITEM 9B. OTHER INFORMATION None.
 
 #### Item 9C
 
@@ -7603,7 +7608,7 @@ End snippet:
 
 - Ticker: `AMZN`
 - Fiscal year: `2014`
-- Overall status: `partial`
+- Overall status: `success`
 - Candidate count: `40`
 - TOC confidence: `medium`
 - TOC items: `1, 1A, 1B, 2, 3, 4, 5, 6, 7, 7A, 8, 9, 9A, 9B, 10, 11, 12, 13, 14, 15`
@@ -7873,19 +7878,21 @@ End snippet:
 
 #### Item 9B
 
-- Status: `failed`
-- Confidence: `low` `0.20`
-- Text length: `0`
-- Warnings: `Start heading was found, but no legal end boundary was found.`
+- Status: `success`
+- Confidence: `medium` `0.75`
+- Text length: `34`
+- Warnings: `Start heading has TOC-like signals.`, `End heading has TOC-like signals.`
 - Start evidence: `Item 9B. Other Information`
+- End evidence: `PART III Item 10. Directors, Executive Officers, and Corporate Governance`
+- Recommended actions: `inspect_only:start_toc_like_signal`
 
 Start snippet:
 
-> 
+> Item 9B. Other Information None.
 
 End snippet:
 
-> 
+> Item 9B. Other Information None.
 
 #### Item 9C
 
@@ -8389,19 +8396,19 @@ End snippet:
 
 - Status: `success`
 - Confidence: `high` `0.85`
-- Text length: `205`
+- Text length: `256`
 - Warnings: `Start heading has TOC-like signals.`
 - Start evidence: `Item 13. Certain Relationships and Related Transactions, and Director Independence`
-- End evidence: `Item 16. Form 10-K Summary`
+- End evidence: `Item 14. Principal Accountant Fees and Services`
 - Recommended actions: `inspect_only:start_toc_like_signal`
 
 Start snippet:
 
-> Item 13. Certain Relationships and Related Transactions, and Director Independence 74 Item 14. Principal Accountant Fees and Services 74 PART IV Item 15. Exhibits, Financial Statement Schedules 75
+> Item 13. Certain Relationships and Related Transactions, and Director Independence Information required by Item 13 of Part III is included in our Proxy Statement relating to our 2024 Annual Meeting of Shareholders and is incorporated herein by reference.
 
 End snippet:
 
-> Item 13. Certain Relationships and Related Transactions, and Director Independence 74 Item 14. Principal Accountant Fees and Services 74 PART IV Item 15. Exhibits, Financial Statement Schedules 75
+> Item 13. Certain Relationships and Related Transactions, and Director Independence Information required by Item 13 of Part III is included in our Proxy Statement relating to our 2024 Annual Meeting of Shareholders and is incorporated herein by reference.
 
 #### Item 14
 

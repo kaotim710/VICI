@@ -253,3 +253,9 @@ testing 方面開始去對全item抽取，而不是只會單一幾個item
 ```text
 好，根據milestone進行下一步，13 failed的部分後續處理，先跑mvp
 ```
+
+## Failed Item Recovery Request
+
+```text
+好，根據milestone進行下一步，13 failed的部分後續處理
+```

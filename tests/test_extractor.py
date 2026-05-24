@@ -156,6 +156,24 @@ class ExtractorTests(unittest.TestCase):
         self.assertNotIn("Signature text.", item.text)
         self.assertEqual(item.end_evidence.item, "EOF")
 
+    def test_item_fifteen_can_use_terminal_boundary_when_item_sixteen_is_absent(self):
+        filing = """
+        PART IV
+        Item 15. Exhibits, Financial Statement Schedules
+        Exhibit index text.
+
+        SIGNATURES
+        Signature text.
+        """
+
+        result = extract_items(filing, target_items=["15"])
+        item = result.item_results[0]
+
+        self.assertEqual(item.status, "success")
+        self.assertIn("Exhibit index text.", item.text)
+        self.assertNotIn("Signature text.", item.text)
+        self.assertIn("ITEM_15_TERMINAL_END_BOUNDARY_USED", item.candidate_attempts[0].validation_reasons)
+
     def test_item_absent_from_toc_is_not_treated_as_failed_extraction(self):
         filing = """
         Table of Contents
@@ -177,6 +195,48 @@ class ExtractorTests(unittest.TestCase):
         self.assertEqual(item.warnings, [])
         self.assertEqual(result.toc_items, ["1", "2"])
         self.assertEqual(result.toc_confidence, "high")
+
+    def test_item_absent_from_observed_sequence_is_not_failed_without_toc(self):
+        spacer = " Long narrative sentence." * 90
+        filing = """
+        Item 1. Business
+        Business narrative.
+        """ + spacer + """
+        Item 1A. Risk Factors
+        Risk narrative.
+        """ + spacer + """
+        Item 1B. Unresolved Staff Comments
+        None.
+        Item 2. Properties
+        Property narrative.
+        """ + spacer + """
+        Item 3. Legal Proceedings
+        Legal narrative.
+        """ + spacer + """
+        Item 4. Mine Safety Disclosures
+        None.
+        Item 5. Market for Registrant's Common Equity
+        Market narrative.
+        """ + spacer + """
+        Item 6. Selected Financial Data
+        Selected data narrative.
+        """ + spacer + """
+        Item 7. Management's Discussion and Analysis
+        MD&A narrative.
+        """ + spacer + """
+        Item 7A. Quantitative and Qualitative Disclosures About Market Risk
+        Market risk narrative.
+        """ + spacer + """
+        Item 8. Financial Statements and Supplementary Data
+        Financial statements narrative.
+        """
+
+        result = extract_items(filing, target_items=["1C"])
+        item = result.item_results[0]
+
+        self.assertEqual(result.status, "success")
+        self.assertEqual(item.status, "not_present")
+        self.assertIn("ITEM_NOT_DECLARED_IN_OBSERVED_SEQUENCE", item.validation_reasons)
 
     def test_toc_next_item_can_skip_absent_intermediate_items_for_boundary(self):
         filing = """
@@ -299,6 +359,25 @@ class ExtractorTests(unittest.TestCase):
         item = result.item_results[0]
 
         self.assertIn("Business narrative.", item.text)
+        self.assertEqual(item.candidate_attempts[-1].decision, "selected")
+
+    def test_short_dense_body_candidate_is_accepted_when_no_later_start_exists(self):
+        filing = """
+        Table of Contents
+        Item 6. Selected Financial Data........ 19
+        Item 7. Management's Discussion and Analysis........ 20
+
+        ITEM 6: SELECTED FINANCIAL DATA
+        For five-year selected financial data, see page 62.
+        ITEM 7: MANAGEMENT'S DISCUSSION AND ANALYSIS
+        Discussion narrative.
+        """
+
+        result = extract_items(filing, target_items=["6"])
+        item = result.item_results[0]
+
+        self.assertEqual(item.status, "success")
+        self.assertIn("For five-year selected financial data", item.text)
         self.assertEqual(item.candidate_attempts[-1].decision, "selected")
 
 

@@ -71,6 +71,15 @@ def _extract_one_item(text: str, candidates: list[HeadingCandidate], item: str, 
                 confidence_score=1.0,
                 strategy_used="toc_presence_filter_v1",
             )
+        if _item_absent_from_observed_sequence(item, candidates):
+            return ItemResult(
+                item=item,
+                status="not_present",
+                validation_reasons=["ITEM_NOT_DECLARED_IN_OBSERVED_SEQUENCE"],
+                confidence_level="medium",
+                confidence_score=0.8,
+                strategy_used="observed_sequence_presence_filter_v1",
+            )
         return ItemResult(
             item=item,
             status="failed",
@@ -104,11 +113,11 @@ def _candidate_pairs(
     text: str, candidates: list[HeadingCandidate], starts: list[HeadingCandidate], toc_items: list[str]
 ) -> list[CandidatePair]:
     pairs = []
-    for start in starts:
+    for index, start in enumerate(starts):
         end, end_reasons = _find_end_candidate(text, candidates, start, toc_items)
         section_text = text[start.start : end.start].strip() if end else ""
         validation_reasons = _start_validation_reasons(start) + end_reasons
-        rejection_reasons = _pair_rejection_reasons(start, end, section_text)
+        rejection_reasons = _pair_rejection_reasons(start, end, section_text, has_later_start=index + 1 < len(starts))
         pairs.append(
             CandidatePair(
                 start=start,
@@ -138,6 +147,8 @@ def _find_end_candidate(
     if not toc_next or not non_toc:
         later = [candidate for candidate in candidates if candidate.start > start.end and candidate.item in legal_next]
     if not later:
+        if start.item == "15":
+            return _terminal_end_candidate(text, start), ["ITEM_15_TERMINAL_END_BOUNDARY_USED"]
         if toc_items and start.item in toc_items and not toc_next:
             return _terminal_end_candidate(text, start), ["TOC_LAST_ITEM_TERMINAL_END_BOUNDARY_USED"]
         return None, ["LEGAL_END_HEADING_NOT_FOUND"]
@@ -161,11 +172,11 @@ def _terminal_end_candidate(text: str, start: HeadingCandidate) -> HeadingCandid
 
 
 def _pair_rejection_reasons(
-    start: HeadingCandidate, end: HeadingCandidate | None, section_text: str
+    start: HeadingCandidate, end: HeadingCandidate | None, section_text: str, has_later_start: bool
 ) -> list[str]:
     if end is None:
         return ["LEGAL_END_HEADING_NOT_FOUND"]
-    if _is_likely_toc_span(start, end, section_text):
+    if _is_likely_toc_span(start, end, section_text, has_later_start):
         return ["REJECTED_SHORT_ORDERED_TOC_SPAN"]
     return []
 
@@ -369,11 +380,66 @@ def _attempt_warnings(start: HeadingCandidate, end: HeadingCandidate | None) -> 
     return warnings
 
 
-def _is_likely_toc_span(start: HeadingCandidate, end: HeadingCandidate, section_text: str) -> bool:
-    ordered_toc_like = start.is_toc_like and end.is_toc_like
-    dense_only = "TOC_DENSE_ITEM_CLUSTER" in start.reasons and "TOC_DENSE_ITEM_CLUSTER" in end.reasons
-    short_heading_only = dense_only and len(section_text) < 200
-    return (ordered_toc_like or short_heading_only) and not _is_cross_reference_section(section_text) and len(section_text) < 800
+def _is_likely_toc_span(
+    start: HeadingCandidate, end: HeadingCandidate, section_text: str, has_later_start: bool
+) -> bool:
+    if len(section_text) >= 800 or _is_cross_reference_section(section_text):
+        return False
+    if _span_has_body_text(start.item, section_text):
+        return False
+
+    explicit_toc_pair = _has_explicit_toc_signal(start) and _has_explicit_toc_signal(end)
+    if explicit_toc_pair:
+        return True
+
+    dense_pair = "TOC_DENSE_ITEM_CLUSTER" in start.reasons and "TOC_DENSE_ITEM_CLUSTER" in end.reasons
+    return has_later_start and (start.is_toc_like or end.is_toc_like or dense_pair)
+
+
+def _has_explicit_toc_signal(candidate: HeadingCandidate) -> bool:
+    return any(
+        reason in candidate.reasons
+        for reason in ("TOC_DOT_LEADER_PAGE_NUMBER", "TOC_PAGE_NUMBER_PATTERN", "TOC_TABLE_ROW_PAGE_NUMBER")
+    )
+
+
+def _span_has_body_text(item: str, section_text: str) -> bool:
+    for line in (" ".join(raw_line.split()) for raw_line in section_text.splitlines()):
+        if not line or re.fullmatch(r"\d{1,4}", line):
+            continue
+        if re.match(r"(?i)^(?:part\s+[ivx]+\s*)?item\s+", line):
+            continue
+        if line.lower() in {"none", "none.", "reserved", "[reserved]"}:
+            return True
+        if re.search(r"\b(?:see|refer|reference|appears|presented|included|incorporated)\b", line, flags=re.IGNORECASE):
+            return True
+        if is_expected_title(item, line):
+            continue
+        if len(line.split()) >= 8:
+            return True
+    return False
+
+
+def _item_absent_from_observed_sequence(item: str, candidates: list[HeadingCandidate]) -> bool:
+    if item not in ITEM_ORDER:
+        return False
+    ordered_candidates = [
+        candidate
+        for candidate in sorted(candidates, key=lambda current: current.start)
+        if candidate.item in ITEM_ORDER and not candidate.is_toc_like and is_expected_title(candidate.item, candidate.normalized_text)
+    ]
+    observed = {candidate.item: candidate for candidate in ordered_candidates}
+    if item in observed or len(observed) < 8:
+        return False
+
+    index = ITEM_ORDER.index(item)
+    previous_items = [previous for previous in reversed(ITEM_ORDER[:index]) if previous in observed]
+    next_items = [next_item for next_item in ITEM_ORDER[index + 1 :] if next_item in observed]
+    if not previous_items:
+        return False
+    if next_items:
+        return observed[previous_items[0]].start < observed[next_items[0]].start
+    return item == ITEM_ORDER[-1] and previous_items[0] == "15"
 
 
 def _is_cross_reference_section(section_text: str) -> bool:

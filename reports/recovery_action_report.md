@@ -41,7 +41,7 @@ Missing filings: 0
 | `bac_2014_10k` | 7A | `needs_external_source` | `external_or_other_document_reference` | `deferred` | 218 | none | none | none |
 | `bac_2023_10k` | 7 | `needs_user_selection` | `internal_item_toc_detected` | `needs_user_selection` | 308102 | none | none | none |
 | `bac_2023_10k` | 7A | `needs_external_source` | `external_or_other_document_reference` | `deferred` | 218 | none | none | none |
-| `unh_2014_10k` | 1B | `inspect_only` | `start_toc_like_signal` | `inspect_only` | 132985 | none | none | none |
+| `unh_2014_10k` | 2 | `inspect_only` | `start_toc_like_signal` | `inspect_only` | 133299 | none | none | none |
 | `unh_2014_10k` | 7 | `inspect_only` | `start_toc_like_signal` | `inspect_only` | 219335 | none | none | none |
 | `unh_2023_10k` | 2 | `inspect_only` | `start_toc_like_signal` | `inspect_only` | 122323 | none | none | none |
 | `unh_2023_10k` | 3 | `inspect_only` | `start_toc_like_signal` | `inspect_only` | 122298 | none | none | none |
@@ -70,16 +70,16 @@ Missing filings: 0
 | `wmt_2014_10k` | 7 | `needs_external_source` | `external_or_other_document_reference` | `deferred` | 413 | none | none | none |
 | `wmt_2014_10k` | 7A | `needs_external_source` | `external_or_other_document_reference` | `deferred` | 423 | none | none | none |
 | `wmt_2014_10k` | 8 | `needs_external_source` | `external_or_other_document_reference` | `deferred` | 606 | none | none | none |
-| `wmt_2023_10k` | 9B | `inspect_only` | `start_toc_like_signal` | `inspect_only` | 340213 | none | none | none |
 | `amzn_2014_10k` | 2 | `inspect_only` | `start_toc_like_signal` | `inspect_only` | 1253 | none | none | none |
 | `amzn_2014_10k` | 3 | `inspect_only` | `start_toc_like_signal` | `inspect_only` | 152 | none | none | none |
+| `amzn_2014_10k` | 9B | `inspect_only` | `start_toc_like_signal` | `inspect_only` | 34 | none | none | none |
 | `amzn_2014_10k` | 10 | `inspect_only` | `start_toc_like_signal` | `inspect_only` | 1545 | none | none | none |
 | `amzn_2014_10k` | 11 | `inspect_only` | `start_toc_like_signal` | `inspect_only` | 484 | none | none | none |
 | `amzn_2014_10k` | 12 | `inspect_only` | `start_toc_like_signal` | `inspect_only` | 277 | none | none | none |
 | `amzn_2023_10k` | 2 | `inspect_only` | `start_toc_like_signal` | `inspect_only` | 79315 | none | none | none |
 | `amzn_2023_10k` | 3 | `inspect_only` | `start_toc_like_signal` | `inspect_only` | 79290 | none | none | none |
 | `amzn_2023_10k` | 9C | `inspect_only` | `start_toc_like_signal` | `inspect_only` | 268364 | none | none | none |
-| `amzn_2023_10k` | 13 | `inspect_only` | `start_toc_like_signal` | `inspect_only` | 205 | none | none | none |
+| `amzn_2023_10k` | 13 | `inspect_only` | `start_toc_like_signal` | `inspect_only` | 256 | none | none | none |
 
 ## Details
 
@@ -192,13 +192,13 @@ Recovered end snippet:
 - Before length: `218`
 - Options: `fetch_referenced_document, upload_reference_document, accept_short_text`
 
-### unh_2014_10k Item 1B - start_toc_like_signal
+### unh_2014_10k Item 2 - start_toc_like_signal
 
 - Ticker: `UNH`
 - Fiscal year: `2014`
 - Status: `inspect_only`
 - Message: No deterministic recovery runner is registered for this action.
-- Before length: `132985`
+- Before length: `133299`
 
 ### unh_2014_10k Item 7 - start_toc_like_signal
 
@@ -444,14 +444,6 @@ Recovered end snippet:
 - Before length: `606`
 - Options: `fetch_referenced_document, upload_reference_document, accept_short_text`
 
-### wmt_2023_10k Item 9B - start_toc_like_signal
-
-- Ticker: `WMT`
-- Fiscal year: `2023`
-- Status: `inspect_only`
-- Message: No deterministic recovery runner is registered for this action.
-- Before length: `340213`
-
 ### amzn_2014_10k Item 2 - start_toc_like_signal
 
 - Ticker: `AMZN`
@@ -467,6 +459,14 @@ Recovered end snippet:
 - Status: `inspect_only`
 - Message: No deterministic recovery runner is registered for this action.
 - Before length: `152`
+
+### amzn_2014_10k Item 9B - start_toc_like_signal
+
+- Ticker: `AMZN`
+- Fiscal year: `2014`
+- Status: `inspect_only`
+- Message: No deterministic recovery runner is registered for this action.
+- Before length: `34`
 
 ### amzn_2014_10k Item 10 - start_toc_like_signal
 
@@ -522,4 +522,4 @@ Recovered end snippet:
 - Fiscal year: `2023`
 - Status: `inspect_only`
 - Message: No deterministic recovery runner is registered for this action.
-- Before length: `205`
+- Before length: `256`
