@@ -136,6 +136,9 @@ Any strategy change should include focused tests for the behavior being changed.
 - Seed tests should cover known production filings when strategy depends on real filing structure.
 - Supplemental partition tests must scan the 20 seed filings for expected virtual sections and must
   verify raw preview scope.
+- Regression reports should combine seed and validation filings into one review surface with status,
+  confidence, warning categories, raw media counts, supplemental section counts, raw preview
+  availability, and recovery action counts.
 - Full test suite should pass with `python3 -m unittest discover -s tests`.
 
 ## Change Log
@@ -147,3 +150,5 @@ Any strategy change should include focused tests for the behavior being changed.
   heading offsets.
 - 2026-05-24: Simplified normal item UI by removing section snippets and section-structure toggles;
   made original filing structure a reversible view toggle instead of an appended one-way preview.
+- 2026-05-25: Added regression evaluation as the reliability review surface before live SEC intake;
+  recovery readiness is tracked separately from autonomous external fetching.

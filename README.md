@@ -82,6 +82,12 @@ Evaluate lightweight gold boundary expectations:
 python3 scripts/evaluate_gold_boundaries.py
 ```
 
+Generate the combined seed + validation regression report:
+
+```bash
+python3 scripts/evaluate_regression.py
+```
+
 Fetch and evaluate the held-out validation filings:
 
 ```bash
@@ -126,3 +132,9 @@ Item results now include `confidence_components`, which break the final score in
 explainable signals: legal boundary pair, TOC filtering, expected title match, and section length.
 `scripts/evaluate_seed.py` also emits aggregate status, confidence-level, and warning counts across
 the seed filings.
+
+## Reliability Regression
+
+`scripts/evaluate_regression.py` combines seed and validation filings into a single regression
+surface. It records per-item status, confidence, warning categories, raw table/image counts,
+supplemental section counts, raw preview availability, and recovery action counts.

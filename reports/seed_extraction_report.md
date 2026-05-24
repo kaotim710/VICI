@@ -1,6 +1,6 @@
 # Seed 10-K Extraction Report
 
-Generated: 2026-05-24
+Generated: 2026-05-25
 
 Scope: 20 seed 10-K filings, extracting 23 configured 10-K items.
 

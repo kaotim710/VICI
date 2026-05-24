@@ -58,3 +58,4 @@ estimated_prompt_tokens =
 | 2026-05-24 | strategy_documentation_request | `prompts/2026-05-24-user-prompts.md` |  | 26 | Requested creating a strategy Markdown file and keeping it updated whenever extraction strategy changes. |
 | 2026-05-24 | supplemental_toc_subsection_request | `prompts/2026-05-24-user-prompts.md` |  | 35 | Requested classifying supplemental partitions into child subsections using their own TOC, similar to item extraction. |
 | 2026-05-24 | item_ui_simplification_raw_toggle_request | `prompts/2026-05-24-user-prompts.md` |  | 37 | Requested removing section snippets and section-structure toggles from normal items, and making original filing structure toggle back to extracted view. |
+| 2026-05-25 | regression_milestone_implementation_request | `prompts/2026-05-25-user-prompts.md` |  | 28 | Approved implementing milestone planning items 1-4 while excluding live SEC intake, and noted JPM needs follow-up review. |

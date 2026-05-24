@@ -1,6 +1,6 @@
 {
   "summary": {
-    "generated": "2026-05-24",
+    "generated": "2026-05-25",
     "manifest": "fixtures/gold/validation_filings.json",
     "evaluated_filings": 10,
     "missing_filings": [],
@@ -13,18 +13,18 @@
       "not_present": 15
     },
     "confidence_level_counts": {
-      "high": 225,
-      "medium": 5
+      "high": 226,
+      "medium": 4
     },
     "warning_counts": {
-      "Start heading has TOC-like signals.": 4,
-      "Section length is outside the expected first-pass range.": 3,
-      "Start heading does not contain the expected canonical title.": 1
+      "Start heading has TOC-like signals.": 6,
+      "Start heading does not contain the expected canonical title.": 1,
+      "Section length is outside the expected first-pass range.": 1
     },
     "warning_category_counts": {
-      "length_policy_review": 3,
+      "length_policy_review": 1,
       "title_policy_review": 1,
-      "toc_signal_review": 4
+      "toc_signal_review": 6
     },
     "retry_policy": {
       "contract_version": "retry_policy_v1",
@@ -342,7 +342,7 @@
           "status": "success",
           "confidence_level": "high",
           "confidence_score": 1.0,
-          "text_length": 108,
+          "text_length": 645,
           "warnings": [],
           "recommended_actions": []
         },
@@ -350,7 +350,7 @@
           "status": "success",
           "confidence_level": "high",
           "confidence_score": 1.0,
-          "text_length": 87,
+          "text_length": 387,
           "warnings": [],
           "recommended_actions": []
         },
@@ -358,7 +358,7 @@
           "status": "success",
           "confidence_level": "high",
           "confidence_score": 1.0,
-          "text_length": 52,
+          "text_length": 267,
           "warnings": [],
           "recommended_actions": []
         },
@@ -395,8 +395,10 @@
       "status": "success",
       "candidate_count": 46,
       "toc_confidence": "high",
-      "warnings": [],
-      "recommended_action_count": 7,
+      "warnings": [
+        "Start heading has TOC-like signals."
+      ],
+      "recommended_action_count": 11,
       "items": {
         "1": {
           "status": "success",
@@ -474,7 +476,7 @@
           "status": "success",
           "confidence_level": "high",
           "confidence_score": 1.0,
-          "text_length": 5618,
+          "text_length": 5661,
           "warnings": [],
           "recommended_actions": [
             {
@@ -489,10 +491,34 @@
         "6": {
           "status": "success",
           "confidence_level": "high",
-          "confidence_score": 1.0,
-          "text_length": 41,
-          "warnings": [],
-          "recommended_actions": []
+          "confidence_score": 0.85,
+          "text_length": 181862,
+          "warnings": [
+            "Start heading has TOC-like signals."
+          ],
+          "recommended_actions": [
+            {
+              "action_type": "inspect_only",
+              "reason": "start_toc_like_signal",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_evidence_only"
+            },
+            {
+              "action_type": "inspect_only",
+              "reason": "section_reference_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_references"
+            },
+            {
+              "action_type": "inspect_only",
+              "reason": "exhibit_index_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_exhibit_index"
+            }
+          ]
         },
         "7": {
           "status": "success",
@@ -602,7 +628,7 @@
           "status": "success",
           "confidence_level": "high",
           "confidence_score": 1.0,
-          "text_length": 87,
+          "text_length": 455,
           "warnings": [],
           "recommended_actions": []
         },
@@ -610,7 +636,7 @@
           "status": "success",
           "confidence_level": "high",
           "confidence_score": 1.0,
-          "text_length": 52,
+          "text_length": 317,
           "warnings": [],
           "recommended_actions": []
         },
@@ -618,9 +644,16 @@
           "status": "success",
           "confidence_level": "high",
           "confidence_score": 1.0,
-          "text_length": 65,
+          "text_length": 110915,
           "warnings": [],
           "recommended_actions": [
+            {
+              "action_type": "inspect_only",
+              "reason": "section_reference_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_references"
+            },
             {
               "action_type": "inspect_only",
               "reason": "exhibit_index_detected",
@@ -648,10 +681,9 @@
       "candidate_count": 40,
       "toc_confidence": "high",
       "warnings": [
-        "Section length is outside the expected first-pass range.",
         "Start heading has TOC-like signals."
       ],
-      "recommended_action_count": 17,
+      "recommended_action_count": 19,
       "items": {
         "1": {
           "status": "success",
@@ -679,12 +711,11 @@
         },
         "1B": {
           "status": "success",
-          "confidence_level": "medium",
-          "confidence_score": 0.75,
+          "confidence_level": "high",
+          "confidence_score": 0.85,
           "text_length": 87177,
           "warnings": [
-            "Start heading has TOC-like signals.",
-            "Section length is outside the expected first-pass range."
+            "Start heading has TOC-like signals."
           ],
           "recommended_actions": [
             {
@@ -874,11 +905,18 @@
           "status": "success",
           "confidence_level": "high",
           "confidence_score": 0.85,
-          "text_length": 387,
+          "text_length": 364375,
           "warnings": [
             "Start heading has TOC-like signals."
           ],
           "recommended_actions": [
+            {
+              "action_type": "needs_user_selection",
+              "reason": "internal_item_toc_detected",
+              "severity": "review",
+              "requires_user_input": true,
+              "next_step": "select_internal_heading"
+            },
             {
               "action_type": "inspect_only",
               "reason": "start_toc_like_signal",
@@ -892,6 +930,13 @@
               "severity": "info",
               "requires_user_input": false,
               "next_step": "inspect_references"
+            },
+            {
+              "action_type": "inspect_only",
+              "reason": "exhibit_index_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_exhibit_index"
             }
           ]
         },
@@ -946,11 +991,9 @@
         "15": {
           "status": "success",
           "confidence_level": "high",
-          "confidence_score": 0.9,
+          "confidence_score": 1.0,
           "text_length": 367163,
-          "warnings": [
-            "Section length is outside the expected first-pass range."
-          ],
+          "warnings": [],
           "recommended_actions": [
             {
               "action_type": "inspect_only",
@@ -1313,7 +1356,7 @@
           "status": "success",
           "confidence_level": "high",
           "confidence_score": 1.0,
-          "text_length": 62,
+          "text_length": 13152,
           "warnings": [],
           "recommended_actions": [
             {
@@ -1585,8 +1628,10 @@
       "status": "success",
       "candidate_count": 46,
       "toc_confidence": "high",
-      "warnings": [],
-      "recommended_action_count": 9,
+      "warnings": [
+        "Start heading has TOC-like signals."
+      ],
+      "recommended_action_count": 13,
       "items": {
         "1": {
           "status": "success",
@@ -1672,7 +1717,7 @@
           "status": "success",
           "confidence_level": "high",
           "confidence_score": 1.0,
-          "text_length": 3262,
+          "text_length": 3304,
           "warnings": [],
           "recommended_actions": [
             {
@@ -1687,10 +1732,41 @@
         "6": {
           "status": "success",
           "confidence_level": "high",
-          "confidence_score": 1.0,
-          "text_length": 40,
-          "warnings": [],
-          "recommended_actions": []
+          "confidence_score": 0.85,
+          "text_length": 283798,
+          "warnings": [
+            "Start heading has TOC-like signals."
+          ],
+          "recommended_actions": [
+            {
+              "action_type": "needs_user_selection",
+              "reason": "internal_item_toc_detected",
+              "severity": "review",
+              "requires_user_input": true,
+              "next_step": "select_internal_heading"
+            },
+            {
+              "action_type": "inspect_only",
+              "reason": "start_toc_like_signal",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_evidence_only"
+            },
+            {
+              "action_type": "inspect_only",
+              "reason": "section_reference_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_references"
+            },
+            {
+              "action_type": "inspect_only",
+              "reason": "exhibit_index_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_exhibit_index"
+            }
+          ]
         },
         "7": {
           "status": "success",
@@ -1824,7 +1900,7 @@
           "status": "success",
           "confidence_level": "high",
           "confidence_score": 1.0,
-          "text_length": 65,
+          "text_length": 7440,
           "warnings": [],
           "recommended_actions": [
             {
@@ -2067,7 +2143,7 @@
           "status": "success",
           "confidence_level": "high",
           "confidence_score": 1.0,
-          "text_length": 88,
+          "text_length": 656,
           "warnings": [],
           "recommended_actions": []
         },
@@ -2319,7 +2395,7 @@
           "status": "success",
           "confidence_level": "high",
           "confidence_score": 1.0,
-          "text_length": 88,
+          "text_length": 756,
           "warnings": [],
           "recommended_actions": []
         },
@@ -2805,7 +2881,7 @@
           "status": "success",
           "confidence_level": "high",
           "confidence_score": 1.0,
-          "text_length": 52,
+          "text_length": 369,
           "warnings": [],
           "recommended_actions": []
         },
@@ -2813,7 +2889,7 @@
           "status": "success",
           "confidence_level": "high",
           "confidence_score": 1.0,
-          "text_length": 65,
+          "text_length": 11993,
           "warnings": [],
           "recommended_actions": [
             {
@@ -2829,7 +2905,7 @@
           "status": "success",
           "confidence_level": "high",
           "confidence_score": 1.0,
-          "text_length": 31,
+          "text_length": 77,
           "warnings": [],
           "recommended_actions": []
         }
