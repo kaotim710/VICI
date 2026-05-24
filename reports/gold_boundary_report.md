@@ -6,15 +6,13 @@ Filings: 7
 Items: 17
 Passed checks: 54
 Failed checks: 0
-Warnings: 3
+Warnings: 0
 
 ## Warning Categories
 
 | Category | Count |
 | --- | ---: |
-| `length_policy_review` | 1 |
-| `reference_recovery` | 1 |
-| `title_policy_review` | 1 |
+| none | 0 |
 
 ## Boundary And Raw Structure Checks
 

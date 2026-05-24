@@ -158,6 +158,53 @@ class ExtractorTests(unittest.TestCase):
         self.assertIn("Exhibit 10.1", item.text)
         self.assertIn(("inspect_only", "exhibit_index_detected"), action_pairs)
 
+    def test_item_fifteen_skips_toc_heading_followed_by_page_range(self):
+        filing = """
+        <html><body>
+        <div>Table of Contents</div>
+        <div>Part IV</div>
+        <div>Item 15.</div>
+        <div>Exhibits, Financial Statement Schedules.</div>
+        <td>40-43</td>
+        <div>Part I</div>
+        <div>Item 1. Business.</div>
+        <div>Business overview text.</div>
+
+        <div>Part IV</div>
+        <div>Item 15. Exhibits, Financial Statement Schedules</div>
+        <div>Exhibit 10.1 Material agreement</div>
+        <div>Exhibit 21 Subsidiaries</div>
+        <div>SIGNATURES</div>
+        </body></html>
+        """
+
+        result = extract_items(filing, target_items=["15"])
+        item = result.item_results[0]
+
+        self.assertEqual(item.status, "success")
+        self.assertNotIn("Item 1. Business", item.text)
+        self.assertIn("Exhibit 10.1", item.text)
+
+    def test_item_fifteen_keeps_numbered_exhibit_subsections(self):
+        filing = """
+        Table of Contents
+        Part IV
+        Item 15. Exhibits, Financial Statement Schedules
+        1
+        Financial statements
+        The consolidated financial statements are listed in Item 8.
+        2
+        Exhibit 10.1 Material agreement
+        SIGNATURES
+        """
+
+        result = extract_items(filing, target_items=["15"])
+        item = result.item_results[0]
+
+        self.assertEqual(item.status, "success")
+        self.assertIn("Financial statements", item.text)
+        self.assertIn("Exhibit 10.1", item.text)
+
     def test_short_administrative_sections_do_not_recommend_external_source(self):
         filing = """
         Item 1B. Unresolved Staff Comments

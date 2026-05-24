@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import re
 from html import escape as html_escape
+from html import unescape
 
 
 def raw_structure_counts(content: str, item_result) -> dict:
@@ -22,17 +23,169 @@ def raw_fragment_structure(fragment: str) -> dict:
 
 
 def raw_fragment_outline(fragment: str, limit: int = 30) -> list[str]:
+    return [section["label"] for section in raw_fragment_outline_sections(fragment, limit)]
+
+
+def raw_fragment_outline_sections(fragment: str, limit: int = 30) -> list[dict]:
     candidates: list[str] = []
-    patterns = (
-        r"(?is)<(?:b|strong)\b[^>]*>(.*?)</(?:b|strong)>",
-        r"(?is)<h[1-6]\b[^>]*>(.*?)</h[1-6]>",
+    sections: list[dict] = []
+    matches = sorted(
+        (
+            match
+            for pattern in (
+                r"(?is)<(?:b|strong)\b[^>]*>(.*?)</(?:b|strong)>",
+                r"(?is)<h[1-6]\b[^>]*>(.*?)</h[1-6]>",
+            )
+            for match in re.finditer(pattern, fragment)
+        ),
+        key=lambda match: match.start(),
     )
-    for pattern in patterns:
-        for match in re.finditer(pattern, fragment):
-            text = _html_text(match.group(1))
-            if _looks_like_outline_label(text):
-                candidates.append(text[:140])
-    return _dedupe(candidates, limit)
+    for index, match in enumerate(matches):
+        label = _html_text(match.group(1))
+        if not _looks_like_outline_label(label):
+            continue
+        label = label[:140]
+        if label.lower() in candidates:
+            continue
+        candidates.append(label.lower())
+        next_start = matches[index + 1].start() if index + 1 < len(matches) else len(fragment)
+        section_html = fragment[match.end() : next_start]
+        structure = raw_fragment_structure(section_html)
+        sections.append(
+            {
+                "label": label,
+                "text": _truncate(_html_text(section_html), 6000),
+                "raw_bytes": len(section_html.encode("utf-8", errors="replace")),
+                "table_count": structure["table_count"],
+                "image_count": structure["image_count"],
+            }
+        )
+        if len(sections) >= limit:
+            break
+    return sections
+
+
+def raw_fragment_exhibit_links(fragment: str, limit: int = 120) -> dict[str, dict]:
+    links: dict[str, dict] = {}
+    for row in re.finditer(r"(?is)<tr\b.*?</tr>", fragment):
+        row_html = row.group(0)
+        row_text = _html_text(row_html)
+        number_match = re.match(r"(?P<number>\d+(?:\.\d+)+[A-Z]?)\b", row_text)
+        if not number_match:
+            continue
+        link_match = re.search(r"(?is)<a\b[^>]*href=[\"'](?P<href>[^\"']+)[\"'][^>]*>(?P<label>.*?)</a>", row_html)
+        if not link_match:
+            continue
+        number = number_match.group("number")
+        label = _html_text(link_match.group("label"))
+        if not label:
+            continue
+        links[number] = {
+            "href": unescape(link_match.group("href")),
+            "label": label,
+        }
+        if len(links) >= limit:
+            break
+    return links
+
+
+def raw_fragment_supplemental_chunk(fragment: str, limit: int = 40) -> dict | None:
+    supplemental = raw_fragment_supplemental_fragment(fragment)
+    if supplemental is None:
+        return None
+    _, chunk = supplemental
+    structure = raw_fragment_structure(chunk)
+    toc_entries = _supplemental_toc_entries(chunk, limit)
+    sections = _supplemental_sections_from_toc(chunk, toc_entries)
+    if not sections:
+        sections = raw_fragment_outline_sections(chunk, limit)
+    if not sections and structure["table_count"] + structure["image_count"] < 20:
+        return None
+    return {
+        "label": "Supplemental filing content after Item 15",
+        "text": _truncate(_html_text(chunk), 10000),
+        "raw_bytes": len(chunk.encode("utf-8", errors="replace")),
+        "table_count": structure["table_count"],
+        "image_count": structure["image_count"],
+        "sections": sections,
+    }
+
+
+def raw_fragment_supplemental_fragment(fragment: str) -> tuple[int, str] | None:
+    start = _supplemental_toc_start(fragment)
+    if start is None:
+        return None
+    return start, fragment[start:]
+
+
+def _supplemental_toc_start(fragment: str) -> int | None:
+    for match in re.finditer(r"(?is)table\s+of\s+contents", fragment):
+        start = _financial_toc_start(fragment, match.start())
+        if start is not None:
+            return start
+    return None
+
+
+def _financial_toc_start(fragment: str, toc_offset: int) -> int | None:
+    before_raw = fragment[max(0, toc_offset - 1800) : toc_offset]
+    after_raw = fragment[toc_offset : toc_offset + 5000]
+    before_text = _html_text(before_raw).lower()
+    after_text = _html_text(after_raw).lower()
+
+    local_after = after_text[:700]
+    local_before = before_text[-220:]
+    if "exhibit index" in local_after and "financial" not in local_before:
+        return None
+    if "signatures" in local_after and "financial" not in local_before:
+        return None
+
+    if "financial:" in local_after or "audited financial statements" in local_after:
+        return toc_offset
+    if "financial table of contents" in (local_before + " " + local_after[:120]):
+        return _nearby_financial_heading_start(fragment, toc_offset) or toc_offset
+    if "financial section" in (local_before + " " + local_after):
+        heading_start = _nearby_financial_heading_start(fragment, toc_offset)
+        if heading_start is not None:
+            return heading_start
+        if "business profile" in local_after or "financial information" in local_after:
+            return toc_offset
+    return None
+
+
+def _nearby_financial_heading_start(fragment: str, toc_offset: int) -> int | None:
+    search_start = max(0, toc_offset - 1800)
+    before_raw = fragment[search_start:toc_offset]
+    before_matches = list(re.finditer(r"(?is)financial(?:\s+section)?", before_raw))
+    if before_matches:
+        return search_start + before_matches[-1].start()
+
+    after_raw = fragment[toc_offset : toc_offset + 5000]
+    after_match = re.search(r"(?is)financial\s+section", after_raw)
+    if after_match:
+        return toc_offset + after_match.start()
+    return None
+
+
+def _supplemental_toc_entries(chunk: str, limit: int) -> list[dict]:
+    toc_entries = []
+    seen = set()
+    for link_match in re.finditer(r"(?is)<a\b[^>]*href=[\"'](?P<href>[^\"']+)[\"'][^>]*>(?P<label>.*?)</a>", chunk[:250000]):
+        label = _html_text(link_match.group("label"))
+        if not _looks_like_supplemental_label(label):
+            continue
+        key = label.lower()
+        if key in seen:
+            continue
+        seen.add(key)
+        toc_entries.append(
+            {
+                "label": label[:180],
+                "href": unescape(link_match.group("href")),
+            }
+        )
+        if len(toc_entries) >= limit:
+            break
+    return toc_entries
 
 
 def raw_section_fragment(content: str, item_result) -> tuple[int, int, str]:
@@ -78,10 +231,7 @@ def _raw_container_start(content: str, raw_offset: int) -> int:
 
 def _html_text(value: str) -> str:
     value = re.sub(r"(?is)<[^>]+>", " ", value)
-    value = re.sub(r"&nbsp;?", " ", value, flags=re.IGNORECASE)
-    value = re.sub(r"&amp;?", "&", value, flags=re.IGNORECASE)
-    value = re.sub(r"&lt;?", "<", value, flags=re.IGNORECASE)
-    value = re.sub(r"&gt;?", ">", value, flags=re.IGNORECASE)
+    value = unescape(value)
     return " ".join(value.split())
 
 
@@ -100,15 +250,57 @@ def _looks_like_outline_label(value: str) -> bool:
     return uppercase_ratio > 0.55 or (value[:1].isupper() and not value.endswith("."))
 
 
-def _dedupe(values: list[str], limit: int) -> list[str]:
-    seen = set()
-    result = []
-    for value in values:
-        key = value.lower()
-        if key in seen:
+def _looks_like_supplemental_label(value: str) -> bool:
+    if not 8 <= len(value) <= 220:
+        return False
+    if re.fullmatch(r"[\d.,$%() -]+", value):
+        return False
+    if value.lower().startswith(("item ", "part ")):
+        return False
+    alpha_count = sum(1 for character in value if character.isalpha())
+    return alpha_count >= 6
+
+
+def _supplemental_sections_from_toc(chunk: str, toc_entries: list[dict]) -> list[dict]:
+    starts = []
+    seen_offsets = set()
+    for entry in toc_entries:
+        offset = _anchor_offset(chunk, entry["href"])
+        if offset is None or offset in seen_offsets:
             continue
-        seen.add(key)
-        result.append(value)
-        if len(result) >= limit:
-            break
-    return result
+        seen_offsets.add(offset)
+        starts.append((offset, entry["label"]))
+    starts.sort(key=lambda current: current[0])
+
+    sections = []
+    for index, (start, label) in enumerate(starts):
+        end = starts[index + 1][0] if index + 1 < len(starts) else len(chunk)
+        section_html = chunk[start:end]
+        structure = raw_fragment_structure(section_html)
+        sections.append(
+            {
+                "label": label,
+                "text": _truncate(_html_text(section_html), 6000),
+                "raw_bytes": len(section_html.encode("utf-8", errors="replace")),
+                "table_count": structure["table_count"],
+                "image_count": structure["image_count"],
+            }
+        )
+    return sections
+
+
+def _anchor_offset(chunk: str, href: str) -> int | None:
+    if not href.startswith("#"):
+        return None
+    anchor = re.escape(href[1:])
+    match = re.search(rf"(?is)\bid=[\"']{anchor}[\"']", chunk)
+    if not match:
+        return None
+    tag_start = chunk.rfind("<", 0, match.start())
+    return tag_start if tag_start >= 0 else match.start()
+
+
+def _truncate(value: str, limit: int) -> str:
+    if len(value) <= limit:
+        return value
+    return value[:limit].rstrip() + "\n[truncated]"

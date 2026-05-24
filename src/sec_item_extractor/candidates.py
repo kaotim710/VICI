@@ -91,6 +91,8 @@ def find_heading_candidates(text: str, blocks: list[NarrativeBlock] | None = Non
         if blocks:
             block, block_index = _block_for_offset(start, blocks, block_index)
         reasons = _heading_reasons(item, normalized, start, text, block)
+        if blocks and _candidate_followed_by_page_number(match.end(), blocks, block_index):
+            reasons.append("TOC_FOLLOWED_BY_PAGE_NUMBER")
         candidates.append(
             HeadingCandidate(
                 item=item,
@@ -230,6 +232,8 @@ def _heading_reasons(
         reasons.append("TOC_DENSE_ITEM_CLUSTER")
     if "table of contents" in text[max(0, start - 1500) : start].lower():
         reasons.append("NEAR_TABLE_OF_CONTENTS_LABEL")
+    if start < min(25000, max(5000, int(len(text) * 0.04))):
+        reasons.append("EARLY_DOCUMENT_REGION")
     if "see item" in lower or "refer to item" in lower:
         reasons.append("INLINE_REFERENCE_RISK")
     return reasons
@@ -244,9 +248,46 @@ def _block_has_toc_page_number(block_text: str) -> bool:
     return bool(re.search(r"(?:\.{2,}\s*|\s{2,})\d{1,4}\s*$", compact))
 
 
+def _candidate_followed_by_page_number(clean_end: int, blocks: list[NarrativeBlock], block_index: int) -> bool:
+    index = max(0, min(block_index, len(blocks) - 1))
+    while index + 1 < len(blocks) and blocks[index].clean_end < clean_end:
+        index += 1
+    for next_index in range(index + 1, min(len(blocks), index + 4)):
+        gap = blocks[next_index].clean_start - clean_end
+        if gap > 12:
+            break
+        compact = " ".join(blocks[next_index].text.split())
+        if re.fullmatch(r"\d{1,4}\s*[-–—]\s*\d{1,4}", compact):
+            return True
+        if re.fullmatch(r"\d{1,4}", compact) and _near_next_toc_item(blocks, next_index):
+            return True
+        if compact and not re.fullmatch(r"part\s+[ivx]+", compact, flags=re.IGNORECASE):
+            break
+    return False
+
+
+def _near_next_toc_item(blocks: list[NarrativeBlock], page_number_index: int) -> bool:
+    for block in blocks[page_number_index + 1 : page_number_index + 6]:
+        compact = " ".join(block.text.split())
+        if re.fullmatch(r"part\s+[ivx]+", compact, flags=re.IGNORECASE):
+            return True
+        if re.fullmatch(
+            r"item\s+(?:1a|1b|1c|10|11|12|13|14|15|16|1|2|3|4|5|6|7a|7|8|9a|9b|9c|9)\.?.*",
+            compact,
+            flags=re.IGNORECASE,
+        ):
+            return True
+    return False
+
+
 def _is_toc_like(reasons: list[str]) -> bool:
     reason_set = set(reasons)
     if TOC_REASON_CODES.intersection(reason_set):
+        return True
+    if "TOC_FOLLOWED_BY_PAGE_NUMBER" in reason_set and (
+        "EARLY_DOCUMENT_REGION" in reason_set
+        or "NEAR_TABLE_OF_CONTENTS_LABEL" in reason_set
+    ):
         return True
     return "TOC_DENSE_ITEM_CLUSTER" in reason_set and "NEAR_TABLE_OF_CONTENTS_LABEL" in reason_set
 

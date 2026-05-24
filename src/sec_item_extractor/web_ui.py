@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import re
 import time
 from http import HTTPStatus
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -11,8 +12,12 @@ from urllib.parse import unquote, urlparse
 
 from .extractor import extract_items
 from .raw_structure import (
+    raw_fragment_exhibit_links,
     raw_fragment_outline,
+    raw_fragment_outline_sections,
+    raw_fragment_supplemental_fragment,
     raw_fragment_structure,
+    raw_fragment_supplemental_chunk,
     raw_section_fragment,
     raw_section_srcdoc,
     raw_structure_counts,
@@ -84,6 +89,8 @@ def extract_seed_filing(filing_id: str) -> dict:
     elapsed_ms = round((time.perf_counter() - started) * 1000)
     result_dict = result.to_dict()
     _attach_raw_structure(result_dict, content, result.item_results)
+    _append_supplemental_items(result_dict)
+    item_count = len(result_dict.get("item_results", []))
     return {
         "filing": filings[filing_id],
         "elapsed_ms": elapsed_ms,
@@ -98,7 +105,7 @@ def extract_seed_filing(filing_id: str) -> dict:
             "status": result.status,
             "candidate_count": result.candidate_count,
             "toc_confidence": result.toc_confidence,
-            "item_count": len(result.item_results),
+            "item_count": item_count,
         },
         "toc_entries": result_dict["toc_entries"],
         "items": [_item_contract(item, content) for item in result.item_results],
@@ -150,6 +157,8 @@ def raw_section_preview(filing_id: str, item: str) -> dict:
 
     item = item.upper()
     content = path.read_text(encoding="utf-8", errors="replace")
+    if item.startswith("SUPPLEMENTAL-"):
+        return _supplemental_raw_section_preview(filings[filing_id], filing_id, item, content)
     result = extract_items(content, target_items=[item], filing_id=filing_id)
     item_result = result.item_results[0]
     if item_result.status != "success" or not item_result.start_evidence:
@@ -160,6 +169,35 @@ def raw_section_preview(filing_id: str, item: str) -> dict:
     structure = raw_fragment_structure(fragment)
     return {
         "filing": filings[filing_id],
+        "item": item,
+        "raw_start": start,
+        "raw_end": end,
+        "raw_bytes": len(fragment.encode("utf-8", errors="replace")),
+        "table_count": structure["table_count"],
+        "image_count": structure["image_count"],
+        "base_url": base_url,
+        "srcdoc": raw_section_srcdoc(fragment, base_url),
+    }
+
+
+def _supplemental_raw_section_preview(filing: dict, filing_id: str, item: str, content: str) -> dict:
+    source_item = item.removeprefix("SUPPLEMENTAL-")
+    result = extract_items(content, target_items=[source_item], filing_id=filing_id)
+    item_result = result.item_results[0]
+    if item_result.status != "success" or not item_result.start_evidence:
+        raise ValueError(f"raw section is unavailable for Item {item}")
+
+    source_start, _, source_fragment = raw_section_fragment(content, item_result)
+    supplemental = raw_fragment_supplemental_fragment(source_fragment)
+    if supplemental is None:
+        raise ValueError(f"raw section is unavailable for Item {item}")
+    relative_start, fragment = supplemental
+    start = source_start + relative_start
+    end = start + len(fragment)
+    base_url = _archive_base_url(filing_id)
+    structure = raw_fragment_structure(fragment)
+    return {
+        "filing": filing,
         "item": item,
         "raw_start": start,
         "raw_end": end,
@@ -236,11 +274,54 @@ def _archive_base_url(filing_id: str) -> str | None:
 def _attach_raw_structure(result_dict: dict, content: str, item_results: list) -> None:
     for item_payload, item_result in zip(result_dict.get("item_results", []), item_results):
         item_payload["raw_structure"] = _raw_structure_contract(content, item_result)
+        item_payload["raw_section_available"] = item_result.status == "success"
+
+
+def _append_supplemental_items(result_dict: dict) -> None:
+    for item_payload in list(result_dict.get("item_results", [])):
+        chunk = item_payload.get("raw_structure", {}).get("supplemental_chunk")
+        if not chunk:
+            continue
+        item_payload["raw_structure"]["supplemental_chunk"] = None
+        result_dict["item_results"].append(_supplemental_item_payload(item_payload.get("item", ""), chunk))
+
+
+def _supplemental_item_payload(source_item: str, chunk: dict) -> dict:
+    return {
+        "item": f"supplemental-{source_item.lower()}",
+        "display_label": f"Supplemental after Item {source_item}",
+        "title": chunk["label"],
+        "status": "success",
+        "text": chunk.get("text", ""),
+        "start_offset": None,
+        "end_offset": None,
+        "confidence_level": "high",
+        "confidence_score": 1.0,
+        "confidence_components": [],
+        "start_evidence": None,
+        "end_evidence": None,
+        "candidate_attempts": [],
+        "validation_reasons": ["SUPPLEMENTAL_CHUNK_PARTITIONED_AFTER_ITEM_16"],
+        "warnings": [],
+        "recommended_actions": [],
+        "strategy_used": "raw_supplemental_chunk_v1",
+        "raw_section_available": True,
+        "raw_structure": {
+            "table_count": chunk.get("table_count", 0),
+            "image_count": chunk.get("image_count", 0),
+            "outline": [section["label"] for section in chunk.get("sections", [])],
+            "sections": chunk.get("sections", []),
+            "supplemental_chunk": None,
+            "raw_bytes": chunk.get("raw_bytes", 0),
+        },
+    }
 
 
 def _raw_structure_contract(content: str, item_result) -> dict:
     structure = raw_structure_counts(content, item_result)
     structure["outline"] = []
+    structure["sections"] = []
+    structure["supplemental_chunk"] = None
     structure["raw_bytes"] = 0
     try:
         _, _, fragment = raw_section_fragment(content, item_result)
@@ -248,7 +329,95 @@ def _raw_structure_contract(content: str, item_result) -> dict:
         return structure
     structure["raw_bytes"] = len(fragment.encode("utf-8", errors="replace"))
     structure["outline"] = raw_fragment_outline(fragment)
+    structure["sections"] = raw_fragment_outline_sections(fragment)
+    exhibit_links = raw_fragment_exhibit_links(fragment)
+    if not structure["sections"] and item_result.text:
+        structure["sections"] = _text_outline_sections(item_result.text, exhibit_links)
+        structure["outline"] = [section["label"] for section in structure["sections"]]
+    elif exhibit_links:
+        _attach_exhibit_links(structure["sections"], exhibit_links)
+    if _can_partition_supplemental(item_result.item):
+        structure["supplemental_chunk"] = raw_fragment_supplemental_chunk(fragment)
     return structure
+
+
+def _can_partition_supplemental(item_name: str) -> bool:
+    return item_name.upper() in {"15", "16"}
+
+
+def _text_outline_sections(text: str, exhibit_links: dict[str, dict] | None = None, limit: int = 30) -> list[dict]:
+    lines = [line.strip() for line in text.splitlines() if line.strip()]
+    starts: list[tuple[int, int, str]] = []
+    seen = set()
+    for index, line in enumerate(lines):
+        label = ""
+        content_start = index + 1
+        if re.fullmatch(r"\d{1,2}", line) and index + 1 < len(lines) and _looks_like_text_outline_label(lines[index + 1]):
+            label = f"{line} {lines[index + 1]}"
+            content_start = index + 2
+        elif re.fullmatch(r"\d+(?:\.\d+)+[A-Z]?", line) and index + 1 < len(lines):
+            label = line
+            content_start = index + 1
+        elif not (index > 0 and re.fullmatch(r"\d{1,2}", lines[index - 1])) and _looks_like_text_outline_label(line):
+            label = line
+        if not label:
+            continue
+        label = label[:140]
+        key = label.lower()
+        if key in seen:
+            continue
+        seen.add(key)
+        starts.append((index, content_start, label))
+        if len(starts) >= limit:
+            break
+
+    sections = []
+    for position, (heading_index, content_start, label) in enumerate(starts):
+        next_heading_index = starts[position + 1][0] if position + 1 < len(starts) else len(lines)
+        section_text = "\n".join(lines[content_start:next_heading_index]).strip()
+        section = {
+            "label": label,
+            "text": section_text[:6000] + ("\n[truncated]" if len(section_text) > 6000 else ""),
+            "raw_bytes": len(section_text.encode("utf-8", errors="replace")),
+            "table_count": 0,
+            "image_count": 0,
+        }
+        _attach_exhibit_link(section, exhibit_links or {})
+        sections.append(section)
+    return sections
+
+
+def _attach_exhibit_links(sections: list[dict], exhibit_links: dict[str, dict]) -> None:
+    for section in sections:
+        _attach_exhibit_link(section, exhibit_links)
+
+
+def _attach_exhibit_link(section: dict, exhibit_links: dict[str, dict]) -> None:
+    number_match = re.match(r"(?P<number>\d+(?:\.\d+)+[A-Z]?)\b", section.get("label", ""))
+    if not number_match:
+        return
+    link = exhibit_links.get(number_match.group("number"))
+    if not link:
+        return
+    section["href"] = link["href"]
+    if section["label"] == number_match.group("number"):
+        section["label"] = f"{section['label']} {link['label']}"[:180]
+
+
+def _looks_like_text_outline_label(value: str) -> bool:
+    if not 8 <= len(value) <= 180:
+        return False
+    if value.lower().startswith("item "):
+        return False
+    if re.fullmatch(r"[\d.,$%() -]+", value):
+        return False
+    if re.search(r"\.{2,}\s*\d+\s*$", value):
+        return False
+    alpha_count = sum(1 for character in value if character.isalpha())
+    if alpha_count < 5:
+        return False
+    uppercase_ratio = sum(1 for character in value if character.isupper()) / max(alpha_count, 1)
+    return uppercase_ratio > 0.55 or (value[:1].isupper() and not value.endswith("."))
 
 
 class WebUiHandler(BaseHTTPRequestHandler):
@@ -501,9 +670,10 @@ def render_detail(filing_id: str) -> str:
             const link = document.createElement('a');
             link.href = `#item-${{cssId(item.item)}}`;
             link.className = `toc-link ${{item.status}} ${{item.confidence_level}}`;
+            const label = item.display_label || `Item ${{item.item}}`;
             link.innerHTML = `
-              <span>Item ${{escapeHtml(item.item)}}</span>
-              <small>${{escapeHtml(titles.get(item.item) || item.status)}}</small>
+              <span>${{escapeHtml(label)}}</span>
+              <small>${{escapeHtml(item.title || titles.get(item.item) || item.status)}}</small>
               <em>${{escapeHtml(item.status)}} | ${{escapeHtml(item.confidence_level)}} ${{Number(item.confidence_score).toFixed(2)}}</em>
             `;
             tocList.appendChild(link);
@@ -528,10 +698,18 @@ def render_detail(filing_id: str) -> str:
             const endSnippet = edgeSnippet(text, 'end');
             const structureTags = renderStructureTags(item.raw_structure || {{}});
             const structurePanel = renderStructurePanel(item);
+            const rawTools = item.raw_section_available === false ? '' : `
+              <div class="raw-section-tools">
+                <button class="secondary-button compact" data-raw-item="${{escapeHtml(item.item)}}">Show original filing structure</button>
+                <span class="raw-section-meta"></span>
+              </div>
+              <div class="raw-section-preview"></div>
+            `;
+            const heading = item.display_label || `Item ${{item.item}}`;
             article.innerHTML = `
               <header class="item-header">
                 <div>
-                  <h2>Item ${{escapeHtml(item.item)}}</h2>
+                  <h2>${{escapeHtml(heading)}}</h2>
                   <p class="muted">${{escapeHtml(item.status)}} | ${{escapeHtml(item.confidence_level)}} ${{Number(item.confidence_score).toFixed(2)}} | ${{(item.text || '').length.toLocaleString()}} chars</p>
                 </div>
                 <div class="item-badges">
@@ -553,18 +731,15 @@ def render_detail(filing_id: str) -> str:
                 </div>
               </details>
               ${{structurePanel}}
-              <div class="raw-section-tools">
-                <button class="secondary-button compact" data-raw-item="${{escapeHtml(item.item)}}">Show original filing structure</button>
-                <span class="raw-section-meta"></span>
-              </div>
-              <div class="raw-section-preview"></div>
+              ${{rawTools}}
               <pre class="item-text"></pre>
             `;
             const snippets = article.querySelectorAll('.snippet-grid pre');
             snippets[0].textContent = startSnippet;
             snippets[1].textContent = endSnippet;
             article.querySelector('.item-text').textContent = item.text || '';
-            article.querySelector('[data-raw-item]').addEventListener('click', () => loadRawSection(item.item, article));
+            const rawButton = article.querySelector('[data-raw-item]');
+            if (rawButton) rawButton.addEventListener('click', () => loadRawSection(item.item, article));
             items.appendChild(article);
           }}
         }}
@@ -623,21 +798,40 @@ def render_detail(filing_id: str) -> str:
 
         function renderStructurePanel(item) {{
           const rawStructure = item.raw_structure || {{}};
+          const rawSections = Array.isArray(rawStructure.sections) ? rawStructure.sections : [];
           const rawOutline = Array.isArray(rawStructure.outline) ? rawStructure.outline : [];
           const textOutline = outlineEntriesForText(item.text || '');
-          const outline = rawOutline.length ? rawOutline : textOutline;
+          const outline = rawSections.length ? rawSections.map(section => section.label) : (rawOutline.length ? rawOutline : textOutline);
           const rawBytes = Number(rawStructure.raw_bytes || 0);
           const tableCount = Number(rawStructure.table_count || 0);
-          const shouldShow = outline.length || rawBytes > 250000 || tableCount > 50;
+          const shouldShow = rawSections.length || outline.length || rawBytes > 250000 || tableCount > 50;
           if (!shouldShow) return '';
-          const items = outline.length
-            ? outline.slice(0, 30).map(label => `<li>${{escapeHtml(label)}}</li>`).join('')
-            : '<li>No bold/internal headings detected; use original filing structure for full review.</li>';
+          const sectionContent = rawSections.length
+            ? `<div class="structure-section-list">${{rawSections.slice(0, 30).map(renderStructureSection).join('')}}</div>`
+            : `<ol>${{outline.length ? outline.slice(0, 30).map(label => `<li>${{escapeHtml(label)}}</li>`).join('') : '<li>No bold/internal headings detected; use original filing structure for full review.</li>'}}</ol>`;
           return `
             <details class="structure-outline">
               <summary>Section structure</summary>
               <div class="structure-outline-meta">${{Number(rawBytes).toLocaleString()}} raw bytes | ${{tableCount}} tables | ${{Number(rawStructure.image_count || 0)}} images</div>
-              <ol>${{items}}</ol>
+              ${{sectionContent}}
+            </details>
+          `;
+        }}
+
+        function renderStructureSection(section, index) {{
+          const text = String(section.text || '').trim() || String(section.label || '').trim() || 'No text extracted for this subsection.';
+          const tableCount = Number(section.table_count || 0);
+          const imageCount = Number(section.image_count || 0);
+          const label = section.href
+            ? `<a href="${{escapeHtml(section.href)}}" target="_blank" rel="noopener noreferrer">${{escapeHtml(section.label || `Section ${{index + 1}}`)}}</a>`
+            : `<span>${{escapeHtml(section.label || `Section ${{index + 1}}`)}}</span>`;
+          return `
+            <details class="structure-section" ${{index === 0 ? 'open' : ''}}>
+              <summary>
+                ${{label}}
+                <small>${{Number(section.raw_bytes || 0).toLocaleString()}} bytes | ${{tableCount}} tables | ${{imageCount}} images</small>
+              </summary>
+              <pre>${{escapeHtml(text)}}</pre>
             </details>
           `;
         }}
@@ -1080,6 +1274,50 @@ dd { margin: 0; overflow-wrap: anywhere; }
   break-inside: avoid;
   margin-bottom: 5px;
   color: #19212a;
+}
+.structure-section-list {
+  display: grid;
+  gap: 8px;
+  padding: 0 12px 12px;
+}
+.structure-section {
+  border: 1px solid #e0e4e9;
+  border-radius: 6px;
+  background: #ffffff;
+}
+.structure-section summary {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: start;
+  padding: 9px 10px;
+  cursor: pointer;
+}
+.structure-section summary span,
+.structure-section summary a {
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+.structure-section summary a {
+  color: #1769aa;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.structure-section summary small {
+  flex: 0 0 auto;
+  color: #647080;
+  font-size: 12px;
+  white-space: nowrap;
+}
+.structure-section pre {
+  max-height: 260px;
+  overflow: auto;
+  margin: 0;
+  padding: 10px;
+  border-top: 1px solid #e0e4e9;
+  background: #fbfcfd;
+  white-space: pre-wrap;
+  font: 12px/1.5 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 }
 .raw-section-tools {
   display: flex;

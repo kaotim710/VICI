@@ -1,4 +1,5 @@
 import sys
+import json
 import unittest
 from pathlib import Path
 from types import SimpleNamespace
@@ -9,6 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from sec_item_extractor import web_ui
+from sec_item_extractor.extractor import extract_items
 
 
 class WebUiTests(unittest.TestCase):
@@ -44,6 +46,8 @@ class WebUiTests(unittest.TestCase):
         self.assertIn("renderStructureTags", html)
         self.assertIn("structure-outline", html)
         self.assertIn("renderStructurePanel", html)
+        self.assertIn("structure-section", html)
+        self.assertIn("renderStructureSection", html)
 
     def test_raw_section_preview_preserves_tables_and_archive_base(self):
         payload = web_ui.raw_section_preview("wmt_2014_10k", "15")
@@ -87,6 +91,67 @@ class WebUiTests(unittest.TestCase):
 
         self.assertGreater(by_item["15"]["raw_structure"]["raw_bytes"], 250000)
         self.assertIsInstance(by_item["15"]["raw_structure"]["outline"], list)
+        self.assertIsInstance(by_item["15"]["raw_structure"]["sections"], list)
+        self.assertGreater(len(by_item["15"]["raw_structure"]["sections"]), 0)
+        exhibit_section = by_item["15"]["raw_structure"]["sections"][3]
+        self.assertIn("Restated Certificate", exhibit_section["label"])
+        self.assertIn("href", exhibit_section)
+        self.assertIsNone(by_item["15"]["raw_structure"]["supplemental_chunk"])
+        self.assertIn("supplemental-15", by_item)
+        supplemental = by_item["supplemental-15"]
+        self.assertEqual(supplemental["display_label"], "Supplemental after Item 15")
+        self.assertTrue(supplemental["raw_section_available"])
+        self.assertGreater(supplemental["raw_structure"]["table_count"], 0)
+        self.assertGreater(supplemental["raw_structure"]["image_count"], 0)
+        self.assertIn("Three-Year Summary", supplemental["raw_structure"]["sections"][0]["label"])
+        self.assertNotIn("href", supplemental["raw_structure"]["sections"][0])
+
+    def test_supplemental_raw_section_preview_preserves_own_raw_structure(self):
+        payload = web_ui.raw_section_preview("jpm_2023_10k", "supplemental-15")
+
+        self.assertGreater(payload["table_count"], 0)
+        self.assertGreater(payload["image_count"], 0)
+        self.assertIn("Table of contents", payload["srcdoc"])
+        self.assertIn("Three-Year Summary", payload["srcdoc"])
+
+    def test_supplemental_partitioning_runs_across_seed_filings(self):
+        expected = {
+            "jpm_2014_10k": ["supplemental-15"],
+            "jpm_2023_10k": ["supplemental-15"],
+            "xom_2014_10k": ["supplemental-15"],
+            "xom_2023_10k": ["supplemental-16"],
+            "cvx_2014_10k": ["supplemental-15"],
+        }
+        observed = {}
+        manifest = json.loads((ROOT / "fixtures" / "gold" / "seed_filings.json").read_text(encoding="utf-8"))
+
+        for filing in manifest["filings"]:
+            filing_id = filing["filing_id"]
+            content = (ROOT / "fixtures" / "filings" / "raw" / f"{filing_id}.html").read_text(
+                encoding="utf-8", errors="replace"
+            )
+            result = extract_items(content, target_items=["15", "16"], filing_id=filing_id)
+            result_dict = result.to_dict()
+            web_ui._attach_raw_structure(result_dict, content, result.item_results)
+            web_ui._append_supplemental_items(result_dict)
+            supplemental_items = [item["item"] for item in result_dict["item_results"] if item["item"].startswith("supplemental-")]
+            if supplemental_items:
+                observed[filing_id] = supplemental_items
+                for item in supplemental_items:
+                    preview = web_ui.raw_section_preview(filing_id, item)
+                    self.assertGreater(preview["raw_bytes"], 1000)
+                    self.assertGreater(preview["table_count"] + preview["image_count"], 0)
+                    self.assertIn("table of contents", preview["srcdoc"].lower())
+                    self.assertNotIn("Item 1. Business", preview["srcdoc"][:20000])
+
+        self.assertEqual(observed, expected)
+
+    def test_jpm_item_fifteen_raw_section_starts_at_actual_section(self):
+        payload = web_ui.extract_seed_filing("jpm_2023_10k")
+        by_item = {item["item"]: item for item in payload["result"]["item_results"]}
+
+        self.assertIn("Exhibit 3.1", by_item["15"]["text"])
+        self.assertNotIn("Item 1. Business", by_item["15"]["text"][:1000])
 
     def test_raw_metadata_does_not_run_extraction(self):
         with patch("sec_item_extractor.web_ui.extract_items") as extract_items:

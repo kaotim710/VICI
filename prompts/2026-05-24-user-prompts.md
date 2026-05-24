@@ -367,3 +367,39 @@ bac_2014_10k	7	上述已處理
 bac_2023_10k	7	上述已處理
 amzn_2014_10k	6	抽取正常
 ```
+
+## Raw Structure Toggle Fix Request
+
+```text
+jpm_2023_10k Item 15 確實出現了section structure 的 toggle，但有幾個問題。首先，Show original filing structure，會把整個文件從item 1 開始都列出來，而不是只有item 15，我發現其他文件在這個部分，也有類似問題。第二個問題，toggle 應該要是可以讓user點選，別且顯示該內容，而不是只有顯示標題
+```
+
+## JPM Exhibit Link And Supplemental Chunk Request
+
+```text
+jpm_2023_10k 這份文件的exhibit部分每一個title大部分是有hyperlink的，把它補給標題。另外在45頁開始後這邊就沒有在一開始的toc 裡了，這邊在item 15後方加上一個big chunk of session來展示這一塊的內容？他也有自己的toc、表格、圖表等
+```
+
+## Supplemental Same-Page Section Request
+
+```text
+supplemental chunk 這部分應該是在同一個頁面操作，而不是超hyperlink，因為是在同一份檔案中，我的想法是將其接在item 16之後，在一開始做extract的時候就做好分區分section
+```
+
+## Supplemental Raw Structure Button Request
+
+```text
+應該也是要有Show original filing structure的 button
+```
+
+## Supplemental Seed Coverage Request
+
+```text
+做完後拓展到其他的20個filing，並且新增關於這部分的testing
+```
+
+## Strategy Documentation Request
+
+```text
+新增一個strategy的md file，將目前的策略規則寫入，之後在策略上有更改就read n write這個file
+```

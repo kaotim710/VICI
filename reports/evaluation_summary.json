@@ -15,17 +15,17 @@
     "medium": 6
   },
   "warning_counts": {
-    "Start heading has TOC-like signals.": 10,
+    "Start heading has TOC-like signals.": 15,
     "End heading has TOC-like signals.": 2
   },
   "warning_category_counts": {
-    "toc_signal_review": 12
+    "toc_signal_review": 17
   },
   "raw_media_counts": {
-    "items_with_tables": 266,
-    "items_with_images": 29,
-    "total_tables": 6144,
-    "total_images": 158
+    "items_with_tables": 274,
+    "items_with_images": 30,
+    "total_tables": 6871,
+    "total_images": 161
   },
   "retry_policy": {
     "contract_version": "retry_policy_v1",

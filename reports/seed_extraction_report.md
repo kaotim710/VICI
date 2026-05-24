@@ -16,10 +16,10 @@ Missing filings: 0
 | `msft_2014_10k` | MSFT | 2014 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 |
 | `msft_2023_10k` | MSFT | 2023 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 |
 | `jpm_2014_10k` | JPM | 2014 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 |
-| `jpm_2023_10k` | JPM | 2023 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 |
+| `jpm_2023_10k` | JPM | 2023 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 0.85 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 |
 | `bac_2014_10k` | BAC | 2014 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 |
 | `bac_2023_10k` | BAC | 2023 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 |
-| `unh_2014_10k` | UNH | 2014 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 | success / high 0.85 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 0.85 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 |
+| `unh_2014_10k` | UNH | 2014 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 | success / high 0.85 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 0.85 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 0.85 | success / high 0.85 | success / high 1.00 | not_present / high 1.00 |
 | `unh_2023_10k` | UNH | 2023 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 0.85 | success / high 0.85 | success / high 1.00 | success / high 1.00 | success / high 0.85 | success / high 0.85 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 |
 | `jnj_2014_10k` | JNJ | 2014 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 |
 | `jnj_2023_10k` | JNJ | 2023 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 |
@@ -29,7 +29,7 @@ Missing filings: 0
 | `cvx_2023_10k` | CVX | 2023 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 |
 | `wmt_2014_10k` | WMT | 2014 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / medium 0.80 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / medium 0.80 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / medium 0.80 |
 | `wmt_2023_10k` | WMT | 2023 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 |
-| `amzn_2014_10k` | AMZN | 2014 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 | success / high 0.85 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 0.90 | success / high 0.90 | not_present / high 1.00 | success / high 0.85 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 |
+| `amzn_2014_10k` | AMZN | 2014 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 | success / high 0.85 | success / high 0.85 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 0.90 | success / high 0.90 | not_present / high 1.00 | success / high 0.85 | success / high 0.85 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 |
 | `amzn_2023_10k` | AMZN | 2023 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 0.85 | success / high 0.85 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 |
 
 ## Details
@@ -474,17 +474,17 @@ End snippet:
 
 - Status: `success`
 - Confidence: `high` `1.00`
-- Text length: `302976`
-- Raw tables/images: `116` / `1`
-- Raw structure bytes: `1290748`
+- Text length: `1578`
+- Raw tables/images: `13` / `0`
+- Raw structure bytes: `52438`
 - Warnings: none
-- Start evidence: `Part IV Item 15. Exhibits, Financial Statement Schedules`
+- Start evidence: `PART IV Item 15. Exhibits, Financial Statement Schedules`
 - End evidence: `SIGNATURES`
-- Recommended actions: `inspect_only:section_reference_detected`, `inspect_only:exhibit_index_detected`
+- Recommended actions: `inspect_only:exhibit_index_detected`
 
 Start snippet:
 
-> Part IV Item 15. Exhibits, Financial Statement Schedules 85 Table of Contents This Annual Report on Form 10-K (“Form 10-K”) contains forward-looking statements, within the meaning of the Private Securities Litigation Reform Act of 1995, that involve risks a...
+> PART IV Item 15. Exhibits, Financial Statement Schedules (a) Documents filed as part of this report (1) All financial statements Index to Consolidated Financial Statements Page Consolidated Statements of Operations for the years ended September 27, 2014, Se...
 
 End snippet:
 
@@ -1470,7 +1470,7 @@ End snippet:
 - Fiscal year: `2023`
 - Overall status: `success`
 - Candidate count: `144`
-- TOC confidence: `medium`
+- TOC confidence: `high`
 - TOC items: `1, 1A, 1B, 2, 3, 4, 5, 6, 7, 7A, 8, 9, 9A, 9B, 9C, 10, 11, 12, 13, 14, 15, 16`
 
 TOC entries:
@@ -1656,20 +1656,20 @@ End snippet:
 
 - Status: `success`
 - Confidence: `high` `1.00`
-- Text length: `23`
+- Text length: `39`
 - Raw tables/images: `0` / `0`
-- Raw structure bytes: `5174`
+- Raw structure bytes: `2167`
 - Warnings: none
-- Start evidence: `Item 6. [Reserved]`
-- End evidence: `Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations`
+- Start evidence: `PART II Item 6 ITEM 6. [RESERVED]`
+- End evidence: `PART II Item 7 ITEM 7. MANAGEMENT’S DISCUSSION AND ANALYSIS OF FINANCIAL CONDITION AND RESULTS OF OPERATIONS`
 
 Start snippet:
 
-> Item 6. [Reserved] 39
+> PART II Item 6 ITEM 6. [RESERVED] 39
 
 End snippet:
 
-> Item 6. [Reserved] 39
+> PART II Item 6 ITEM 6. [RESERVED] 39
 
 #### Item 7
 
@@ -1951,7 +1951,7 @@ End snippet:
 - Fiscal year: `2014`
 - Overall status: `success`
 - Candidate count: `40`
-- TOC confidence: `medium`
+- TOC confidence: `high`
 - TOC items: `1, 1A, 1B, 2, 3, 4, 5, 6, 7, 7A, 8, 9, 9A, 9B, 10, 11, 12, 13, 14, 15`
 
 TOC entries:
@@ -2328,74 +2328,77 @@ End snippet:
 
 - Status: `success`
 - Confidence: `high` `1.00`
-- Text length: `107`
-- Raw tables/images: `0` / `0`
-- Raw structure bytes: `1303`
+- Text length: `1241`
+- Raw tables/images: `2` / `0`
+- Raw structure bytes: `13111`
 - Warnings: none
-- Start evidence: `Item 12 Security ownership of certain beneficial owners and management and related stockholder matters`
-- End evidence: `Item 13 Certain relationships and related transactions, and director independence`
+- Start evidence: `ITEM 12: SECURITY OWNERSHIP OF CERTAIN BENEFICIAL OWNERS AND MANAGEMENT AND RELATED STOCKHOLDER MATTERS`
+- End evidence: `ITEM 13: CERTAIN RELATIONSHIPS AND RELATED TRANSACTIONS, AND DIRECTOR INDEPENDENCE`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
-> Item 12 Security ownership of certain beneficial owners and management and related stockholder matters 23
+> ITEM 12: SECURITY OWNERSHIP OF CERTAIN BENEFICIAL OWNERS AND MANAGEMENT AND RELATED STOCKHOLDER MATTERS For security ownership of certain beneficial owners and management, see Item 10. The following table sets forth the total number of shares available for...
 
 End snippet:
 
-> Item 12 Security ownership of certain beneficial owners and management and related stockholder matters 23
+> ...approved Long-Term Incentive Plan, as amended and restated effective May 17, 2011. All future shares will be issued under the shareholder-approved Long-Term Incentive Plan, as amended and restated effective May 17, 2011. For further discussion, see Note 10.
 
 #### Item 13
 
 - Status: `success`
 - Confidence: `high` `1.00`
-- Text length: `86`
+- Text length: `96`
 - Raw tables/images: `0` / `0`
-- Raw structure bytes: `1116`
+- Raw structure bytes: `434`
 - Warnings: none
-- Start evidence: `Item 13 Certain relationships and related transactions, and director independence`
-- End evidence: `Item 14 Principal accounting fees and services`
+- Start evidence: `ITEM 13: CERTAIN RELATIONSHIPS AND RELATED TRANSACTIONS, AND DIRECTOR INDEPENDENCE`
+- End evidence: `ITEM 14: PRINCIPAL ACCOUNTING FEES AND SERVICES`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
-> Item 13 Certain relationships and related transactions, and director independence 23
+> ITEM 13: CERTAIN RELATIONSHIPS AND RELATED TRANSACTIONS, AND DIRECTOR INDEPENDENCE See Item 10.
 
 End snippet:
 
-> Item 13 Certain relationships and related transactions, and director independence 23
+> ITEM 13: CERTAIN RELATIONSHIPS AND RELATED TRANSACTIONS, AND DIRECTOR INDEPENDENCE See Item 10.
 
 #### Item 14
 
 - Status: `success`
 - Confidence: `high` `1.00`
-- Text length: `51`
-- Raw tables/images: `0` / `0`
-- Raw structure bytes: `1815`
+- Text length: `65`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `1602`
 - Warnings: none
-- Start evidence: `Item 14 Principal accounting fees and services`
-- End evidence: `Part IV Item 15 Exhibits, financial statement schedules`
+- Start evidence: `ITEM 14: PRINCIPAL ACCOUNTING FEES AND SERVICES`
+- End evidence: `Part IV ITEM 15: EXHIBITS, FINANCIAL STATEMENT SCHEDULES`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
-> Item 14 Principal accounting fees and services 23
+> ITEM 14: PRINCIPAL ACCOUNTING FEES AND SERVICES See Item 10. 23
 
 End snippet:
 
-> Item 14 Principal accounting fees and services 23
+> ITEM 14: PRINCIPAL ACCOUNTING FEES AND SERVICES See Item 10. 23
 
 #### Item 15
 
 - Status: `success`
 - Confidence: `high` `1.00`
-- Text length: `1274373`
-- Raw tables/images: `1302` / `13`
-- Raw structure bytes: `16079531`
+- Text length: `1154393`
+- Raw tables/images: `1273` / `13`
+- Raw structure bytes: `15813154`
 - Warnings: none
-- Start evidence: `Part IV Item 15 Exhibits, financial statement schedules`
+- Start evidence: `Part IV ITEM 15: EXHIBITS, FINANCIAL STATEMENT SCHEDULES`
 - End evidence: `SIGNATURES`
 - Recommended actions: `inspect_only:section_reference_detected`, `inspect_only:exhibit_index_detected`
 
 Start snippet:
 
-> Part IV Item 15 Exhibits, financial statement schedules 24–27 Part I ITEM 1: BUSINESS Overview JPMorgan Chase & Co.,(“JPMorgan Chase” or the “Firm”) a financial holding company incorporated under Delaware law in 1968, is a leading global financial services...
+> Part IV ITEM 15: EXHIBITS, FINANCIAL STATEMENT SCHEDULES Exhibits, financial statement schedules 1 Financial statements The Consolidated Financial Statements, the Notes thereto and the report of the Independent Registered Public Accounting Firm thereon list...
 
 End snippet:
 
@@ -2424,7 +2427,7 @@ End snippet:
 - Fiscal year: `2023`
 - Overall status: `success`
 - Candidate count: `43`
-- TOC confidence: `medium`
+- TOC confidence: `high`
 - TOC items: `1, 1A, 1B, 2, 3, 4, 5, 6, 7, 7A, 8, 9, 9A, 9B, 9C, 10, 11, 12, 13, 14, 15`
 
 TOC entries:
@@ -2612,21 +2615,22 @@ End snippet:
 #### Item 6
 
 - Status: `success`
-- Confidence: `high` `1.00`
-- Text length: `21`
-- Raw tables/images: `0` / `0`
-- Raw structure bytes: `1025`
-- Warnings: none
+- Confidence: `high` `0.85`
+- Text length: `181135`
+- Raw tables/images: `38` / `0`
+- Raw structure bytes: `512504`
+- Warnings: `Start heading has TOC-like signals.`
 - Start evidence: `Item 6. Reserved`
 - End evidence: `Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations.`
+- Recommended actions: `inspect_only:start_toc_like_signal`, `inspect_only:section_reference_detected`, `inspect_only:exhibit_index_detected`
 
 Start snippet:
 
-> Item 6. Reserved 35
+> Item 6. Reserved 35 Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations. 35 Item 7A. Quantitative and Qualitative Disclosures About Market Risk. 35 Item 8. Financial Statements and Supplementary Data. 36 Item 9. Cha...
 
 End snippet:
 
-> Item 6. Reserved 35
+> ...xcludes excise tax and commissions. As part of the Inflation Reduction Act of 2022, a 1% excise tax was imposed on net share repurchases effective January 1, 2023. (b)Represents the amount remaining under the $30 billion repurchase program. Item 6. Reserved
 
 #### Item 7
 
@@ -2827,47 +2831,49 @@ End snippet:
 
 - Status: `success`
 - Confidence: `high` `1.00`
-- Text length: `88`
+- Text length: `102`
 - Raw tables/images: `0` / `0`
-- Raw structure bytes: `1092`
+- Raw structure bytes: `463`
 - Warnings: none
 - Start evidence: `Item 13. Certain Relationships and Related Transactions, and Director Independence.`
 - End evidence: `Item 14. Principal Accounting Fees and Services.`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
-> Item 13. Certain Relationships and Related Transactions, and Director Independence. 39
+> Item 13. Certain Relationships and Related Transactions, and Director Independence. Refer to Item 10.
 
 End snippet:
 
-> Item 13. Certain Relationships and Related Transactions, and Director Independence. 39
+> Item 13. Certain Relationships and Related Transactions, and Director Independence. Refer to Item 10.
 
 #### Item 14
 
 - Status: `success`
 - Confidence: `high` `1.00`
-- Text length: `53`
-- Raw tables/images: `0` / `0`
-- Raw structure bytes: `1203`
+- Text length: `71`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `1524`
 - Warnings: none
 - Start evidence: `Item 14. Principal Accounting Fees and Services.`
 - End evidence: `Part IV Item 15. Exhibits, Financial Statement Schedules.`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
-> Item 14. Principal Accounting Fees and Services. 39
+> Item 14. Principal Accounting Fees and Services. Refer to Item 10. 39
 
 End snippet:
 
-> Item 14. Principal Accounting Fees and Services. 39
+> Item 14. Principal Accounting Fees and Services. Refer to Item 10. 39
 
 #### Item 15
 
 - Status: `success`
 - Confidence: `high` `1.00`
-- Text length: `1246677`
-- Raw tables/images: `665` / `13`
-- Raw structure bytes: `11923242`
+- Text length: `1054339`
+- Raw tables/images: `619` / `13`
+- Raw structure bytes: `11373237`
 - Warnings: none
 - Start evidence: `Part IV Item 15. Exhibits, Financial Statement Schedules.`
 - End evidence: `SIGNATURES`
@@ -2875,7 +2881,7 @@ End snippet:
 
 Start snippet:
 
-> Part IV Item 15. Exhibits, Financial Statement Schedules. 40-43 Part I Item 1. Business. Overview JPMorgan Chase & Co. (“JPMorgan Chase” or the “Firm”, NYSE: JPM), a financial holding company incorporated under Delaware law in 1968, is a leading financial s...
+> Part IV Item 15. Exhibits, Financial Statement Schedules. 1 Financial statements The Consolidated Financial Statements, the Notes thereto and the report of the Independent Registered Public Accounting Firm thereon listed in Item 8 are set forth commencing o...
 
 End snippet:
 
@@ -4267,40 +4273,42 @@ End snippet:
 #### Item 13
 
 - Status: `success`
-- Confidence: `high` `1.00`
-- Text length: `87`
-- Raw tables/images: `0` / `0`
-- Raw structure bytes: `911`
-- Warnings: none
+- Confidence: `high` `0.85`
+- Text length: `352142`
+- Raw tables/images: `185` / `2`
+- Raw structure bytes: `3105394`
+- Warnings: `Start heading has TOC-like signals.`
 - Start evidence: `Item 13. Certain Relationships and Related Transactions, and Director Independence`
-- End evidence: `Item 14. Principal Accountant Fees and Services`
+- End evidence: `PART IV ITEM 15.EXHIBITS AND FINANCIAL STATEMENT SCHEDULES`
+- Recommended actions: `needs_user_selection:internal_item_toc_detected`, `inspect_only:start_toc_like_signal`, `inspect_only:section_reference_detected`, `inspect_only:exhibit_index_detected`
 
 Start snippet:
 
-> Item 13. Certain Relationships and Related Transactions, and Director Independence 87
+> Item 13. Certain Relationships and Related Transactions, and Director Independence 87 Item 14. Principal Accountant Fees and Services 87 Part IV Item 15. Exhibits and Financial Statement Schedules 87 Signatures 96 Exhibit Index 97 PART I ITEM 1. BUSINESS IN...
 
 End snippet:
 
-> Item 13. Certain Relationships and Related Transactions, and Director Independence 87
+> ...by Item 9(e) of Schedule 14A will be included under the heading “Independent Registered Public Accounting Firm” in our definitive proxy statement for our 2015 Annual Meeting of Shareholders, and such required information is incorporated herein by reference.
 
 #### Item 14
 
 - Status: `success`
-- Confidence: `high` `1.00`
-- Text length: `52`
-- Raw tables/images: `0` / `0`
-- Raw structure bytes: `863`
-- Warnings: none
+- Confidence: `high` `0.85`
+- Text length: `352053`
+- Raw tables/images: `185` / `2`
+- Raw structure bytes: `3104483`
+- Warnings: `Start heading has TOC-like signals.`
 - Start evidence: `Item 14. Principal Accountant Fees and Services`
-- End evidence: `Part IV Item 15. Exhibits and Financial Statement Schedules`
+- End evidence: `PART IV ITEM 15.EXHIBITS AND FINANCIAL STATEMENT SCHEDULES`
+- Recommended actions: `needs_user_selection:internal_item_toc_detected`, `inspect_only:start_toc_like_signal`, `inspect_only:section_reference_detected`, `inspect_only:exhibit_index_detected`
 
 Start snippet:
 
-> Item 14. Principal Accountant Fees and Services 87
+> Item 14. Principal Accountant Fees and Services 87 Part IV Item 15. Exhibits and Financial Statement Schedules 87 Signatures 96 Exhibit Index 97 PART I ITEM 1. BUSINESS INTRODUCTION Overview UnitedHealth Group is a diversified health and well-being company...
 
 End snippet:
 
-> Item 14. Principal Accountant Fees and Services 87
+> ...by Item 9(e) of Schedule 14A will be included under the heading “Independent Registered Public Accounting Firm” in our definitive proxy statement for our 2015 Annual Meeting of Shareholders, and such required information is incorporated herein by reference.
 
 #### Item 15
 
@@ -4772,40 +4780,41 @@ End snippet:
 
 - Status: `success`
 - Confidence: `high` `1.00`
-- Text length: `52`
+- Text length: `381`
 - Raw tables/images: `0` / `0`
-- Raw structure bytes: `1233`
+- Raw structure bytes: `1665`
 - Warnings: none
-- Start evidence: `Item 14. Principal Accountant Fees and Services`
-- End evidence: `Part IV Item 15. Exhibit and Financial Statement Schedules`
+- Start evidence: `ITEM 14. PRINCIPAL ACCOUNTANT FEES AND SERVICES`
+- End evidence: `PART IV ITEM 15. EXHIBIT AND FINANCIAL STATEMENT SCHEDULES`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
-> Item 14. Principal Accountant Fees and Services 70
+> ITEM 14. PRINCIPAL ACCOUNTANT FEES AND SERVICES The information required by Item 9(e) of Schedule 14A will be included under the heading “Disclosure of Fees Paid to Independent Registered Public Accounting Firm” in our definitive proxy statement for our 202...
 
 End snippet:
 
-> Item 14. Principal Accountant Fees and Services 70
+> ...der the heading “Disclosure of Fees Paid to Independent Registered Public Accounting Firm” in our definitive proxy statement for our 2024 Annual Meeting of Shareholders, and such required information is incorporated herein by reference. 70 Table of Contents
 
 #### Item 15
 
 - Status: `success`
 - Confidence: `high` `1.00`
-- Text length: `64`
-- Raw tables/images: `0` / `0`
-- Raw structure bytes: `1483`
+- Text length: `25408`
+- Raw tables/images: `10` / `0`
+- Raw structure bytes: `267618`
 - Warnings: none
-- Start evidence: `Part IV Item 15. Exhibit and Financial Statement Schedules`
-- End evidence: `Item 16. Form 10-K Summary`
-- Recommended actions: `inspect_only:exhibit_index_detected`
+- Start evidence: `PART IV ITEM 15. EXHIBIT AND FINANCIAL STATEMENT SCHEDULES`
+- End evidence: `ITEM 16. FORM 10-K SUMMARY`
+- Recommended actions: `inspect_only:section_reference_detected`, `inspect_only:exhibit_index_detected`
 
 Start snippet:
 
-> Part IV Item 15. Exhibit and Financial Statement Schedules 71
+> PART IV ITEM 15. EXHIBIT AND FINANCIAL STATEMENT SCHEDULES (a) 1. Financial Statements The financial statements are included under Item 8 of this report: •Reports of Independent Registered Public Accounting Firm. •Consolidated Balance Sheets as of December...
 
 End snippet:
 
-> Part IV Item 15. Exhibit and Financial Statement Schedules 71
+> ...vel guarantees were material as of December 31, 2023, 2022 or 2021. For a summary of commitments and contingencies, see Note 12 of the Notes to the Consolidated Financial Statements included in Part II, Item 8, “Financial Statements and Supplementary Data.”
 
 #### Item 16
 
@@ -8502,20 +8511,21 @@ End snippet:
 
 - Status: `success`
 - Confidence: `high` `1.00`
-- Text length: `86`
-- Raw tables/images: `0` / `0`
-- Raw structure bytes: `1413`
+- Text length: `286`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `1306`
 - Warnings: none
-- Start evidence: `Item 13 Certain Relationships and Related Transactions, and Director Independence`
-- End evidence: `Item 14 Principal Accounting Fees and Services`
+- Start evidence: `ITEM 13. CERTAIN RELATIONSHIPS AND RELATED TRANSACTIONS, AND DIRECTOR INDEPENDENCE`
+- End evidence: `ITEM 14. PRINCIPAL ACCOUNTING FEES AND SERVICES`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
-> Item 13 Certain Relationships and Related Transactions, and Director Independence 82
+> ITEM 13. CERTAIN RELATIONSHIPS AND RELATED TRANSACTIONS, AND DIRECTOR INDEPENDENCE The information required by this Item 13 is incorporated herein by reference to the information under the caption "Corporate Governance – Board Processes and Practices" inclu...
 
 End snippet:
 
-> Item 13 Certain Relationships and Related Transactions, and Director Independence 82
+> ...IPS AND RELATED TRANSACTIONS, AND DIRECTOR INDEPENDENCE The information required by this Item 13 is incorporated herein by reference to the information under the caption "Corporate Governance – Board Processes and Practices" included in our Proxy Statement.
 
 #### Item 14
 
@@ -8582,7 +8592,7 @@ End snippet:
 - Fiscal year: `2014`
 - Overall status: `success`
 - Candidate count: `40`
-- TOC confidence: `medium`
+- TOC confidence: `high`
 - TOC items: `1, 1A, 1B, 2, 3, 4, 5, 6, 7, 7A, 8, 9, 9A, 9B, 10, 11, 12, 13, 14, 15`
 
 TOC entries:
@@ -8690,17 +8700,17 @@ End snippet:
 
 - Status: `success`
 - Confidence: `high` `0.85`
-- Text length: `1253`
-- Raw tables/images: `4` / `0`
-- Raw structure bytes: `23717`
+- Text length: `57727`
+- Raw tables/images: `68` / `0`
+- Raw structure bytes: `180536`
 - Warnings: `Start heading has TOC-like signals.`
 - Start evidence: `Item 2. Properties`
 - End evidence: `Item 4. Mine Safety Disclosures`
-- Recommended actions: `inspect_only:start_toc_like_signal`, `inspect_only:section_reference_detected`
+- Recommended actions: `inspect_only:start_toc_like_signal`, `inspect_only:section_reference_detected`, `inspect_only:exhibit_index_detected`
 
 Start snippet:
 
-> Item 2. Properties As of December 31, 2014, we operated the following facilities (in thousands): Description of Use Square Footage (1) Location Lease Expirations Owned office space 1,802 North America Leased office space 5,672 North America From 2015 throug...
+> Item 2. Properties 15 Item 3. Legal Proceedings 15 Item 4. Mine Safety Disclosures 15 PART II Item 5. Market for the Registrant’s Common Stock, Related Shareholder Matters, and Issuer Purchases of Equity Securities 16 Item 6. Selected Consolidated Financial...
 
 End snippet:
 
@@ -8709,22 +8719,22 @@ End snippet:
 #### Item 3
 
 - Status: `success`
-- Confidence: `high` `1.00`
-- Text length: `152`
-- Raw tables/images: `1` / `0`
-- Raw structure bytes: `1408`
-- Warnings: none
+- Confidence: `high` `0.85`
+- Text length: `57702`
+- Raw tables/images: `68` / `0`
+- Raw structure bytes: `179740`
+- Warnings: `Start heading has TOC-like signals.`
 - Start evidence: `Item 3. Legal Proceedings`
 - End evidence: `Item 4. Mine Safety Disclosures`
-- Recommended actions: `inspect_only:section_reference_detected`
+- Recommended actions: `inspect_only:start_toc_like_signal`, `inspect_only:section_reference_detected`, `inspect_only:exhibit_index_detected`
 
 Start snippet:
 
-> Item 3. Legal Proceedings See Item 8 of Part II, “Financial Statements and Supplementary Data—Note 8—Commitments and Contingencies—Legal Proceedings.”
+> Item 3. Legal Proceedings 15 Item 4. Mine Safety Disclosures 15 PART II Item 5. Market for the Registrant’s Common Stock, Related Shareholder Matters, and Issuer Purchases of Equity Securities 16 Item 6. Selected Consolidated Financial Data 17 Item 7. Manag...
 
 End snippet:
 
-> Item 3. Legal Proceedings See Item 8 of Part II, “Financial Statements and Supplementary Data—Note 8—Commitments and Contingencies—Legal Proceedings.”
+> ...ions, data center, customer service, and other facilities, principally in North America, Europe, and Asia. Item 3. Legal Proceedings See Item 8 of Part II, “Financial Statements and Supplementary Data—Note 8—Commitments and Contingencies—Legal Proceedings.”
 
 #### Item 4
 
@@ -8922,17 +8932,17 @@ End snippet:
 
 - Status: `success`
 - Confidence: `high` `0.85`
-- Text length: `1545`
-- Raw tables/images: `4` / `0`
-- Raw structure bytes: `5286`
+- Text length: `263418`
+- Raw tables/images: `178` / `0`
+- Raw structure bytes: `2133448`
 - Warnings: `Start heading has TOC-like signals.`
 - Start evidence: `PART III Item 10. Directors, Executive Officers, and Corporate Governance`
 - End evidence: `Item 13. Certain Relationships and Related Transactions, and Director Independence`
-- Recommended actions: `inspect_only:start_toc_like_signal`, `inspect_only:section_reference_detected`
+- Recommended actions: `needs_user_selection:internal_item_toc_detected`, `inspect_only:start_toc_like_signal`, `inspect_only:section_reference_detected`, `inspect_only:exhibit_index_detected`
 
 Start snippet:
 
-> PART III Item 10. Directors, Executive Officers, and Corporate Governance Information regarding our Executive Officers required by Item 10 of Part III is set forth in Item 1 of Part I “Business—Executive Officers of the Registrant.” Information required by...
+> PART III Item 10. Directors, Executive Officers, and Corporate Governance 74 Item 11. Executive Compensation 74 Item 12. Security Ownership of Certain Beneficial Owners and Management and Related Shareholder Matters 74 Item 13. Certain Relationships and Rel...
 
 End snippet:
 
@@ -8941,18 +8951,18 @@ End snippet:
 #### Item 11
 
 - Status: `success`
-- Confidence: `high` `1.00`
-- Text length: `484`
-- Raw tables/images: `2` / `0`
-- Raw structure bytes: `2514`
-- Warnings: none
+- Confidence: `high` `0.85`
+- Text length: `263337`
+- Raw tables/images: `178` / `0`
+- Raw structure bytes: `2132118`
+- Warnings: `Start heading has TOC-like signals.`
 - Start evidence: `Item 11. Executive Compensation`
 - End evidence: `Item 13. Certain Relationships and Related Transactions, and Director Independence`
-- Recommended actions: `inspect_only:section_reference_detected`
+- Recommended actions: `needs_user_selection:internal_item_toc_detected`, `inspect_only:start_toc_like_signal`, `inspect_only:section_reference_detected`, `inspect_only:exhibit_index_detected`
 
 Start snippet:
 
-> Item 11. Executive Compensation Information required by Item 11 of Part III is included in our Proxy Statement relating to our 2015 Annual Meeting of Shareholders and is incorporated herein by reference. Item 12. Security Ownership of Certain Beneficial Own...
+> Item 11. Executive Compensation 74 Item 12. Security Ownership of Certain Beneficial Owners and Management and Related Shareholder Matters 74 Item 13. Certain Relationships and Related Transactions, and Director Independence 74 Item 14. Principal Accountant...
 
 End snippet:
 
@@ -8962,59 +8972,60 @@ End snippet:
 
 - Status: `success`
 - Confidence: `high` `1.00`
-- Text length: `277`
-- Raw tables/images: `1` / `0`
-- Raw structure bytes: `1293`
+- Text length: `251`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `3086`
 - Warnings: none
 - Start evidence: `Item 12. Security Ownership of Certain Beneficial Owners and Management and Related Shareholder Matters`
-- End evidence: `Item 13. Certain Relationships and Related Transactions, and Director Independence`
-- Recommended actions: `inspect_only:section_reference_detected`
+- End evidence: `PART IV Item 15. Exhibits, Financial Statement Schedules`
 
 Start snippet:
 
-> Item 12. Security Ownership of Certain Beneficial Owners and Management and Related Shareholder Matters Information required by Item 12 of Part III is included in our Proxy Statement relating to our 2015 Annual Meeting of Shareholders and is incorporated he...
+> Item 12. Security Ownership of Certain Beneficial Owners and Management and Related Shareholder Matters 74 Item 13. Certain Relationships and Related Transactions, and Director Independence 74 Item 14. Principal Accountant Fees and Services 74
 
 End snippet:
 
-> ...Ownership of Certain Beneficial Owners and Management and Related Shareholder Matters Information required by Item 12 of Part III is included in our Proxy Statement relating to our 2015 Annual Meeting of Shareholders and is incorporated herein by reference.
+> Item 12. Security Ownership of Certain Beneficial Owners and Management and Related Shareholder Matters 74 Item 13. Certain Relationships and Related Transactions, and Director Independence 74 Item 14. Principal Accountant Fees and Services 74
 
 #### Item 13
 
 - Status: `success`
 - Confidence: `high` `1.00`
-- Text length: `87`
-- Raw tables/images: `0` / `0`
-- Raw structure bytes: `865`
+- Text length: `256`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `1272`
 - Warnings: none
 - Start evidence: `Item 13. Certain Relationships and Related Transactions, and Director Independence`
 - End evidence: `Item 14. Principal Accountant Fees and Services`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
-> Item 13. Certain Relationships and Related Transactions, and Director Independence 74
+> Item 13. Certain Relationships and Related Transactions, and Director Independence Information required by Item 13 of Part III is included in our Proxy Statement relating to our 2015 Annual Meeting of Shareholders and is incorporated herein by reference.
 
 End snippet:
 
-> Item 13. Certain Relationships and Related Transactions, and Director Independence 74
+> Item 13. Certain Relationships and Related Transactions, and Director Independence Information required by Item 13 of Part III is included in our Proxy Statement relating to our 2015 Annual Meeting of Shareholders and is incorporated herein by reference.
 
 #### Item 14
 
 - Status: `success`
 - Confidence: `high` `1.00`
-- Text length: `52`
+- Text length: `241`
 - Raw tables/images: `0` / `0`
-- Raw structure bytes: `1335`
+- Raw structure bytes: `1466`
 - Warnings: none
 - Start evidence: `Item 14. Principal Accountant Fees and Services`
 - End evidence: `PART IV Item 15. Exhibits, Financial Statement Schedules`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
-> Item 14. Principal Accountant Fees and Services 74
+> Item 14. Principal Accountant Fees and Services Information required by Item 14 of Part III is included in our Proxy Statement relating our 2015 Annual Meeting of Shareholders and is incorporated herein by reference. 74 Table of Contents
 
 End snippet:
 
-> Item 14. Principal Accountant Fees and Services 74
+> Item 14. Principal Accountant Fees and Services Information required by Item 14 of Part III is included in our Proxy Statement relating our 2015 Annual Meeting of Shareholders and is incorporated herein by reference. 74 Table of Contents
 
 #### Item 15
 
@@ -9231,12 +9242,12 @@ End snippet:
 
 - Status: `success`
 - Confidence: `high` `1.00`
-- Text length: `489`
-- Raw tables/images: `2` / `0`
-- Raw structure bytes: `3379`
+- Text length: `531`
+- Raw tables/images: `3` / `0`
+- Raw structure bytes: `5064`
 - Warnings: none
 - Start evidence: `PART II Item 5. Market for the Registrant’s Common Stock, Related Shareholder Matters, and Issuer Purchases of Equity...`
-- End evidence: `Item 6. Reserved`
+- End evidence: `Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations`
 
 Start snippet:
 
@@ -9244,7 +9255,7 @@ Start snippet:
 
 End snippet:
 
-> ...mbol “AMZN.” Holders As of January 24, 2024, there were 11,656 shareholders of record of our common stock, although there is a much larger number of beneficial owners. Recent Sales of Unregistered Securities None. Issuer Purchases of Equity Securities None.
+> ...2024, there were 11,656 shareholders of record of our common stock, although there is a much larger number of beneficial owners. Recent Sales of Unregistered Securities None. Issuer Purchases of Equity Securities None. Item 6. Reserved 19 Table of Contents
 
 #### Item 6
 
