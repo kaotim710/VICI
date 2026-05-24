@@ -102,6 +102,38 @@ class ExtractorTests(unittest.TestCase):
         item = result.item_results[0]
 
         self.assertIn("Section appears to be a cross-reference rather than full narrative text.", item.warnings)
+        self.assertEqual(item.recommended_actions[0].action_type, "needs_user_confirmation")
+        self.assertEqual(item.recommended_actions[0].reason, "same_filing_page_reference")
+
+    def test_short_unexplained_section_recommends_external_source(self):
+        filing = """
+        Item 7. Management's Discussion and Analysis
+        See the annual report for management discussion.
+        Item 7A. Quantitative and Qualitative Disclosures About Market Risk
+        Market risk text.
+        """
+
+        result = extract_items(filing, target_items=["7"])
+        item = result.item_results[0]
+
+        self.assertEqual(item.recommended_actions[0].action_type, "needs_external_source")
+
+    def test_long_noncanonical_section_recommends_subsection_selection(self):
+        filing = """
+        Item 7. Company and Subsidiaries
+        OVERVIEW
+        """ + ("Long narrative. " * 22000) + """
+        RESULTS OF OPERATIONS
+        """ + ("More long narrative. " * 20000) + """
+        Item 7A. Quantitative and Qualitative Disclosures About Market Risk
+        Market risk text.
+        """
+
+        result = extract_items(filing, target_items=["7"])
+        item = result.item_results[0]
+
+        self.assertEqual(item.recommended_actions[0].action_type, "needs_user_selection")
+        self.assertIn("OVERVIEW", item.recommended_actions[0].options)
 
     def test_dense_item_cluster_alone_is_not_toc_like(self):
         text = """

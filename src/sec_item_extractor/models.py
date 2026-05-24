@@ -72,6 +72,14 @@ class ConfidenceComponent:
 
 
 @dataclass(frozen=True)
+class RecommendedAction:
+    action_type: str
+    reason: str
+    description: str
+    options: list[str] = field(default_factory=list)
+
+
+@dataclass(frozen=True)
 class ItemResult:
     item: str
     status: str
@@ -86,6 +94,7 @@ class ItemResult:
     candidate_attempts: list[CandidateAttempt] = field(default_factory=list)
     validation_reasons: list[str] = field(default_factory=list)
     warnings: list[str] = field(default_factory=list)
+    recommended_actions: list[RecommendedAction] = field(default_factory=list)
     strategy_used: str = "deterministic_text_v1"
 
     def to_dict(self) -> dict:

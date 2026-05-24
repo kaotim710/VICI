@@ -32,6 +32,11 @@ Missing filings: 0
 - End evidence: `ITEM 7A: QUANTITATIVE AND QUALITATIVE DISCLOSURES ABOUT MARKET RISK`
 - End evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH`
 
+Recommended actions:
+
+- `needs_user_confirmation` / `same_filing_page_reference`: Confirm whether to follow the referenced page range and attempt secondary extraction.
+  Options: `extract_referenced_pages, accept_cross_reference_text`
+
 Confidence components:
 
 | Component | Earned | Weight | Passed |
@@ -68,6 +73,11 @@ End snippet:
 - Start evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH`
 - End evidence: `Item 7A. Quantitative and Qualitative Disclosures About Market Risk.`
 - End evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH`
+
+Recommended actions:
+
+- `needs_user_confirmation` / `same_filing_page_reference`: Confirm whether to follow the referenced page range and attempt secondary extraction.
+  Options: `extract_referenced_pages, accept_cross_reference_text`
 
 Confidence components:
 
@@ -106,6 +116,11 @@ End snippet:
 - End evidence: `Item 7A. Quantitative and Qualitative Disclosures About Market Risk`
 - End evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH`
 
+Recommended actions:
+
+- `needs_user_selection` / `internal_item_toc_detected`: Review likely internal Item 7 headings and choose the subsection to extract.
+  Options: `Management’s Discussion and Analysis of Financial Condition and Results of Operation, Table of Contents, Executive Summary, Financial Highlights, Balance Sheet Overview, Supplemental Financial Data, Business Segment Operations, Consumer & Business Banking, Consumer Real Estate Services, Global Wealth & Investment Management, Global Banking, Global Markets`
+
 Confidence components:
 
 | Component | Earned | Weight | Passed |
@@ -141,6 +156,11 @@ End snippet:
 - Start evidence reasons: `REGEX_ITEM_HEADING`
 - End evidence: `Item 7A. Quantitative and Qualitative Disclosures about Market Risk`
 - End evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH`
+
+Recommended actions:
+
+- `needs_user_selection` / `internal_item_toc_detected`: Review likely internal Item 7 headings and choose the subsection to extract.
+  Options: `Management's Discussion and Analysis of Financial Condition and Results of Operations, Table of Contents, Executive Summary, Recent Developments, Financial Highlights, Balance Sheet Overview, Supplemental Financial Data, Business Segment Operations, Consumer Banking, Global Wealth & Investment Management, Global Banking, Global Markets`
 
 Confidence components:
 
@@ -178,6 +198,10 @@ End snippet:
 - End evidence: `ITEM 7A. QUANTITATIVE AND QUALITATIVE DISCLOSURES ABOUT MARKET RISK`
 - End evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH, NEAR_TABLE_OF_CONTENTS_LABEL`
 
+Recommended actions:
+
+- `inspect_only` / `start_toc_like_signal`: Inspect start evidence; extraction is retained because the selected span is not a rejected TOC pair.
+
 Confidence components:
 
 | Component | Earned | Weight | Passed |
@@ -213,6 +237,10 @@ End snippet:
 - Start evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH, TOC_DENSE_ITEM_CLUSTER, NEAR_TABLE_OF_CONTENTS_LABEL`
 - End evidence: `ITEM 7A. QUANTITATIVE AND QUALITATIVE DISCLOSURES ABOUT MARKET RISK`
 - End evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH`
+
+Recommended actions:
+
+- `inspect_only` / `start_toc_like_signal`: Inspect start evidence; extraction is retained because the selected span is not a rejected TOC pair.
 
 Confidence components:
 
@@ -250,6 +278,11 @@ End snippet:
 - End evidence: `Item 1B. UNRESOLVED STAFF COMMENTS`
 - End evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH`
 
+Recommended actions:
+
+- `needs_external_source` / `external_or_other_document_reference`: Short section likely requires a referenced annual report, exhibit, proxy, or other source document.
+  Options: `fetch_referenced_document, upload_reference_document, accept_short_text`
+
 Confidence components:
 
 | Component | Earned | Weight | Passed |
@@ -285,6 +318,11 @@ End snippet:
 - Start evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH, NEAR_TABLE_OF_CONTENTS_LABEL`
 - End evidence: `Item 7A. QUANTITATIVE AND QUALITATIVE DISCLOSURES ABOUT MARKET RISK`
 - End evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH, NEAR_TABLE_OF_CONTENTS_LABEL`
+
+Recommended actions:
+
+- `needs_external_source` / `external_or_other_document_reference`: Short section likely requires a referenced annual report, exhibit, proxy, or other source document.
+  Options: `fetch_referenced_document, upload_reference_document, accept_short_text`
 
 Confidence components:
 
@@ -322,6 +360,11 @@ End snippet:
 - End evidence: `Item 7A. Quantitative and Qualitative Disclosures About Market Risk`
 - End evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH`
 
+Recommended actions:
+
+- `needs_external_source` / `external_or_other_document_reference`: Short section likely requires a referenced annual report, exhibit, proxy, or other source document.
+  Options: `fetch_referenced_document, upload_reference_document, accept_short_text`
+
 Confidence components:
 
 | Component | Earned | Weight | Passed |
@@ -357,6 +400,11 @@ End snippet:
 - Start evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH`
 - End evidence: `ITEM 7A. QUANTITATIVE AND QUALITATIVE DISCLOSURES ABOUT MARKET RISK`
 - End evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH`
+
+Recommended actions:
+
+- `needs_external_source` / `external_or_other_document_reference`: Short section likely requires a referenced annual report, exhibit, proxy, or other source document.
+  Options: `fetch_referenced_document, upload_reference_document, accept_short_text`
 
 Confidence components:
 
@@ -394,6 +442,11 @@ End snippet:
 - End evidence: `Item 7A. Quantitative and Qualitative Disclosures About Market Risk`
 - End evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH`
 
+Recommended actions:
+
+- `needs_external_source` / `external_or_other_document_reference`: Short section likely requires a referenced annual report, exhibit, proxy, or other source document.
+  Options: `fetch_referenced_document, upload_reference_document, accept_short_text`
+
 Confidence components:
 
 | Component | Earned | Weight | Passed |
@@ -430,6 +483,11 @@ End snippet:
 - End evidence: `Item 7A. Quantitative and Qualitative Disclosures About Market Risk`
 - End evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH, NEAR_TABLE_OF_CONTENTS_LABEL`
 
+Recommended actions:
+
+- `needs_external_source` / `external_or_other_document_reference`: Short section likely requires a referenced annual report, exhibit, proxy, or other source document.
+  Options: `fetch_referenced_document, upload_reference_document, accept_short_text`
+
 Confidence components:
 
 | Component | Earned | Weight | Passed |
@@ -465,6 +523,11 @@ End snippet:
 - Start evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH`
 - End evidence: `ITEM 7A. QUANTITATIVE AND QUALITATIVE DISCLOSURES ABOUT MARKET RISK`
 - End evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH`
+
+Recommended actions:
+
+- `needs_external_source` / `external_or_other_document_reference`: Short section likely requires a referenced annual report, exhibit, proxy, or other source document.
+  Options: `fetch_referenced_document, upload_reference_document, accept_short_text`
 
 Confidence components:
 

@@ -5,7 +5,15 @@ from dataclasses import dataclass
 
 from .candidates import TARGET_ITEMS, find_heading_candidates, is_expected_title, legal_next_items
 from .cleaning import parse_document
-from .models import CandidateAttempt, ConfidenceComponent, Evidence, ExtractionResult, HeadingCandidate, ItemResult
+from .models import (
+    CandidateAttempt,
+    ConfidenceComponent,
+    Evidence,
+    ExtractionResult,
+    HeadingCandidate,
+    ItemResult,
+    RecommendedAction,
+)
 
 PARSER_VERSION = "deterministic_text_v1"
 
@@ -253,6 +261,7 @@ def _build_success_result(
         )
         warnings.append("Section appears to be a cross-reference rather than full narrative text.")
 
+    recommended_actions = _recommended_actions(start, end, section_text, warnings)
     score = sum(component.earned for component in confidence_components)
     confidence_level = "high" if score >= 0.85 else "medium" if score >= 0.60 else "low"
     return ItemResult(
@@ -269,6 +278,7 @@ def _build_success_result(
         candidate_attempts=attempts,
         validation_reasons=reasons,
         warnings=warnings,
+        recommended_actions=recommended_actions,
     )
 
 
@@ -335,3 +345,88 @@ def _is_cross_reference_section(section_text: str) -> bool:
         )
     )
     return has_page_range and has_reference_language
+
+
+def _recommended_actions(
+    start: HeadingCandidate, end: HeadingCandidate, section_text: str, warnings: list[str]
+) -> list[RecommendedAction]:
+    actions: list[RecommendedAction] = []
+    section_length = len(section_text)
+
+    if "Section appears to be a cross-reference rather than full narrative text." in warnings:
+        actions.append(
+            RecommendedAction(
+                action_type="needs_user_confirmation",
+                reason="same_filing_page_reference",
+                description="Confirm whether to follow the referenced page range and attempt secondary extraction.",
+                options=["extract_referenced_pages", "accept_cross_reference_text"],
+            )
+        )
+
+    if section_length > 250000 and "Start heading does not contain the expected canonical title." in warnings:
+        actions.append(
+            RecommendedAction(
+                action_type="needs_user_selection",
+                reason="internal_item_toc_detected",
+                description="Review likely internal Item 7 headings and choose the subsection to extract.",
+                options=_internal_heading_options(section_text),
+            )
+        )
+
+    if "Start heading has TOC-like signals." in warnings:
+        actions.append(
+            RecommendedAction(
+                action_type="inspect_only",
+                reason="start_toc_like_signal",
+                description="Inspect start evidence; extraction is retained because the selected span is not a rejected TOC pair.",
+            )
+        )
+
+    if (
+        section_length < 1000
+        and "Section appears to be a cross-reference rather than full narrative text." not in warnings
+        and "Section length is outside the expected first-pass range." in warnings
+    ):
+        actions.append(
+            RecommendedAction(
+                action_type="needs_external_source",
+                reason="external_or_other_document_reference",
+                description="Short section likely requires a referenced annual report, exhibit, proxy, or other source document.",
+                options=["fetch_referenced_document", "upload_reference_document", "accept_short_text"],
+            )
+        )
+
+    return actions
+
+
+def _internal_heading_options(section_text: str, limit: int = 12) -> list[str]:
+    options = []
+    seen = set()
+    for raw_line in section_text.splitlines():
+        line = " ".join(raw_line.split())
+        if not _looks_like_internal_heading(line):
+            continue
+        normalized = line.lower()
+        if normalized in seen:
+            continue
+        seen.add(normalized)
+        options.append(line[:120])
+        if len(options) >= limit:
+            break
+    return options
+
+
+def _looks_like_internal_heading(line: str) -> bool:
+    if not 8 <= len(line) <= 140:
+        return False
+    lower = line.lower()
+    if lower.startswith("item "):
+        return False
+    if re.search(r"\.{2,}\s*\d+\s*$", line):
+        return False
+    alpha_count = sum(1 for character in line if character.isalpha())
+    if alpha_count < 5:
+        return False
+    uppercase_ratio = sum(1 for character in line if character.isupper()) / max(alpha_count, 1)
+    title_like = line[:1].isupper() and not line.endswith(".")
+    return uppercase_ratio > 0.55 or title_like

@@ -57,6 +57,14 @@ def main() -> int:
                             for component in item.confidence_components
                         ],
                         "warnings": item.warnings,
+                        "recommended_actions": [
+                            {
+                                "action_type": action.action_type,
+                                "reason": action.reason,
+                                "options": action.options,
+                            }
+                            for action in item.recommended_actions
+                        ],
                     }
                     for item in result.item_results
                 },

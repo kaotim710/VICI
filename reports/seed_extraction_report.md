@@ -315,6 +315,7 @@ End snippet:
 - Warnings: `Section length is outside the expected first-pass range.`, `Section appears to be a cross-reference rather than full narrative text.`
 - Start evidence: `ITEM 7: MANAGEMENT’S DISCUSSION AND ANALYSIS OF FINANCIAL CONDITION AND RESULTS OF OPERATIONS`
 - End evidence: `ITEM 7A: QUANTITATIVE AND QUALITATIVE DISCLOSURES ABOUT MARKET RISK`
+- Recommended actions: `needs_user_confirmation:same_filing_page_reference`
 
 Start snippet:
 
@@ -373,6 +374,7 @@ End snippet:
 - Warnings: `Section length is outside the expected first-pass range.`, `Section appears to be a cross-reference rather than full narrative text.`
 - Start evidence: `Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations.`
 - End evidence: `Item 7A. Quantitative and Qualitative Disclosures About Market Risk.`
+- Recommended actions: `needs_user_confirmation:same_filing_page_reference`
 
 Start snippet:
 
@@ -431,6 +433,7 @@ End snippet:
 - Warnings: `Start heading does not contain the expected canonical title.`, `Section length is outside the expected first-pass range.`
 - Start evidence: `Item 7. Bank of America Corporation and Subsidiaries`
 - End evidence: `Item 7A. Quantitative and Qualitative Disclosures About Market Risk`
+- Recommended actions: `needs_user_selection:internal_item_toc_detected`
 
 Start snippet:
 
@@ -489,6 +492,7 @@ End snippet:
 - Warnings: `Start heading does not contain the expected canonical title.`, `Section length is outside the expected first-pass range.`
 - Start evidence: `Item 7. Bank of America Corporation and Subsidiaries`
 - End evidence: `Item 7A. Quantitative and Qualitative Disclosures about Market Risk`
+- Recommended actions: `needs_user_selection:internal_item_toc_detected`
 
 Start snippet:
 
@@ -547,6 +551,7 @@ End snippet:
 - Warnings: `Start heading has TOC-like signals.`
 - Start evidence: `Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations`
 - End evidence: `ITEM 7A. QUANTITATIVE AND QUALITATIVE DISCLOSURES ABOUT MARKET RISK`
+- Recommended actions: `inspect_only:start_toc_like_signal`
 
 Start snippet:
 
@@ -605,6 +610,7 @@ End snippet:
 - Warnings: `Start heading has TOC-like signals.`
 - Start evidence: `Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations`
 - End evidence: `ITEM 7A. QUANTITATIVE AND QUALITATIVE DISCLOSURES ABOUT MARKET RISK`
+- Recommended actions: `inspect_only:start_toc_like_signal`
 
 Start snippet:
 
@@ -646,6 +652,7 @@ End snippet:
 - Warnings: `Section length is outside the expected first-pass range.`
 - Start evidence: `Item 1A. RISK FACTORS`
 - End evidence: `Item 1B. UNRESOLVED STAFF COMMENTS`
+- Recommended actions: `needs_external_source:external_or_other_document_reference`
 
 Start snippet:
 
@@ -663,6 +670,7 @@ End snippet:
 - Warnings: `Section length is outside the expected first-pass range.`
 - Start evidence: `Item 7. MANAGEMENT’S DISCUSSION AND ANALYSIS OF FINANCIAL CONDITION AND RESULTS OF OPERATIONS`
 - End evidence: `Item 7A. QUANTITATIVE AND QUALITATIVE DISCLOSURES ABOUT MARKET RISK`
+- Recommended actions: `needs_external_source:external_or_other_document_reference`
 
 Start snippet:
 
@@ -779,6 +787,7 @@ End snippet:
 - Warnings: `Section length is outside the expected first-pass range.`
 - Start evidence: `Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations`
 - End evidence: `Item 7A. Quantitative and Qualitative Disclosures About Market Risk`
+- Recommended actions: `needs_external_source:external_or_other_document_reference`
 
 Start snippet:
 
@@ -837,6 +846,7 @@ End snippet:
 - Warnings: `Section length is outside the expected first-pass range.`
 - Start evidence: `ITEM 7. MANAGEMENT'S DISCUSSION AND ANALYSIS OF FINANCIAL CONDITION AND RESULTS OF OPERATIONS`
 - End evidence: `ITEM 7A. QUANTITATIVE AND QUALITATIVE DISCLOSURES ABOUT MARKET RISK`
+- Recommended actions: `needs_external_source:external_or_other_document_reference`
 
 Start snippet:
 
@@ -895,6 +905,7 @@ End snippet:
 - Warnings: `Section length is outside the expected first-pass range.`
 - Start evidence: `Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations`
 - End evidence: `Item 7A. Quantitative and Qualitative Disclosures About Market Risk`
+- Recommended actions: `needs_external_source:external_or_other_document_reference`
 
 Start snippet:
 
@@ -953,6 +964,7 @@ End snippet:
 - Warnings: `Section length is outside the expected first-pass range.`
 - Start evidence: `Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations`
 - End evidence: `Item 7A. Quantitative and Qualitative Disclosures About Market Risk`
+- Recommended actions: `needs_external_source:external_or_other_document_reference`
 
 Start snippet:
 
@@ -1011,6 +1023,7 @@ End snippet:
 - Warnings: `Section length is outside the expected first-pass range.`
 - Start evidence: `ITEM 7. MANAGEMENT'S DISCUSSION AND ANALYSIS OF FINANCIAL CONDITION AND RESULTS OF OPERATIONS`
 - End evidence: `ITEM 7A. QUANTITATIVE AND QUALITATIVE DISCLOSURES ABOUT MARKET RISK`
+- Recommended actions: `needs_external_source:external_or_other_document_reference`
 
 Start snippet:
 

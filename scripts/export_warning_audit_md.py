@@ -99,6 +99,12 @@ def _audit_item(filing: dict, result, item) -> list[str]:
     if item.end_evidence:
         lines.append(f"- End evidence: `{_compact(item.end_evidence.text, 160)}`")
         lines.append(f"- End evidence reasons: `{', '.join(item.end_evidence.reasons)}`")
+    if item.recommended_actions:
+        lines.extend(["", "Recommended actions:", ""])
+        for action in item.recommended_actions:
+            lines.append(f"- `{action.action_type}` / `{action.reason}`: {action.description}")
+            if action.options:
+                lines.append(f"  Options: `{', '.join(action.options)}`")
 
     lines.extend(["", "Confidence components:", ""])
     lines.extend(

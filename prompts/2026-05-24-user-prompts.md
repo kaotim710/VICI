@@ -211,3 +211,9 @@ ok，進行下一個milestone
 ```text
 先實作看看，並跑測試
 ```
+
+## Warning Count Follow-Up Request
+
+```text
+warning數有下降嗎？有的話再做後續的部分
+```

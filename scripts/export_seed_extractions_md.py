@@ -123,6 +123,9 @@ def _item_detail(item) -> list[str]:
         lines.append(f"- Start evidence: `{_compact(item.start_evidence.text, 120)}`")
     if item.end_evidence:
         lines.append(f"- End evidence: `{_compact(item.end_evidence.text, 120)}`")
+    if item.recommended_actions:
+        actions = ", ".join(f"`{action.action_type}:{action.reason}`" for action in item.recommended_actions)
+        lines.append(f"- Recommended actions: {actions}")
     start_snippet, end_snippet = _edge_snippets(item.text or "", SNIPPET_CHARS)
     lines.extend(
         [

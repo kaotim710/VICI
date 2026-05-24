@@ -21,6 +21,7 @@ class WarningAuditReportTests(unittest.TestCase):
             end_evidence = None
             confidence_components = []
             candidate_attempts = []
+            recommended_actions = []
 
         class Result:
             status = "success"
