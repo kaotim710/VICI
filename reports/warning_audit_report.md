@@ -4,129 +4,59 @@ Generated: 2026-05-24
 
 Scope: seed 10-K filings with non-empty item warnings.
 
-Warning items: 117
-Items with rejected candidate pairs: 34
+Warning items: 78
+Items with rejected candidate pairs: 25
 Missing filings: 0
 
 ## Warning Counts
 
 | Warning | Count |
 | --- | ---: |
-| `End heading has TOC-like signals.` | 7 |
-| `No heading candidate found for requested item.` | 34 |
+| `End heading has TOC-like signals.` | 1 |
+| `No heading candidate found for requested item.` | 6 |
 | `Section appears to be a cross-reference rather than full narrative text.` | 2 |
-| `Section length is outside the expected first-pass range.` | 45 |
+| `Section length is outside the expected first-pass range.` | 48 |
 | `Start heading does not contain the expected canonical title.` | 4 |
 | `Start heading has TOC-like signals.` | 20 |
-| `Start heading was found, but no legal end boundary was found.` | 17 |
+| `Start heading was found, but no legal end boundary was found.` | 7 |
 
 ## Audit Items
-
-### aapl_2014_10k Item 1C
-
-- Ticker: `AAPL`
-- Fiscal year: `2014`
-- Overall status: `partial`
-- Confidence: `low` `0.00`
-- Text length: `0`
-- Warnings: `No heading candidate found for requested item.`
-
-Confidence components:
-
-| Component | Earned | Weight | Passed |
-| --- | ---: | ---: | --- |
-
-Selected candidate attempt:
-
-- No selected candidate attempt recorded.
-
-Start snippet:
-
-> 
-
-End snippet:
-
-> 
-
-### aapl_2014_10k Item 9C
-
-- Ticker: `AAPL`
-- Fiscal year: `2014`
-- Overall status: `partial`
-- Confidence: `low` `0.00`
-- Text length: `0`
-- Warnings: `No heading candidate found for requested item.`
-
-Confidence components:
-
-| Component | Earned | Weight | Passed |
-| --- | ---: | ---: | --- |
-
-Selected candidate attempt:
-
-- No selected candidate attempt recorded.
-
-Start snippet:
-
-> 
-
-End snippet:
-
-> 
 
 ### aapl_2014_10k Item 15
 
 - Ticker: `AAPL`
 - Fiscal year: `2014`
-- Overall status: `partial`
-- Confidence: `low` `0.20`
-- Text length: `0`
-- Warnings: `Start heading was found, but no legal end boundary was found.`
+- Overall status: `success`
+- Confidence: `high` `0.90`
+- Text length: `302976`
+- Warnings: `Section length is outside the expected first-pass range.`
 - Start evidence: `Part IV Item 15. Exhibits, Financial Statement Schedules`
 - Start evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH, NEAR_TABLE_OF_CONTENTS_LABEL`
+- End evidence: `SIGNATURES`
+- End evidence reasons: `TERMINAL_BOUNDARY`
 
 Confidence components:
 
 | Component | Earned | Weight | Passed |
 | --- | ---: | ---: | --- |
+| `legal_boundary_pair` | 0.55 | 0.55 | True |
+| `start_not_toc_like` | 0.15 | 0.15 | True |
+| `end_not_toc_like` | 0.10 | 0.10 | True |
+| `start_expected_title` | 0.10 | 0.10 | True |
+| `section_length_reasonable` | 0.00 | 0.10 | False |
 
 Selected candidate attempt:
 
-- No selected candidate attempt recorded.
+- Validation reasons: `START_HEADING_FOUND, START_NOT_TOC_LIKE, START_EXPECTED_TITLE_MATCH, TOC_LAST_ITEM_TERMINAL_END_BOUNDARY_USED`
+- Attempt warnings: `none`
 
 Start snippet:
 
-> 
+> Part IV Item 15. Exhibits, Financial Statement Schedules 85 Table of Contents This Annual Report on Form 10-K (“Form 10-K”) contains forward-looking statements, within the meaning of the Private Securities Litigation...
 
 End snippet:
 
-> 
-
-### aapl_2014_10k Item 16
-
-- Ticker: `AAPL`
-- Fiscal year: `2014`
-- Overall status: `partial`
-- Confidence: `low` `0.00`
-- Text length: `0`
-- Warnings: `No heading candidate found for requested item.`
-
-Confidence components:
-
-| Component | Earned | Weight | Passed |
-| --- | ---: | ---: | --- |
-
-Selected candidate attempt:
-
-- No selected candidate attempt recorded.
-
-Start snippet:
-
-> 
-
-End snippet:
-
-> 
+> ...601 of Regulation S-K The information required by this Section (a)(3) of Item 15 is set forth on the exhibit index that follows the Signatures page of this Form 10-K. Apple Inc. \| 2014 Form 10-K \| 85 Table of Contents
 
 ### aapl_2023_10k Item 6
 
@@ -204,143 +134,11 @@ End snippet:
 
 > ...ms’ plan will expire on December 15, 2024, subject to early termination for certain specified events set forth in the plans. Item 9C. Disclosure Regarding Foreign Jurisdictions that Prevent Inspections Not applicable.
 
-### msft_2014_10k Item 1C
-
-- Ticker: `MSFT`
-- Fiscal year: `2014`
-- Overall status: `partial`
-- Confidence: `low` `0.00`
-- Text length: `0`
-- Warnings: `No heading candidate found for requested item.`
-
-Confidence components:
-
-| Component | Earned | Weight | Passed |
-| --- | ---: | ---: | --- |
-
-Selected candidate attempt:
-
-- No selected candidate attempt recorded.
-
-Start snippet:
-
-> 
-
-End snippet:
-
-> 
-
-### msft_2014_10k Item 9C
-
-- Ticker: `MSFT`
-- Fiscal year: `2014`
-- Overall status: `partial`
-- Confidence: `low` `0.00`
-- Text length: `0`
-- Warnings: `No heading candidate found for requested item.`
-
-Confidence components:
-
-| Component | Earned | Weight | Passed |
-| --- | ---: | ---: | --- |
-
-Selected candidate attempt:
-
-- No selected candidate attempt recorded.
-
-Start snippet:
-
-> 
-
-End snippet:
-
-> 
-
-### msft_2014_10k Item 15
-
-- Ticker: `MSFT`
-- Fiscal year: `2014`
-- Overall status: `partial`
-- Confidence: `low` `0.20`
-- Text length: `0`
-- Warnings: `Start heading was found, but no legal end boundary was found.`
-- Start evidence: `ITEM 15. EXHIBITS, FINANCIAL STATEMENT SCHEDULES`
-- Start evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH, NEAR_TABLE_OF_CONTENTS_LABEL`
-
-Confidence components:
-
-| Component | Earned | Weight | Passed |
-| --- | ---: | ---: | --- |
-
-Selected candidate attempt:
-
-- No selected candidate attempt recorded.
-
-Start snippet:
-
-> 
-
-End snippet:
-
-> 
-
-### msft_2014_10k Item 16
-
-- Ticker: `MSFT`
-- Fiscal year: `2014`
-- Overall status: `partial`
-- Confidence: `low` `0.00`
-- Text length: `0`
-- Warnings: `No heading candidate found for requested item.`
-
-Confidence components:
-
-| Component | Earned | Weight | Passed |
-| --- | ---: | ---: | --- |
-
-Selected candidate attempt:
-
-- No selected candidate attempt recorded.
-
-Start snippet:
-
-> 
-
-End snippet:
-
-> 
-
-### msft_2023_10k Item 1C
-
-- Ticker: `MSFT`
-- Fiscal year: `2023`
-- Overall status: `partial`
-- Confidence: `low` `0.00`
-- Text length: `0`
-- Warnings: `No heading candidate found for requested item.`
-
-Confidence components:
-
-| Component | Earned | Weight | Passed |
-| --- | ---: | ---: | --- |
-
-Selected candidate attempt:
-
-- No selected candidate attempt recorded.
-
-Start snippet:
-
-> 
-
-End snippet:
-
-> 
-
 ### msft_2023_10k Item 6
 
 - Ticker: `MSFT`
 - Fiscal year: `2023`
-- Overall status: `partial`
+- Overall status: `success`
 - Confidence: `high` `0.90`
 - Text length: `39`
 - Warnings: `Section length is outside the expected first-pass range.`
@@ -407,32 +205,6 @@ Start snippet:
 End snippet:
 
 > ITEM 1B: UNRESOLVED SEC STAFF COMMENTS None.
-
-### jpm_2014_10k Item 1C
-
-- Ticker: `JPM`
-- Fiscal year: `2014`
-- Overall status: `partial`
-- Confidence: `low` `0.00`
-- Text length: `0`
-- Warnings: `No heading candidate found for requested item.`
-
-Confidence components:
-
-| Component | Earned | Weight | Passed |
-| --- | ---: | ---: | --- |
-
-Selected candidate attempt:
-
-- No selected candidate attempt recorded.
-
-Start snippet:
-
-> 
-
-End snippet:
-
-> 
 
 ### jpm_2014_10k Item 3
 
@@ -622,32 +394,6 @@ End snippet:
 
 > ...full quarter within the two years ended December 31, 2014, are included on pages 307–308 in the table entitled “Selected quarterly financial data (unaudited).” Also included is a “Glossary of terms’’ on pages 309–313.
 
-### jpm_2014_10k Item 9C
-
-- Ticker: `JPM`
-- Fiscal year: `2014`
-- Overall status: `partial`
-- Confidence: `low` `0.00`
-- Text length: `0`
-- Warnings: `No heading candidate found for requested item.`
-
-Confidence components:
-
-| Component | Earned | Weight | Passed |
-| --- | ---: | ---: | --- |
-
-Selected candidate attempt:
-
-- No selected candidate attempt recorded.
-
-Start snippet:
-
-> 
-
-End snippet:
-
-> 
-
 ### jpm_2014_10k Item 11
 
 - Ticker: `JPM`
@@ -681,54 +427,36 @@ End snippet:
 - Ticker: `JPM`
 - Fiscal year: `2014`
 - Overall status: `partial`
-- Confidence: `low` `0.20`
-- Text length: `0`
-- Warnings: `Start heading was found, but no legal end boundary was found.`
+- Confidence: `high` `0.90`
+- Text length: `1274373`
+- Warnings: `Section length is outside the expected first-pass range.`
 - Start evidence: `Part IV Item 15 Exhibits, financial statement schedules`
 - Start evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH`
+- End evidence: `SIGNATURES`
+- End evidence reasons: `TERMINAL_BOUNDARY`
 
 Confidence components:
 
 | Component | Earned | Weight | Passed |
 | --- | ---: | ---: | --- |
+| `legal_boundary_pair` | 0.55 | 0.55 | True |
+| `start_not_toc_like` | 0.15 | 0.15 | True |
+| `end_not_toc_like` | 0.10 | 0.10 | True |
+| `start_expected_title` | 0.10 | 0.10 | True |
+| `section_length_reasonable` | 0.00 | 0.10 | False |
 
 Selected candidate attempt:
 
-- No selected candidate attempt recorded.
+- Validation reasons: `START_HEADING_FOUND, START_NOT_TOC_LIKE, START_EXPECTED_TITLE_MATCH, TOC_LAST_ITEM_TERMINAL_END_BOUNDARY_USED`
+- Attempt warnings: `none`
 
 Start snippet:
 
-> 
+> Part IV Item 15 Exhibits, financial statement schedules 24–27 Part I ITEM 1: BUSINESS Overview JPMorgan Chase & Co.,(“JPMorgan Chase” or the “Firm”) a financial holding company incorporated under Delaware law in 1968,...
 
 End snippet:
 
-> 
-
-### jpm_2014_10k Item 16
-
-- Ticker: `JPM`
-- Fiscal year: `2014`
-- Overall status: `partial`
-- Confidence: `low` `0.00`
-- Text length: `0`
-- Warnings: `No heading candidate found for requested item.`
-
-Confidence components:
-
-| Component | Earned | Weight | Passed |
-| --- | ---: | ---: | --- |
-
-Selected candidate attempt:
-
-- No selected candidate attempt recorded.
-
-Start snippet:
-
-> 
-
-End snippet:
-
-> 
+> ...than $100,000, and with maturities of 270 days or less. Other borrowed funds consist of demand notes, term federal funds purchased, and various other borrowings that generally have maturities of one year or less. 329
 
 ### jpm_2023_10k Item 6
 
@@ -887,86 +615,42 @@ End snippet:
 - Ticker: `JPM`
 - Fiscal year: `2023`
 - Overall status: `partial`
-- Confidence: `low` `0.20`
-- Text length: `0`
-- Warnings: `Start heading was found, but no legal end boundary was found.`
+- Confidence: `high` `0.90`
+- Text length: `1246677`
+- Warnings: `Section length is outside the expected first-pass range.`
 - Start evidence: `Part IV Item 15. Exhibits, Financial Statement Schedules.`
 - Start evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH`
+- End evidence: `SIGNATURES`
+- End evidence reasons: `TERMINAL_BOUNDARY`
 
 Confidence components:
 
 | Component | Earned | Weight | Passed |
 | --- | ---: | ---: | --- |
+| `legal_boundary_pair` | 0.55 | 0.55 | True |
+| `start_not_toc_like` | 0.15 | 0.15 | True |
+| `end_not_toc_like` | 0.10 | 0.10 | True |
+| `start_expected_title` | 0.10 | 0.10 | True |
+| `section_length_reasonable` | 0.00 | 0.10 | False |
 
 Selected candidate attempt:
 
-- No selected candidate attempt recorded.
+- Validation reasons: `START_HEADING_FOUND, START_NOT_TOC_LIKE, START_EXPECTED_TITLE_MATCH, TOC_LAST_ITEM_TERMINAL_END_BOUNDARY_USED`
+- Attempt warnings: `none`
 
 Start snippet:
 
-> 
+> Part IV Item 15. Exhibits, Financial Statement Schedules. 40-43 Part I Item 1. Business. Overview JPMorgan Chase & Co. (“JPMorgan Chase” or the “Firm”, NYSE: JPM), a financial holding company incorporated under Delawa...
 
 End snippet:
 
-> 
-
-### jpm_2023_10k Item 16
-
-- Ticker: `JPM`
-- Fiscal year: `2023`
-- Overall status: `partial`
-- Confidence: `low` `0.00`
-- Text length: `0`
-- Warnings: `No heading candidate found for requested item.`
-
-Confidence components:
-
-| Component | Earned | Weight | Passed |
-| --- | ---: | ---: | --- |
-
-Selected candidate attempt:
-
-- No selected candidate attempt recorded.
-
-Start snippet:
-
-> 
-
-End snippet:
-
-> 
-
-### bac_2014_10k Item 1C
-
-- Ticker: `BAC`
-- Fiscal year: `2014`
-- Overall status: `partial`
-- Confidence: `low` `0.00`
-- Text length: `0`
-- Warnings: `No heading candidate found for requested item.`
-
-Confidence components:
-
-| Component | Earned | Weight | Passed |
-| --- | ---: | ---: | --- |
-
-Selected candidate attempt:
-
-- No selected candidate attempt recorded.
-
-Start snippet:
-
-> 
-
-End snippet:
-
-> 
+> ...rum VIEs: Variable interest entities Warehouse loans: Consist of prime mortgages originated with the intent to sell that are accounted for at fair value and classified as loans. JPMorgan Chase & Co./2023 Form 10-K 321
 
 ### bac_2014_10k Item 7
 
 - Ticker: `BAC`
 - Fiscal year: `2014`
-- Overall status: `partial`
+- Overall status: `success`
 - Confidence: `medium` `0.80`
 - Text length: `578441`
 - Warnings: `Start heading does not contain the expected canonical title.`, `Section length is outside the expected first-pass range.`
@@ -1007,7 +691,7 @@ End snippet:
 
 - Ticker: `BAC`
 - Fiscal year: `2014`
-- Overall status: `partial`
+- Overall status: `success`
 - Confidence: `high` `0.90`
 - Text length: `218`
 - Warnings: `Section length is outside the expected first-pass range.`
@@ -1048,7 +732,7 @@ End snippet:
 
 - Ticker: `BAC`
 - Fiscal year: `2014`
-- Overall status: `partial`
+- Overall status: `success`
 - Confidence: `high` `0.90`
 - Text length: `569098`
 - Warnings: `Section length is outside the expected first-pass range.`
@@ -1080,85 +764,41 @@ End snippet:
 
 > ...for any of the periods presented. (3) Substantially reflects the U.S. (4) Amounts include pretax gains of $753 million ($474 million net-of-tax) on the sale of common shares of CCB during 2013. Bank of America 2014264
 
-### bac_2014_10k Item 9C
-
-- Ticker: `BAC`
-- Fiscal year: `2014`
-- Overall status: `partial`
-- Confidence: `low` `0.00`
-- Text length: `0`
-- Warnings: `No heading candidate found for requested item.`
-
-Confidence components:
-
-| Component | Earned | Weight | Passed |
-| --- | ---: | ---: | --- |
-
-Selected candidate attempt:
-
-- No selected candidate attempt recorded.
-
-Start snippet:
-
-> 
-
-End snippet:
-
-> 
-
 ### bac_2014_10k Item 15
 
 - Ticker: `BAC`
 - Fiscal year: `2014`
-- Overall status: `partial`
-- Confidence: `low` `0.20`
-- Text length: `0`
-- Warnings: `Start heading was found, but no legal end boundary was found.`
+- Overall status: `success`
+- Confidence: `high` `0.90`
+- Text length: `1286930`
+- Warnings: `Section length is outside the expected first-pass range.`
 - Start evidence: `Part IV Item 15. Exhibits, Financial Statement Schedules`
 - Start evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH, NEAR_TABLE_OF_CONTENTS_LABEL`
+- End evidence: `SIGNATURES`
+- End evidence reasons: `TERMINAL_BOUNDARY`
 
 Confidence components:
 
 | Component | Earned | Weight | Passed |
 | --- | ---: | ---: | --- |
+| `legal_boundary_pair` | 0.55 | 0.55 | True |
+| `start_not_toc_like` | 0.15 | 0.15 | True |
+| `end_not_toc_like` | 0.10 | 0.10 | True |
+| `start_expected_title` | 0.10 | 0.10 | True |
+| `section_length_reasonable` | 0.00 | 0.10 | False |
 
 Selected candidate attempt:
 
-- No selected candidate attempt recorded.
+- Validation reasons: `START_HEADING_FOUND, START_NOT_TOC_LIKE, START_EXPECTED_TITLE_MATCH, TOC_LAST_ITEM_TERMINAL_END_BOUNDARY_USED`
+- Attempt warnings: `none`
 
 Start snippet:
 
-> 
+> Part IV Item 15. Exhibits, Financial Statement Schedules 270 1 Bank of America 2014 Part I Bank of America Corporation and Subsidiaries Item 1. Business Bank of America Corporation (together, with its consolidated sub...
 
 End snippet:
 
-> 
-
-### bac_2014_10k Item 16
-
-- Ticker: `BAC`
-- Fiscal year: `2014`
-- Overall status: `partial`
-- Confidence: `low` `0.00`
-- Text length: `0`
-- Warnings: `No heading candidate found for requested item.`
-
-Confidence components:
-
-| Component | Earned | Weight | Passed |
-| --- | ---: | ---: | --- |
-
-Selected candidate attempt:
-
-- No selected candidate attempt recorded.
-
-Start snippet:
-
-> 
-
-End snippet:
-
-> 
+> ...-1 through E-4). With the exception of the information expressly incorporated herein by reference, the 2015 Proxy Statement shall not be deemed filed as part of this Annual Report on Form 10-K. Bank of America 2014270
 
 ### bac_2023_10k Item 6
 
@@ -1318,7 +958,7 @@ End snippet:
 
 - Ticker: `UNH`
 - Fiscal year: `2014`
-- Overall status: `partial`
+- Overall status: `success`
 - Confidence: `medium` `0.75`
 - Text length: `132985`
 - Warnings: `Start heading has TOC-like signals.`, `Section length is outside the expected first-pass range.`
@@ -1354,37 +994,11 @@ End snippet:
 
 > ...ngs, should they occur, could materially increase our costs of or ability to access funds in the debt and capital markets and otherwise materially increase our operating costs. ITEM 1B. UNRESOLVED STAFF COMMENTS None.
 
-### unh_2014_10k Item 1C
-
-- Ticker: `UNH`
-- Fiscal year: `2014`
-- Overall status: `partial`
-- Confidence: `low` `0.00`
-- Text length: `0`
-- Warnings: `No heading candidate found for requested item.`
-
-Confidence components:
-
-| Component | Earned | Weight | Passed |
-| --- | ---: | ---: | --- |
-
-Selected candidate attempt:
-
-- No selected candidate attempt recorded.
-
-Start snippet:
-
-> 
-
-End snippet:
-
-> 
-
 ### unh_2014_10k Item 7
 
 - Ticker: `UNH`
 - Fiscal year: `2014`
-- Overall status: `partial`
+- Overall status: `success`
 - Confidence: `high` `0.85`
 - Text length: `219335`
 - Warnings: `Start heading has TOC-like signals.`
@@ -1419,158 +1033,6 @@ Start snippet:
 End snippet:
 
 > ...nt that the amounts are deemed probable of recovery. Currently, the reinsurer is rated by A.M. Best as “A+.” As of December 31, 2014, there were no other significant concentrations of credit risk. 46 Table of Contents
-
-### unh_2014_10k Item 9C
-
-- Ticker: `UNH`
-- Fiscal year: `2014`
-- Overall status: `partial`
-- Confidence: `low` `0.00`
-- Text length: `0`
-- Warnings: `No heading candidate found for requested item.`
-
-Confidence components:
-
-| Component | Earned | Weight | Passed |
-| --- | ---: | ---: | --- |
-
-Selected candidate attempt:
-
-- No selected candidate attempt recorded.
-
-Start snippet:
-
-> 
-
-End snippet:
-
-> 
-
-### unh_2014_10k Item 12
-
-- Ticker: `UNH`
-- Fiscal year: `2014`
-- Overall status: `partial`
-- Confidence: `high` `0.90`
-- Text length: `753`
-- Warnings: `End heading has TOC-like signals.`
-- Start evidence: `ITEM 12. SECURITY OWNERSHIP OF CERTAIN BENEFICIAL OWNERS AND MANAGEMENT AND RELATED STOCKHOLDER MATTERS`
-- Start evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH, NEAR_TABLE_OF_CONTENTS_LABEL`
-- End evidence: `ITEM 13. CERTAIN RELATIONSHIPS AND RELATED TRANSACTIONS, AND DIRECTOR INDEPENDENCE`
-- End evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH, TOC_DENSE_ITEM_CLUSTER, NEAR_TABLE_OF_CONTENTS_LABEL`
-
-Confidence components:
-
-| Component | Earned | Weight | Passed |
-| --- | ---: | ---: | --- |
-| `legal_boundary_pair` | 0.55 | 0.55 | True |
-| `start_not_toc_like` | 0.15 | 0.15 | True |
-| `end_not_toc_like` | 0.00 | 0.10 | False |
-| `start_expected_title` | 0.10 | 0.10 | True |
-| `section_length_reasonable` | 0.10 | 0.10 | True |
-
-Selected candidate attempt:
-
-- Validation reasons: `START_HEADING_FOUND, START_NOT_TOC_LIKE, START_EXPECTED_TITLE_MATCH, LEGAL_END_HEADING_FOUND, END_TOC_LIKE_USED_AS_FALLBACK`
-- Attempt warnings: `End heading has TOC-like signals.`
-
-Start snippet:
-
-> ITEM 12. SECURITY OWNERSHIP OF CERTAIN BENEFICIAL OWNERS AND MANAGEMENT AND RELATED STOCKHOLDER MATTERS Equity Compensation Plan Information The information required by Item 201(d) of Regulation S-K will be included u...
-
-End snippet:
-
-> ...eading “Security Ownership of Certain Beneficial Owners and Management” in our definitive proxy statement for our 2015 Annual Meeting of Shareholders, and such required information is incorporated herein by reference.
-
-### unh_2014_10k Item 15
-
-- Ticker: `UNH`
-- Fiscal year: `2014`
-- Overall status: `partial`
-- Confidence: `low` `0.20`
-- Text length: `0`
-- Warnings: `Start heading was found, but no legal end boundary was found.`
-- Start evidence: `Part IV Item 15. Exhibits and Financial Statement Schedules`
-- Start evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH, NEAR_TABLE_OF_CONTENTS_LABEL`
-
-Confidence components:
-
-| Component | Earned | Weight | Passed |
-| --- | ---: | ---: | --- |
-
-Selected candidate attempt:
-
-- No selected candidate attempt recorded.
-
-Start snippet:
-
-> 
-
-End snippet:
-
-> 
-
-### unh_2014_10k Item 16
-
-- Ticker: `UNH`
-- Fiscal year: `2014`
-- Overall status: `partial`
-- Confidence: `low` `0.00`
-- Text length: `0`
-- Warnings: `No heading candidate found for requested item.`
-
-Confidence components:
-
-| Component | Earned | Weight | Passed |
-| --- | ---: | ---: | --- |
-
-Selected candidate attempt:
-
-- No selected candidate attempt recorded.
-
-Start snippet:
-
-> 
-
-End snippet:
-
-> 
-
-### unh_2023_10k Item 1C
-
-- Ticker: `UNH`
-- Fiscal year: `2023`
-- Overall status: `success`
-- Confidence: `high` `0.90`
-- Text length: `5697`
-- Warnings: `End heading has TOC-like signals.`
-- Start evidence: `ITEM 1C. CYBERSECURITY`
-- Start evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH, NEAR_TABLE_OF_CONTENTS_LABEL`
-- End evidence: `ITEM 2.PROPERTIES`
-- End evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH, TOC_DENSE_ITEM_CLUSTER, NEAR_TABLE_OF_CONTENTS_LABEL`
-
-Confidence components:
-
-| Component | Earned | Weight | Passed |
-| --- | ---: | ---: | --- |
-| `legal_boundary_pair` | 0.55 | 0.55 | True |
-| `start_not_toc_like` | 0.15 | 0.15 | True |
-| `end_not_toc_like` | 0.00 | 0.10 | False |
-| `start_expected_title` | 0.10 | 0.10 | True |
-| `section_length_reasonable` | 0.10 | 0.10 | True |
-
-Selected candidate attempt:
-
-- Validation reasons: `START_HEADING_FOUND, START_NOT_TOC_LIKE, START_EXPECTED_TITLE_MATCH, LEGAL_END_HEADING_FOUND, END_TOC_LIKE_USED_AS_FALLBACK`
-- Attempt warnings: `End heading has TOC-like signals.`
-
-Start snippet:
-
-> ITEM 1C. CYBERSECURITY UnitedHealth Group manages cybersecurity and data protection through a continuously evolving framework. The framework allows us to identify, assess and mitigate the risks we face, and assists us...
-
-End snippet:
-
-> ...ommitted by cybercrime threat actors. As of the date of this report, we have not determined the incident is reasonably likely to materially impact our financial condition or results of operations. 21 Table of Contents
 
 ### unh_2023_10k Item 2
 
@@ -1651,42 +1113,6 @@ Start snippet:
 End snippet:
 
 > ...captions “Legal Matters” and “Government Investigations, Audits and Reviews” in Note 12 of the Notes to the Consolidated Financial Statements included in Part II, Item 8, “Financial Statements and Supplementary Data”
-
-### unh_2023_10k Item 5
-
-- Ticker: `UNH`
-- Fiscal year: `2023`
-- Overall status: `success`
-- Confidence: `high` `0.90`
-- Text length: `3255`
-- Warnings: `End heading has TOC-like signals.`
-- Start evidence: `PART II ITEM 5.MARKET FOR REGISTRANT’S COMMON EQUITY, RELATED STOCKHOLDER MATTERS AND ISSUER PURCHASES OF EQUITY SECURITIES`
-- Start evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH, NEAR_TABLE_OF_CONTENTS_LABEL`
-- End evidence: `ITEM 6. Reserved`
-- End evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH, TOC_DENSE_ITEM_CLUSTER, NEAR_TABLE_OF_CONTENTS_LABEL`
-
-Confidence components:
-
-| Component | Earned | Weight | Passed |
-| --- | ---: | ---: | --- |
-| `legal_boundary_pair` | 0.55 | 0.55 | True |
-| `start_not_toc_like` | 0.15 | 0.15 | True |
-| `end_not_toc_like` | 0.00 | 0.10 | False |
-| `start_expected_title` | 0.10 | 0.10 | True |
-| `section_length_reasonable` | 0.10 | 0.10 | True |
-
-Selected candidate attempt:
-
-- Validation reasons: `START_HEADING_FOUND, START_NOT_TOC_LIKE, START_EXPECTED_TITLE_MATCH, LEGAL_END_HEADING_FOUND, END_TOC_LIKE_USED_AS_FALLBACK`
-- Attempt warnings: `End heading has TOC-like signals.`
-
-Start snippet:
-
-> PART II ITEM 5.MARKET FOR REGISTRANT’S COMMON EQUITY, RELATED STOCKHOLDER MATTERS AND ISSUER PURCHASES OF EQUITY SECURITIES MARKET AND HOLDERS Our common stock is traded on the New York Stock Exchange (NYSE) under the...
-
-End snippet:
-
-> ..., as amended, or the Securities Exchange Act of 1934, as amended, except to the extent that the Company specifically incorporates such information by reference, and shall not otherwise be deemed filed under such Acts.
 
 ### unh_2023_10k Item 6
 
@@ -1772,7 +1198,7 @@ End snippet:
 
 - Ticker: `JNJ`
 - Fiscal year: `2014`
-- Overall status: `partial`
+- Overall status: `success`
 - Confidence: `high` `0.90`
 - Text length: `546`
 - Warnings: `Section length is outside the expected first-pass range.`
@@ -1809,37 +1235,11 @@ End snippet:
 
 > ...t 99 to this Report on Form 10-K. Investors should realize that if known or unknown risks or uncertainties materialize, the Company’s business, results of operations or financial condition could be adversely affected.
 
-### jnj_2014_10k Item 1C
-
-- Ticker: `JNJ`
-- Fiscal year: `2014`
-- Overall status: `partial`
-- Confidence: `low` `0.00`
-- Text length: `0`
-- Warnings: `No heading candidate found for requested item.`
-
-Confidence components:
-
-| Component | Earned | Weight | Passed |
-| --- | ---: | ---: | --- |
-
-Selected candidate attempt:
-
-- No selected candidate attempt recorded.
-
-Start snippet:
-
-> 
-
-End snippet:
-
-> 
-
 ### jnj_2014_10k Item 7
 
 - Ticker: `JNJ`
 - Fiscal year: `2014`
-- Overall status: `partial`
+- Overall status: `success`
 - Confidence: `medium` `0.75`
 - Text length: `386`
 - Warnings: `Start heading has TOC-like signals.`, `Section length is outside the expected first-pass range.`
@@ -1881,7 +1281,7 @@ End snippet:
 
 - Ticker: `JNJ`
 - Fiscal year: `2014`
-- Overall status: `partial`
+- Overall status: `success`
 - Confidence: `high` `0.90`
 - Text length: `531`
 - Warnings: `Section length is outside the expected first-pass range.`
@@ -1922,7 +1322,7 @@ End snippet:
 
 - Ticker: `JNJ`
 - Fiscal year: `2014`
-- Overall status: `partial`
+- Overall status: `success`
 - Confidence: `high` `0.90`
 - Text length: `360`
 - Warnings: `Section length is outside the expected first-pass range.`
@@ -1958,86 +1358,6 @@ Start snippet:
 End snippet:
 
 > ...d Consolidated Financial Statements and Notes thereto and the material under the caption “Report of Independent Registered Public Accounting Firm” of the Annual Report, filed as Exhibit 13 to this Report on Form 10-K.
-
-### jnj_2014_10k Item 9C
-
-- Ticker: `JNJ`
-- Fiscal year: `2014`
-- Overall status: `partial`
-- Confidence: `low` `0.00`
-- Text length: `0`
-- Warnings: `No heading candidate found for requested item.`
-
-Confidence components:
-
-| Component | Earned | Weight | Passed |
-| --- | ---: | ---: | --- |
-
-Selected candidate attempt:
-
-- No selected candidate attempt recorded.
-
-Start snippet:
-
-> 
-
-End snippet:
-
-> 
-
-### jnj_2014_10k Item 15
-
-- Ticker: `JNJ`
-- Fiscal year: `2014`
-- Overall status: `partial`
-- Confidence: `low` `0.20`
-- Text length: `0`
-- Warnings: `Start heading was found, but no legal end boundary was found.`
-- Start evidence: `PART IV Item 15. EXHIBITS AND FINANCIAL STATEMENT SCHEDULES`
-- Start evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH, NEAR_TABLE_OF_CONTENTS_LABEL`
-
-Confidence components:
-
-| Component | Earned | Weight | Passed |
-| --- | ---: | ---: | --- |
-
-Selected candidate attempt:
-
-- No selected candidate attempt recorded.
-
-Start snippet:
-
-> 
-
-End snippet:
-
-> 
-
-### jnj_2014_10k Item 16
-
-- Ticker: `JNJ`
-- Fiscal year: `2014`
-- Overall status: `partial`
-- Confidence: `low` `0.00`
-- Text length: `0`
-- Warnings: `No heading candidate found for requested item.`
-
-Confidence components:
-
-| Component | Earned | Weight | Passed |
-| --- | ---: | ---: | --- |
-
-Selected candidate attempt:
-
-- No selected candidate attempt recorded.
-
-Start snippet:
-
-> 
-
-End snippet:
-
-> 
 
 ### jnj_2023_10k Item 6
 
@@ -2116,37 +1436,11 @@ End snippet:
 
 > ...sources - Financing and market risk of this Report; and Note 1 Summary of significant accounting policies - Financial instruments of the Notes to Consolidated Financial Statements included in Item 8 of this Report. 42
 
-### xom_2014_10k Item 1C
-
-- Ticker: `XOM`
-- Fiscal year: `2014`
-- Overall status: `partial`
-- Confidence: `low` `0.00`
-- Text length: `0`
-- Warnings: `No heading candidate found for requested item.`
-
-Confidence components:
-
-| Component | Earned | Weight | Passed |
-| --- | ---: | ---: | --- |
-
-Selected candidate attempt:
-
-- No selected candidate attempt recorded.
-
-Start snippet:
-
-> 
-
-End snippet:
-
-> 
-
 ### xom_2014_10k Item 7
 
 - Ticker: `XOM`
 - Fiscal year: `2014`
-- Overall status: `partial`
+- Overall status: `success`
 - Confidence: `high` `0.90`
 - Text length: `265`
 - Warnings: `Section length is outside the expected first-pass range.`
@@ -2187,7 +1481,7 @@ End snippet:
 
 - Ticker: `XOM`
 - Fiscal year: `2014`
-- Overall status: `partial`
+- Overall status: `success`
 - Confidence: `high` `0.90`
 - Text length: `510`
 - Warnings: `Section length is outside the expected first-pass range.`
@@ -2228,7 +1522,7 @@ End snippet:
 
 - Ticker: `XOM`
 - Fiscal year: `2014`
-- Overall status: `partial`
+- Overall status: `success`
 - Confidence: `high` `0.90`
 - Text length: `780`
 - Warnings: `Section length is outside the expected first-pass range.`
@@ -2265,117 +1559,11 @@ End snippet:
 
 > ...nd · “Frequently Used Terms” (unaudited). Financial Statement Schedules have been omitted because they are not applicable or the required information is shown in the consolidated financial statements or notes thereto.
 
-### xom_2014_10k Item 9C
-
-- Ticker: `XOM`
-- Fiscal year: `2014`
-- Overall status: `partial`
-- Confidence: `low` `0.00`
-- Text length: `0`
-- Warnings: `No heading candidate found for requested item.`
-
-Confidence components:
-
-| Component | Earned | Weight | Passed |
-| --- | ---: | ---: | --- |
-
-Selected candidate attempt:
-
-- No selected candidate attempt recorded.
-
-Start snippet:
-
-> 
-
-End snippet:
-
-> 
-
-### xom_2014_10k Item 15
-
-- Ticker: `XOM`
-- Fiscal year: `2014`
-- Overall status: `partial`
-- Confidence: `low` `0.20`
-- Text length: `0`
-- Warnings: `Start heading was found, but no legal end boundary was found.`
-- Start evidence: `PART IV Item 15. Exhibits, Financial Statement Schedules`
-- Start evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH, NEAR_TABLE_OF_CONTENTS_LABEL`
-
-Confidence components:
-
-| Component | Earned | Weight | Passed |
-| --- | ---: | ---: | --- |
-
-Selected candidate attempt:
-
-- No selected candidate attempt recorded.
-
-Start snippet:
-
-> 
-
-End snippet:
-
-> 
-
-### xom_2014_10k Item 16
-
-- Ticker: `XOM`
-- Fiscal year: `2014`
-- Overall status: `partial`
-- Confidence: `low` `0.00`
-- Text length: `0`
-- Warnings: `No heading candidate found for requested item.`
-
-Confidence components:
-
-| Component | Earned | Weight | Passed |
-| --- | ---: | ---: | --- |
-
-Selected candidate attempt:
-
-- No selected candidate attempt recorded.
-
-Start snippet:
-
-> 
-
-End snippet:
-
-> 
-
-### xom_2023_10k Item 6
-
-- Ticker: `XOM`
-- Fiscal year: `2023`
-- Overall status: `partial`
-- Confidence: `low` `0.00`
-- Text length: `0`
-- Warnings: `No heading candidate found for requested item.`
-
-Confidence components:
-
-| Component | Earned | Weight | Passed |
-| --- | ---: | ---: | --- |
-
-Selected candidate attempt:
-
-- No selected candidate attempt recorded.
-
-Start snippet:
-
-> 
-
-End snippet:
-
-> 
-
 ### xom_2023_10k Item 7
 
 - Ticker: `XOM`
 - Fiscal year: `2023`
-- Overall status: `partial`
+- Overall status: `success`
 - Confidence: `high` `0.90`
 - Text length: `265`
 - Warnings: `Section length is outside the expected first-pass range.`
@@ -2416,7 +1604,7 @@ End snippet:
 
 - Ticker: `XOM`
 - Fiscal year: `2023`
-- Overall status: `partial`
+- Overall status: `success`
 - Confidence: `high` `0.90`
 - Text length: `411`
 - Warnings: `Section length is outside the expected first-pass range.`
@@ -2457,7 +1645,7 @@ End snippet:
 
 - Ticker: `XOM`
 - Fiscal year: `2023`
-- Overall status: `partial`
+- Overall status: `success`
 - Confidence: `high` `0.90`
 - Text length: `737`
 - Warnings: `Section length is outside the expected first-pass range.`
@@ -2750,42 +1938,6 @@ Start snippet:
 End snippet:
 
 > 
-
-### cvx_2023_10k Item 5
-
-- Ticker: `CVX`
-- Fiscal year: `2023`
-- Overall status: `success`
-- Confidence: `high` `0.90`
-- Text length: `1215`
-- Warnings: `End heading has TOC-like signals.`
-- Start evidence: `PART II Item 5. Market for the Registrant’s Common Equity, Related Stockholder Matters and Issuer Purchases of Equity Securities`
-- Start evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH, NEAR_TABLE_OF_CONTENTS_LABEL`
-- End evidence: `Item 6. [Reserved]`
-- End evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH, TOC_DENSE_ITEM_CLUSTER, NEAR_TABLE_OF_CONTENTS_LABEL`
-
-Confidence components:
-
-| Component | Earned | Weight | Passed |
-| --- | ---: | ---: | --- |
-| `legal_boundary_pair` | 0.55 | 0.55 | True |
-| `start_not_toc_like` | 0.15 | 0.15 | True |
-| `end_not_toc_like` | 0.00 | 0.10 | False |
-| `start_expected_title` | 0.10 | 0.10 | True |
-| `section_length_reasonable` | 0.10 | 0.10 | True |
-
-Selected candidate attempt:
-
-- Validation reasons: `START_HEADING_FOUND, START_NOT_TOC_LIKE, START_EXPECTED_TITLE_MATCH, LEGAL_END_HEADING_FOUND, END_TOC_LIKE_USED_AS_FALLBACK`
-- Attempt warnings: `End heading has TOC-like signals.`
-
-Start snippet:
-
-> PART II Item 5. Market for the Registrant’s Common Equity, Related Stockholder Matters and Issuer Purchases of Equity Securities The company’s common stock is listed on the New York Stock Exchange (trading symbol: CVX...
-
-End snippet:
-
-> ...12 $147.74 6,180,512 $63.8 Total October 1 – December 31, 2023 22,394,671 $152.74 22,394,671 *Refer to Liquidity and Capital Resources for additional detail regarding the company's authorized stock repurchase program.
 
 ### cvx_2023_10k Item 6
 
@@ -3216,37 +2368,11 @@ End snippet:
 
 > 
 
-### wmt_2023_10k Item 1C
-
-- Ticker: `WMT`
-- Fiscal year: `2023`
-- Overall status: `partial`
-- Confidence: `low` `0.00`
-- Text length: `0`
-- Warnings: `No heading candidate found for requested item.`
-
-Confidence components:
-
-| Component | Earned | Weight | Passed |
-| --- | ---: | ---: | --- |
-
-Selected candidate attempt:
-
-- No selected candidate attempt recorded.
-
-Start snippet:
-
-> 
-
-End snippet:
-
-> 
-
 ### wmt_2023_10k Item 6
 
 - Ticker: `WMT`
 - Fiscal year: `2023`
-- Overall status: `partial`
+- Overall status: `success`
 - Confidence: `high` `0.90`
 - Text length: `21`
 - Warnings: `Section length is outside the expected first-pass range.`
@@ -3282,7 +2408,7 @@ End snippet:
 
 - Ticker: `WMT`
 - Fiscal year: `2023`
-- Overall status: `partial`
+- Overall status: `success`
 - Confidence: `medium` `0.75`
 - Text length: `340213`
 - Warnings: `Start heading has TOC-like signals.`, `Section length is outside the expected first-pass range.`
@@ -3317,60 +2443,6 @@ Start snippet:
 End snippet:
 
 > ...neral ledger and other applications, in stages. This financial system will continue to be a significant component of our internal control over financial reporting as it is implemented. ITEM 9B. OTHER INFORMATION None.
-
-### amzn_2014_10k Item 1B
-
-- Ticker: `AMZN`
-- Fiscal year: `2014`
-- Overall status: `partial`
-- Confidence: `low` `0.20`
-- Text length: `0`
-- Warnings: `Start heading was found, but no legal end boundary was found.`
-- Start evidence: `Item 1B. Unresolved Staff Comments`
-- Start evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH, TOC_DENSE_ITEM_CLUSTER`
-
-Confidence components:
-
-| Component | Earned | Weight | Passed |
-| --- | ---: | ---: | --- |
-
-Selected candidate attempt:
-
-- No selected candidate attempt recorded.
-
-Start snippet:
-
-> 
-
-End snippet:
-
-> 
-
-### amzn_2014_10k Item 1C
-
-- Ticker: `AMZN`
-- Fiscal year: `2014`
-- Overall status: `partial`
-- Confidence: `low` `0.00`
-- Text length: `0`
-- Warnings: `No heading candidate found for requested item.`
-
-Confidence components:
-
-| Component | Earned | Weight | Passed |
-| --- | ---: | ---: | --- |
-
-Selected candidate attempt:
-
-- No selected candidate attempt recorded.
-
-Start snippet:
-
-> 
-
-End snippet:
-
-> 
 
 ### amzn_2014_10k Item 2
 
@@ -3552,44 +2624,18 @@ End snippet:
 
 > 
 
-### amzn_2014_10k Item 9C
-
-- Ticker: `AMZN`
-- Fiscal year: `2014`
-- Overall status: `partial`
-- Confidence: `low` `0.00`
-- Text length: `0`
-- Warnings: `No heading candidate found for requested item.`
-
-Confidence components:
-
-| Component | Earned | Weight | Passed |
-| --- | ---: | ---: | --- |
-
-Selected candidate attempt:
-
-- No selected candidate attempt recorded.
-
-Start snippet:
-
-> 
-
-End snippet:
-
-> 
-
 ### amzn_2014_10k Item 10
 
 - Ticker: `AMZN`
 - Fiscal year: `2014`
 - Overall status: `partial`
-- Confidence: `medium` `0.75`
-- Text length: `1059`
-- Warnings: `Start heading has TOC-like signals.`, `End heading has TOC-like signals.`
+- Confidence: `high` `0.85`
+- Text length: `1545`
+- Warnings: `Start heading has TOC-like signals.`
 - Start evidence: `PART III Item 10. Directors, Executive Officers, and Corporate Governance`
 - Start evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH, TOC_DENSE_ITEM_CLUSTER, NEAR_TABLE_OF_CONTENTS_LABEL`
-- End evidence: `Item 11. Executive Compensation`
-- End evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH, TOC_DENSE_ITEM_CLUSTER, NEAR_TABLE_OF_CONTENTS_LABEL`
+- End evidence: `Item 13. Certain Relationships and Related Transactions, and Director Independence`
+- End evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH, TOC_DENSE_ITEM_CLUSTER`
 
 Recommended actions:
 
@@ -3601,14 +2647,14 @@ Confidence components:
 | --- | ---: | ---: | --- |
 | `legal_boundary_pair` | 0.55 | 0.55 | True |
 | `start_not_toc_like` | 0.00 | 0.15 | False |
-| `end_not_toc_like` | 0.00 | 0.10 | False |
+| `end_not_toc_like` | 0.10 | 0.10 | True |
 | `start_expected_title` | 0.10 | 0.10 | True |
 | `section_length_reasonable` | 0.10 | 0.10 | True |
 
 Selected candidate attempt:
 
-- Validation reasons: `START_HEADING_FOUND, START_TOC_LIKE, START_EXPECTED_TITLE_MATCH, LEGAL_END_HEADING_FOUND, END_TOC_LIKE_USED_AS_FALLBACK`
-- Attempt warnings: `Start heading has TOC-like signals., End heading has TOC-like signals.`
+- Validation reasons: `START_HEADING_FOUND, START_TOC_LIKE, START_EXPECTED_TITLE_MATCH, LEGAL_END_HEADING_FOUND, END_NOT_TOC_LIKE`
+- Attempt warnings: `Start heading has TOC-like signals.`
 
 Start snippet:
 
@@ -3616,7 +2662,7 @@ Start snippet:
 
 End snippet:
 
-> ...intend to disclose amendments to our Code of Business Conduct and Ethics, as well as waivers of the provisions thereof, on our investor relations website under the heading “Corporate Governance” at www.amazon.com/ir.
+> ...nd Management and Related Shareholder Matters Information required by Item 12 of Part III is included in our Proxy Statement relating to our 2015 Annual Meeting of Shareholders and is incorporated herein by reference.
 
 ### amzn_2014_10k Item 11
 
@@ -3697,96 +2743,6 @@ Start snippet:
 End snippet:
 
 > ...nd Management and Related Shareholder Matters Information required by Item 12 of Part III is included in our Proxy Statement relating to our 2015 Annual Meeting of Shareholders and is incorporated herein by reference.
-
-### amzn_2014_10k Item 15
-
-- Ticker: `AMZN`
-- Fiscal year: `2014`
-- Overall status: `partial`
-- Confidence: `low` `0.20`
-- Text length: `0`
-- Warnings: `Start heading was found, but no legal end boundary was found.`
-- Start evidence: `PART IV Item 15. Exhibits, Financial Statement Schedules`
-- Start evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH`
-
-Confidence components:
-
-| Component | Earned | Weight | Passed |
-| --- | ---: | ---: | --- |
-
-Selected candidate attempt:
-
-- No selected candidate attempt recorded.
-
-Start snippet:
-
-> 
-
-End snippet:
-
-> 
-
-### amzn_2014_10k Item 16
-
-- Ticker: `AMZN`
-- Fiscal year: `2014`
-- Overall status: `partial`
-- Confidence: `low` `0.00`
-- Text length: `0`
-- Warnings: `No heading candidate found for requested item.`
-
-Confidence components:
-
-| Component | Earned | Weight | Passed |
-| --- | ---: | ---: | --- |
-
-Selected candidate attempt:
-
-- No selected candidate attempt recorded.
-
-Start snippet:
-
-> 
-
-End snippet:
-
-> 
-
-### amzn_2023_10k Item 1C
-
-- Ticker: `AMZN`
-- Fiscal year: `2023`
-- Overall status: `success`
-- Confidence: `high` `0.90`
-- Text length: `4038`
-- Warnings: `End heading has TOC-like signals.`
-- Start evidence: `Item 1C. Cybersecurity`
-- Start evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH`
-- End evidence: `Item 2. Properties`
-- End evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH, TOC_DENSE_ITEM_CLUSTER, NEAR_TABLE_OF_CONTENTS_LABEL`
-
-Confidence components:
-
-| Component | Earned | Weight | Passed |
-| --- | ---: | ---: | --- |
-| `legal_boundary_pair` | 0.55 | 0.55 | True |
-| `start_not_toc_like` | 0.15 | 0.15 | True |
-| `end_not_toc_like` | 0.00 | 0.10 | False |
-| `start_expected_title` | 0.10 | 0.10 | True |
-| `section_length_reasonable` | 0.10 | 0.10 | True |
-
-Selected candidate attempt:
-
-- Validation reasons: `START_HEADING_FOUND, START_NOT_TOC_LIKE, START_EXPECTED_TITLE_MATCH, LEGAL_END_HEADING_FOUND, END_TOC_LIKE_USED_AS_FALLBACK`
-- Attempt warnings: `End heading has TOC-like signals.`
-
-Start snippet:
-
-> Item 1C. Cybersecurity We have processes in place for assessing, identifying, and managing material risks from potential unauthorized occurrences on or through our electronic information systems that could adversely a...
-
-End snippet:
-
-> ...ve in the federal government, heads the team responsible for implementing and maintaining cybersecurity and data protection practices at Amazon and reports directly to the Chief Executive Officer. 17 Table of Contents
 
 ### amzn_2023_10k Item 2
 
@@ -3949,12 +2905,12 @@ End snippet:
 - Ticker: `AMZN`
 - Fiscal year: `2023`
 - Overall status: `success`
-- Confidence: `medium` `0.75`
-- Text length: `269906`
-- Warnings: `Start heading has TOC-like signals.`, `Section length is outside the expected first-pass range.`
+- Confidence: `high` `0.85`
+- Text length: `205`
+- Warnings: `Start heading has TOC-like signals.`
 - Start evidence: `Item 13. Certain Relationships and Related Transactions, and Director Independence`
 - Start evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH, TOC_DENSE_ITEM_CLUSTER, NEAR_TABLE_OF_CONTENTS_LABEL`
-- End evidence: `Item 14. Principal Accountant Fees and Services`
+- End evidence: `Item 16. Form 10-K Summary`
 - End evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH, NEAR_TABLE_OF_CONTENTS_LABEL`
 
 Recommended actions:
@@ -3969,7 +2925,7 @@ Confidence components:
 | `start_not_toc_like` | 0.00 | 0.15 | False |
 | `end_not_toc_like` | 0.10 | 0.10 | True |
 | `start_expected_title` | 0.10 | 0.10 | True |
-| `section_length_reasonable` | 0.00 | 0.10 | False |
+| `section_length_reasonable` | 0.10 | 0.10 | True |
 
 Selected candidate attempt:
 
@@ -3978,26 +2934,13 @@ Selected candidate attempt:
 
 Start snippet:
 
-> Item 13. Certain Relationships and Related Transactions, and Director Independence 74 Item 14. Principal Accountant Fees and Services 74 PART IV Item 15. Exhibits, Financial Statement Schedules 75 Item 16. Form 10-K S...
+> Item 13. Certain Relationships and Related Transactions, and Director Independence 74 Item 14. Principal Accountant Fees and Services 74 PART IV Item 15. Exhibits, Financial Statement Schedules 75
 
 End snippet:
 
-> ...lated Transactions, and Director Independence Information required by Item 13 of Part III is included in our Proxy Statement relating to our 2024 Annual Meeting of Shareholders and is incorporated herein by reference.
+> Item 13. Certain Relationships and Related Transactions, and Director Independence 74 Item 14. Principal Accountant Fees and Services 74 PART IV Item 15. Exhibits, Financial Statement Schedules 75
 
 ## Rejected Candidate Pairs
-
-### aapl_2014_10k Item 15
-
-- Ticker: `AAPL`
-- Fiscal year: `2014`
-- Final status: `failed`
-- Final confidence: `low` `0.20`
-- Final start evidence: `Part IV Item 15. Exhibits, Financial Statement Schedules`
-
-| Decision | Start Evidence | End Evidence | Reasons | Warnings |
-| --- | --- | --- | --- | --- |
-| rejected | `Part IV Item 15. Exhibits, Financial Statement Schedules` | `none` | `START_HEADING_FOUND, START_NOT_TOC_LIKE, START_EXPECTED_TITLE_MATCH, LEGAL_END_HEADING_NOT_FOUND, LEGAL_END_HEADING_NOT_FOUND` | `none` |
-| rejected | `PART IV Item 15. Exhibits, Financial Statement Schedules` | `none` | `START_HEADING_FOUND, START_NOT_TOC_LIKE, START_EXPECTED_TITLE_MATCH, LEGAL_END_HEADING_NOT_FOUND, LEGAL_END_HEADING_NOT_FOUND` | `none` |
 
 ### aapl_2023_10k Item 9C
 
@@ -4010,23 +2953,6 @@ End snippet:
 | Decision | Start Evidence | End Evidence | Reasons | Warnings |
 | --- | --- | --- | --- | --- |
 | rejected | `Item 9C. Disclosure Regarding Foreign Jurisdictions that Prevent Inspections` | `PART III Item 10. Directors, Executive Officers and Corporate Governance` | `START_HEADING_FOUND, START_NOT_TOC_LIKE, START_EXPECTED_TITLE_MATCH, LEGAL_END_HEADING_FOUND, END_NOT_TOC_LIKE, REJECTED_SHORT_ORDERED_TOC_SPAN` | `Candidate pair is too short and follows an ordered TOC-like transition.` |
-
-### msft_2014_10k Item 15
-
-- Ticker: `MSFT`
-- Fiscal year: `2014`
-- Final status: `failed`
-- Final confidence: `low` `0.20`
-- Final start evidence: `ITEM 15. EXHIBITS, FINANCIAL STATEMENT SCHEDULES`
-
-| Decision | Start Evidence | End Evidence | Reasons | Warnings |
-| --- | --- | --- | --- | --- |
-| rejected | `ITEM 15. EXHIBITS, FINANCIAL STATEMENT SCHEDULES` | `none` | `START_HEADING_FOUND, START_NOT_TOC_LIKE, START_EXPECTED_TITLE_MATCH, LEGAL_END_HEADING_NOT_FOUND, LEGAL_END_HEADING_NOT_FOUND` | `none` |
-| rejected | `PART IV Item 15 PART IV` | `none` | `START_HEADING_FOUND, START_NOT_TOC_LIKE, START_EXPECTED_TITLE_MISSING, LEGAL_END_HEADING_NOT_FOUND, LEGAL_END_HEADING_NOT_FOUND` | `Start heading does not contain the expected canonical title.` |
-| rejected | `PART IV Item 15 Incorporated by Reference` | `none` | `START_HEADING_FOUND, START_NOT_TOC_LIKE, START_EXPECTED_TITLE_MISSING, LEGAL_END_HEADING_NOT_FOUND, LEGAL_END_HEADING_NOT_FOUND` | `Start heading does not contain the expected canonical title.` |
-| rejected | `PART IV Item 15 Incorporated by Reference` | `none` | `START_HEADING_FOUND, START_NOT_TOC_LIKE, START_EXPECTED_TITLE_MISSING, LEGAL_END_HEADING_NOT_FOUND, LEGAL_END_HEADING_NOT_FOUND` | `Start heading does not contain the expected canonical title.` |
-| rejected | `PART IV Item 15 Incorporated by Reference` | `none` | `START_HEADING_FOUND, START_NOT_TOC_LIKE, START_EXPECTED_TITLE_MISSING, LEGAL_END_HEADING_NOT_FOUND, LEGAL_END_HEADING_NOT_FOUND` | `Start heading does not contain the expected canonical title.` |
-| rejected | `PART IV Item 15. Exhibits, Financial Statement Schedules` | `none` | `START_HEADING_FOUND, START_TOC_LIKE, START_EXPECTED_TITLE_MATCH, LEGAL_END_HEADING_NOT_FOUND, LEGAL_END_HEADING_NOT_FOUND` | `Start heading has TOC-like signals.` |
 
 ### msft_2023_10k Item 3
 
@@ -4126,19 +3052,6 @@ End snippet:
 | rejected | `Item 11 Executive compensation` | `Item 12 Security ownership of certain beneficial owners and management and related stockholder ma...` | `START_HEADING_FOUND, START_NOT_TOC_LIKE, START_EXPECTED_TITLE_MATCH, LEGAL_END_HEADING_FOUND, END_NOT_TOC_LIKE, REJECTED_SHORT_ORDERED_TOC_SPAN` | `Candidate pair is too short and follows an ordered TOC-like transition.` |
 | rejected | `ITEM 11: EXECUTIVE COMPENSATION` | `ITEM 12: SECURITY OWNERSHIP OF CERTAIN BENEFICIAL OWNERS AND MANAGEMENT AND RELATED STOCKHOLDER M...` | `START_HEADING_FOUND, START_NOT_TOC_LIKE, START_EXPECTED_TITLE_MATCH, LEGAL_END_HEADING_FOUND, END_NOT_TOC_LIKE, REJECTED_SHORT_ORDERED_TOC_SPAN` | `Candidate pair is too short and follows an ordered TOC-like transition.` |
 
-### jpm_2014_10k Item 15
-
-- Ticker: `JPM`
-- Fiscal year: `2014`
-- Final status: `failed`
-- Final confidence: `low` `0.20`
-- Final start evidence: `Part IV Item 15 Exhibits, financial statement schedules`
-
-| Decision | Start Evidence | End Evidence | Reasons | Warnings |
-| --- | --- | --- | --- | --- |
-| rejected | `Part IV Item 15 Exhibits, financial statement schedules` | `none` | `START_HEADING_FOUND, START_NOT_TOC_LIKE, START_EXPECTED_TITLE_MATCH, LEGAL_END_HEADING_NOT_FOUND, LEGAL_END_HEADING_NOT_FOUND` | `none` |
-| rejected | `Part IV ITEM 15: EXHIBITS, FINANCIAL STATEMENT SCHEDULES` | `none` | `START_HEADING_FOUND, START_NOT_TOC_LIKE, START_EXPECTED_TITLE_MATCH, LEGAL_END_HEADING_NOT_FOUND, LEGAL_END_HEADING_NOT_FOUND` | `none` |
-
 ### jpm_2023_10k Item 6
 
 - Ticker: `JPM`
@@ -4176,32 +3089,6 @@ End snippet:
 | --- | --- | --- | --- | --- |
 | rejected | `Item 11. Executive Compensation.` | `Item 12. Security Ownership of Certain Beneficial Owners and Management and Related Stockholder M...` | `START_HEADING_FOUND, START_NOT_TOC_LIKE, START_EXPECTED_TITLE_MATCH, LEGAL_END_HEADING_FOUND, END_NOT_TOC_LIKE, REJECTED_SHORT_ORDERED_TOC_SPAN` | `Candidate pair is too short and follows an ordered TOC-like transition.` |
 
-### jpm_2023_10k Item 15
-
-- Ticker: `JPM`
-- Fiscal year: `2023`
-- Final status: `failed`
-- Final confidence: `low` `0.20`
-- Final start evidence: `Part IV Item 15. Exhibits, Financial Statement Schedules.`
-
-| Decision | Start Evidence | End Evidence | Reasons | Warnings |
-| --- | --- | --- | --- | --- |
-| rejected | `Part IV Item 15. Exhibits, Financial Statement Schedules.` | `none` | `START_HEADING_FOUND, START_NOT_TOC_LIKE, START_EXPECTED_TITLE_MATCH, LEGAL_END_HEADING_NOT_FOUND, LEGAL_END_HEADING_NOT_FOUND` | `none` |
-| rejected | `Part IV Item 15. Exhibits, Financial Statement Schedules.` | `none` | `START_HEADING_FOUND, START_NOT_TOC_LIKE, START_EXPECTED_TITLE_MATCH, LEGAL_END_HEADING_NOT_FOUND, LEGAL_END_HEADING_NOT_FOUND` | `none` |
-
-### bac_2014_10k Item 15
-
-- Ticker: `BAC`
-- Fiscal year: `2014`
-- Final status: `failed`
-- Final confidence: `low` `0.20`
-- Final start evidence: `Part IV Item 15. Exhibits, Financial Statement Schedules`
-
-| Decision | Start Evidence | End Evidence | Reasons | Warnings |
-| --- | --- | --- | --- | --- |
-| rejected | `Part IV Item 15. Exhibits, Financial Statement Schedules` | `none` | `START_HEADING_FOUND, START_NOT_TOC_LIKE, START_EXPECTED_TITLE_MATCH, LEGAL_END_HEADING_NOT_FOUND, LEGAL_END_HEADING_NOT_FOUND` | `none` |
-| rejected | `Item 15. Exhibits, Financial Statement Schedules` | `none` | `START_HEADING_FOUND, START_NOT_TOC_LIKE, START_EXPECTED_TITLE_MATCH, LEGAL_END_HEADING_NOT_FOUND, LEGAL_END_HEADING_NOT_FOUND` | `none` |
-
 ### unh_2014_10k Item 1B
 
 - Ticker: `UNH`
@@ -4213,44 +3100,6 @@ End snippet:
 | Decision | Start Evidence | End Evidence | Reasons | Warnings |
 | --- | --- | --- | --- | --- |
 | rejected | `ITEM 1B. UNRESOLVED STAFF COMMENTS` | `ITEM 2. PROPERTIES` | `START_HEADING_FOUND, START_NOT_TOC_LIKE, START_EXPECTED_TITLE_MATCH, LEGAL_END_HEADING_FOUND, END_NOT_TOC_LIKE, REJECTED_SHORT_ORDERED_TOC_SPAN` | `Candidate pair is too short and follows an ordered TOC-like transition.` |
-
-### unh_2014_10k Item 15
-
-- Ticker: `UNH`
-- Fiscal year: `2014`
-- Final status: `failed`
-- Final confidence: `low` `0.20`
-- Final start evidence: `Part IV Item 15. Exhibits and Financial Statement Schedules`
-
-| Decision | Start Evidence | End Evidence | Reasons | Warnings |
-| --- | --- | --- | --- | --- |
-| rejected | `Part IV Item 15. Exhibits and Financial Statement Schedules` | `none` | `START_HEADING_FOUND, START_NOT_TOC_LIKE, START_EXPECTED_TITLE_MATCH, LEGAL_END_HEADING_NOT_FOUND, LEGAL_END_HEADING_NOT_FOUND` | `none` |
-| rejected | `PART IV ITEM 15.EXHIBITS AND FINANCIAL STATEMENT SCHEDULES` | `none` | `START_HEADING_FOUND, START_NOT_TOC_LIKE, START_EXPECTED_TITLE_MATCH, LEGAL_END_HEADING_NOT_FOUND, LEGAL_END_HEADING_NOT_FOUND` | `none` |
-
-### jnj_2014_10k Item 15
-
-- Ticker: `JNJ`
-- Fiscal year: `2014`
-- Final status: `failed`
-- Final confidence: `low` `0.20`
-- Final start evidence: `PART IV Item 15. EXHIBITS AND FINANCIAL STATEMENT SCHEDULES`
-
-| Decision | Start Evidence | End Evidence | Reasons | Warnings |
-| --- | --- | --- | --- | --- |
-| rejected | `PART IV Item 15. EXHIBITS AND FINANCIAL STATEMENT SCHEDULES` | `none` | `START_HEADING_FOUND, START_NOT_TOC_LIKE, START_EXPECTED_TITLE_MATCH, LEGAL_END_HEADING_NOT_FOUND, LEGAL_END_HEADING_NOT_FOUND` | `none` |
-
-### xom_2014_10k Item 15
-
-- Ticker: `XOM`
-- Fiscal year: `2014`
-- Final status: `failed`
-- Final confidence: `low` `0.20`
-- Final start evidence: `PART IV Item 15. Exhibits, Financial Statement Schedules`
-
-| Decision | Start Evidence | End Evidence | Reasons | Warnings |
-| --- | --- | --- | --- | --- |
-| rejected | `PART IV Item 15. Exhibits, Financial Statement Schedules` | `none` | `START_HEADING_FOUND, START_NOT_TOC_LIKE, START_EXPECTED_TITLE_MATCH, LEGAL_END_HEADING_NOT_FOUND, LEGAL_END_HEADING_NOT_FOUND` | `none` |
-| rejected | `PART IV Item 15. Exhibits, Financial Statement Schedules` | `none` | `START_HEADING_FOUND, START_NOT_TOC_LIKE, START_EXPECTED_TITLE_MATCH, LEGAL_END_HEADING_NOT_FOUND, LEGAL_END_HEADING_NOT_FOUND` | `none` |
 
 ### cvx_2014_10k Item 6
 
@@ -4304,14 +3153,13 @@ End snippet:
 
 - Ticker: `AMZN`
 - Fiscal year: `2014`
-- Final status: `failed`
-- Final confidence: `low` `0.20`
+- Final status: `success`
+- Final confidence: `high` `1.00`
 - Final start evidence: `Item 1B. Unresolved Staff Comments`
 
 | Decision | Start Evidence | End Evidence | Reasons | Warnings |
 | --- | --- | --- | --- | --- |
 | rejected | `Item 1B. Unresolved Staff Comments` | `Item 2. Properties` | `START_HEADING_FOUND, START_NOT_TOC_LIKE, START_EXPECTED_TITLE_MATCH, LEGAL_END_HEADING_FOUND, END_NOT_TOC_LIKE, REJECTED_SHORT_ORDERED_TOC_SPAN` | `Candidate pair is too short and follows an ordered TOC-like transition.` |
-| rejected | `Item 1B. Unresolved Staff Comments` | `Item 2. Properties` | `START_HEADING_FOUND, START_NOT_TOC_LIKE, START_EXPECTED_TITLE_MATCH, LEGAL_END_HEADING_FOUND, END_TOC_LIKE_USED_AS_FALLBACK, REJECTED_SHORT_ORDERED_TOC_SPAN` | `End heading has TOC-like signals., Candidate pair is too short and follows an ordered TOC-like transition.` |
 
 ### amzn_2014_10k Item 2
 
@@ -4355,7 +3203,7 @@ End snippet:
 - Ticker: `AMZN`
 - Fiscal year: `2014`
 - Final status: `success`
-- Final confidence: `medium` `0.75`
+- Final confidence: `high` `0.85`
 - Final start evidence: `PART III Item 10. Directors, Executive Officers, and Corporate Governance`
 
 | Decision | Start Evidence | End Evidence | Reasons | Warnings |
@@ -4385,19 +3233,6 @@ End snippet:
 | Decision | Start Evidence | End Evidence | Reasons | Warnings |
 | --- | --- | --- | --- | --- |
 | rejected | `Item 12. Security Ownership of Certain Beneficial Owners and Management and Related Shareholder M...` | `Item 13. Certain Relationships and Related Transactions, and Director Independence` | `START_HEADING_FOUND, START_NOT_TOC_LIKE, START_EXPECTED_TITLE_MATCH, LEGAL_END_HEADING_FOUND, END_NOT_TOC_LIKE, REJECTED_SHORT_ORDERED_TOC_SPAN` | `Candidate pair is too short and follows an ordered TOC-like transition.` |
-
-### amzn_2014_10k Item 15
-
-- Ticker: `AMZN`
-- Fiscal year: `2014`
-- Final status: `failed`
-- Final confidence: `low` `0.20`
-- Final start evidence: `PART IV Item 15. Exhibits, Financial Statement Schedules`
-
-| Decision | Start Evidence | End Evidence | Reasons | Warnings |
-| --- | --- | --- | --- | --- |
-| rejected | `PART IV Item 15. Exhibits, Financial Statement Schedules` | `none` | `START_HEADING_FOUND, START_NOT_TOC_LIKE, START_EXPECTED_TITLE_MATCH, LEGAL_END_HEADING_NOT_FOUND, LEGAL_END_HEADING_NOT_FOUND` | `none` |
-| rejected | `PART IV Item 15. Exhibits, Financial Statement Schedules` | `none` | `START_HEADING_FOUND, START_NOT_TOC_LIKE, START_EXPECTED_TITLE_MATCH, LEGAL_END_HEADING_NOT_FOUND, LEGAL_END_HEADING_NOT_FOUND` | `none` |
 
 ### amzn_2023_10k Item 9C
 

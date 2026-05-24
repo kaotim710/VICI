@@ -73,13 +73,13 @@ Missing filings: 0
 | `wmt_2023_10k` | 9B | `inspect_only` | `start_toc_like_signal` | `inspect_only` | 340213 | none | none | none |
 | `amzn_2014_10k` | 2 | `inspect_only` | `start_toc_like_signal` | `inspect_only` | 1253 | none | none | none |
 | `amzn_2014_10k` | 3 | `inspect_only` | `start_toc_like_signal` | `inspect_only` | 152 | none | none | none |
-| `amzn_2014_10k` | 10 | `inspect_only` | `start_toc_like_signal` | `inspect_only` | 1059 | none | none | none |
+| `amzn_2014_10k` | 10 | `inspect_only` | `start_toc_like_signal` | `inspect_only` | 1545 | none | none | none |
 | `amzn_2014_10k` | 11 | `inspect_only` | `start_toc_like_signal` | `inspect_only` | 484 | none | none | none |
 | `amzn_2014_10k` | 12 | `inspect_only` | `start_toc_like_signal` | `inspect_only` | 277 | none | none | none |
 | `amzn_2023_10k` | 2 | `inspect_only` | `start_toc_like_signal` | `inspect_only` | 79315 | none | none | none |
 | `amzn_2023_10k` | 3 | `inspect_only` | `start_toc_like_signal` | `inspect_only` | 79290 | none | none | none |
 | `amzn_2023_10k` | 9C | `inspect_only` | `start_toc_like_signal` | `inspect_only` | 268364 | none | none | none |
-| `amzn_2023_10k` | 13 | `inspect_only` | `start_toc_like_signal` | `inspect_only` | 269906 | none | none | none |
+| `amzn_2023_10k` | 13 | `inspect_only` | `start_toc_like_signal` | `inspect_only` | 205 | none | none | none |
 
 ## Details
 
@@ -474,7 +474,7 @@ Recovered end snippet:
 - Fiscal year: `2014`
 - Status: `inspect_only`
 - Message: No deterministic recovery runner is registered for this action.
-- Before length: `1059`
+- Before length: `1545`
 
 ### amzn_2014_10k Item 11 - start_toc_like_signal
 
@@ -522,4 +522,4 @@ Recovered end snippet:
 - Fiscal year: `2023`
 - Status: `inspect_only`
 - Message: No deterministic recovery runner is registered for this action.
-- Before length: `269906`
+- Before length: `205`

@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import re
 
-from .models import HeadingCandidate, NarrativeBlock
+from .models import HeadingCandidate, NarrativeBlock, TocProfile
 
 
 ITEM_ORDER = [
@@ -119,16 +119,63 @@ def legal_next_items(item: str) -> set[str]:
     return set(ITEM_ORDER[index + 1 : index + 3])
 
 
+def infer_toc_profile(candidates: list[HeadingCandidate]) -> TocProfile:
+    prefix = _toc_prefix(candidates)
+    if len(prefix) < 2:
+        return TocProfile(items=[], confidence="none")
+
+    has_toc_signals = any(candidate.is_toc_like for candidate in prefix)
+    dense_count = sum("TOC_DENSE_ITEM_CLUSTER" in candidate.reasons for candidate in prefix)
+    ordered_count = _ordered_pair_count(prefix)
+    if has_toc_signals:
+        confidence = "high"
+    elif len(prefix) >= 5 and dense_count >= 5 and ordered_count >= len(prefix) - 2:
+        confidence = "medium"
+    else:
+        return TocProfile(items=[], confidence="none")
+
+    return TocProfile(
+        items=[candidate.item for candidate in prefix],
+        confidence=confidence,
+        evidence=[f"prefix_items={len(prefix)}", f"dense_items={dense_count}", f"ordered_pairs={ordered_count}"],
+    )
+
+
 def is_expected_title(item: str, heading: str) -> bool:
     expected = EXPECTED_TITLES.get(item, ())
     normalized = heading.lower()
     return bool(expected) and any(token in normalized for token in expected)
 
 
+def toc_next_items(item: str, toc_items: list[str], limit: int = 3) -> list[str]:
+    if item not in toc_items:
+        return []
+    index = toc_items.index(item)
+    return toc_items[index + 1 : index + 1 + limit]
+
+
 def _normalize_heading(value: str) -> str:
     value = re.sub(r"\s+", " ", value)
     value = value.strip(" .\t\n\r")
     return value
+
+
+def _toc_prefix(candidates: list[HeadingCandidate]) -> list[HeadingCandidate]:
+    prefix = []
+    seen = set()
+    for candidate in sorted(candidates, key=lambda current: current.start):
+        if candidate.item not in ITEM_ORDER:
+            continue
+        if candidate.item in seen:
+            break
+        prefix.append(candidate)
+        seen.add(candidate.item)
+    return prefix
+
+
+def _ordered_pair_count(candidates: list[HeadingCandidate]) -> int:
+    positions = [ITEM_ORDER.index(candidate.item) for candidate in candidates if candidate.item in ITEM_ORDER]
+    return sum(1 for left, right in zip(positions, positions[1:]) if right > left)
 
 
 def _first_nonspace(text: str, start: int, end: int) -> int:

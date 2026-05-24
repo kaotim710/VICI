@@ -3,7 +3,7 @@ from __future__ import annotations
 import re
 from dataclasses import dataclass
 
-from .candidates import ITEM_ORDER, find_heading_candidates, is_expected_title, legal_next_items
+from .candidates import ITEM_ORDER, find_heading_candidates, infer_toc_profile, is_expected_title, legal_next_items, toc_next_items
 from .cleaning import parse_document
 from .models import (
     CandidateAttempt,
@@ -32,9 +32,11 @@ def extract_items(content: str, target_items: list[str] | None = None, filing_id
     text = document.text
     targets = [item.upper() for item in target_items] if target_items else list(ITEM_ORDER)
     candidates = find_heading_candidates(text, document.blocks)
-    item_results = [_extract_one_item(text, candidates, item) for item in targets]
+    toc_profile = infer_toc_profile(candidates)
+    item_results = [_extract_one_item(text, candidates, item, toc_profile.items) for item in targets]
+    resolved = sum(1 for result in item_results if result.status in {"success", "not_present"})
     successful = sum(1 for result in item_results if result.status == "success")
-    if successful == len(item_results):
+    if resolved == len(item_results):
         status = "success"
     elif successful:
         status = "partial"
@@ -51,12 +53,23 @@ def extract_items(content: str, target_items: list[str] | None = None, filing_id
         warnings=warnings,
         candidate_count=len(candidates),
         document_warnings=document.warnings,
+        toc_items=toc_profile.items,
+        toc_confidence=toc_profile.confidence,
     )
 
 
-def _extract_one_item(text: str, candidates: list[HeadingCandidate], item: str) -> ItemResult:
+def _extract_one_item(text: str, candidates: list[HeadingCandidate], item: str, toc_items: list[str]) -> ItemResult:
     start_candidates = [candidate for candidate in candidates if candidate.item == item]
     if not start_candidates:
+        if toc_items and item not in toc_items:
+            return ItemResult(
+                item=item,
+                status="not_present",
+                validation_reasons=["ITEM_NOT_DECLARED_IN_TOC"],
+                confidence_level="high",
+                confidence_score=1.0,
+                strategy_used="toc_presence_filter_v1",
+            )
         return ItemResult(
             item=item,
             status="failed",
@@ -66,7 +79,7 @@ def _extract_one_item(text: str, candidates: list[HeadingCandidate], item: str) 
 
     ranked_starts = sorted(start_candidates, key=_start_rank)
     attempts: list[CandidateAttempt] = []
-    for pair in _candidate_pairs(text, candidates, ranked_starts):
+    for pair in _candidate_pairs(text, candidates, ranked_starts, toc_items):
         if pair.end and not pair.rejection_reasons:
             attempts.append(_attempt_from_pair(item, "selected", pair))
             return _build_success_result(text, pair.start, pair.end, attempts)
@@ -87,11 +100,11 @@ def _extract_one_item(text: str, candidates: list[HeadingCandidate], item: str) 
 
 
 def _candidate_pairs(
-    text: str, candidates: list[HeadingCandidate], starts: list[HeadingCandidate]
+    text: str, candidates: list[HeadingCandidate], starts: list[HeadingCandidate], toc_items: list[str]
 ) -> list[CandidatePair]:
     pairs = []
     for start in starts:
-        end, end_reasons = _find_end_candidate(text, candidates, start)
+        end, end_reasons = _find_end_candidate(text, candidates, start, toc_items)
         section_text = text[start.start : end.start].strip() if end else ""
         validation_reasons = _start_validation_reasons(start) + end_reasons
         rejection_reasons = _pair_rejection_reasons(start, end, section_text)
@@ -108,14 +121,24 @@ def _candidate_pairs(
 
 
 def _find_end_candidate(
-    text: str, candidates: list[HeadingCandidate], start: HeadingCandidate
+    text: str, candidates: list[HeadingCandidate], start: HeadingCandidate, toc_items: list[str]
 ) -> tuple[HeadingCandidate | None, list[str]]:
     if start.item == "16":
         return _terminal_end_candidate(text, start), ["TERMINAL_END_BOUNDARY_USED"]
 
+    toc_next = set(toc_next_items(start.item, toc_items))
     legal_next = legal_next_items(start.item)
-    later = [candidate for candidate in candidates if candidate.start > start.end and candidate.item in legal_next]
+    if toc_next:
+        later = [candidate for candidate in candidates if candidate.start > start.end and candidate.item in toc_next]
+        non_toc = [candidate for candidate in later if not candidate.is_toc_like]
+    else:
+        later = []
+        non_toc = []
+    if not toc_next or not non_toc:
+        later = [candidate for candidate in candidates if candidate.start > start.end and candidate.item in legal_next]
     if not later:
+        if toc_items and start.item in toc_items and not toc_next:
+            return _terminal_end_candidate(text, start), ["TOC_LAST_ITEM_TERMINAL_END_BOUNDARY_USED"]
         return None, ["LEGAL_END_HEADING_NOT_FOUND"]
     non_toc = [candidate for candidate in later if not candidate.is_toc_like]
     if non_toc:

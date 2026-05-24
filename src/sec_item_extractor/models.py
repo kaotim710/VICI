@@ -41,6 +41,13 @@ class HeadingCandidate:
 
 
 @dataclass(frozen=True)
+class TocProfile:
+    items: list[str]
+    confidence: str
+    evidence: list[str] = field(default_factory=list)
+
+
+@dataclass(frozen=True)
 class Evidence:
     kind: str
     item: str
@@ -110,6 +117,8 @@ class ExtractionResult:
     warnings: list[str] = field(default_factory=list)
     candidate_count: int = 0
     document_warnings: list[str] = field(default_factory=list)
+    toc_items: list[str] = field(default_factory=list)
+    toc_confidence: str = "none"
 
     def to_dict(self) -> dict:
         return asdict(self)

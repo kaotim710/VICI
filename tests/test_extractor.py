@@ -156,6 +156,46 @@ class ExtractorTests(unittest.TestCase):
         self.assertNotIn("Signature text.", item.text)
         self.assertEqual(item.end_evidence.item, "EOF")
 
+    def test_item_absent_from_toc_is_not_treated_as_failed_extraction(self):
+        filing = """
+        Table of Contents
+        Item 1. Business........ 3
+        Item 2. Properties........ 9
+
+        Item 1. Business
+        Business narrative.
+        Item 2. Properties
+        Properties narrative.
+        """
+
+        result = extract_items(filing, target_items=["1C"])
+        item = result.item_results[0]
+
+        self.assertEqual(result.status, "success")
+        self.assertEqual(item.status, "not_present")
+        self.assertIn("ITEM_NOT_DECLARED_IN_TOC", item.validation_reasons)
+        self.assertEqual(item.warnings, [])
+
+    def test_toc_next_item_can_skip_absent_intermediate_items_for_boundary(self):
+        filing = """
+        Table of Contents
+        Item 1. Business........ 3
+        Item 2. Properties........ 9
+
+        Item 1. Business
+        Business narrative.
+        Item 2. Properties
+        Properties narrative.
+        """
+
+        result = extract_items(filing, target_items=["1"])
+        item = result.item_results[0]
+
+        self.assertEqual(item.status, "success")
+        self.assertEqual(item.end_evidence.item, "2")
+        self.assertIn("Business narrative.", item.text)
+        self.assertNotIn("Properties narrative.", item.text)
+
     def test_long_noncanonical_section_recommends_subsection_selection(self):
         filing = """
         Item 7. Company and Subsidiaries
