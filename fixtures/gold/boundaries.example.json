@@ -1,0 +1,22 @@
+{
+  "filing_id": "aapl_2023_10k",
+  "source_path": "fixtures/filings/raw/aapl_2023_10k.html",
+  "items": {
+    "1": {
+      "start_heading": "Item 1. Business",
+      "end_heading": "Item 1A. Risk Factors",
+      "notes": "Use exact text as it appears after normalization when possible."
+    },
+    "1A": {
+      "start_heading": "Item 1A. Risk Factors",
+      "end_heading": "Item 1B. Unresolved Staff Comments",
+      "notes": ""
+    },
+    "7": {
+      "start_heading": "Item 7. Management's Discussion and Analysis of Financial Condition and Results of Operations",
+      "end_heading": "Item 7A. Quantitative and Qualitative Disclosures About Market Risk",
+      "notes": "If Item 7A is absent, use Item 8 as the legal end heading."
+    }
+  }
+}
+

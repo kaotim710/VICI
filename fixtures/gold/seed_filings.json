@@ -1,0 +1,39 @@
+{
+  "description": "Seed gold set plan for the first deterministic extractor milestone. Raw filings and verified boundaries are added incrementally.",
+  "selection_strategy": {
+    "industries": [
+      "Technology",
+      "Financials",
+      "Healthcare",
+      "Energy",
+      "Consumer/Retail"
+    ],
+    "companies_per_industry": 2,
+    "time_points_per_company": 2,
+    "total_filings": 20
+  },
+  "items": ["1", "1A", "7"],
+  "filings": [
+    {"filing_id": "aapl_2014_10k", "ticker": "AAPL", "cik": "0000320193", "industry": "Technology", "fiscal_year": 2014, "form": "10-K"},
+    {"filing_id": "aapl_2023_10k", "ticker": "AAPL", "cik": "0000320193", "industry": "Technology", "fiscal_year": 2023, "form": "10-K"},
+    {"filing_id": "msft_2014_10k", "ticker": "MSFT", "cik": "0000789019", "industry": "Technology", "fiscal_year": 2014, "form": "10-K"},
+    {"filing_id": "msft_2023_10k", "ticker": "MSFT", "cik": "0000789019", "industry": "Technology", "fiscal_year": 2023, "form": "10-K"},
+    {"filing_id": "jpm_2014_10k", "ticker": "JPM", "cik": "0000019617", "industry": "Financials", "fiscal_year": 2014, "form": "10-K"},
+    {"filing_id": "jpm_2023_10k", "ticker": "JPM", "cik": "0000019617", "industry": "Financials", "fiscal_year": 2023, "form": "10-K"},
+    {"filing_id": "bac_2014_10k", "ticker": "BAC", "cik": "0000070858", "industry": "Financials", "fiscal_year": 2014, "form": "10-K"},
+    {"filing_id": "bac_2023_10k", "ticker": "BAC", "cik": "0000070858", "industry": "Financials", "fiscal_year": 2023, "form": "10-K"},
+    {"filing_id": "unh_2014_10k", "ticker": "UNH", "cik": "0000731766", "industry": "Healthcare", "fiscal_year": 2014, "form": "10-K"},
+    {"filing_id": "unh_2023_10k", "ticker": "UNH", "cik": "0000731766", "industry": "Healthcare", "fiscal_year": 2023, "form": "10-K"},
+    {"filing_id": "jnj_2014_10k", "ticker": "JNJ", "cik": "0000200406", "industry": "Healthcare", "fiscal_year": 2014, "form": "10-K"},
+    {"filing_id": "jnj_2023_10k", "ticker": "JNJ", "cik": "0000200406", "industry": "Healthcare", "fiscal_year": 2023, "form": "10-K"},
+    {"filing_id": "xom_2014_10k", "ticker": "XOM", "cik": "0000034088", "industry": "Energy", "fiscal_year": 2014, "form": "10-K"},
+    {"filing_id": "xom_2023_10k", "ticker": "XOM", "cik": "0000034088", "industry": "Energy", "fiscal_year": 2023, "form": "10-K"},
+    {"filing_id": "cvx_2014_10k", "ticker": "CVX", "cik": "0000093410", "industry": "Energy", "fiscal_year": 2014, "form": "10-K"},
+    {"filing_id": "cvx_2023_10k", "ticker": "CVX", "cik": "0000093410", "industry": "Energy", "fiscal_year": 2023, "form": "10-K"},
+    {"filing_id": "wmt_2014_10k", "ticker": "WMT", "cik": "0000104169", "industry": "Consumer/Retail", "fiscal_year": 2014, "form": "10-K"},
+    {"filing_id": "wmt_2023_10k", "ticker": "WMT", "cik": "0000104169", "industry": "Consumer/Retail", "fiscal_year": 2023, "form": "10-K"},
+    {"filing_id": "amzn_2014_10k", "ticker": "AMZN", "cik": "0001018724", "industry": "Consumer/Retail", "fiscal_year": 2014, "form": "10-K"},
+    {"filing_id": "amzn_2023_10k", "ticker": "AMZN", "cik": "0001018724", "industry": "Consumer/Retail", "fiscal_year": 2023, "form": "10-K"}
+  ]
+}
+
