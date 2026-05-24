@@ -1,0 +1,11 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+
+fixtures/filings/raw/*.html
+fixtures/filings/raw/*.txt
+fixtures/filings/raw/*.json
+artifacts/
+
