@@ -123,8 +123,31 @@ def _item_detail(item) -> list[str]:
         lines.append(f"- Start evidence: `{_compact(item.start_evidence.text, 120)}`")
     if item.end_evidence:
         lines.append(f"- End evidence: `{_compact(item.end_evidence.text, 120)}`")
-    lines.extend(["", "Snippet:", "", f"> {_compact(item.text or '', SNIPPET_CHARS)}", ""])
+    start_snippet, end_snippet = _edge_snippets(item.text or "", SNIPPET_CHARS)
+    lines.extend(
+        [
+            "",
+            "Start snippet:",
+            "",
+            f"> {start_snippet}",
+            "",
+            "End snippet:",
+            "",
+            f"> {end_snippet}",
+            "",
+        ]
+    )
     return lines
+
+
+def _edge_snippets(value: str, limit: int) -> tuple[str, str]:
+    compacted = " ".join(value.split())
+    if not compacted:
+        return "", ""
+    start = _compact(compacted, limit)
+    if len(compacted) <= limit:
+        return start, start
+    return start, _escape_markdown_cell("..." + compacted[-(limit - 3) :].lstrip())
 
 
 def _compact(value: str, limit: int) -> str:

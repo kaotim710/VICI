@@ -187,3 +187,9 @@ ok，進行下一個milestone
 ```text
 目前先測試對test filing 做extracting，並且以md的形式展示
 ```
+
+## Seed Extraction Snippet Request
+
+```text
+我看過測試了，目前沒問題，snippet部分除了開頭，也需要把結尾也列出來
+```
