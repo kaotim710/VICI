@@ -31,6 +31,7 @@ def main() -> int:
 
 def build_report(manifest: dict) -> str:
     warning_items = []
+    rejected_pair_items = []
     warning_counts = Counter()
     missing = []
 
@@ -42,10 +43,11 @@ def build_report(manifest: dict) -> str:
         content = path.read_text(encoding="utf-8", errors="replace")
         result = extract_items(content, target_items=manifest["items"], filing_id=filing["filing_id"])
         for item in result.item_results:
-            if not item.warnings:
-                continue
-            warning_counts.update(item.warnings)
-            warning_items.append((filing, result, item))
+            if item.warnings:
+                warning_counts.update(item.warnings)
+                warning_items.append((filing, result, item))
+            if any(attempt.decision == "rejected" for attempt in item.candidate_attempts):
+                rejected_pair_items.append((filing, result, item))
 
     lines = [
         "# Warning Audit Report",
@@ -55,6 +57,7 @@ def build_report(manifest: dict) -> str:
         "Scope: seed 10-K filings with non-empty item warnings.",
         "",
         f"Warning items: {len(warning_items)}",
+        f"Items with rejected candidate pairs: {len(rejected_pair_items)}",
         f"Missing filings: {len(missing)}",
         "",
         "## Warning Counts",
@@ -69,6 +72,10 @@ def build_report(manifest: dict) -> str:
 
     for filing, result, item in warning_items:
         lines.extend(_audit_item(filing, result, item))
+
+    lines.extend(["## Rejected Candidate Pairs", ""])
+    for filing, result, item in rejected_pair_items:
+        lines.extend(_rejected_pair_item(filing, result, item))
 
     return "\n".join(lines).rstrip() + "\n"
 
@@ -131,6 +138,38 @@ def _audit_item(filing: dict, result, item) -> list[str]:
             "",
         ]
     )
+    return lines
+
+
+def _rejected_pair_item(filing: dict, result, item) -> list[str]:
+    rejected_attempts = [attempt for attempt in item.candidate_attempts if attempt.decision == "rejected"]
+    lines = [
+        f"### {filing['filing_id']} Item {item.item}",
+        "",
+        f"- Ticker: `{filing['ticker']}`",
+        f"- Fiscal year: `{filing['fiscal_year']}`",
+        f"- Final status: `{item.status}`",
+        f"- Final confidence: `{item.confidence_level}` `{item.confidence_score:.2f}`",
+        f"- Final start evidence: `{_compact(item.start_evidence.text, 160) if item.start_evidence else 'none'}`",
+        "",
+        "| Decision | Start Evidence | End Evidence | Reasons | Warnings |",
+        "| --- | --- | --- | --- | --- |",
+    ]
+    for attempt in rejected_attempts:
+        lines.append(
+            "| "
+            + " | ".join(
+                [
+                    attempt.decision,
+                    f"`{_compact(attempt.start_evidence.text, 100)}`",
+                    f"`{_compact(attempt.end_evidence.text, 100) if attempt.end_evidence else 'none'}`",
+                    f"`{', '.join(attempt.validation_reasons)}`",
+                    f"`{', '.join(attempt.warnings) if attempt.warnings else 'none'}`",
+                ]
+            )
+            + " |"
+        )
+    lines.append("")
     return lines
 
 

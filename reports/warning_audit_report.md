@@ -5,6 +5,7 @@ Generated: 2026-05-24
 Scope: seed 10-K filings with non-empty item warnings.
 
 Warning items: 13
+Items with rejected candidate pairs: 12
 Missing filings: 0
 
 ## Warning Counts
@@ -487,3 +488,149 @@ Start snippet:
 End snippet:
 
 > ...ion "Management's Discussion and Analysis of Financial Condition and Results of Operations" included in our Annual Report to Shareholders. Such information is included in Exhibit 13 to this Annual Report on Form 10-K.
+
+## Rejected Candidate Pairs
+
+### msft_2023_10k Item 1
+
+- Ticker: `MSFT`
+- Fiscal year: `2023`
+- Final status: `success`
+- Final confidence: `high` `1.00`
+- Final start evidence: `ITEM 1. BUSINESS`
+
+| Decision | Start Evidence | End Evidence | Reasons | Warnings |
+| --- | --- | --- | --- | --- |
+| rejected | `PART I Item 1. Business` | `Item 1A. Risk Factors` | `START_HEADING_FOUND, START_NOT_TOC_LIKE, START_EXPECTED_TITLE_MATCH, LEGAL_END_HEADING_FOUND, END_NOT_TOC_LIKE, REJECTED_SHORT_ORDERED_TOC_SPAN` | `Candidate pair is too short and follows an ordered TOC-like transition.` |
+
+### msft_2023_10k Item 1A
+
+- Ticker: `MSFT`
+- Fiscal year: `2023`
+- Final status: `success`
+- Final confidence: `high` `1.00`
+- Final start evidence: `PART I Item 1A ITEM 1A. RISK FACTORS`
+
+| Decision | Start Evidence | End Evidence | Reasons | Warnings |
+| --- | --- | --- | --- | --- |
+| rejected | `Item 1A. Risk Factors` | `Item 1B. Unresolved Staff Comments` | `START_HEADING_FOUND, START_NOT_TOC_LIKE, START_EXPECTED_TITLE_MATCH, LEGAL_END_HEADING_FOUND, END_NOT_TOC_LIKE, REJECTED_SHORT_ORDERED_TOC_SPAN` | `Candidate pair is too short and follows an ordered TOC-like transition.` |
+
+### msft_2023_10k Item 7
+
+- Ticker: `MSFT`
+- Fiscal year: `2023`
+- Final status: `success`
+- Final confidence: `high` `1.00`
+- Final start evidence: `PART II Item 7 ITEM 7. MANAGEMENT’S DISCUSSION AND ANALYSIS OF FINANCIAL CONDITION AND RESULTS OF OPERATIONS`
+
+| Decision | Start Evidence | End Evidence | Reasons | Warnings |
+| --- | --- | --- | --- | --- |
+| rejected | `Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations` | `Item 7A. Quantitative and Qualitative Disclosures about Market Risk` | `START_HEADING_FOUND, START_NOT_TOC_LIKE, START_EXPECTED_TITLE_MATCH, LEGAL_END_HEADING_FOUND, END_NOT_TOC_LIKE, REJECTED_SHORT_ORDERED_TOC_SPAN` | `Candidate pair is too short and follows an ordered TOC-like transition.` |
+
+### jpm_2014_10k Item 1
+
+- Ticker: `JPM`
+- Fiscal year: `2014`
+- Final status: `success`
+- Final confidence: `high` `1.00`
+- Final start evidence: `Part I ITEM 1: BUSINESS`
+
+| Decision | Start Evidence | End Evidence | Reasons | Warnings |
+| --- | --- | --- | --- | --- |
+| rejected | `Item 1 Business` | `Item 1A Risk factors` | `START_HEADING_FOUND, START_NOT_TOC_LIKE, START_EXPECTED_TITLE_MATCH, LEGAL_END_HEADING_FOUND, END_NOT_TOC_LIKE, REJECTED_SHORT_ORDERED_TOC_SPAN` | `Candidate pair is too short and follows an ordered TOC-like transition.` |
+
+### jpm_2014_10k Item 1A
+
+- Ticker: `JPM`
+- Fiscal year: `2014`
+- Final status: `success`
+- Final confidence: `high` `1.00`
+- Final start evidence: `Part I Item 1A: RISK FACTORS`
+
+| Decision | Start Evidence | End Evidence | Reasons | Warnings |
+| --- | --- | --- | --- | --- |
+| rejected | `Item 1A Risk factors` | `Item 1B Unresolved SEC Staff comments` | `START_HEADING_FOUND, START_NOT_TOC_LIKE, START_EXPECTED_TITLE_MATCH, LEGAL_END_HEADING_FOUND, END_NOT_TOC_LIKE, REJECTED_SHORT_ORDERED_TOC_SPAN` | `Candidate pair is too short and follows an ordered TOC-like transition.` |
+
+### jpm_2014_10k Item 7
+
+- Ticker: `JPM`
+- Fiscal year: `2014`
+- Final status: `success`
+- Final confidence: `high` `0.90`
+- Final start evidence: `ITEM 7: MANAGEMENT’S DISCUSSION AND ANALYSIS OF FINANCIAL CONDITION AND RESULTS OF OPERATIONS`
+
+| Decision | Start Evidence | End Evidence | Reasons | Warnings |
+| --- | --- | --- | --- | --- |
+| rejected | `Item 7 Management’s discussion and analysis of financial condition and results of operations` | `Item 7A Quantitative and qualitative disclosures about market risk` | `START_HEADING_FOUND, START_NOT_TOC_LIKE, START_EXPECTED_TITLE_MATCH, LEGAL_END_HEADING_FOUND, END_NOT_TOC_LIKE, REJECTED_SHORT_ORDERED_TOC_SPAN` | `Candidate pair is too short and follows an ordered TOC-like transition.` |
+
+### jpm_2023_10k Item 1
+
+- Ticker: `JPM`
+- Fiscal year: `2023`
+- Final status: `success`
+- Final confidence: `high` `1.00`
+- Final start evidence: `Part I Item 1. Business.`
+
+| Decision | Start Evidence | End Evidence | Reasons | Warnings |
+| --- | --- | --- | --- | --- |
+| rejected | `Item 1. Business.` | `Item 1A. Risk Factors.` | `START_HEADING_FOUND, START_NOT_TOC_LIKE, START_EXPECTED_TITLE_MATCH, LEGAL_END_HEADING_FOUND, END_NOT_TOC_LIKE, REJECTED_SHORT_ORDERED_TOC_SPAN` | `Candidate pair is too short and follows an ordered TOC-like transition.` |
+
+### jpm_2023_10k Item 1A
+
+- Ticker: `JPM`
+- Fiscal year: `2023`
+- Final status: `success`
+- Final confidence: `high` `1.00`
+- Final start evidence: `Item 1A. Risk Factors.`
+
+| Decision | Start Evidence | End Evidence | Reasons | Warnings |
+| --- | --- | --- | --- | --- |
+| rejected | `Item 1A. Risk Factors.` | `Item 1B. Unresolved Staff Comments.` | `START_HEADING_FOUND, START_NOT_TOC_LIKE, START_EXPECTED_TITLE_MATCH, LEGAL_END_HEADING_FOUND, END_NOT_TOC_LIKE, REJECTED_SHORT_ORDERED_TOC_SPAN` | `Candidate pair is too short and follows an ordered TOC-like transition.` |
+
+### jpm_2023_10k Item 7
+
+- Ticker: `JPM`
+- Fiscal year: `2023`
+- Final status: `success`
+- Final confidence: `high` `0.90`
+- Final start evidence: `Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations.`
+
+| Decision | Start Evidence | End Evidence | Reasons | Warnings |
+| --- | --- | --- | --- | --- |
+| rejected | `Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations.` | `Item 7A. Quantitative and Qualitative Disclosures About Market Risk.` | `START_HEADING_FOUND, START_NOT_TOC_LIKE, START_EXPECTED_TITLE_MATCH, LEGAL_END_HEADING_FOUND, END_NOT_TOC_LIKE, REJECTED_SHORT_ORDERED_TOC_SPAN` | `Candidate pair is too short and follows an ordered TOC-like transition.` |
+
+### amzn_2014_10k Item 1
+
+- Ticker: `AMZN`
+- Fiscal year: `2014`
+- Final status: `success`
+- Final confidence: `high` `1.00`
+- Final start evidence: `PART I Item 1. Business`
+
+| Decision | Start Evidence | End Evidence | Reasons | Warnings |
+| --- | --- | --- | --- | --- |
+| rejected | `PART I Item 1. Business` | `Item 1A. Risk Factors` | `START_HEADING_FOUND, START_NOT_TOC_LIKE, START_EXPECTED_TITLE_MATCH, LEGAL_END_HEADING_FOUND, END_NOT_TOC_LIKE, REJECTED_SHORT_ORDERED_TOC_SPAN` | `Candidate pair is too short and follows an ordered TOC-like transition.` |
+
+### amzn_2014_10k Item 1A
+
+- Ticker: `AMZN`
+- Fiscal year: `2014`
+- Final status: `success`
+- Final confidence: `high` `1.00`
+- Final start evidence: `Item 1A. Risk Factors`
+
+| Decision | Start Evidence | End Evidence | Reasons | Warnings |
+| --- | --- | --- | --- | --- |
+| rejected | `Item 1A. Risk Factors` | `Item 1B. Unresolved Staff Comments` | `START_HEADING_FOUND, START_NOT_TOC_LIKE, START_EXPECTED_TITLE_MATCH, LEGAL_END_HEADING_FOUND, END_NOT_TOC_LIKE, REJECTED_SHORT_ORDERED_TOC_SPAN` | `Candidate pair is too short and follows an ordered TOC-like transition.` |
+
+### amzn_2014_10k Item 7
+
+- Ticker: `AMZN`
+- Fiscal year: `2014`
+- Final status: `success`
+- Final confidence: `high` `1.00`
+- Final start evidence: `Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations`
+
+| Decision | Start Evidence | End Evidence | Reasons | Warnings |
+| --- | --- | --- | --- | --- |
+| rejected | `Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operation` | `Item 7A. Quantitative and Qualitative Disclosure About Market Risk` | `START_HEADING_FOUND, START_NOT_TOC_LIKE, START_EXPECTED_TITLE_MATCH, LEGAL_END_HEADING_FOUND, END_NOT_TOC_LIKE, REJECTED_SHORT_ORDERED_TOC_SPAN` | `Candidate pair is too short and follows an ordered TOC-like transition.` |
