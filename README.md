@@ -29,6 +29,30 @@ python3 -m unittest discover -s tests
 PYTHONPATH=src python3 -m sec_item_extractor path/to/10k.html --items 1 1A 7
 ```
 
+## MVP HTTP API
+
+Run the stdlib-only API server:
+
+```bash
+PYTHONPATH=src PORT=8000 python3 -m sec_item_extractor.server
+```
+
+Health check:
+
+```bash
+curl http://localhost:8000/health
+```
+
+Extract the default MVP items, Item 1, Item 1A, and Item 7:
+
+```bash
+curl -X POST http://localhost:8000/extract \
+  -H "Content-Type: application/json" \
+  --data '{"filing_id":"sample","content":"Item 1. Business ... Item 1A. Risk Factors ... Item 7. Management'\''s Discussion and Analysis ... Item 7A. Market Risk ..."}'
+```
+
+For Zeabur, the included `Procfile` starts the same server and reads the platform-provided `PORT`.
+
 ## Seed Dataset
 
 The first test corpus is planned in [fixtures/gold/seed_filings.json](fixtures/gold/seed_filings.json):
