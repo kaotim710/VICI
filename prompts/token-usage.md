@@ -48,3 +48,4 @@ estimated_prompt_tokens =
 | 2026-05-24 | raw_filing_structure_preview_request | `prompts/2026-05-24-user-prompts.md` |  | 34 | Requested restoring original filing table structure in the UI and prototyping image display. |
 | 2026-05-24 | raw_structure_tag_request | `prompts/2026-05-24-user-prompts.md` |  | 13 | Requested adding tags to extracted items when raw tables or images are detected. |
 | 2026-05-24 | gold_raw_media_fidelity_request | `prompts/2026-05-24-user-prompts.md` |  | 31 | Requested adding gold checks for table/image restoration fidelity and rerunning gold warning classification. |
+| 2026-05-24 | seed_raw_media_coverage_request | `prompts/2026-05-24-user-prompts.md` |  | 29 | Asked whether raw table/image restoration only covers a few filings and requested pushing it to current test filings. |

@@ -12,25 +12,25 @@ Missing filings: 0
 | Filing | Ticker | Year | Overall | Item 1 | Item 1A | Item 1B | Item 1C | Item 2 | Item 3 | Item 4 | Item 5 | Item 6 | Item 7 | Item 7A | Item 8 | Item 9 | Item 9A | Item 9B | Item 9C | Item 10 | Item 11 | Item 12 | Item 13 | Item 14 | Item 15 | Item 16 |
 | --- | --- | ---: | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | `aapl_2014_10k` | AAPL | 2014 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 0.90 | not_present / high 1.00 |
-| `aapl_2023_10k` | AAPL | 2023 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 0.90 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / medium 0.75 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 |
+| `aapl_2023_10k` | AAPL | 2023 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / medium 0.75 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 |
 | `msft_2014_10k` | MSFT | 2014 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 |
-| `msft_2023_10k` | MSFT | 2023 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 0.90 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 |
-| `jpm_2014_10k` | JPM | 2014 | success | success / high 1.00 | success / high 1.00 | success / high 0.90 | not_present / high 1.00 | success / high 1.00 | success / high 0.90 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 0.90 | success / high 0.90 | success / high 0.90 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 0.90 | not_present / high 1.00 |
-| `jpm_2023_10k` | JPM | 2023 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 0.90 | success / high 0.90 | success / high 0.90 | success / high 0.90 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 0.90 | not_present / high 1.00 |
-| `bac_2014_10k` | BAC | 2014 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / medium 0.80 | success / high 0.90 | success / high 0.90 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 0.90 | not_present / high 1.00 |
-| `bac_2023_10k` | BAC | 2023 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 0.90 | success / medium 0.80 | success / high 0.90 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 0.90 |
+| `msft_2023_10k` | MSFT | 2023 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 |
+| `jpm_2014_10k` | JPM | 2014 | success | success / high 1.00 | success / high 1.00 | success / high 0.90 | not_present / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 0.90 | not_present / high 1.00 |
+| `jpm_2023_10k` | JPM | 2023 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 0.90 | not_present / high 1.00 |
+| `bac_2014_10k` | BAC | 2014 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / medium 0.80 | success / high 1.00 | success / high 0.90 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 |
+| `bac_2023_10k` | BAC | 2023 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 0.90 | success / medium 0.80 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 |
 | `unh_2014_10k` | UNH | 2014 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 | success / high 0.85 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 0.85 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 |
 | `unh_2023_10k` | UNH | 2023 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 0.85 | success / high 0.85 | success / high 1.00 | success / high 1.00 | success / high 0.85 | success / high 0.85 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 |
-| `jnj_2014_10k` | JNJ | 2014 | success | success / high 1.00 | success / high 0.90 | success / high 1.00 | not_present / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / medium 0.75 | success / high 0.90 | success / high 0.90 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 |
-| `jnj_2023_10k` | JNJ | 2023 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 0.90 | success / high 1.00 | success / high 0.90 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 |
-| `xom_2014_10k` | XOM | 2014 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 0.90 | success / high 0.90 | success / high 0.90 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 |
-| `xom_2023_10k` | XOM | 2023 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 | success / high 0.90 | success / high 0.90 | success / high 0.90 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 |
-| `cvx_2014_10k` | CVX | 2014 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / medium 0.80 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 0.90 | success / high 0.90 | success / high 0.90 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / medium 0.80 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / medium 0.80 |
-| `cvx_2023_10k` | CVX | 2023 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 0.85 | success / medium 0.75 | success / high 0.90 | success / high 0.90 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 0.90 | success / high 1.00 | success / high 1.00 |
-| `wmt_2014_10k` | WMT | 2014 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / medium 0.80 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 0.90 | success / high 0.90 | success / high 0.90 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / medium 0.80 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / medium 0.80 |
-| `wmt_2023_10k` | WMT | 2023 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 0.90 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 |
+| `jnj_2014_10k` | JNJ | 2014 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / medium 0.75 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 |
+| `jnj_2023_10k` | JNJ | 2023 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 |
+| `xom_2014_10k` | XOM | 2014 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 |
+| `xom_2023_10k` | XOM | 2023 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 |
+| `cvx_2014_10k` | CVX | 2014 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / medium 0.80 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / medium 0.80 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / medium 0.80 |
+| `cvx_2023_10k` | CVX | 2023 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 0.85 | success / medium 0.75 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 0.90 | success / high 1.00 | success / high 1.00 |
+| `wmt_2014_10k` | WMT | 2014 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / medium 0.80 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / medium 0.80 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / medium 0.80 |
+| `wmt_2023_10k` | WMT | 2023 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 |
 | `amzn_2014_10k` | AMZN | 2014 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 | success / high 0.85 | success / high 0.85 | success / high 1.00 | success / high 1.00 | success / high 0.90 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 0.90 | success / medium 0.75 | not_present / high 1.00 | success / high 0.85 | success / high 0.85 | success / high 0.85 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 |
-| `amzn_2023_10k` | AMZN | 2023 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 0.85 | success / high 0.85 | success / high 1.00 | success / high 1.00 | success / high 0.90 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / medium 0.75 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 0.85 | success / high 1.00 | success / high 1.00 | success / high 1.00 |
+| `amzn_2023_10k` | AMZN | 2023 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 0.85 | success / high 0.85 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / medium 0.75 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 0.85 | success / high 1.00 | success / high 1.00 | success / high 1.00 |
 
 ## Details
 
@@ -73,6 +73,8 @@ TOC entries:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `34854`
+- Raw tables/images: `2` / `0`
+- Raw structure bytes: `48859`
 - Warnings: none
 - Start evidence: `PART I Item 1. Business`
 - End evidence: `Item 1A. Risk Factors`
@@ -90,6 +92,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `53207`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `67208`
 - Warnings: none
 - Start evidence: `Item 1A. Risk Factors`
 - End evidence: `Item 1B. Unresolved Staff Comments`
@@ -107,6 +111,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `95`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `772`
 - Warnings: none
 - Start evidence: `Item 1B. Unresolved Staff Comments`
 - End evidence: `Item 2. Properties`
@@ -124,6 +130,8 @@ End snippet:
 - Status: `not_present`
 - Confidence: `high` `1.00`
 - Text length: `0`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `0`
 - Warnings: none
 
 Start snippet:
@@ -139,6 +147,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `1819`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `2503`
 - Warnings: none
 - Start evidence: `Item 2. Properties`
 - End evidence: `Item 3. Legal Proceedings`
@@ -156,6 +166,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `4137`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `5469`
 - Warnings: none
 - Start evidence: `Item 3. Legal Proceedings`
 - End evidence: `Item 4. Mine Safety Disclosures`
@@ -173,6 +185,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `49`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `397`
 - Warnings: none
 - Start evidence: `Item 4. Mine Safety Disclosures`
 - End evidence: `PART II Item 5. Market for Registrant’s Common Equity, Related Stockholder Matters and Issuer Purchases of Equity Sec...`
@@ -190,6 +204,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `6233`
+- Raw tables/images: `8` / `1`
+- Raw structure bytes: `37614`
 - Warnings: none
 - Start evidence: `PART II Item 5. Market for Registrant’s Common Equity, Related Stockholder Matters and Issuer Purchases of Equity Sec...`
 - End evidence: `Item 6. Selected Financial Data`
@@ -207,6 +223,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `1833`
+- Raw tables/images: `3` / `0`
+- Raw structure bytes: `28291`
 - Warnings: none
 - Start evidence: `Item 6. Selected Financial Data`
 - End evidence: `Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations`
@@ -224,9 +242,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `64522`
+- Raw tables/images: `22` / `0`
+- Raw structure bytes: `241868`
 - Warnings: none
 - Start evidence: `Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations`
 - End evidence: `Item 7A. Quantitative and Qualitative Disclosures About Market Risk`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -241,6 +262,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `7513`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `10324`
 - Warnings: none
 - Start evidence: `Item 7A. Quantitative and Qualitative Disclosures About Market Risk`
 - End evidence: `Item 8. Financial Statements and Supplementary Data`
@@ -258,9 +281,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `117865`
+- Raw tables/images: `53` / `0`
+- Raw structure bytes: `777742`
 - Warnings: none
 - Start evidence: `Item 8. Financial Statements and Supplementary Data`
 - End evidence: `Item 9. Changes in and Disagreements with Accountants on Accounting and Financial Disclosure`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -275,6 +301,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `100`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `530`
 - Warnings: none
 - Start evidence: `Item 9. Changes in and Disagreements with Accountants on Accounting and Financial Disclosure`
 - End evidence: `Item 9A. Controls and Procedures`
@@ -292,6 +320,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `4668`
+- Raw tables/images: `4` / `0`
+- Raw structure bytes: `7575`
 - Warnings: none
 - Start evidence: `Item 9A. Controls and Procedures`
 - End evidence: `Item 9B. Other Information`
@@ -309,6 +339,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `44`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `323`
 - Warnings: none
 - Start evidence: `Item 9B. Other Information`
 - End evidence: `PART III Item 10. Directors, Executive Officers and Corporate Governance`
@@ -326,6 +358,8 @@ End snippet:
 - Status: `not_present`
 - Confidence: `high` `1.00`
 - Text length: `0`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `0`
 - Warnings: none
 
 Start snippet:
@@ -341,9 +375,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `558`
+- Raw tables/images: `2` / `0`
+- Raw structure bytes: `1334`
 - Warnings: none
 - Start evidence: `PART III Item 10. Directors, Executive Officers and Corporate Governance`
 - End evidence: `Item 11. Executive Compensation`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -358,9 +395,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `535`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `1051`
 - Warnings: none
 - Start evidence: `Item 11. Executive Compensation`
 - End evidence: `Item 12. Security Ownership of Certain Beneficial Owners and Management and Related Stockholder Matters`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -375,9 +415,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `428`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `904`
 - Warnings: none
 - Start evidence: `Item 12. Security Ownership of Certain Beneficial Owners and Management and Related Stockholder Matters`
 - End evidence: `Item 13. Certain Relationships and Related Transactions, and Director Independence`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -392,9 +435,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `489`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `975`
 - Warnings: none
 - Start evidence: `Item 13. Certain Relationships and Related Transactions, and Director Independence`
 - End evidence: `Item 14. Principal Accounting Fees and Services`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -408,27 +454,33 @@ End snippet:
 
 - Status: `success`
 - Confidence: `high` `1.00`
-- Text length: `52`
+- Text length: `582`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `1218`
 - Warnings: none
 - Start evidence: `Item 14. Principal Accounting Fees and Services`
-- End evidence: `Part IV Item 15. Exhibits, Financial Statement Schedules`
+- End evidence: `PART IV Item 15. Exhibits, Financial Statement Schedules`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
-> Item 14. Principal Accounting Fees and Services 84
+> Item 14. Principal Accounting Fees and Services The information required by this Item is set forth under the subheadings “Fees Paid to Auditors” and “Policy on Audit Committee Pre-Approval of Audit and Non-Audit Services Performed by the Independent Registe...
 
 End snippet:
 
-> Item 14. Principal Accounting Fees and Services 84
+> ...Appointment of Independent Registered Public Accounting Firm” in the Company’s 2015 Proxy Statement to be filed with the SEC within 120 days after September 27, 2014 and is incorporated herein by reference. Apple Inc. \| 2014 Form 10-K \| 84 Table of Contents
 
 #### Item 15
 
 - Status: `success`
 - Confidence: `high` `0.90`
 - Text length: `302976`
+- Raw tables/images: `116` / `1`
+- Raw structure bytes: `1290748`
 - Warnings: `Section length is outside the expected first-pass range.`
 - Start evidence: `Part IV Item 15. Exhibits, Financial Statement Schedules`
 - End evidence: `SIGNATURES`
+- Recommended actions: `inspect_only:section_reference_detected`, `inspect_only:exhibit_index_detected`
 
 Start snippet:
 
@@ -443,6 +495,8 @@ End snippet:
 - Status: `not_present`
 - Confidence: `high` `1.00`
 - Text length: `0`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `0`
 - Warnings: none
 
 Start snippet:
@@ -495,6 +549,8 @@ TOC entries:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `15167`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `38574`
 - Warnings: none
 - Start evidence: `PART I Item 1. Business`
 - End evidence: `Item 1A. Risk Factors`
@@ -512,6 +568,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `67995`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `94537`
 - Warnings: none
 - Start evidence: `Item 1A. Risk Factors`
 - End evidence: `Item 1B. Unresolved Staff Comments`
@@ -529,6 +587,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `41`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `494`
 - Warnings: none
 - Start evidence: `Item 1B. Unresolved Staff Comments`
 - End evidence: `Item 1C. Cybersecurity`
@@ -546,6 +606,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `73`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `938`
 - Warnings: none
 - Start evidence: `Item 1C. Cybersecurity`
 - End evidence: `Item 2. Properties`
@@ -563,6 +625,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `484`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `950`
 - Warnings: none
 - Start evidence: `Item 2. Properties`
 - End evidence: `Item 3. Legal Proceedings`
@@ -580,6 +644,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `3068`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `4553`
 - Warnings: none
 - Start evidence: `Item 3. Legal Proceedings`
 - End evidence: `Item 4. Mine Safety Disclosures`
@@ -597,6 +663,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `82`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `947`
 - Warnings: none
 - Start evidence: `Item 4. Mine Safety Disclosures`
 - End evidence: `PART II Item 5. Market for Registrant’s Common Equity, Related Stockholder Matters and Issuer Purchases of Equity Sec...`
@@ -614,6 +682,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `3352`
+- Raw tables/images: `2` / `1`
+- Raw structure bytes: `36095`
 - Warnings: none
 - Start evidence: `PART II Item 5. Market for Registrant’s Common Equity, Related Stockholder Matters and Issuer Purchases of Equity Sec...`
 - End evidence: `Item 6. [Reserved]`
@@ -629,9 +699,11 @@ End snippet:
 #### Item 6
 
 - Status: `success`
-- Confidence: `high` `0.90`
+- Confidence: `high` `1.00`
 - Text length: `52`
-- Warnings: `Section length is outside the expected first-pass range.`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `749`
+- Warnings: none
 - Start evidence: `Item 6. [Reserved]`
 - End evidence: `Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations`
 
@@ -648,6 +720,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `15820`
+- Raw tables/images: `6` / `0`
+- Raw structure bytes: `115551`
 - Warnings: none
 - Start evidence: `Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations`
 - End evidence: `Item 7A. Quantitative and Qualitative Disclosures About Market Risk`
@@ -665,6 +739,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `3049`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `11605`
 - Warnings: none
 - Start evidence: `Item 7A. Quantitative and Qualitative Disclosures About Market Risk`
 - End evidence: `Item 8. Financial Statements and Supplementary Data`
@@ -682,9 +758,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `63706`
+- Raw tables/images: `38` / `0`
+- Raw structure bytes: `914809`
 - Warnings: none
 - Start evidence: `Item 8. Financial Statements and Supplementary Data`
 - End evidence: `Item 9. Changes in and Disagreements with Accountants on Accounting and Financial Disclosure`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -699,6 +778,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `99`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `535`
 - Warnings: none
 - Start evidence: `Item 9. Changes in and Disagreements with Accountants on Accounting and Financial Disclosure`
 - End evidence: `Item 9A. Controls and Procedures`
@@ -716,6 +797,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `4509`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `7912`
 - Warnings: none
 - Start evidence: `Item 9A. Controls and Procedures`
 - End evidence: `Item 9B. Other Information`
@@ -733,6 +816,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `799`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `2889`
 - Warnings: none
 - Start evidence: `Item 9B. Other Information`
 - End evidence: `Item 9C. Disclosure Regarding Foreign Jurisdictions that Prevent Inspections`
@@ -750,10 +835,12 @@ End snippet:
 - Status: `success`
 - Confidence: `medium` `0.75`
 - Text length: `180958`
+- Raw tables/images: `47` / `1`
+- Raw structure bytes: `1246822`
 - Warnings: `Start heading has TOC-like signals.`, `Section length is outside the expected first-pass range.`
 - Start evidence: `Item 9C. Disclosure Regarding Foreign Jurisdictions that Prevent Inspections`
 - End evidence: `PART III Item 10. Directors, Executive Officers and Corporate Governance`
-- Recommended actions: `inspect_only:start_toc_like_signal`
+- Recommended actions: `inspect_only:start_toc_like_signal`, `inspect_only:section_reference_detected`, `inspect_only:exhibit_index_detected`
 
 Start snippet:
 
@@ -768,9 +855,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `412`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `1116`
 - Warnings: none
 - Start evidence: `PART III Item 10. Directors, Executive Officers and Corporate Governance`
 - End evidence: `Item 11. Executive Compensation`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -785,9 +875,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `157`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `609`
 - Warnings: none
 - Start evidence: `Item 11. Executive Compensation`
 - End evidence: `Item 12. Security Ownership of Certain Beneficial Owners and Management and Related Stockholder Matters`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -802,9 +895,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `229`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `681`
 - Warnings: none
 - Start evidence: `Item 12. Security Ownership of Certain Beneficial Owners and Management and Related Stockholder Matters`
 - End evidence: `Item 13. Certain Relationships and Related Transactions, and Director Independence`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -819,9 +915,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `208`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `660`
 - Warnings: none
 - Start evidence: `Item 13. Certain Relationships and Related Transactions, and Director Independence`
 - End evidence: `Item 14. Principal Accountant Fees and Services`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -836,9 +935,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `207`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `1073`
 - Warnings: none
 - Start evidence: `Item 14. Principal Accountant Fees and Services`
 - End evidence: `PART IV Item 15. Exhibit and Financial Statement Schedules`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -853,9 +955,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `12615`
+- Raw tables/images: `5` / `0`
+- Raw structure bytes: `122516`
 - Warnings: none
 - Start evidence: `PART IV Item 15. Exhibit and Financial Statement Schedules`
 - End evidence: `Item 16. Form 10-K Summary`
+- Recommended actions: `inspect_only:exhibit_index_detected`
 
 Start snippet:
 
@@ -869,18 +974,20 @@ End snippet:
 
 - Status: `success`
 - Confidence: `high` `1.00`
-- Text length: `194347`
+- Text length: `67`
+- Raw tables/images: `2` / `0`
+- Raw structure bytes: `23160`
 - Warnings: none
 - Start evidence: `Item 16. Form 10-K Summary`
 - End evidence: `SIGNATURES`
 
 Start snippet:
 
-> Item 16. Form 10-K Summary 57 This Annual Report on Form 10-K (“Form 10-K”) contains forward-looking statements, within the meaning of the Private Securities Litigation Reform Act of 1995, that involve risks and uncertainties. Many of the forward-looking st...
+> Item 16. Form 10-K Summary None. Apple Inc. \| 2023 Form 10-K \| 57
 
 End snippet:
 
-> ...curities of the Registrant are omitted pursuant to Item 601(b)(4)(iii) of Regulation S-K. The Registrant hereby undertakes to furnish to the SEC, upon request, copies of any such instruments. Item 16. Form 10-K Summary None. Apple Inc. \| 2023 Form 10-K \| 57
+> Item 16. Form 10-K Summary None. Apple Inc. \| 2023 Form 10-K \| 57
 
 ### msft_2014_10k
 
@@ -921,6 +1028,8 @@ TOC entries:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `48821`
+- Raw tables/images: `20` / `0`
+- Raw structure bytes: `89179`
 - Warnings: none
 - Start evidence: `PART I ITEM 1. BUSINESS`
 - End evidence: `ITEM 1A. RISK FACTORS`
@@ -938,6 +1047,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `41529`
+- Raw tables/images: `16` / `0`
+- Raw structure bytes: `63125`
 - Warnings: none
 - Start evidence: `ITEM 1A. RISK FACTORS`
 - End evidence: `ITEM 1B. UNRESOLVED STAFF COMMENTS`
@@ -955,6 +1066,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `240`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `509`
 - Warnings: none
 - Start evidence: `ITEM 1B. UNRESOLVED STAFF COMMENTS`
 - End evidence: `ITEM 2. PROPERTIES`
@@ -972,6 +1085,8 @@ End snippet:
 - Status: `not_present`
 - Confidence: `high` `1.00`
 - Text length: `0`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `0`
 - Warnings: none
 
 Start snippet:
@@ -987,6 +1102,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `2136`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `2784`
 - Warnings: none
 - Start evidence: `ITEM 2. PROPERTIES`
 - End evidence: `ITEM 3. LEGAL PROCEEDINGS`
@@ -1004,9 +1121,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `197`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `476`
 - Warnings: none
 - Start evidence: `ITEM 3. LEGAL PROCEEDINGS`
 - End evidence: `ITEM 4. MINE SAFETY DISCLOSURES`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -1021,6 +1141,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `91`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `1065`
 - Warnings: none
 - Start evidence: `ITEM 4. MINE SAFETY DISCLOSURES`
 - End evidence: `PART II ITEM 5. MARKET FOR REGISTRANT’S COMMON EQUITY, RELATED STOCKHOLDER MATTERS, AND ISSUER PURCHASES OF EQUITY SE...`
@@ -1038,9 +1160,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `1642`
+- Raw tables/images: `2` / `0`
+- Raw structure bytes: `27350`
 - Warnings: none
 - Start evidence: `PART II ITEM 5. MARKET FOR REGISTRANT’S COMMON EQUITY, RELATED STOCKHOLDER MATTERS, AND ISSUER PURCHASES OF EQUITY SE...`
 - End evidence: `ITEM 6. SELECTED FINANCIAL DATA`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -1055,6 +1180,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `2120`
+- Raw tables/images: `5` / `0`
+- Raw structure bytes: `28008`
 - Warnings: none
 - Start evidence: `ITEM 6. SELECTED FINANCIAL DATA`
 - End evidence: `ITEM 7. MANAGEMENT’S DISCUSSION AND ANALYSIS OF FINANCIAL CONDITION AND RESULTS OF OPERATIONS`
@@ -1072,9 +1199,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `86223`
+- Raw tables/images: `44` / `0`
+- Raw structure bytes: `313903`
 - Warnings: none
 - Start evidence: `ITEM 7. MANAGEMENT’S DISCUSSION AND ANALYSIS OF FINANCIAL CONDITION AND RESULTS OF OPERATIONS`
 - End evidence: `PART II Item 7A ITEM 7A. QUANTITATIVE AND QUALITATIVE DISCLOSURES ABOUT MARKET RISK`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -1089,6 +1219,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `3808`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `18939`
 - Warnings: none
 - Start evidence: `PART II Item 7A ITEM 7A. QUANTITATIVE AND QUALITATIVE DISCLOSURES ABOUT MARKET RISK`
 - End evidence: `PART II Item 8 ITEM 8. FINANCIAL STATEMENTS AND SUPPLEMENTARY DATA`
@@ -1106,9 +1238,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `126694`
+- Raw tables/images: `101` / `0`
+- Raw structure bytes: `1202710`
 - Warnings: none
 - Start evidence: `PART II Item 8 ITEM 8. FINANCIAL STATEMENTS AND SUPPLEMENTARY DATA`
 - End evidence: `PART II Item 9, 9A`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -1123,6 +1258,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `109`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `374`
 - Warnings: none
 - Start evidence: `ITEM 9. CHANGES IN AND DISAGREEMENTS WITH ACCOUNTANTS ON ACCOUNTING AND FINANCIAL DISCLOSURE`
 - End evidence: `ITEM 9A. CONTROLS AND PROCEDURES`
@@ -1140,6 +1277,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `7777`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `11663`
 - Warnings: none
 - Start evidence: `ITEM 9A. CONTROLS AND PROCEDURES`
 - End evidence: `ITEM 9B. OTHER INFORMATION`
@@ -1157,9 +1296,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `323`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `489`
 - Warnings: none
 - Start evidence: `ITEM 9B. OTHER INFORMATION`
 - End evidence: `PART III ITEM 10. DIRECTORS, EXECUTIVE OFFICERS AND CORPORATE GOVERNANCE`
+- Recommended actions: `inspect_only:exhibit_index_detected`
 
 Start snippet:
 
@@ -1174,6 +1316,8 @@ End snippet:
 - Status: `not_present`
 - Confidence: `high` `1.00`
 - Text length: `0`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `0`
 - Warnings: none
 
 Start snippet:
@@ -1189,9 +1333,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `1460`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `2239`
 - Warnings: none
 - Start evidence: `PART III ITEM 10. DIRECTORS, EXECUTIVE OFFICERS AND CORPORATE GOVERNANCE`
 - End evidence: `ITEM 11. EXECUTIVE COMPENSATION`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -1206,9 +1353,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `301`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `606`
 - Warnings: none
 - Start evidence: `ITEM 11. EXECUTIVE COMPENSATION`
 - End evidence: `ITEM 12. SECURITY OWNERSHIP OF CERTAIN BENEFICIAL OWNERS AND MANAGEMENT AND RELATED STOCKHOLDER MATTERS`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -1223,9 +1373,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `350`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `635`
 - Warnings: none
 - Start evidence: `ITEM 12. SECURITY OWNERSHIP OF CERTAIN BENEFICIAL OWNERS AND MANAGEMENT AND RELATED STOCKHOLDER MATTERS`
 - End evidence: `ITEM 13. CERTAIN RELATIONSHIPS AND RELATED TRANSACTIONS, AND DIRECTOR INDEPENDENCE`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -1240,9 +1393,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `265`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `555`
 - Warnings: none
 - Start evidence: `ITEM 13. CERTAIN RELATIONSHIPS AND RELATED TRANSACTIONS, AND DIRECTOR INDEPENDENCE`
 - End evidence: `ITEM 14. PRINCIPAL ACCOUNTING FEES AND SERVICES`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -1257,9 +1413,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `372`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `1064`
 - Warnings: none
 - Start evidence: `ITEM 14. PRINCIPAL ACCOUNTING FEES AND SERVICES`
 - End evidence: `PART IV Item 15 PART IV`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -1274,9 +1433,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `7354`
+- Raw tables/images: `11` / `0`
+- Raw structure bytes: `104257`
 - Warnings: none
 - Start evidence: `ITEM 15. EXHIBITS, FINANCIAL STATEMENT SCHEDULES`
 - End evidence: `SIGNATURES`
+- Recommended actions: `inspect_only:exhibit_index_detected`
 
 Start snippet:
 
@@ -1291,6 +1453,8 @@ End snippet:
 - Status: `not_present`
 - Confidence: `high` `1.00`
 - Text length: `0`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `0`
 - Warnings: none
 
 Start snippet:
@@ -1342,6 +1506,8 @@ TOC entries:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `73205`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `245819`
 - Warnings: none
 - Start evidence: `ITEM 1. BUSINESS`
 - End evidence: `PART I Item 1A ITEM 1A. RISK FACTORS`
@@ -1359,6 +1525,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `68690`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `138480`
 - Warnings: none
 - Start evidence: `PART I Item 1A ITEM 1A. RISK FACTORS`
 - End evidence: `ITEM 1B. UNRESOLVED STAFF COMMENTS`
@@ -1376,6 +1544,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `271`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `1486`
 - Warnings: none
 - Start evidence: `ITEM 1B. UNRESOLVED STAFF COMMENTS`
 - End evidence: `ITEM 2. PROPERTIES`
@@ -1393,6 +1563,8 @@ End snippet:
 - Status: `not_present`
 - Confidence: `high` `1.00`
 - Text length: `0`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `0`
 - Warnings: none
 
 Start snippet:
@@ -1408,6 +1580,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `1592`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `46188`
 - Warnings: none
 - Start evidence: `ITEM 2. PROPERTIES`
 - End evidence: `ITEM 3. LEGAL PROCEEDINGS`
@@ -1425,9 +1599,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `202`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `1414`
 - Warnings: none
 - Start evidence: `ITEM 3. LEGAL PROCEEDINGS`
 - End evidence: `ITEM 4. MINE SAFETY DISCLOSURES`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -1442,6 +1619,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `52`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `1470`
 - Warnings: none
 - Start evidence: `ITEM 4. MINE SAFETY DISCLOSURES`
 - End evidence: `PART II Item 5 PART II`
@@ -1459,9 +1638,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `1790`
+- Raw tables/images: `2` / `0`
+- Raw structure bytes: `121590`
 - Warnings: none
 - Start evidence: `ITEM 5. MARKET FOR REGISTRANT’S COMMON EQUITY, RELATED STOCKHOLDER MATTERS, AND ISSUER PURCHASES OF EQUITY SECURITIES`
 - End evidence: `PART II Item 6 ITEM 6. [RESERVED]`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -1474,9 +1656,11 @@ End snippet:
 #### Item 6
 
 - Status: `success`
-- Confidence: `high` `0.90`
+- Confidence: `high` `1.00`
 - Text length: `23`
-- Warnings: `Section length is outside the expected first-pass range.`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `5174`
+- Warnings: none
 - Start evidence: `Item 6. [Reserved]`
 - End evidence: `Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations`
 
@@ -1493,9 +1677,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `56228`
+- Raw tables/images: `13` / `0`
+- Raw structure bytes: `798493`
 - Warnings: none
 - Start evidence: `PART II Item 7 ITEM 7. MANAGEMENT’S DISCUSSION AND ANALYSIS OF FINANCIAL CONDITION AND RESULTS OF OPERATIONS`
 - End evidence: `PART II Item 7A ITEM 7A. QUANTITATIVE AND QUALITATIVE DISCLOSURES ABOUT MARKET RISK`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -1510,6 +1697,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `1983`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `58443`
 - Warnings: none
 - Start evidence: `PART II Item 7A ITEM 7A. QUANTITATIVE AND QUALITATIVE DISCLOSURES ABOUT MARKET RISK`
 - End evidence: `PART II Item 8 ITEM 8. FINANCIAL STATEMENTS AND SUPPLEMENTARY DATA`
@@ -1527,9 +1716,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `107756`
+- Raw tables/images: `57` / `0`
+- Raw structure bytes: `7124216`
 - Warnings: none
 - Start evidence: `PART II Item 8 ITEM 8. FINANCIAL STATEMENTS AND SUPPLEMENTARY DATA`
 - End evidence: `PART II Item 9, 9A`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -1544,6 +1736,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `109`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `1327`
 - Warnings: none
 - Start evidence: `ITEM 9. CHANGES IN AND DISAGREEMENTS WITH ACCOUNTANTS ON ACCOUNTING AND FINANCIAL DISCLOSURE`
 - End evidence: `ITEM 9A. CONTROLS AND PROCEDURES`
@@ -1561,6 +1755,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `6700`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `20912`
 - Warnings: none
 - Start evidence: `ITEM 9A. CONTROLS AND PROCEDURES`
 - End evidence: `ITEM 9B. OTHER INFORMATION`
@@ -1578,6 +1774,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `341`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `3701`
 - Warnings: none
 - Start evidence: `ITEM 9B. OTHER INFORMATION`
 - End evidence: `ITEM 9C. DISCLOSURE REGARDING FOREIGN JURISDICTIONS THAT PREVENT INSPECTIONS`
@@ -1595,6 +1793,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `93`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `989`
 - Warnings: none
 - Start evidence: `ITEM 9C. DISCLOSURE REGARDING FOREIGN JURISDICTIONS THAT PREVENT INSPECTIONS`
 - End evidence: `PART III ITEM 10. DIRECTORS, EXECUTIVE OFFICERS, AND CORPORATE GOVERNANCE`
@@ -1612,9 +1812,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `1253`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `3731`
 - Warnings: none
 - Start evidence: `PART III ITEM 10. DIRECTORS, EXECUTIVE OFFICERS, AND CORPORATE GOVERNANCE`
 - End evidence: `ITEM 11. EXECUTIVE COMPENSATION`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -1629,9 +1832,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `316`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `1422`
 - Warnings: none
 - Start evidence: `ITEM 11. EXECUTIVE COMPENSATION`
 - End evidence: `ITEM 12. SECURITY OWNERSHIP OF CERTAIN BENEFICIAL OWNERS AND MANAGEMENT AND RELATED STOCKHOLDER MATTERS`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -1646,9 +1852,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `308`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `1410`
 - Warnings: none
 - Start evidence: `ITEM 12. SECURITY OWNERSHIP OF CERTAIN BENEFICIAL OWNERS AND MANAGEMENT AND RELATED STOCKHOLDER MATTERS`
 - End evidence: `ITEM 13. CERTAIN RELATIONSHIPS AND RELATED TRANSACTIONS, AND DIRECTOR INDEPENDENCE`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -1663,9 +1872,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `276`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `1364`
 - Warnings: none
 - Start evidence: `ITEM 13. CERTAIN RELATIONSHIPS AND RELATED TRANSACTIONS, AND DIRECTOR INDEPENDENCE`
 - End evidence: `ITEM 14. PRINCIPAL ACCOUNTANT FEES AND SERVICES`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -1680,9 +1892,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `411`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `2498`
 - Warnings: none
 - Start evidence: `ITEM 14. PRINCIPAL ACCOUNTANT FEES AND SERVICES`
 - End evidence: `PART IV Item 15 PART IV`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -1697,9 +1912,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `11186`
+- Raw tables/images: `7` / `0`
+- Raw structure bytes: `836005`
 - Warnings: none
 - Start evidence: `ITEM 15. EXHIBIT AND FINANCIAL STATEMENT SCHEDULES`
 - End evidence: `PART IV Item 16 ITEM 16. FORM 10-K SUMMARY`
+- Recommended actions: `inspect_only:exhibit_index_detected`
 
 Start snippet:
 
@@ -1714,6 +1932,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `56`
+- Raw tables/images: `2` / `0`
+- Raw structure bytes: `71148`
 - Warnings: none
 - Start evidence: `PART IV Item 16 ITEM 16. FORM 10-K SUMMARY`
 - End evidence: `SIGNATURES`
@@ -1765,9 +1985,12 @@ TOC entries:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `42501`
+- Raw tables/images: `7` / `0`
+- Raw structure bytes: `70110`
 - Warnings: none
 - Start evidence: `Part I ITEM 1: BUSINESS`
 - End evidence: `Part I Item 1A: RISK FACTORS`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -1782,6 +2005,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `59852`
+- Raw tables/images: `9` / `0`
+- Raw structure bytes: `91140`
 - Warnings: none
 - Start evidence: `Part I Item 1A: RISK FACTORS`
 - End evidence: `ITEM 1B: UNRESOLVED SEC STAFF COMMENTS`
@@ -1799,6 +2024,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `0.90`
 - Text length: `45`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `383`
 - Warnings: `Start heading does not contain the expected canonical title.`
 - Start evidence: `ITEM 1B: UNRESOLVED SEC STAFF COMMENTS`
 - End evidence: `ITEM 2: PROPERTIES`
@@ -1816,6 +2043,8 @@ End snippet:
 - Status: `not_present`
 - Confidence: `high` `1.00`
 - Text length: `0`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `0`
 - Warnings: none
 
 Start snippet:
@@ -1831,6 +2060,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `2608`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `5883`
 - Warnings: none
 - Start evidence: `ITEM 2: PROPERTIES`
 - End evidence: `ITEM 3: LEGAL PROCEEDINGS`
@@ -1846,11 +2077,14 @@ End snippet:
 #### Item 3
 
 - Status: `success`
-- Confidence: `high` `0.90`
+- Confidence: `high` `1.00`
 - Text length: `99`
-- Warnings: `Section length is outside the expected first-pass range.`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `443`
+- Warnings: none
 - Start evidence: `ITEM 3: LEGAL PROCEEDINGS`
 - End evidence: `ITEM 4: MINE SAFETY DISCLOSURES`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -1865,6 +2099,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `48`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `769`
 - Warnings: none
 - Start evidence: `ITEM 4: MINE SAFETY DISCLOSURES`
 - End evidence: `Part II ITEM 5: MARKET FOR REGISTRANT’S COMMON EQUITY, RELATED STOCKHOLDER MATTERS AND ISSUER PURCHASES OF EQUITY SEC...`
@@ -1882,9 +2118,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `3041`
+- Raw tables/images: `4` / `0`
+- Raw structure bytes: `48159`
 - Warnings: none
 - Start evidence: `Part II ITEM 5: MARKET FOR REGISTRANT’S COMMON EQUITY, RELATED STOCKHOLDER MATTERS AND ISSUER PURCHASES OF EQUITY SEC...`
 - End evidence: `ITEM 6: SELECTED FINANCIAL DATA`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -1899,6 +2138,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `156`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `624`
 - Warnings: none
 - Start evidence: `ITEM 6: SELECTED FINANCIAL DATA`
 - End evidence: `ITEM 7: MANAGEMENT’S DISCUSSION AND ANALYSIS OF FINANCIAL CONDITION AND RESULTS OF OPERATIONS`
@@ -1914,9 +2155,11 @@ End snippet:
 #### Item 7
 
 - Status: `success`
-- Confidence: `high` `0.90`
+- Confidence: `high` `1.00`
 - Text length: `395`
-- Warnings: `Section length is outside the expected first-pass range.`, `Section appears to be a cross-reference rather than full narrative text.`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `1011`
+- Warnings: `Section appears to be a cross-reference rather than full narrative text.`
 - Start evidence: `ITEM 7: MANAGEMENT’S DISCUSSION AND ANALYSIS OF FINANCIAL CONDITION AND RESULTS OF OPERATIONS`
 - End evidence: `ITEM 7A: QUANTITATIVE AND QUALITATIVE DISCLOSURES ABOUT MARKET RISK`
 - Recommended actions: `needs_user_confirmation:same_filing_page_reference`
@@ -1932,12 +2175,13 @@ End snippet:
 #### Item 7A
 
 - Status: `success`
-- Confidence: `high` `0.90`
+- Confidence: `high` `1.00`
 - Text length: `253`
-- Warnings: `Section length is outside the expected first-pass range.`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `1920`
+- Warnings: none
 - Start evidence: `ITEM 7A: QUANTITATIVE AND QUALITATIVE DISCLOSURES ABOUT MARKET RISK`
 - End evidence: `Part II ITEM 8: FINANCIAL STATEMENTS AND SUPPLEMENTARY DATA`
-- Recommended actions: `needs_external_source:external_or_other_document_reference`
 
 Start snippet:
 
@@ -1950,9 +2194,11 @@ End snippet:
 #### Item 8
 
 - Status: `success`
-- Confidence: `high` `0.90`
+- Confidence: `high` `1.00`
 - Text length: `551`
-- Warnings: `Section length is outside the expected first-pass range.`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `1926`
+- Warnings: none
 - Start evidence: `Part II ITEM 8: FINANCIAL STATEMENTS AND SUPPLEMENTARY DATA`
 - End evidence: `ITEM 9: CHANGES IN AND DISAGREEMENTS WITH ACCOUNTANTS ON ACCOUNTING AND FINANCIAL DISCLOSURE`
 - Recommended actions: `needs_external_source:external_or_other_document_reference`
@@ -1970,6 +2216,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `99`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `804`
 - Warnings: none
 - Start evidence: `ITEM 9: CHANGES IN AND DISAGREEMENTS WITH ACCOUNTANTS ON ACCOUNTING AND FINANCIAL DISCLOSURE`
 - End evidence: `ITEM 9A: CONTROLS AND PROCEDURES`
@@ -1987,9 +2235,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `2298`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `4870`
 - Warnings: none
 - Start evidence: `ITEM 9A: CONTROLS AND PROCEDURES`
 - End evidence: `ITEM 9B: OTHER INFORMATION`
+- Recommended actions: `inspect_only:exhibit_index_detected`
 
 Start snippet:
 
@@ -2004,6 +2255,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `3065`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `5199`
 - Warnings: none
 - Start evidence: `ITEM 9B: OTHER INFORMATION`
 - End evidence: `Part III ITEM 10: DIRECTORS, EXECUTIVE OFFICERS AND CORPORATE GOVERNANCE`
@@ -2021,6 +2274,8 @@ End snippet:
 - Status: `not_present`
 - Confidence: `high` `1.00`
 - Text length: `0`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `0`
 - Warnings: none
 
 Start snippet:
@@ -2036,6 +2291,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `3418`
+- Raw tables/images: `2` / `0`
+- Raw structure bytes: `15053`
 - Warnings: none
 - Start evidence: `Part III ITEM 10: DIRECTORS, EXECUTIVE OFFICERS AND CORPORATE GOVERNANCE`
 - End evidence: `ITEM 11: EXECUTIVE COMPENSATION`
@@ -2053,9 +2310,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `45`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `702`
 - Warnings: none
 - Start evidence: `ITEM 11: EXECUTIVE COMPENSATION`
 - End evidence: `ITEM 12: SECURITY OWNERSHIP OF CERTAIN BENEFICIAL OWNERS AND MANAGEMENT AND RELATED STOCKHOLDER MATTERS`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -2070,6 +2330,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `107`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `1303`
 - Warnings: none
 - Start evidence: `Item 12 Security ownership of certain beneficial owners and management and related stockholder matters`
 - End evidence: `Item 13 Certain relationships and related transactions, and director independence`
@@ -2087,6 +2349,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `86`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `1116`
 - Warnings: none
 - Start evidence: `Item 13 Certain relationships and related transactions, and director independence`
 - End evidence: `Item 14 Principal accounting fees and services`
@@ -2104,6 +2368,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `51`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `1815`
 - Warnings: none
 - Start evidence: `Item 14 Principal accounting fees and services`
 - End evidence: `Part IV Item 15 Exhibits, financial statement schedules`
@@ -2121,9 +2387,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `0.90`
 - Text length: `1274373`
+- Raw tables/images: `1302` / `13`
+- Raw structure bytes: `16079531`
 - Warnings: `Section length is outside the expected first-pass range.`
 - Start evidence: `Part IV Item 15 Exhibits, financial statement schedules`
 - End evidence: `SIGNATURES`
+- Recommended actions: `inspect_only:section_reference_detected`, `inspect_only:exhibit_index_detected`
 
 Start snippet:
 
@@ -2138,6 +2407,8 @@ End snippet:
 - Status: `not_present`
 - Confidence: `high` `1.00`
 - Text length: `0`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `0`
 - Warnings: none
 
 Start snippet:
@@ -2188,9 +2459,12 @@ TOC entries:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `42936`
+- Raw tables/images: `10` / `0`
+- Raw structure bytes: `110809`
 - Warnings: none
 - Start evidence: `Part I Item 1. Business.`
 - End evidence: `Item 1A. Risk Factors.`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -2205,9 +2479,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `132222`
+- Raw tables/images: `25` / `0`
+- Raw structure bytes: `337467`
 - Warnings: none
 - Start evidence: `Item 1A. Risk Factors.`
 - End evidence: `Item 1B. Unresolved Staff Comments.`
+- Recommended actions: `inspect_only:exhibit_index_detected`
 
 Start snippet:
 
@@ -2222,6 +2499,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `214`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `1187`
 - Warnings: none
 - Start evidence: `Item 1B. Unresolved Staff Comments.`
 - End evidence: `Item 2. Properties.`
@@ -2239,6 +2518,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `170`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `782`
 - Warnings: none
 - Start evidence: `Item 1C. Cybersecurity.`
 - End evidence: `Item 2. Properties.`
@@ -2256,6 +2537,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `2119`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `18940`
 - Warnings: none
 - Start evidence: `Item 2. Properties.`
 - End evidence: `Item 3. Legal Proceedings.`
@@ -2273,9 +2556,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `104`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `471`
 - Warnings: none
 - Start evidence: `Item 3. Legal Proceedings.`
 - End evidence: `Item 4. Mine Safety Disclosures.`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -2290,6 +2576,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `53`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `1504`
 - Warnings: none
 - Start evidence: `Item 4. Mine Safety Disclosures.`
 - End evidence: `Item 5. Market for Registrant’s Common Equity, Related Stockholder Matters and Issuer Purchases of Equity Securities.`
@@ -2307,9 +2595,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `2497`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `25443`
 - Warnings: none
 - Start evidence: `Item 5. Market for Registrant’s Common Equity, Related Stockholder Matters and Issuer Purchases of Equity Securities.`
 - End evidence: `Item 6. Reserved`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -2322,9 +2613,11 @@ End snippet:
 #### Item 6
 
 - Status: `success`
-- Confidence: `high` `0.90`
+- Confidence: `high` `1.00`
 - Text length: `21`
-- Warnings: `Section length is outside the expected first-pass range.`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `1025`
+- Warnings: none
 - Start evidence: `Item 6. Reserved`
 - End evidence: `Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations.`
 
@@ -2339,9 +2632,11 @@ End snippet:
 #### Item 7
 
 - Status: `success`
-- Confidence: `high` `0.90`
+- Confidence: `high` `1.00`
 - Text length: `396`
-- Warnings: `Section length is outside the expected first-pass range.`, `Section appears to be a cross-reference rather than full narrative text.`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `965`
+- Warnings: `Section appears to be a cross-reference rather than full narrative text.`
 - Start evidence: `Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations.`
 - End evidence: `Item 7A. Quantitative and Qualitative Disclosures About Market Risk.`
 - Recommended actions: `needs_user_confirmation:same_filing_page_reference`
@@ -2357,12 +2652,13 @@ End snippet:
 #### Item 7A
 
 - Status: `success`
-- Confidence: `high` `0.90`
+- Confidence: `high` `1.00`
 - Text length: `272`
-- Warnings: `Section length is outside the expected first-pass range.`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `1824`
+- Warnings: none
 - Start evidence: `Item 7A. Quantitative and Qualitative Disclosures About Market Risk.`
 - End evidence: `Item 8. Financial Statements and Supplementary Data.`
-- Recommended actions: `needs_external_source:external_or_other_document_reference`
 
 Start snippet:
 
@@ -2375,9 +2671,11 @@ End snippet:
 #### Item 8
 
 - Status: `success`
-- Confidence: `high` `0.90`
+- Confidence: `high` `1.00`
 - Text length: `370`
-- Warnings: `Section length is outside the expected first-pass range.`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `1002`
+- Warnings: none
 - Start evidence: `Item 8. Financial Statements and Supplementary Data.`
 - End evidence: `Item 9. Changes in and Disagreements With Accountants on Accounting and Financial Disclosure.`
 - Recommended actions: `needs_external_source:external_or_other_document_reference`
@@ -2395,6 +2693,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `100`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `464`
 - Warnings: none
 - Start evidence: `Item 9. Changes in and Disagreements With Accountants on Accounting and Financial Disclosure.`
 - End evidence: `Item 9A. Controls and Procedures.`
@@ -2412,9 +2712,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `2532`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `4698`
 - Warnings: none
 - Start evidence: `Item 9A. Controls and Procedures.`
 - End evidence: `Item 9B. Other Information.`
+- Recommended actions: `inspect_only:exhibit_index_detected`
 
 Start snippet:
 
@@ -2429,6 +2732,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `3424`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `13731`
 - Warnings: none
 - Start evidence: `Item 9B. Other Information.`
 - End evidence: `Item 9C. Disclosure regarding Foreign Jurisdictions that Prevent Inspections.`
@@ -2446,6 +2751,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `116`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `2059`
 - Warnings: none
 - Start evidence: `Item 9C. Disclosure regarding Foreign Jurisdictions that Prevent Inspections.`
 - End evidence: `Item 10. Directors, Executive Officers and Corporate Governance.`
@@ -2463,6 +2770,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `3209`
+- Raw tables/images: `2` / `0`
+- Raw structure bytes: `14918`
 - Warnings: none
 - Start evidence: `Item 10. Directors, Executive Officers and Corporate Governance.`
 - End evidence: `Item 11. Executive Compensation.`
@@ -2480,9 +2789,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `51`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `745`
 - Warnings: none
 - Start evidence: `Item 11. Executive Compensation.`
 - End evidence: `Item 12. Security Ownership of Certain Beneficial Owners and Management and Related Stockholder Matters.`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -2497,9 +2809,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `1426`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `9847`
 - Warnings: none
 - Start evidence: `Item 12. Security Ownership of Certain Beneficial Owners and Management and Related Stockholder Matters.`
 - End evidence: `Item 13. Certain Relationships and Related Transactions, and Director Independence.`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -2514,6 +2829,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `88`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `1092`
 - Warnings: none
 - Start evidence: `Item 13. Certain Relationships and Related Transactions, and Director Independence.`
 - End evidence: `Item 14. Principal Accounting Fees and Services.`
@@ -2531,6 +2848,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `53`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `1203`
 - Warnings: none
 - Start evidence: `Item 14. Principal Accounting Fees and Services.`
 - End evidence: `Part IV Item 15. Exhibits, Financial Statement Schedules.`
@@ -2548,9 +2867,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `0.90`
 - Text length: `1246677`
+- Raw tables/images: `665` / `13`
+- Raw structure bytes: `11923242`
 - Warnings: `Section length is outside the expected first-pass range.`
 - Start evidence: `Part IV Item 15. Exhibits, Financial Statement Schedules.`
 - End evidence: `SIGNATURES`
+- Recommended actions: `inspect_only:section_reference_detected`, `inspect_only:exhibit_index_detected`
 
 Start snippet:
 
@@ -2565,6 +2887,8 @@ End snippet:
 - Status: `not_present`
 - Confidence: `high` `1.00`
 - Text length: `0`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `0`
 - Warnings: none
 
 Start snippet:
@@ -2614,9 +2938,12 @@ TOC entries:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `24226`
+- Raw tables/images: `4` / `0`
+- Raw structure bytes: `45535`
 - Warnings: none
 - Start evidence: `Item 1. Business`
 - End evidence: `Item 1A. Risk Factors`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -2631,9 +2958,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `94102`
+- Raw tables/images: `12` / `0`
+- Raw structure bytes: `160748`
 - Warnings: none
 - Start evidence: `Item 1A. Risk Factors`
 - End evidence: `Item 1B. Unresolved Staff Comments`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -2648,6 +2978,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `64`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `2275`
 - Warnings: none
 - Start evidence: `Item 1B. Unresolved Staff Comments`
 - End evidence: `Item 2. Properties`
@@ -2665,6 +2997,8 @@ End snippet:
 - Status: `not_present`
 - Confidence: `high` `1.00`
 - Text length: `0`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `0`
 - Warnings: none
 
 Start snippet:
@@ -2680,6 +3014,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `1741`
+- Raw tables/images: `3` / `0`
+- Raw structure bytes: `22798`
 - Warnings: none
 - Start evidence: `Item 2. Properties`
 - End evidence: `Item 3. Legal Proceedings`
@@ -2697,9 +3033,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `191`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `973`
 - Warnings: none
 - Start evidence: `Item 3. Legal Proceedings`
 - End evidence: `Item 4. Mine Safety Disclosures`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -2714,6 +3053,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `117`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `2299`
 - Warnings: none
 - Start evidence: `Item 4. Mine Safety Disclosures`
 - End evidence: `Item 5. Market for Registrant’s Common Equity, Related Stockholder Matters and Issuer Purchases of Equity Securities`
@@ -2731,9 +3072,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `3704`
+- Raw tables/images: `4` / `0`
+- Raw structure bytes: `48438`
 - Warnings: none
 - Start evidence: `Item 5. Market for Registrant’s Common Equity, Related Stockholder Matters and Issuer Purchases of Equity Securities`
 - End evidence: `Item 6. Selected Financial Data`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -2748,9 +3092,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `186`
+- Raw tables/images: `2` / `0`
+- Raw structure bytes: `3271`
 - Warnings: none
 - Start evidence: `Item 6. Selected Financial Data`
 - End evidence: `Item 7. Bank of America Corporation and Subsidiaries`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -2765,10 +3112,12 @@ End snippet:
 - Status: `success`
 - Confidence: `medium` `0.80`
 - Text length: `578441`
+- Raw tables/images: `469` / `4`
+- Raw structure bytes: `8615210`
 - Warnings: `Start heading does not contain the expected canonical title.`, `Section length is outside the expected first-pass range.`
 - Start evidence: `Item 7. Bank of America Corporation and Subsidiaries`
 - End evidence: `Item 7A. Quantitative and Qualitative Disclosures About Market Risk`
-- Recommended actions: `needs_user_selection:internal_item_toc_detected`
+- Recommended actions: `needs_user_selection:internal_item_toc_detected`, `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -2781,12 +3130,13 @@ End snippet:
 #### Item 7A
 
 - Status: `success`
-- Confidence: `high` `0.90`
+- Confidence: `high` `1.00`
 - Text length: `218`
-- Warnings: `Section length is outside the expected first-pass range.`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `1438`
+- Warnings: none
 - Start evidence: `Item 7A. Quantitative and Qualitative Disclosures About Market Risk`
 - End evidence: `Item 8. Financial Statements and Supplementary Data`
-- Recommended actions: `needs_external_source:external_or_other_document_reference`
 
 Start snippet:
 
@@ -2801,9 +3151,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `0.90`
 - Text length: `569098`
+- Raw tables/images: `455` / `3`
+- Raw structure bytes: `9684834`
 - Warnings: `Section length is outside the expected first-pass range.`
 - Start evidence: `Item 8. Financial Statements and Supplementary Data`
 - End evidence: `Item 9. Changes in and Disagreements with Accountants on Accounting and Financial Disclosure`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -2818,6 +3171,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `98`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `451`
 - Warnings: none
 - Start evidence: `Item 9. Changes in and Disagreements with Accountants on Accounting and Financial Disclosure`
 - End evidence: `Item 9A. Controls and Procedures`
@@ -2835,9 +3190,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `5617`
+- Raw tables/images: `2` / `1`
+- Raw structure bytes: `15042`
 - Warnings: none
 - Start evidence: `Item 9A. Controls and Procedures`
 - End evidence: `Item 9B. Other Information`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -2852,6 +3210,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `114`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `2791`
 - Warnings: none
 - Start evidence: `Item 9B. Other Information`
 - End evidence: `Item 10. Directors, Executive Officers and Corporate Governance`
@@ -2869,6 +3229,8 @@ End snippet:
 - Status: `not_present`
 - Confidence: `high` `1.00`
 - Text length: `0`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `0`
 - Warnings: none
 
 Start snippet:
@@ -2884,9 +3246,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `3483`
+- Raw tables/images: `4` / `0`
+- Raw structure bytes: `11756`
 - Warnings: none
 - Start evidence: `Item 10. Directors, Executive Officers and Corporate Governance`
 - End evidence: `Item 11. Executive Compensation`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -2901,9 +3266,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `508`
+- Raw tables/images: `5` / `0`
+- Raw structure bytes: `4825`
 - Warnings: none
 - Start evidence: `Item 11. Executive Compensation`
 - End evidence: `Item 12. Security Ownership of Certain Beneficial Owners and Management and Related Stockholder Matters`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -2918,9 +3286,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `2979`
+- Raw tables/images: `7` / `0`
+- Raw structure bytes: `20449`
 - Warnings: none
 - Start evidence: `Item 12. Security Ownership of Certain Beneficial Owners and Management and Related Stockholder Matters`
 - End evidence: `Item 13. Certain Relationships and Related Transactions, and Director Independence`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -2934,48 +3305,57 @@ End snippet:
 
 - Status: `success`
 - Confidence: `high` `1.00`
-- Text length: `88`
+- Text length: `309`
+- Raw tables/images: `2` / `0`
+- Raw structure bytes: `2240`
 - Warnings: none
 - Start evidence: `Item 13. Certain Relationships and Related Transactions, and Director Independence`
 - End evidence: `Item 14. Principal Accounting Fees and Services`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
-> Item 13. Certain Relationships and Related Transactions, and Director Independence 269
+> Item 13. Certain Relationships and Related Transactions, and Director Independence Information included under the following captions in the 2015 Proxy Statement is incorporated herein by reference: Ÿ “Corporate Governance – Related Person and Certain Other...
 
 End snippet:
 
-> Item 13. Certain Relationships and Related Transactions, and Director Independence 269
+> ...sactions, and Director Independence Information included under the following captions in the 2015 Proxy Statement is incorporated herein by reference: Ÿ “Corporate Governance – Related Person and Certain Other Transactions;” and Ÿ “– Director Independence.”
 
 #### Item 14
 
 - Status: `success`
 - Confidence: `high` `1.00`
-- Text length: `53`
+- Text length: `436`
+- Raw tables/images: `3` / `0`
+- Raw structure bytes: `4314`
 - Warnings: none
 - Start evidence: `Item 14. Principal Accounting Fees and Services`
-- End evidence: `Part IV Item 15. Exhibits, Financial Statement Schedules`
+- End evidence: `Item 15. Exhibits, Financial Statement Schedules`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
-> Item 14. Principal Accounting Fees and Services 269
+> Item 14. Principal Accounting Fees and Services Information included under the following captions in the 2015 Proxy Statement is incorporated herein by reference: Ÿ “Proposal 3: Ratifying Appointment of our Registered Independent Public Accounting Firm for...
 
 End snippet:
 
-> Item 14. Principal Accounting Fees and Services 269
+> ...sal 3: Ratifying Appointment of our Registered Independent Public Accounting Firm for 2015 – PwC’s 2014 and 2013 Fees;” Ÿ “– Audit Committee Pre-Approval Policies and Procedures.” 269 Bank of America 2014 Part IV Bank of America Corporation and Subsidiaries
 
 #### Item 15
 
 - Status: `success`
-- Confidence: `high` `0.90`
-- Text length: `1286930`
-- Warnings: `Section length is outside the expected first-pass range.`
-- Start evidence: `Part IV Item 15. Exhibits, Financial Statement Schedules`
+- Confidence: `high` `1.00`
+- Text length: `1117`
+- Raw tables/images: `16` / `0`
+- Raw structure bytes: `184220`
+- Warnings: none
+- Start evidence: `Item 15. Exhibits, Financial Statement Schedules`
 - End evidence: `SIGNATURES`
+- Recommended actions: `inspect_only:section_reference_detected`, `inspect_only:exhibit_index_detected`
 
 Start snippet:
 
-> Part IV Item 15. Exhibits, Financial Statement Schedules 270 1 Bank of America 2014 Part I Bank of America Corporation and Subsidiaries Item 1. Business Bank of America Corporation (together, with its consolidated subsidiaries, Bank of America, we or us) is...
+> Item 15. Exhibits, Financial Statement Schedules The following documents are filed as part of this report: (1) Financial Statements: Report of Independent Registered Public Accounting Firm Consolidated Statement of Income for the years ended December 31, 20...
 
 End snippet:
 
@@ -2986,6 +3366,8 @@ End snippet:
 - Status: `not_present`
 - Confidence: `high` `1.00`
 - Text length: `0`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `0`
 - Warnings: none
 
 Start snippet:
@@ -3038,9 +3420,12 @@ TOC entries:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `39662`
+- Raw tables/images: `7` / `0`
+- Raw structure bytes: `77349`
 - Warnings: none
 - Start evidence: `Item 1. Business`
 - End evidence: `Item 1A. Risk Factors`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -3055,9 +3440,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `116601`
+- Raw tables/images: `15` / `0`
+- Raw structure bytes: `171232`
 - Warnings: none
 - Start evidence: `Item 1A. Risk Factors`
 - End evidence: `Item 1B. Unresolved Staff Comments`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -3072,6 +3460,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `40`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `671`
 - Warnings: none
 - Start evidence: `Item 1B. Unresolved Staff Comments`
 - End evidence: `Item 1C. Cybersecurity`
@@ -3089,9 +3479,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `147`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `508`
 - Warnings: none
 - Start evidence: `Item 1C. Cybersecurity`
 - End evidence: `Item 2. Properties`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -3106,6 +3499,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `1746`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `15118`
 - Warnings: none
 - Start evidence: `Item 2. Properties`
 - End evidence: `Item 3. Legal Proceedings`
@@ -3123,9 +3518,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `192`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `874`
 - Warnings: none
 - Start evidence: `Item 3. Legal Proceedings`
 - End evidence: `Item 4. Mine Safety Disclosures`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -3140,6 +3538,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `92`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `848`
 - Warnings: none
 - Start evidence: `Item 4. Mine Safety Disclosures`
 - End evidence: `Item 5. Market for Registrant’s Common Equity, Related Stockholder Matters and Issuer Purchases of Equity Securities`
@@ -3157,6 +3557,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `2824`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `16142`
 - Warnings: none
 - Start evidence: `Item 5. Market for Registrant’s Common Equity, Related Stockholder Matters and Issuer Purchases of Equity Securities`
 - End evidence: `Item 6. [Reserved]`
@@ -3174,6 +3576,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `0.90`
 - Text length: `38`
+- Raw tables/images: `2` / `0`
+- Raw structure bytes: `1880`
 - Warnings: `Section length is outside the expected first-pass range.`
 - Start evidence: `Item 6. [Reserved]`
 - End evidence: `Item 7. Bank of America Corporation and Subsidiaries`
@@ -3191,10 +3595,12 @@ End snippet:
 - Status: `success`
 - Confidence: `medium` `0.80`
 - Text length: `308102`
+- Raw tables/images: `121` / `4`
+- Raw structure bytes: `3217361`
 - Warnings: `Start heading does not contain the expected canonical title.`, `Section length is outside the expected first-pass range.`
 - Start evidence: `Item 7. Bank of America Corporation and Subsidiaries`
 - End evidence: `Item 7A. Quantitative and Qualitative Disclosures about Market Risk`
-- Recommended actions: `needs_user_selection:internal_item_toc_detected`
+- Recommended actions: `needs_user_selection:internal_item_toc_detected`, `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -3207,12 +3613,13 @@ End snippet:
 #### Item 7A
 
 - Status: `success`
-- Confidence: `high` `0.90`
+- Confidence: `high` `1.00`
 - Text length: `218`
-- Warnings: `Section length is outside the expected first-pass range.`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `1119`
+- Warnings: none
 - Start evidence: `Item 7A. Quantitative and Qualitative Disclosures about Market Risk`
 - End evidence: `Item 8. Financial Statements and Supplementary Data`
-- Recommended actions: `needs_external_source:external_or_other_document_reference`
 
 Start snippet:
 
@@ -3227,9 +3634,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `403402`
+- Raw tables/images: `190` / `3`
+- Raw structure bytes: `7519470`
 - Warnings: none
 - Start evidence: `Item 8. Financial Statements and Supplementary Data`
 - End evidence: `Item 9. Changes in and Disagreements with Accountants on Accounting and Financial Disclosure`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -3244,6 +3654,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `98`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `458`
 - Warnings: none
 - Start evidence: `Item 9. Changes in and Disagreements with Accountants on Accounting and Financial Disclosure`
 - End evidence: `Item 9A. Controls and Procedures`
@@ -3261,9 +3673,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `1461`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `2761`
 - Warnings: none
 - Start evidence: `Item 9A. Controls and Procedures`
 - End evidence: `Item 9B. Other Information`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -3278,6 +3693,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `2392`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `4294`
 - Warnings: none
 - Start evidence: `Item 9B. Other Information`
 - End evidence: `Item 9C. Disclosure Regarding Foreign Jurisdictions that Prevent Inspections`
@@ -3295,6 +3712,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `149`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `924`
 - Warnings: none
 - Start evidence: `Item 9C. Disclosure Regarding Foreign Jurisdictions that Prevent Inspections`
 - End evidence: `Item 10. Directors, Executive Officers and Corporate Governance`
@@ -3312,9 +3731,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `5812`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `19873`
 - Warnings: none
 - Start evidence: `Item 10. Directors, Executive Officers and Corporate Governance`
 - End evidence: `Item 11. Executive Compensation`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -3329,9 +3751,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `367`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `4860`
 - Warnings: none
 - Start evidence: `Item 11. Executive Compensation`
 - End evidence: `Item 12. Security Ownership of Certain Beneficial Owners and Management and Related Stockholder Matters`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -3346,9 +3771,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `1454`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `11898`
 - Warnings: none
 - Start evidence: `Item 12. Security Ownership of Certain Beneficial Owners and Management and Related Stockholder Matters`
 - End evidence: `Item 13. Certain Relationships and Related Transactions, and Director Independence`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -3363,9 +3791,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `303`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `1816`
 - Warnings: none
 - Start evidence: `Item 13. Certain Relationships and Related Transactions, and Director Independence`
 - End evidence: `Item 14. Principal Accounting Fees and Services`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -3379,52 +3810,60 @@ End snippet:
 
 - Status: `success`
 - Confidence: `high` `1.00`
-- Text length: `53`
+- Text length: `344`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `3069`
 - Warnings: none
 - Start evidence: `Item 14. Principal Accounting Fees and Services`
-- End evidence: `Part IV Item 15. Exhibits, Financial Statement Schedules`
+- End evidence: `Item 15. Exhibits, Financial Statement Schedules`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
-> Item 14. Principal Accounting Fees and Services 174
+> Item 14. Principal Accounting Fees and Services Information included under the following caption in the 2024 Proxy Statement is incorporated herein by reference: ● “Proposal 3: Ratifying the appointment of our independent registered public accounting firm f...
 
 End snippet:
 
-> Item 14. Principal Accounting Fees and Services 174
+> ...lowing caption in the 2024 Proxy Statement is incorporated herein by reference: ● “Proposal 3: Ratifying the appointment of our independent registered public accounting firm for 2024.” Bank of America 174 Part IV Bank of America Corporation and Subsidiaries
 
 #### Item 15
 
 - Status: `success`
 - Confidence: `high` `1.00`
-- Text length: `63`
+- Text length: `17410`
+- Raw tables/images: `7` / `0`
+- Raw structure bytes: `209719`
 - Warnings: none
-- Start evidence: `Part IV Item 15. Exhibits, Financial Statement Schedules`
+- Start evidence: `Item 15. Exhibits, Financial Statement Schedules`
 - End evidence: `Item 16. Form 10-K Summary`
+- Recommended actions: `inspect_only:section_reference_detected`, `inspect_only:exhibit_index_detected`
 
 Start snippet:
 
-> Part IV Item 15. Exhibits, Financial Statement Schedules 175
+> Item 15. Exhibits, Financial Statement Schedules The following documents are filed as part of this report: (1) Financial Statements: Report of Independent Registered Public Accounting Firm (PCAOB ID 238) Consolidated Statement of Income for the years ended...
 
 End snippet:
 
-> Part IV Item 15. Exhibits, Financial Statement Schedules 175
+> ...all not be deemed incorporated into any filing under the Securities Act of 1933 or the Securities Exchange Act of 1934. (5)The instance document does not appear in the interactive data file because its XBRL tags are embedded within the inline XBRL document.
 
 #### Item 16
 
 - Status: `success`
-- Confidence: `high` `0.90`
-- Text length: `903069`
-- Warnings: `Section length is outside the expected first-pass range.`
+- Confidence: `high` `1.00`
+- Text length: `64`
+- Raw tables/images: `6` / `0`
+- Raw structure bytes: `42516`
+- Warnings: none
 - Start evidence: `Item 16. Form 10-K Summary`
 - End evidence: `SIGNATURES`
 
 Start snippet:
 
-> Item 16. Form 10-K Summary 178 1 Bank of America Part I Bank of America Corporation and Subsidiaries Item 1. Business Bank of America Corporation is a Delaware corporation, a bank holding company (BHC) and a financial holding company. When used in this repo...
+> Item 16. Form 10-K Summary Not applicable. Bank of America 178
 
 End snippet:
 
-> ...ties Act of 1933 or the Securities Exchange Act of 1934. (5)The instance document does not appear in the interactive data file because its XBRL tags are embedded within the inline XBRL document. Item 16. Form 10-K Summary Not applicable. Bank of America 178
+> Item 16. Form 10-K Summary Not applicable. Bank of America 178
 
 ### unh_2014_10k
 
@@ -3465,9 +3904,12 @@ TOC entries:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `69310`
+- Raw tables/images: `51` / `0`
+- Raw structure bytes: `138234`
 - Warnings: none
 - Start evidence: `PART I ITEM 1. BUSINESS`
 - End evidence: `ITEM 1A. RISK FACTORS`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -3482,6 +3924,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `62471`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `81376`
 - Warnings: none
 - Start evidence: `ITEM 1A. RISK FACTORS`
 - End evidence: `ITEM 1B. UNRESOLVED STAFF COMMENTS`
@@ -3499,6 +3943,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `41`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `603`
 - Warnings: none
 - Start evidence: `ITEM 1B. UNRESOLVED STAFF COMMENTS`
 - End evidence: `ITEM 2. PROPERTIES`
@@ -3516,6 +3962,8 @@ End snippet:
 - Status: `not_present`
 - Confidence: `high` `1.00`
 - Text length: `0`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `0`
 - Warnings: none
 
 Start snippet:
@@ -3531,10 +3979,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `0.85`
 - Text length: `133299`
+- Raw tables/images: `52` / `0`
+- Raw structure bytes: `238853`
 - Warnings: `Start heading has TOC-like signals.`
 - Start evidence: `Item 2. Properties`
 - End evidence: `ITEM 3. LEGAL PROCEEDINGS`
-- Recommended actions: `inspect_only:start_toc_like_signal`
+- Recommended actions: `inspect_only:start_toc_like_signal`, `inspect_only:section_reference_detected`, `inspect_only:exhibit_index_detected`
 
 Start snippet:
 
@@ -3549,9 +3999,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `339`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `924`
 - Warnings: none
 - Start evidence: `ITEM 3. LEGAL PROCEEDINGS`
 - End evidence: `ITEM 4. MINE SAFETY DISCLOSURES`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -3566,6 +4019,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `49`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `615`
 - Warnings: none
 - Start evidence: `ITEM 4. MINE SAFETY DISCLOSURES`
 - End evidence: `PART II ITEM 5. MARKET FOR REGISTRANT’S COMMON EQUITY, RELATED STOCKHOLDER MATTERS AND ISSUER PURCHASES OF EQUITY SEC...`
@@ -3583,6 +4038,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `5093`
+- Raw tables/images: `7` / `2`
+- Raw structure bytes: `92294`
 - Warnings: none
 - Start evidence: `PART II ITEM 5. MARKET FOR REGISTRANT’S COMMON EQUITY, RELATED STOCKHOLDER MATTERS AND ISSUER PURCHASES OF EQUITY SEC...`
 - End evidence: `ITEM 6. SELECTED FINANCIAL DATA`
@@ -3600,9 +4057,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `80812`
+- Raw tables/images: `37` / `0`
+- Raw structure bytes: `696970`
 - Warnings: none
 - Start evidence: `ITEM 6. SELECTED FINANCIAL DATA`
 - End evidence: `ITEM 7A. QUANTITATIVE AND QUALITATIVE DISCLOSURES ABOUT MARKET RISK`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -3617,10 +4077,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `0.85`
 - Text length: `219335`
+- Raw tables/images: `97` / `2`
+- Raw structure bytes: `1024931`
 - Warnings: `Start heading has TOC-like signals.`
 - Start evidence: `Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations`
 - End evidence: `ITEM 7A. QUANTITATIVE AND QUALITATIVE DISCLOSURES ABOUT MARKET RISK`
-- Recommended actions: `inspect_only:start_toc_like_signal`
+- Recommended actions: `inspect_only:start_toc_like_signal`, `inspect_only:section_reference_detected`, `inspect_only:exhibit_index_detected`
 
 Start snippet:
 
@@ -3635,6 +4097,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `4889`
+- Raw tables/images: `3` / `0`
+- Raw structure bytes: `42878`
 - Warnings: none
 - Start evidence: `ITEM 7A. QUANTITATIVE AND QUALITATIVE DISCLOSURES ABOUT MARKET RISK`
 - End evidence: `ITEM 8. FINANCIAL STATEMENTS`
@@ -3652,9 +4116,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `115271`
+- Raw tables/images: `77` / `0`
+- Raw structure bytes: `2011906`
 - Warnings: none
 - Start evidence: `ITEM 8. FINANCIAL STATEMENTS`
 - End evidence: `ITEM 9. CHANGES IN AND DISAGREEMENTS WITH ACCOUNTANTS ON ACCOUNTING AND FINANCIAL DISCLOSURE`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -3669,6 +4136,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `100`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `859`
 - Warnings: none
 - Start evidence: `ITEM 9. CHANGES IN AND DISAGREEMENTS WITH ACCOUNTANTS ON ACCOUNTING AND FINANCIAL DISCLOSURE`
 - End evidence: `ITEM 9A. CONTROLS AND PROCEDURES`
@@ -3686,6 +4155,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `8579`
+- Raw tables/images: `2` / `0`
+- Raw structure bytes: `15568`
 - Warnings: none
 - Start evidence: `ITEM 9A. CONTROLS AND PROCEDURES`
 - End evidence: `ITEM 9B. OTHER INFORMATION`
@@ -3703,6 +4174,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `34`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `567`
 - Warnings: none
 - Start evidence: `ITEM 9B. OTHER INFORMATION`
 - End evidence: `PART III ITEM 10. DIRECTORS, EXECUTIVE OFFICERS AND CORPORATE GOVERNANCE`
@@ -3720,6 +4193,8 @@ End snippet:
 - Status: `not_present`
 - Confidence: `high` `1.00`
 - Text length: `0`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `0`
 - Warnings: none
 
 Start snippet:
@@ -3735,9 +4210,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `2565`
+- Raw tables/images: `3` / `0`
+- Raw structure bytes: `11380`
 - Warnings: none
 - Start evidence: `PART III ITEM 10. DIRECTORS, EXECUTIVE OFFICERS AND CORPORATE GOVERNANCE`
 - End evidence: `ITEM 11. EXECUTIVE COMPENSATION`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -3752,9 +4230,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `473`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `1833`
 - Warnings: none
 - Start evidence: `ITEM 11. EXECUTIVE COMPENSATION`
 - End evidence: `ITEM 12. SECURITY OWNERSHIP OF CERTAIN BENEFICIAL OWNERS AND MANAGEMENT AND RELATED STOCKHOLDER MATTERS`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -3769,9 +4250,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `1488`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `3702`
 - Warnings: none
 - Start evidence: `ITEM 12. SECURITY OWNERSHIP OF CERTAIN BENEFICIAL OWNERS AND MANAGEMENT AND RELATED STOCKHOLDER MATTERS`
 - End evidence: `PART IV ITEM 15.EXHIBITS AND FINANCIAL STATEMENT SCHEDULES`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -3786,6 +4270,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `87`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `911`
 - Warnings: none
 - Start evidence: `Item 13. Certain Relationships and Related Transactions, and Director Independence`
 - End evidence: `Item 14. Principal Accountant Fees and Services`
@@ -3803,6 +4289,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `52`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `863`
 - Warnings: none
 - Start evidence: `Item 14. Principal Accountant Fees and Services`
 - End evidence: `Part IV Item 15. Exhibits and Financial Statement Schedules`
@@ -3819,24 +4307,29 @@ End snippet:
 
 - Status: `success`
 - Confidence: `high` `1.00`
-- Text length: `65`
+- Text length: `22740`
+- Raw tables/images: `26` / `0`
+- Raw structure bytes: `340130`
 - Warnings: none
-- Start evidence: `Part IV Item 15. Exhibits and Financial Statement Schedules`
+- Start evidence: `PART IV ITEM 15.EXHIBITS AND FINANCIAL STATEMENT SCHEDULES`
 - End evidence: `SIGNATURES`
+- Recommended actions: `inspect_only:section_reference_detected`, `inspect_only:exhibit_index_detected`
 
 Start snippet:
 
-> Part IV Item 15. Exhibits and Financial Statement Schedules 87
+> PART IV ITEM 15.EXHIBITS AND FINANCIAL STATEMENT SCHEDULES (a) 1. Financial Statements The financial statements are included under Item 8 of this report: • Reports of Independent Registered Accounting Firm. • Consolidated Balance Sheets as of December 31, 2...
 
 End snippet:
 
-> Part IV Item 15. Exhibits and Financial Statement Schedules 87
+> ...2018 1,100 2019 1,000 Thereafter 10,817 4. Commitments and Contingencies For a summary of commitments and contingencies, see Note 12 of Notes to the Consolidated Financial Statements included in Part II, Item 8, “Financial Statements.” 95 Table of Contents
 
 #### Item 16
 
 - Status: `not_present`
 - Confidence: `high` `1.00`
 - Text length: `0`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `0`
 - Warnings: none
 
 Start snippet:
@@ -3889,9 +4382,12 @@ TOC entries:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `48231`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `92416`
 - Warnings: none
 - Start evidence: `PART I ITEM 1. BUSINESS`
 - End evidence: `ITEM 1A. RISK FACTORS`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -3906,6 +4402,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `66400`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `89189`
 - Warnings: none
 - Start evidence: `ITEM 1A. RISK FACTORS`
 - End evidence: `ITEM 1B. UNRESOLVED STAFF COMMENTS`
@@ -3923,6 +4421,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `64`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `1229`
 - Warnings: none
 - Start evidence: `ITEM 1B. UNRESOLVED STAFF COMMENTS`
 - End evidence: `ITEM 1C. CYBERSECURITY`
@@ -3940,9 +4440,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `6400`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `10674`
 - Warnings: none
 - Start evidence: `ITEM 1C. CYBERSECURITY`
 - End evidence: `ITEM 4.MINE SAFETY DISCLOSURES`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -3957,10 +4460,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `0.85`
 - Text length: `122323`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `219509`
 - Warnings: `Start heading has TOC-like signals.`
 - Start evidence: `Item 2. Properties`
 - End evidence: `ITEM 4.MINE SAFETY DISCLOSURES`
-- Recommended actions: `inspect_only:start_toc_like_signal`
+- Recommended actions: `inspect_only:start_toc_like_signal`, `inspect_only:section_reference_detected`, `inspect_only:exhibit_index_detected`
 
 Start snippet:
 
@@ -3975,10 +4480,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `0.85`
 - Text length: `122298`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `218271`
 - Warnings: `Start heading has TOC-like signals.`
 - Start evidence: `Item 3. Legal Proceedings`
 - End evidence: `ITEM 4.MINE SAFETY DISCLOSURES`
-- Recommended actions: `inspect_only:start_toc_like_signal`
+- Recommended actions: `inspect_only:start_toc_like_signal`, `inspect_only:section_reference_detected`, `inspect_only:exhibit_index_detected`
 
 Start snippet:
 
@@ -3993,6 +4500,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `47`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `728`
 - Warnings: none
 - Start evidence: `ITEM 4.MINE SAFETY DISCLOSURES`
 - End evidence: `PART II ITEM 5.MARKET FOR REGISTRANT’S COMMON EQUITY, RELATED STOCKHOLDER MATTERS AND ISSUER PURCHASES OF EQUITY SECU...`
@@ -4010,9 +4519,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `43651`
+- Raw tables/images: `10` / `1`
+- Raw structure bytes: `349210`
 - Warnings: none
 - Start evidence: `PART II ITEM 5.MARKET FOR REGISTRANT’S COMMON EQUITY, RELATED STOCKHOLDER MATTERS AND ISSUER PURCHASES OF EQUITY SECU...`
 - End evidence: `ITEM 7A. QUANTITATIVE AND QUALITATIVE DISCLOSURES ABOUT MARKET RISK`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -4027,10 +4539,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `0.85`
 - Text length: `165798`
+- Raw tables/images: `11` / `1`
+- Raw structure bytes: `564208`
 - Warnings: `Start heading has TOC-like signals.`
 - Start evidence: `Item 6. Reserved`
 - End evidence: `ITEM 7A. QUANTITATIVE AND QUALITATIVE DISCLOSURES ABOUT MARKET RISK`
-- Recommended actions: `inspect_only:start_toc_like_signal`
+- Recommended actions: `inspect_only:start_toc_like_signal`, `inspect_only:section_reference_detected`, `inspect_only:exhibit_index_detected`
 
 Start snippet:
 
@@ -4045,10 +4559,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `0.85`
 - Text length: `165775`
+- Raw tables/images: `11` / `1`
+- Raw structure bytes: `563014`
 - Warnings: `Start heading has TOC-like signals.`
 - Start evidence: `Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations`
 - End evidence: `ITEM 7A. QUANTITATIVE AND QUALITATIVE DISCLOSURES ABOUT MARKET RISK`
-- Recommended actions: `inspect_only:start_toc_like_signal`
+- Recommended actions: `inspect_only:start_toc_like_signal`, `inspect_only:section_reference_detected`, `inspect_only:exhibit_index_detected`
 
 Start snippet:
 
@@ -4063,6 +4579,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `4355`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `28455`
 - Warnings: none
 - Start evidence: `ITEM 7A. QUANTITATIVE AND QUALITATIVE DISCLOSURES ABOUT MARKET RISK`
 - End evidence: `ITEM 8. FINANCIAL STATEMENTS AND SUPPLEMENTARY DATA`
@@ -4080,9 +4598,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `98361`
+- Raw tables/images: `38` / `0`
+- Raw structure bytes: `1484406`
 - Warnings: none
 - Start evidence: `ITEM 8. FINANCIAL STATEMENTS AND SUPPLEMENTARY DATA`
 - End evidence: `ITEM 9. CHANGES IN AND DISAGREEMENTS WITH ACCOUNTANTS ON ACCOUNTING AND FINANCIAL DISCLOSURE`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -4097,6 +4618,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `99`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `532`
 - Warnings: none
 - Start evidence: `ITEM 9. CHANGES IN AND DISAGREEMENTS WITH ACCOUNTANTS ON ACCOUNTING AND FINANCIAL DISCLOSURE`
 - End evidence: `ITEM 9A.CONTROLS AND PROCEDURES`
@@ -4114,6 +4637,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `8296`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `16610`
 - Warnings: none
 - Start evidence: `ITEM 9A.CONTROLS AND PROCEDURES`
 - End evidence: `ITEM 9B. OTHER INFORMATION`
@@ -4131,6 +4656,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `447`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `1786`
 - Warnings: none
 - Start evidence: `ITEM 9B. OTHER INFORMATION`
 - End evidence: `ITEM 9C. DISCLOSURE REGARDING FOREIGN JURISDICTIONS THAT PREVENT INSPECTIONS`
@@ -4148,6 +4675,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `93`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `485`
 - Warnings: none
 - Start evidence: `ITEM 9C. DISCLOSURE REGARDING FOREIGN JURISDICTIONS THAT PREVENT INSPECTIONS`
 - End evidence: `PART III ITEM 10.DIRECTORS, EXECUTIVE OFFICERS AND CORPORATE GOVERNANCE`
@@ -4165,9 +4694,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `2314`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `10589`
 - Warnings: none
 - Start evidence: `PART III ITEM 10.DIRECTORS, EXECUTIVE OFFICERS AND CORPORATE GOVERNANCE`
 - End evidence: `ITEM 11.EXECUTIVE COMPENSATION`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -4182,9 +4714,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `474`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `1999`
 - Warnings: none
 - Start evidence: `ITEM 11.EXECUTIVE COMPENSATION`
 - End evidence: `ITEM 12.SECURITY OWNERSHIP OF CERTAIN BENEFICIAL OWNERS AND MANAGEMENT AND RELATED STOCKHOLDER MATTERS`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -4199,9 +4734,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `2222`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `13546`
 - Warnings: none
 - Start evidence: `ITEM 12.SECURITY OWNERSHIP OF CERTAIN BENEFICIAL OWNERS AND MANAGEMENT AND RELATED STOCKHOLDER MATTERS`
 - End evidence: `ITEM 13.CERTAIN RELATIONSHIPS AND RELATED TRANSACTIONS, AND DIRECTOR INDEPENDENCE`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -4216,9 +4754,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `399`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `1108`
 - Warnings: none
 - Start evidence: `ITEM 13.CERTAIN RELATIONSHIPS AND RELATED TRANSACTIONS, AND DIRECTOR INDEPENDENCE`
 - End evidence: `ITEM 14. PRINCIPAL ACCOUNTANT FEES AND SERVICES`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -4233,6 +4774,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `52`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `1233`
 - Warnings: none
 - Start evidence: `Item 14. Principal Accountant Fees and Services`
 - End evidence: `Part IV Item 15. Exhibit and Financial Statement Schedules`
@@ -4250,9 +4793,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `64`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `1483`
 - Warnings: none
 - Start evidence: `Part IV Item 15. Exhibit and Financial Statement Schedules`
 - End evidence: `Item 16. Form 10-K Summary`
+- Recommended actions: `inspect_only:exhibit_index_detected`
 
 Start snippet:
 
@@ -4266,18 +4812,20 @@ End snippet:
 
 - Status: `success`
 - Confidence: `high` `1.00`
-- Text length: `31`
+- Text length: `56`
+- Raw tables/images: `3` / `0`
+- Raw structure bytes: `23628`
 - Warnings: none
-- Start evidence: `Item 16. Form 10-K Summary`
+- Start evidence: `ITEM 16. FORM 10-K SUMMARY`
 - End evidence: `SIGNATURES`
 
 Start snippet:
 
-> Item 16. Form 10-K Summary 79
+> ITEM 16. FORM 10-K SUMMARY None. 79 Table of Contents
 
 End snippet:
 
-> Item 16. Form 10-K Summary 79
+> ITEM 16. FORM 10-K SUMMARY None. 79 Table of Contents
 
 ### jnj_2014_10k
 
@@ -4318,9 +4866,12 @@ TOC entries:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `18626`
+- Raw tables/images: `2` / `0`
+- Raw structure bytes: `41154`
 - Warnings: none
 - Start evidence: `PART I Item 1. BUSINESS`
 - End evidence: `Item 1A. RISK FACTORS`
+- Recommended actions: `inspect_only:section_reference_detected`, `inspect_only:exhibit_index_detected`
 
 Start snippet:
 
@@ -4333,12 +4884,14 @@ End snippet:
 #### Item 1A
 
 - Status: `success`
-- Confidence: `high` `0.90`
+- Confidence: `high` `1.00`
 - Text length: `546`
-- Warnings: `Section length is outside the expected first-pass range.`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `1276`
+- Warnings: none
 - Start evidence: `Item 1A. RISK FACTORS`
 - End evidence: `Item 1B. UNRESOLVED STAFF COMMENTS`
-- Recommended actions: `needs_external_source:external_or_other_document_reference`
+- Recommended actions: `inspect_only:exhibit_index_detected`
 
 Start snippet:
 
@@ -4353,6 +4906,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `74`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `1222`
 - Warnings: none
 - Start evidence: `Item 1B. UNRESOLVED STAFF COMMENTS`
 - End evidence: `Item 2. PROPERTIES`
@@ -4370,6 +4925,8 @@ End snippet:
 - Status: `not_present`
 - Confidence: `high` `1.00`
 - Text length: `0`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `0`
 - Warnings: none
 
 Start snippet:
@@ -4385,9 +4942,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `4257`
+- Raw tables/images: `3` / `0`
+- Raw structure bytes: `21067`
 - Warnings: none
 - Start evidence: `Item 2. PROPERTIES`
 - End evidence: `Item 3. LEGAL PROCEEDINGS`
+- Recommended actions: `inspect_only:section_reference_detected`, `inspect_only:exhibit_index_detected`
 
 Start snippet:
 
@@ -4402,9 +4962,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `934`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `1898`
 - Warnings: none
 - Start evidence: `Item 3. LEGAL PROCEEDINGS`
 - End evidence: `Item 4. MINE SAFETY DISCLOSURES`
+- Recommended actions: `inspect_only:section_reference_detected`, `inspect_only:exhibit_index_detected`
 
 Start snippet:
 
@@ -4419,9 +4982,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `5010`
+- Raw tables/images: `6` / `0`
+- Raw structure bytes: `18506`
 - Warnings: none
 - Start evidence: `Item 4. MINE SAFETY DISCLOSURES`
 - End evidence: `PART II Item 5. MARKET FOR REGISTRANT’S COMMON EQUITY, RELATED STOCKHOLDER MATTERS AND ISSUER PURCHASES OF EQUITY SEC...`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -4436,9 +5002,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `3277`
+- Raw tables/images: `6` / `0`
+- Raw structure bytes: `20662`
 - Warnings: none
 - Start evidence: `PART II Item 5. MARKET FOR REGISTRANT’S COMMON EQUITY, RELATED STOCKHOLDER MATTERS AND ISSUER PURCHASES OF EQUITY SEC...`
 - End evidence: `Item 6. SELECTED FINANCIAL DATA`
+- Recommended actions: `inspect_only:section_reference_detected`, `inspect_only:exhibit_index_detected`
 
 Start snippet:
 
@@ -4453,9 +5022,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `660`
+- Raw tables/images: `2` / `0`
+- Raw structure bytes: `2422`
 - Warnings: none
 - Start evidence: `Item 6. SELECTED FINANCIAL DATA`
 - End evidence: `Item 7A. QUANTITATIVE AND QUALITATIVE DISCLOSURES ABOUT MARKET RISK`
+- Recommended actions: `inspect_only:section_reference_detected`, `inspect_only:exhibit_index_detected`
 
 Start snippet:
 
@@ -4470,10 +5042,12 @@ End snippet:
 - Status: `success`
 - Confidence: `medium` `0.75`
 - Text length: `386`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `1137`
 - Warnings: `Start heading has TOC-like signals.`, `Section length is outside the expected first-pass range.`
 - Start evidence: `Item 7. MANAGEMENT’S DISCUSSION AND ANALYSIS OF FINANCIAL CONDITION AND RESULTS OF OPERATIONS`
 - End evidence: `Item 7A. QUANTITATIVE AND QUALITATIVE DISCLOSURES ABOUT MARKET RISK`
-- Recommended actions: `inspect_only:start_toc_like_signal`, `needs_external_source:external_or_other_document_reference`
+- Recommended actions: `inspect_only:start_toc_like_signal`, `inspect_only:exhibit_index_detected`, `needs_external_source:external_or_other_document_reference`
 
 Start snippet:
 
@@ -4486,12 +5060,14 @@ End snippet:
 #### Item 7A
 
 - Status: `success`
-- Confidence: `high` `0.90`
+- Confidence: `high` `1.00`
 - Text length: `531`
-- Warnings: `Section length is outside the expected first-pass range.`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `1338`
+- Warnings: none
 - Start evidence: `Item 7A. QUANTITATIVE AND QUALITATIVE DISCLOSURES ABOUT MARKET RISK`
 - End evidence: `Item 8. FINANCIAL STATEMENTS AND SUPPLEMENTARY DATA`
-- Recommended actions: `needs_external_source:external_or_other_document_reference`
+- Recommended actions: `inspect_only:exhibit_index_detected`, `needs_external_source:external_or_other_document_reference`
 
 Start snippet:
 
@@ -4504,12 +5080,14 @@ End snippet:
 #### Item 8
 
 - Status: `success`
-- Confidence: `high` `0.90`
+- Confidence: `high` `1.00`
 - Text length: `360`
-- Warnings: `Section length is outside the expected first-pass range.`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `1099`
+- Warnings: none
 - Start evidence: `Item 8. FINANCIAL STATEMENTS AND SUPPLEMENTARY DATA`
 - End evidence: `Item 9. CHANGES IN AND DISAGREEMENTS WITH ACCOUNTANTS ON ACCOUNTING AND FINANCIAL DISCLOSURE`
-- Recommended actions: `needs_external_source:external_or_other_document_reference`
+- Recommended actions: `inspect_only:exhibit_index_detected`, `needs_external_source:external_or_other_document_reference`
 
 Start snippet:
 
@@ -4524,6 +5102,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `110`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `827`
 - Warnings: none
 - Start evidence: `Item 9. CHANGES IN AND DISAGREEMENTS WITH ACCOUNTANTS ON ACCOUNTING AND FINANCIAL DISCLOSURE`
 - End evidence: `Item 9A. CONTROLS AND PROCEDURES`
@@ -4541,9 +5121,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `2767`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `4976`
 - Warnings: none
 - Start evidence: `Item 9A. CONTROLS AND PROCEDURES`
 - End evidence: `Item 9B. OTHER INFORMATION`
+- Recommended actions: `inspect_only:section_reference_detected`, `inspect_only:exhibit_index_detected`
 
 Start snippet:
 
@@ -4558,6 +5141,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `44`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `571`
 - Warnings: none
 - Start evidence: `Item 9B. OTHER INFORMATION`
 - End evidence: `PART III Item 10. DIRECTORS, EXECUTIVE OFFICERS AND CORPORATE GOVERNANCE`
@@ -4575,6 +5160,8 @@ End snippet:
 - Status: `not_present`
 - Confidence: `high` `1.00`
 - Text length: `0`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `0`
 - Warnings: none
 
 Start snippet:
@@ -4590,9 +5177,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `2176`
+- Raw tables/images: `2` / `0`
+- Raw structure bytes: `4566`
 - Warnings: none
 - Start evidence: `PART III Item 10. DIRECTORS, EXECUTIVE OFFICERS AND CORPORATE GOVERNANCE`
 - End evidence: `Item 11. EXECUTIVE COMPENSATION`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -4607,9 +5197,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `826`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `1735`
 - Warnings: none
 - Start evidence: `Item 11. EXECUTIVE COMPENSATION`
 - End evidence: `Item 12. SECURITY OWNERSHIP OF CERTAIN BENEFICIAL OWNERS AND MANAGEMENT AND RELATED STOCKHOLDER MATTERS`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -4624,9 +5217,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `1798`
+- Raw tables/images: `5` / `0`
+- Raw structure bytes: `14169`
 - Warnings: none
 - Start evidence: `Item 12. SECURITY OWNERSHIP OF CERTAIN BENEFICIAL OWNERS AND MANAGEMENT AND RELATED STOCKHOLDER MATTERS`
 - End evidence: `Item 13. CERTAIN RELATIONSHIPS AND RELATED TRANSACTIONS, AND DIRECTOR INDEPENDENCE`
+- Recommended actions: `inspect_only:section_reference_detected`, `inspect_only:exhibit_index_detected`
 
 Start snippet:
 
@@ -4641,9 +5237,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `306`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `1052`
 - Warnings: none
 - Start evidence: `Item 13. CERTAIN RELATIONSHIPS AND RELATED TRANSACTIONS, AND DIRECTOR INDEPENDENCE`
 - End evidence: `Item 14. PRINCIPAL ACCOUNTANT FEES AND SERVICES`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -4658,9 +5257,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `285`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `1515`
 - Warnings: none
 - Start evidence: `Item 14. PRINCIPAL ACCOUNTANT FEES AND SERVICES`
 - End evidence: `PART IV Item 15. EXHIBITS AND FINANCIAL STATEMENT SCHEDULES`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -4675,9 +5277,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `1210`
+- Raw tables/images: `8` / `0`
+- Raw structure bytes: `107363`
 - Warnings: none
 - Start evidence: `PART IV Item 15. EXHIBITS AND FINANCIAL STATEMENT SCHEDULES`
 - End evidence: `SIGNATURES`
+- Recommended actions: `inspect_only:section_reference_detected`, `inspect_only:exhibit_index_detected`
 
 Start snippet:
 
@@ -4692,6 +5297,8 @@ End snippet:
 - Status: `not_present`
 - Confidence: `high` `1.00`
 - Text length: `0`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `0`
 - Warnings: none
 
 Start snippet:
@@ -4716,9 +5323,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `32955`
+- Raw tables/images: `9` / `5`
+- Raw structure bytes: `64965`
 - Warnings: none
 - Start evidence: `Part I Item 1. Business`
 - End evidence: `Item 1A. Risk factors`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -4733,9 +5343,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `42294`
+- Raw tables/images: `8` / `4`
+- Raw structure bytes: `67984`
 - Warnings: none
 - Start evidence: `Item 1A. Risk factors`
 - End evidence: `Item 1B. Unresolved staff comments`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -4750,6 +5363,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `51`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `462`
 - Warnings: none
 - Start evidence: `Item 1B. Unresolved staff comments`
 - End evidence: `Item 1C. Cybersecurity`
@@ -4767,6 +5382,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `3998`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `7450`
 - Warnings: none
 - Start evidence: `Item 1C. Cybersecurity`
 - End evidence: `Item 2. Properties`
@@ -4784,6 +5401,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `1631`
+- Raw tables/images: `2` / `0`
+- Raw structure bytes: `9337`
 - Warnings: none
 - Start evidence: `Item 2. Properties`
 - End evidence: `Item 3. Legal proceedings`
@@ -4801,9 +5420,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `245`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `650`
 - Warnings: none
 - Start evidence: `Item 3. Legal proceedings`
 - End evidence: `Item 4. Mine safety disclosures`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -4818,6 +5440,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `7437`
+- Raw tables/images: `4` / `2`
+- Raw structure bytes: `26951`
 - Warnings: none
 - Start evidence: `Item 4. Mine safety disclosures`
 - End evidence: `Part II Item 5. Market for registrant’s common equity, related stockholder matters and issuer purchases of equity sec...`
@@ -4835,9 +5459,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `2138`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `11281`
 - Warnings: none
 - Start evidence: `Part II Item 5. Market for registrant’s common equity, related stockholder matters and issuer purchases of equity sec...`
 - End evidence: `Item 6. Reserved`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -4850,9 +5477,11 @@ End snippet:
 #### Item 6
 
 - Status: `success`
-- Confidence: `high` `0.90`
+- Confidence: `high` `1.00`
 - Text length: `40`
-- Warnings: `Section length is outside the expected first-pass range.`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `1362`
+- Warnings: none
 - Start evidence: `Item 6. Reserved`
 - End evidence: `Item 7. Management’s discussion and analysis of results of operations and financial condition`
 
@@ -4869,9 +5498,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `65951`
+- Raw tables/images: `34` / `18`
+- Raw structure bytes: `358439`
 - Warnings: none
 - Start evidence: `Item 7. Management’s discussion and analysis of results of operations and financial condition`
 - End evidence: `Item 7A. Quantitative and qualitative disclosures about market risk`
+- Recommended actions: `inspect_only:section_reference_detected`, `inspect_only:exhibit_index_detected`
 
 Start snippet:
 
@@ -4884,9 +5516,11 @@ End snippet:
 #### Item 7A
 
 - Status: `success`
-- Confidence: `high` `0.90`
+- Confidence: `high` `1.00`
 - Text length: `486`
-- Warnings: `Section length is outside the expected first-pass range.`
+- Raw tables/images: `1` / `1`
+- Raw structure bytes: `2228`
+- Warnings: none
 - Start evidence: `Item 7A. Quantitative and qualitative disclosures about market risk`
 - End evidence: `Item 8. Financial statements and supplementary data`
 - Recommended actions: `needs_external_source:external_or_other_document_reference`
@@ -4904,9 +5538,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `224207`
+- Raw tables/images: `141` / `44`
+- Raw structure bytes: `2278815`
 - Warnings: none
 - Start evidence: `Item 8. Financial statements and supplementary data`
 - End evidence: `Item 9. Changes in and disagreements with accountants on accounting and financial disclosure`
+- Recommended actions: `inspect_only:section_reference_detected`, `inspect_only:exhibit_index_detected`
 
 Start snippet:
 
@@ -4921,6 +5558,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `109`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `510`
 - Warnings: none
 - Start evidence: `Item 9. Changes in and disagreements with accountants on accounting and financial disclosure`
 - End evidence: `Item 9A. Controls and procedures`
@@ -4938,9 +5577,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `2949`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `4371`
 - Warnings: none
 - Start evidence: `Item 9A. Controls and procedures`
 - End evidence: `Item 9B. Other information`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -4955,6 +5597,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `386`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `1441`
 - Warnings: none
 - Start evidence: `Item 9B. Other information`
 - End evidence: `Item 9C. Disclosure regarding foreign jurisdictions that prevent inspections`
@@ -4972,6 +5616,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `98`
+- Raw tables/images: `1` / `1`
+- Raw structure bytes: `1814`
 - Warnings: none
 - Start evidence: `Item 9C. Disclosure regarding foreign jurisdictions that prevent inspections`
 - End evidence: `Part III Item 10. Directors, executive officers and corporate governance`
@@ -4989,9 +5635,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `2201`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `4215`
 - Warnings: none
 - Start evidence: `Part III Item 10. Directors, executive officers and corporate governance`
 - End evidence: `Item 11. Executive compensation`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -5006,9 +5655,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `804`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `1381`
 - Warnings: none
 - Start evidence: `Item 11. Executive compensation`
 - End evidence: `Item 12. Security ownership of certain beneficial owners and management and related stockholder matters`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -5023,9 +5675,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `1662`
+- Raw tables/images: `2` / `0`
+- Raw structure bytes: `9818`
 - Warnings: none
 - Start evidence: `Item 12. Security ownership of certain beneficial owners and management and related stockholder matters`
 - End evidence: `Item 13. Certain relationships and related transactions, and director independence`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -5040,9 +5695,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `302`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `712`
 - Warnings: none
 - Start evidence: `Item 13. Certain relationships and related transactions, and director independence`
 - End evidence: `Item 14. Principal accountant fees and services`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -5057,9 +5715,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `272`
+- Raw tables/images: `1` / `1`
+- Raw structure bytes: `1988`
 - Warnings: none
 - Start evidence: `Item 14. Principal accountant fees and services`
 - End evidence: `Part IV Item 15. Exhibits and financial statement schedules`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -5074,9 +5735,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `932`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `4034`
 - Warnings: none
 - Start evidence: `Part IV Item 15. Exhibits and financial statement schedules`
 - End evidence: `Item 16. Form 10-K summary`
+- Recommended actions: `inspect_only:section_reference_detected`, `inspect_only:exhibit_index_detected`
 
 Start snippet:
 
@@ -5091,6 +5755,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `220`
+- Raw tables/images: `14` / `3`
+- Raw structure bytes: `92057`
 - Warnings: none
 - Start evidence: `Item 16. Form 10-K summary`
 - End evidence: `SIGNATURES`
@@ -5142,6 +5808,8 @@ TOC entries:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `5539`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `11630`
 - Warnings: none
 - Start evidence: `PART I ITEM 1. BUSINESS`
 - End evidence: `ITEM 1A. RISK FACTORS`
@@ -5159,6 +5827,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `14174`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `28817`
 - Warnings: none
 - Start evidence: `ITEM 1A. RISK FACTORS`
 - End evidence: `ITEM 1B. UNRESOLVED STAFF COMMENTS`
@@ -5176,6 +5846,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `44`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `1816`
 - Warnings: none
 - Start evidence: `ITEM 1B. UNRESOLVED STAFF COMMENTS`
 - End evidence: `Item 2. Properties`
@@ -5193,6 +5865,8 @@ End snippet:
 - Status: `not_present`
 - Confidence: `high` `1.00`
 - Text length: `0`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `0`
 - Warnings: none
 
 Start snippet:
@@ -5208,6 +5882,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `59317`
+- Raw tables/images: `13` / `0`
+- Raw structure bytes: `1310118`
 - Warnings: none
 - Start evidence: `Item 2. Properties`
 - End evidence: `Item 3. Legal Proceedings`
@@ -5225,6 +5901,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `4095`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `6240`
 - Warnings: none
 - Start evidence: `Item 3. Legal Proceedings`
 - End evidence: `Item 4. MINE SAFETY DISCLOSURES`
@@ -5242,6 +5920,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `8931`
+- Raw tables/images: `21` / `0`
+- Raw structure bytes: `84367`
 - Warnings: none
 - Start evidence: `Item 4. MINE SAFETY DISCLOSURES`
 - End evidence: `PART II Item 5. Market for Registrant’s Common Equity, Related Stockholder Matters and Issuer Purchases of Equity Sec...`
@@ -5259,9 +5939,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `1580`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `19538`
 - Warnings: none
 - Start evidence: `PART II Item 5. Market for Registrant’s Common Equity, Related Stockholder Matters and Issuer Purchases of Equity Sec...`
 - End evidence: `Item 6. Selected Financial Data`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -5276,6 +5959,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `680`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `33132`
 - Warnings: none
 - Start evidence: `Item 6. Selected Financial Data`
 - End evidence: `Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations`
@@ -5291,9 +5976,11 @@ End snippet:
 #### Item 7
 
 - Status: `success`
-- Confidence: `high` `0.90`
+- Confidence: `high` `1.00`
 - Text length: `265`
-- Warnings: `Section length is outside the expected first-pass range.`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `854`
+- Warnings: none
 - Start evidence: `Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations`
 - End evidence: `Item 7A. Quantitative and Qualitative Disclosures About Market Risk`
 - Recommended actions: `needs_external_source:external_or_other_document_reference`
@@ -5309,9 +5996,11 @@ End snippet:
 #### Item 7A
 
 - Status: `success`
-- Confidence: `high` `0.90`
+- Confidence: `high` `1.00`
 - Text length: `510`
-- Warnings: `Section length is outside the expected first-pass range.`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `2311`
+- Warnings: none
 - Start evidence: `Item 7A. Quantitative and Qualitative Disclosures About Market Risk`
 - End evidence: `Item 8. Financial Statements and Supplementary Data`
 - Recommended actions: `needs_external_source:external_or_other_document_reference`
@@ -5327,12 +6016,13 @@ End snippet:
 #### Item 8
 
 - Status: `success`
-- Confidence: `high` `0.90`
+- Confidence: `high` `1.00`
 - Text length: `780`
-- Warnings: `Section length is outside the expected first-pass range.`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `4469`
+- Warnings: none
 - Start evidence: `Item 8. Financial Statements and Supplementary Data`
 - End evidence: `Item 9. Changes in and Disagreements With Accountants on Accounting and Financial Disclosure`
-- Recommended actions: `needs_external_source:external_or_other_document_reference`
 
 Start snippet:
 
@@ -5347,6 +6037,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `99`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `661`
 - Warnings: none
 - Start evidence: `Item 9. Changes in and Disagreements With Accountants on Accounting and Financial Disclosure`
 - End evidence: `Item 9A. Controls and Procedures`
@@ -5364,9 +6056,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `2222`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `4558`
 - Warnings: none
 - Start evidence: `Item 9A. Controls and Procedures`
 - End evidence: `Item 9B. Other Information`
+- Recommended actions: `inspect_only:exhibit_index_detected`
 
 Start snippet:
 
@@ -5381,6 +6076,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `37`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `1804`
 - Warnings: none
 - Start evidence: `Item 9B. Other Information`
 - End evidence: `PART III Item 10. Directors, Executive Officers and Corporate Governance`
@@ -5398,6 +6095,8 @@ End snippet:
 - Status: `not_present`
 - Confidence: `high` `1.00`
 - Text length: `0`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `0`
 - Warnings: none
 
 Start snippet:
@@ -5413,6 +6112,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `783`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `4662`
 - Warnings: none
 - Start evidence: `PART III Item 10. Directors, Executive Officers and Corporate Governance`
 - End evidence: `Item 11. Executive Compensation`
@@ -5430,6 +6131,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `258`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `883`
 - Warnings: none
 - Start evidence: `Item 11. Executive Compensation`
 - End evidence: `Item 12. Security Ownership of Certain Beneficial Owners and Management and Related Stockholder Matters`
@@ -5447,6 +6150,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `1930`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `34516`
 - Warnings: none
 - Start evidence: `Item 12. Security Ownership of Certain Beneficial Owners and Management and Related Stockholder Matters`
 - End evidence: `Item 13. Certain Relationships and Related Transactions, and Director Independence`
@@ -5463,58 +6168,67 @@ End snippet:
 
 - Status: `success`
 - Confidence: `high` `1.00`
-- Text length: `87`
+- Text length: `296`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `886`
 - Warnings: none
 - Start evidence: `Item 13. Certain Relationships and Related Transactions, and Director Independence`
 - End evidence: `Item 14. Principal Accounting Fees and Services`
 
 Start snippet:
 
-> Item 13. Certain Relationships and Related Transactions, and Director Independence 33
+> Item 13. Certain Relationships and Related Transactions, and Director Independence Incorporated by reference to the portions entitled “Related Person Transactions and Procedures” and “Director Independence” of the section entitled “Corporate Governance” of...
 
 End snippet:
 
-> Item 13. Certain Relationships and Related Transactions, and Director Independence 33
+> ...ated Transactions, and Director Independence Incorporated by reference to the portions entitled “Related Person Transactions and Procedures” and “Director Independence” of the section entitled “Corporate Governance” of the registrant’s 2015 Proxy Statement.
 
 #### Item 14
 
 - Status: `success`
 - Confidence: `high` `1.00`
-- Text length: `52`
+- Text length: `269`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `1065`
 - Warnings: none
 - Start evidence: `Item 14. Principal Accounting Fees and Services`
 - End evidence: `PART IV Item 15. Exhibits, Financial Statement Schedules`
 
 Start snippet:
 
-> Item 14. Principal Accounting Fees and Services 33
+> Item 14. Principal Accounting Fees and Services Incorporated by reference to the portion entitled “Audit Committee” of the section entitled “Corporate Governance” and the section entitled “Ratification of Independent Auditors” of the registrant’s 2015 Proxy...
 
 End snippet:
 
-> Item 14. Principal Accounting Fees and Services 33
+> ...incipal Accounting Fees and Services Incorporated by reference to the portion entitled “Audit Committee” of the section entitled “Corporate Governance” and the section entitled “Ratification of Independent Auditors” of the registrant’s 2015 Proxy Statement.
 
 #### Item 15
 
 - Status: `success`
 - Confidence: `high` `1.00`
-- Text length: `85`
+- Text length: `243202`
+- Raw tables/images: `99` / `4`
+- Raw structure bytes: `6157313`
 - Warnings: none
 - Start evidence: `PART IV Item 15. Exhibits, Financial Statement Schedules`
 - End evidence: `SIGNATURES`
+- Recommended actions: `inspect_only:section_reference_detected`, `inspect_only:exhibit_index_detected`
 
 Start snippet:
 
-> PART IV Item 15. Exhibits, Financial Statement Schedules 33 Financial Section 34
+> PART IV Item 15. Exhibits, Financial Statement Schedules (a) (1) and (2) Financial Statements: See Table of Contents of the Financial Section of this report. (a) (3) Exhibits: See Index to Exhibits of this report. 33 FINANCIAL SECTION TABLE OF CONTENTS Busi...
 
 End snippet:
 
-> PART IV Item 15. Exhibits, Financial Statement Schedules 33 Financial Section 34
+> ...sales contracts with the same counterparty. (3) Prime product sales are total product sales excluding carbon black oil and sulfur. Prime product sales include ExxonMobil’s share of equity company volumes and finished-product transfers to the Downstream. 112
 
 #### Item 16
 
 - Status: `not_present`
 - Confidence: `high` `1.00`
 - Text length: `0`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `0`
 - Warnings: none
 
 Start snippet:
@@ -5566,6 +6280,8 @@ TOC entries:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `7400`
+- Raw tables/images: `2` / `0`
+- Raw structure bytes: `15485`
 - Warnings: none
 - Start evidence: `PART I ITEM 1. BUSINESS`
 - End evidence: `ITEM 1A. RISK FACTORS`
@@ -5583,9 +6299,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `29700`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `45728`
 - Warnings: none
 - Start evidence: `ITEM 1A. RISK FACTORS`
 - End evidence: `ITEM 1B. UNRESOLVED STAFF COMMENTS`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -5600,6 +6319,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `44`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `1677`
 - Warnings: none
 - Start evidence: `ITEM 1B. UNRESOLVED STAFF COMMENTS`
 - End evidence: `ITEM 1C. CYBERSECURITY`
@@ -5617,6 +6338,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `3886`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `6562`
 - Warnings: none
 - Start evidence: `ITEM 1C. CYBERSECURITY`
 - End evidence: `ITEM 2. PROPERTIES`
@@ -5634,6 +6357,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `52498`
+- Raw tables/images: `26` / `0`
+- Raw structure bytes: `789219`
 - Warnings: none
 - Start evidence: `ITEM 2. PROPERTIES`
 - End evidence: `ITEM 3. LEGAL PROCEEDINGS`
@@ -5651,6 +6376,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `1146`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `2996`
 - Warnings: none
 - Start evidence: `ITEM 3. LEGAL PROCEEDINGS`
 - End evidence: `ITEM 4. MINE SAFETY DISCLOSURES`
@@ -5668,6 +6395,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `3157`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `23070`
 - Warnings: none
 - Start evidence: `ITEM 4. MINE SAFETY DISCLOSURES`
 - End evidence: `PART II ITEM 5. MARKET FOR REGISTRANT'S COMMON EQUITY, RELATED STOCKHOLDER MATTERS AND ISSUER PURCHASES OF EQUITY SEC...`
@@ -5685,6 +6414,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `2411`
+- Raw tables/images: `3` / `0`
+- Raw structure bytes: `14668`
 - Warnings: none
 - Start evidence: `PART II ITEM 5. MARKET FOR REGISTRANT'S COMMON EQUITY, RELATED STOCKHOLDER MATTERS AND ISSUER PURCHASES OF EQUITY SEC...`
 - End evidence: `ITEM 7. MANAGEMENT'S DISCUSSION AND ANALYSIS OF FINANCIAL CONDITION AND RESULTS OF OPERATIONS`
@@ -5702,6 +6433,8 @@ End snippet:
 - Status: `not_present`
 - Confidence: `high` `1.00`
 - Text length: `0`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `0`
 - Warnings: none
 
 Start snippet:
@@ -5715,9 +6448,11 @@ End snippet:
 #### Item 7
 
 - Status: `success`
-- Confidence: `high` `0.90`
+- Confidence: `high` `1.00`
 - Text length: `265`
-- Warnings: `Section length is outside the expected first-pass range.`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `1436`
+- Warnings: none
 - Start evidence: `ITEM 7. MANAGEMENT'S DISCUSSION AND ANALYSIS OF FINANCIAL CONDITION AND RESULTS OF OPERATIONS`
 - End evidence: `ITEM 7A. QUANTITATIVE AND QUALITATIVE DISCLOSURES ABOUT MARKET RISK`
 - Recommended actions: `needs_external_source:external_or_other_document_reference`
@@ -5733,9 +6468,11 @@ End snippet:
 #### Item 7A
 
 - Status: `success`
-- Confidence: `high` `0.90`
+- Confidence: `high` `1.00`
 - Text length: `411`
-- Warnings: `Section length is outside the expected first-pass range.`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `1889`
+- Warnings: none
 - Start evidence: `ITEM 7A. QUANTITATIVE AND QUALITATIVE DISCLOSURES ABOUT MARKET RISK`
 - End evidence: `ITEM 8. FINANCIAL STATEMENTS AND SUPPLEMENTARY DATA`
 - Recommended actions: `needs_external_source:external_or_other_document_reference`
@@ -5751,12 +6488,13 @@ End snippet:
 #### Item 8
 
 - Status: `success`
-- Confidence: `high` `0.90`
+- Confidence: `high` `1.00`
 - Text length: `737`
-- Warnings: `Section length is outside the expected first-pass range.`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `3204`
+- Warnings: none
 - Start evidence: `ITEM 8. FINANCIAL STATEMENTS AND SUPPLEMENTARY DATA`
 - End evidence: `ITEM 9. CHANGES IN AND DISAGREEMENTS WITH ACCOUNTANTS ON ACCOUNTING AND FINANCIAL DISCLOSURE`
-- Recommended actions: `needs_external_source:external_or_other_document_reference`
 
 Start snippet:
 
@@ -5771,6 +6509,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `99`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `1122`
 - Warnings: none
 - Start evidence: `ITEM 9. CHANGES IN AND DISAGREEMENTS WITH ACCOUNTANTS ON ACCOUNTING AND FINANCIAL DISCLOSURE`
 - End evidence: `ITEM 9A. CONTROLS AND PROCEDURES`
@@ -5788,9 +6528,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `2674`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `6079`
 - Warnings: none
 - Start evidence: `ITEM 9A. CONTROLS AND PROCEDURES`
 - End evidence: `ITEM 9B. OTHER INFORMATION`
+- Recommended actions: `inspect_only:exhibit_index_detected`
 
 Start snippet:
 
@@ -5805,6 +6548,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `278`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `1756`
 - Warnings: none
 - Start evidence: `ITEM 9B. OTHER INFORMATION`
 - End evidence: `ITEM 9C. DISCLOSURE REGARDING FOREIGN JURISDICTIONS THAT PREVENT INSPECTIONS`
@@ -5822,6 +6567,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `93`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `749`
 - Warnings: none
 - Start evidence: `ITEM 9C. DISCLOSURE REGARDING FOREIGN JURISDICTIONS THAT PREVENT INSPECTIONS`
 - End evidence: `PART III ITEM 10. DIRECTORS, EXECUTIVE OFFICERS AND CORPORATE GOVERNANCE`
@@ -5839,6 +6586,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `877`
+- Raw tables/images: `2` / `0`
+- Raw structure bytes: `3700`
 - Warnings: none
 - Start evidence: `PART III ITEM 10. DIRECTORS, EXECUTIVE OFFICERS AND CORPORATE GOVERNANCE`
 - End evidence: `ITEM 11. EXECUTIVE COMPENSATION`
@@ -5856,6 +6605,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `302`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `1747`
 - Warnings: none
 - Start evidence: `ITEM 11. EXECUTIVE COMPENSATION`
 - End evidence: `ITEM 12. SECURITY OWNERSHIP OF CERTAIN BENEFICIAL OWNERS AND MANAGEMENT AND RELATED STOCKHOLDER MATTERS`
@@ -5873,6 +6624,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `1896`
+- Raw tables/images: `2` / `0`
+- Raw structure bytes: `14907`
 - Warnings: none
 - Start evidence: `ITEM 12. SECURITY OWNERSHIP OF CERTAIN BENEFICIAL OWNERS AND MANAGEMENT AND RELATED STOCKHOLDER MATTERS`
 - End evidence: `ITEM 13. CERTAIN RELATIONSHIPS AND RELATED TRANSACTIONS, AND DIRECTOR INDEPENDENCE`
@@ -5890,6 +6643,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `390`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `1316`
 - Warnings: none
 - Start evidence: `ITEM 13. CERTAIN RELATIONSHIPS AND RELATED TRANSACTIONS, AND DIRECTOR INDEPENDENCE`
 - End evidence: `ITEM 14. PRINCIPAL ACCOUNTING FEES AND SERVICES`
@@ -5906,44 +6661,52 @@ End snippet:
 
 - Status: `success`
 - Confidence: `high` `1.00`
-- Text length: `52`
+- Text length: `269`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `932`
 - Warnings: none
-- Start evidence: `Item 14. Principal Accounting Fees and Services`
-- End evidence: `PART IV Item 15. Exhibit and Financial Statement Schedules`
+- Start evidence: `ITEM 14. PRINCIPAL ACCOUNTING FEES AND SERVICES`
+- End evidence: `PART IV ITEM 15. EXHIBIT AND FINANCIAL STATEMENT SCHEDULES`
 
 Start snippet:
 
-> Item 14. Principal Accounting Fees and Services 33
+> ITEM 14. PRINCIPAL ACCOUNTING FEES AND SERVICES Incorporated by reference to the portion entitled “Audit Committee” of the section entitled “Corporate Governance” and the section entitled “Ratification of Independent Auditors” of the registrant’s 2024 Proxy...
 
 End snippet:
 
-> Item 14. Principal Accounting Fees and Services 33
+> ...INCIPAL ACCOUNTING FEES AND SERVICES Incorporated by reference to the portion entitled “Audit Committee” of the section entitled “Corporate Governance” and the section entitled “Ratification of Independent Auditors” of the registrant’s 2024 Proxy Statement.
 
 #### Item 15
 
 - Status: `success`
 - Confidence: `high` `1.00`
-- Text length: `64`
+- Text length: `218`
+- Raw tables/images: `2` / `0`
+- Raw structure bytes: `2389`
 - Warnings: none
-- Start evidence: `PART IV Item 15. Exhibit and Financial Statement Schedules`
-- End evidence: `Item 16. Form 10-K Summary`
+- Start evidence: `PART IV ITEM 15. EXHIBIT AND FINANCIAL STATEMENT SCHEDULES`
+- End evidence: `ITEM 16. FORM 10-K SUMMARY`
+- Recommended actions: `inspect_only:exhibit_index_detected`
 
 Start snippet:
 
-> PART IV Item 15. Exhibit and Financial Statement Schedules 33
+> PART IV ITEM 15. EXHIBIT AND FINANCIAL STATEMENT SCHEDULES (a)(1) and (2) Financial Statements: See Table of Contents of the Financial Section of this report. (b)(3) Exhibits: See Index to Exhibits of this report.
 
 End snippet:
 
-> PART IV Item 15. Exhibit and Financial Statement Schedules 33
+> PART IV ITEM 15. EXHIBIT AND FINANCIAL STATEMENT SCHEDULES (a)(1) and (2) Financial Statements: See Table of Contents of the Financial Section of this report. (b)(3) Exhibits: See Index to Exhibits of this report.
 
 #### Item 16
 
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `78`
+- Raw tables/images: `177` / `15`
+- Raw structure bytes: `5268080`
 - Warnings: none
 - Start evidence: `Item 16. Form 10-K Summary`
 - End evidence: `SIGNATURES`
+- Recommended actions: `inspect_only:exhibit_index_detected`
 
 Start snippet:
 
@@ -5967,9 +6730,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `91905`
+- Raw tables/images: `13` / `0`
+- Raw structure bytes: `583187`
 - Warnings: none
 - Start evidence: `PART I Item 1. Business`
 - End evidence: `Item 1A. Risk Factors`
+- Recommended actions: `inspect_only:section_reference_detected`, `inspect_only:exhibit_index_detected`
 
 Start snippet:
 
@@ -5984,9 +6750,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `12013`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `17169`
 - Warnings: none
 - Start evidence: `Item 1A. Risk Factors`
 - End evidence: `Item 1B. Unresolved Staff Comments`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -6001,6 +6770,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `41`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `388`
 - Warnings: none
 - Start evidence: `Item 1B. Unresolved Staff Comments`
 - End evidence: `Item 2. Properties`
@@ -6018,6 +6789,8 @@ End snippet:
 - Status: `not_present`
 - Confidence: `medium` `0.80`
 - Text length: `0`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `0`
 - Warnings: none
 
 Start snippet:
@@ -6033,6 +6806,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `532`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `938`
 - Warnings: none
 - Start evidence: `Item 2. Properties`
 - End evidence: `Item 3. Legal Proceedings`
@@ -6050,6 +6825,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `3113`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `5005`
 - Warnings: none
 - Start evidence: `Item 3. Legal Proceedings`
 - End evidence: `Item 4. Mine Safety Disclosures`
@@ -6067,9 +6844,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `314`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `702`
 - Warnings: none
 - Start evidence: `Item 4. Mine Safety Disclosures`
 - End evidence: `PART II Item 5. Market for the Registrant’s Common Equity, Related Stockholder Matters and Issuer Purchases of Equity...`
+- Recommended actions: `inspect_only:exhibit_index_detected`
 
 Start snippet:
 
@@ -6084,6 +6864,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `2014`
+- Raw tables/images: `3` / `0`
+- Raw structure bytes: `15793`
 - Warnings: none
 - Start evidence: `PART II Item 5. Market for the Registrant’s Common Equity, Related Stockholder Matters and Issuer Purchases of Equity...`
 - End evidence: `Item 6. Selected Financial Data`
@@ -6101,6 +6883,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `117`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `705`
 - Warnings: none
 - Start evidence: `Item 6. Selected Financial Data`
 - End evidence: `Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations`
@@ -6116,12 +6900,13 @@ End snippet:
 #### Item 7
 
 - Status: `success`
-- Confidence: `high` `0.90`
+- Confidence: `high` `1.00`
 - Text length: `278`
-- Warnings: `Section length is outside the expected first-pass range.`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `626`
+- Warnings: none
 - Start evidence: `Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations`
 - End evidence: `Item 7A. Quantitative and Qualitative Disclosures About Market Risk`
-- Recommended actions: `needs_external_source:external_or_other_document_reference`
 
 Start snippet:
 
@@ -6134,12 +6919,13 @@ End snippet:
 #### Item 7A
 
 - Status: `success`
-- Confidence: `high` `0.90`
+- Confidence: `high` `1.00`
 - Text length: `451`
-- Warnings: `Section length is outside the expected first-pass range.`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `882`
+- Warnings: none
 - Start evidence: `Item 7A. Quantitative and Qualitative Disclosures About Market Risk`
 - End evidence: `Item 8. Financial Statements and Supplementary Data`
-- Recommended actions: `needs_external_source:external_or_other_document_reference`
 
 Start snippet:
 
@@ -6152,12 +6938,13 @@ End snippet:
 #### Item 8
 
 - Status: `success`
-- Confidence: `high` `0.90`
+- Confidence: `high` `1.00`
 - Text length: `187`
-- Warnings: `Section length is outside the expected first-pass range.`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `567`
+- Warnings: none
 - Start evidence: `Item 8. Financial Statements and Supplementary Data`
 - End evidence: `Item 9. Changes in and Disagreements With Accountants on Accounting and Financial Disclosure`
-- Recommended actions: `needs_external_source:external_or_other_document_reference`
 
 Start snippet:
 
@@ -6172,6 +6959,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `103`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `972`
 - Warnings: none
 - Start evidence: `Item 9. Changes in and Disagreements With Accountants on Accounting and Financial Disclosure`
 - End evidence: `Item 9A. Controls and Procedures`
@@ -6189,6 +6978,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `2155`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `4539`
 - Warnings: none
 - Start evidence: `Item 9A. Controls and Procedures`
 - End evidence: `Item 9B. Other Information`
@@ -6206,6 +6997,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `33`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `380`
 - Warnings: none
 - Start evidence: `Item 9B. Other Information`
 - End evidence: `PART III Item 10. Directors, Executive Officers and Corporate Governance`
@@ -6223,6 +7016,8 @@ End snippet:
 - Status: `not_present`
 - Confidence: `medium` `0.80`
 - Text length: `0`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `0`
 - Warnings: none
 
 Start snippet:
@@ -6238,6 +7033,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `3269`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `17921`
 - Warnings: none
 - Start evidence: `PART III Item 10. Directors, Executive Officers and Corporate Governance`
 - End evidence: `Item 11. Executive Compensation`
@@ -6255,9 +7052,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `1200`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `2472`
 - Warnings: none
 - Start evidence: `Item 11. Executive Compensation`
 - End evidence: `Item 12. Security Ownership of Certain Beneficial Owners and Management and Related Stockholder Matters`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -6272,6 +7072,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `606`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `1422`
 - Warnings: none
 - Start evidence: `Item 12. Security Ownership of Certain Beneficial Owners and Management and Related Stockholder Matters`
 - End evidence: `Item 13. Certain Relationships and Related Transactions, and Director Independence`
@@ -6289,6 +7091,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `551`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `1446`
 - Warnings: none
 - Start evidence: `Item 13. Certain Relationships and Related Transactions, and Director Independence`
 - End evidence: `Item 14. Principal Accounting Fees and Services`
@@ -6306,6 +7110,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `329`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `1366`
 - Warnings: none
 - Start evidence: `Item 14. Principal Accounting Fees and Services`
 - End evidence: `PART IV Item 15. Exhibits, Financial Statement Schedules`
@@ -6323,9 +7129,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `1886`
+- Raw tables/images: `146` / `4`
+- Raw structure bytes: `4851475`
 - Warnings: none
 - Start evidence: `PART IV Item 15. Exhibits, Financial Statement Schedules`
 - End evidence: `SIGNATURES`
+- Recommended actions: `inspect_only:exhibit_index_detected`
 
 Start snippet:
 
@@ -6340,6 +7149,8 @@ End snippet:
 - Status: `not_present`
 - Confidence: `medium` `0.80`
 - Text length: `0`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `0`
 - Warnings: none
 
 Start snippet:
@@ -6392,9 +7203,12 @@ TOC entries:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `76795`
+- Raw tables/images: `26` / `0`
+- Raw structure bytes: `531856`
 - Warnings: none
 - Start evidence: `PART I Item 1. Business`
 - End evidence: `Item 1A. Risk Factors`
+- Recommended actions: `inspect_only:section_reference_detected`, `inspect_only:exhibit_index_detected`
 
 Start snippet:
 
@@ -6409,9 +7223,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `35055`
+- Raw tables/images: `6` / `0`
+- Raw structure bytes: `55008`
 - Warnings: none
 - Start evidence: `Item 1A. Risk Factors`
 - End evidence: `Item 1B. Unresolved Staff Comments`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -6426,6 +7243,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `41`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `421`
 - Warnings: none
 - Start evidence: `Item 1B. Unresolved Staff Comments`
 - End evidence: `Item 1C. Cybersecurity`
@@ -6443,9 +7262,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `7732`
+- Raw tables/images: `2` / `0`
+- Raw structure bytes: `13603`
 - Warnings: none
 - Start evidence: `Item 1C. Cybersecurity`
 - End evidence: `Item 2. Properties`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -6460,6 +7282,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `483`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `1379`
 - Warnings: none
 - Start evidence: `Item 2. Properties`
 - End evidence: `Item 3. Legal Proceedings`
@@ -6477,6 +7301,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `2752`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `4570`
 - Warnings: none
 - Start evidence: `Item 3. Legal Proceedings`
 - End evidence: `Item 4. Mine Safety Disclosures`
@@ -6494,6 +7320,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `71`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `1725`
 - Warnings: none
 - Start evidence: `Item 4. Mine Safety Disclosures`
 - End evidence: `PART II Item 5. Market for the Registrant’s Common Equity, Related Stockholder Matters and Issuer Purchases of Equity...`
@@ -6511,6 +7339,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `1479`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `13279`
 - Warnings: none
 - Start evidence: `PART II Item 5. Market for the Registrant’s Common Equity, Related Stockholder Matters and Issuer Purchases of Equity...`
 - End evidence: `Item 7A. Quantitative and Qualitative Disclosures About Market Risk`
@@ -6528,6 +7358,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `0.85`
 - Text length: `262`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `1354`
 - Warnings: `Start heading has TOC-like signals.`
 - Start evidence: `Item 6. [Reserved]`
 - End evidence: `Item 7A. Quantitative and Qualitative Disclosures About Market Risk`
@@ -6546,10 +7378,12 @@ End snippet:
 - Status: `success`
 - Confidence: `medium` `0.75`
 - Text length: `242`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `1116`
 - Warnings: `Start heading has TOC-like signals.`, `Section length is outside the expected first-pass range.`
 - Start evidence: `Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations`
 - End evidence: `Item 7A. Quantitative and Qualitative Disclosures About Market Risk`
-- Recommended actions: `inspect_only:start_toc_like_signal`, `needs_external_source:external_or_other_document_reference`
+- Recommended actions: `inspect_only:start_toc_like_signal`
 
 Start snippet:
 
@@ -6562,12 +7396,13 @@ End snippet:
 #### Item 7A
 
 - Status: `success`
-- Confidence: `high` `0.90`
+- Confidence: `high` `1.00`
 - Text length: `354`
-- Warnings: `Section length is outside the expected first-pass range.`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `1722`
+- Warnings: none
 - Start evidence: `Item 7A. Quantitative and Qualitative Disclosures About Market Risk`
 - End evidence: `Item 8. Financial Statements and Supplementary Data`
-- Recommended actions: `needs_external_source:external_or_other_document_reference`
 
 Start snippet:
 
@@ -6580,12 +7415,13 @@ End snippet:
 #### Item 8
 
 - Status: `success`
-- Confidence: `high` `0.90`
+- Confidence: `high` `1.00`
 - Text length: `158`
-- Warnings: `Section length is outside the expected first-pass range.`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `1039`
+- Warnings: none
 - Start evidence: `Item 8. Financial Statements and Supplementary Data`
 - End evidence: `Item 9. Changes in and Disagreements With Accountants on Accounting and Financial Disclosure`
-- Recommended actions: `needs_external_source:external_or_other_document_reference`
 
 Start snippet:
 
@@ -6600,6 +7436,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `99`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `452`
 - Warnings: none
 - Start evidence: `Item 9. Changes in and Disagreements With Accountants on Accounting and Financial Disclosure`
 - End evidence: `Item 9A. Controls and Procedures`
@@ -6617,6 +7455,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `2361`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `6226`
 - Warnings: none
 - Start evidence: `Item 9A. Controls and Procedures`
 - End evidence: `Item 9B. Other Information`
@@ -6634,6 +7474,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `1301`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `4813`
 - Warnings: none
 - Start evidence: `Item 9B. Other Information`
 - End evidence: `Item 9C. Disclosure Regarding Foreign Jurisdictions that Prevent Inspections`
@@ -6651,6 +7493,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `116`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `1805`
 - Warnings: none
 - Start evidence: `Item 9C. Disclosure Regarding Foreign Jurisdictions that Prevent Inspections`
 - End evidence: `PART III Item 10. Directors, Executive Officers and Corporate Governance`
@@ -6668,6 +7512,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `4166`
+- Raw tables/images: `2` / `0`
+- Raw structure bytes: `20507`
 - Warnings: none
 - Start evidence: `PART III Item 10. Directors, Executive Officers and Corporate Governance`
 - End evidence: `Item 11. Executive Compensation`
@@ -6685,9 +7531,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `987`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `1701`
 - Warnings: none
 - Start evidence: `Item 11. Executive Compensation`
 - End evidence: `Item 12. Security Ownership of Certain Beneficial Owners and Management and Related Stockholder Matters`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -6702,6 +7551,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `606`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `1267`
 - Warnings: none
 - Start evidence: `Item 12. Security Ownership of Certain Beneficial Owners and Management and Related Stockholder Matters`
 - End evidence: `Item 13. Certain Relationships and Related Transactions, and Director Independence`
@@ -6719,6 +7570,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `528`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `1303`
 - Warnings: none
 - Start evidence: `Item 13. Certain Relationships and Related Transactions, and Director Independence`
 - End evidence: `Item 14. Principal Accountant Fees and Services`
@@ -6736,9 +7589,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `0.90`
 - Text length: `313143`
+- Raw tables/images: `191` / `4`
+- Raw structure bytes: `4436506`
 - Warnings: `Section length is outside the expected first-pass range.`
 - Start evidence: `Item 14. Principal Accountant Fees and Services`
 - End evidence: `PART IV Item 15. Exhibit and Financial Statement Schedules`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -6753,9 +7609,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `1885`
+- Raw tables/images: `2` / `0`
+- Raw structure bytes: `42215`
 - Warnings: none
 - Start evidence: `PART IV Item 15. Exhibit and Financial Statement Schedules`
 - End evidence: `Item 16. Form 10-K Summary`
+- Recommended actions: `inspect_only:exhibit_index_detected`
 
 Start snippet:
 
@@ -6770,9 +7629,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `13455`
+- Raw tables/images: `9` / `0`
+- Raw structure bytes: `96618`
 - Warnings: none
 - Start evidence: `Item 16. Form 10-K Summary`
 - End evidence: `SIGNATURES`
+- Recommended actions: `inspect_only:section_reference_detected`, `inspect_only:exhibit_index_detected`
 
 Start snippet:
 
@@ -6796,9 +7658,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `38493`
+- Raw tables/images: `38` / `0`
+- Raw structure bytes: `418669`
 - Warnings: none
 - Start evidence: `PART I ITEM 1. BUSINESS`
 - End evidence: `ITEM 1A. RISK FACTORS`
+- Recommended actions: `inspect_only:section_reference_detected`, `inspect_only:exhibit_index_detected`
 
 Start snippet:
 
@@ -6813,9 +7678,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `40280`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `50055`
 - Warnings: none
 - Start evidence: `ITEM 1A. RISK FACTORS`
 - End evidence: `ITEM 1B. UNRESOLVED STAFF COMMENTS`
+- Recommended actions: `inspect_only:exhibit_index_detected`
 
 Start snippet:
 
@@ -6830,6 +7698,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `46`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `1338`
 - Warnings: none
 - Start evidence: `ITEM 1B. UNRESOLVED STAFF COMMENTS`
 - End evidence: `ITEM 2. PROPERTIES`
@@ -6847,6 +7717,8 @@ End snippet:
 - Status: `not_present`
 - Confidence: `medium` `0.80`
 - Text length: `0`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `0`
 - Warnings: none
 
 Start snippet:
@@ -6862,9 +7734,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `2887`
+- Raw tables/images: `3` / `0`
+- Raw structure bytes: `102438`
 - Warnings: none
 - Start evidence: `ITEM 2. PROPERTIES`
 - End evidence: `ITEM 3. LEGAL PROCEEDINGS`
+- Recommended actions: `inspect_only:section_reference_detected`, `inspect_only:exhibit_index_detected`
 
 Start snippet:
 
@@ -6879,6 +7754,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `8517`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `14691`
 - Warnings: none
 - Start evidence: `ITEM 3. LEGAL PROCEEDINGS`
 - End evidence: `ITEM 4. MINE SAFETY DISCLOSURES`
@@ -6896,6 +7773,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `53`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `871`
 - Warnings: none
 - Start evidence: `ITEM 4. MINE SAFETY DISCLOSURES`
 - End evidence: `PART II ITEM 5. MARKET FOR REGISTRANT'S COMMON EQUITY, RELATED STOCKHOLDER MATTERS AND ISSUER PURCHASES OF EQUITY SEC...`
@@ -6913,9 +7792,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `2264`
+- Raw tables/images: `3` / `0`
+- Raw structure bytes: `21643`
 - Warnings: none
 - Start evidence: `PART II ITEM 5. MARKET FOR REGISTRANT'S COMMON EQUITY, RELATED STOCKHOLDER MATTERS AND ISSUER PURCHASES OF EQUITY SEC...`
 - End evidence: `ITEM 6. SELECTED FINANCIAL DATA`
+- Recommended actions: `inspect_only:section_reference_detected`, `inspect_only:exhibit_index_detected`
 
 Start snippet:
 
@@ -6930,9 +7812,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `293`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `1397`
 - Warnings: none
 - Start evidence: `ITEM 6. SELECTED FINANCIAL DATA`
 - End evidence: `ITEM 7. MANAGEMENT'S DISCUSSION AND ANALYSIS OF FINANCIAL CONDITION AND RESULTS OF OPERATIONS`
+- Recommended actions: `inspect_only:exhibit_index_detected`
 
 Start snippet:
 
@@ -6945,12 +7830,14 @@ End snippet:
 #### Item 7
 
 - Status: `success`
-- Confidence: `high` `0.90`
+- Confidence: `high` `1.00`
 - Text length: `413`
-- Warnings: `Section length is outside the expected first-pass range.`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `1517`
+- Warnings: none
 - Start evidence: `ITEM 7. MANAGEMENT'S DISCUSSION AND ANALYSIS OF FINANCIAL CONDITION AND RESULTS OF OPERATIONS`
 - End evidence: `ITEM 7A. QUANTITATIVE AND QUALITATIVE DISCLOSURES ABOUT MARKET RISK`
-- Recommended actions: `needs_external_source:external_or_other_document_reference`
+- Recommended actions: `inspect_only:exhibit_index_detected`
 
 Start snippet:
 
@@ -6963,12 +7850,14 @@ End snippet:
 #### Item 7A
 
 - Status: `success`
-- Confidence: `high` `0.90`
+- Confidence: `high` `1.00`
 - Text length: `423`
-- Warnings: `Section length is outside the expected first-pass range.`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `1527`
+- Warnings: none
 - Start evidence: `ITEM 7A. QUANTITATIVE AND QUALITATIVE DISCLOSURES ABOUT MARKET RISK`
 - End evidence: `ITEM 8. FINANCIAL STATEMENTS AND SUPPLEMENTARY DATA`
-- Recommended actions: `needs_external_source:external_or_other_document_reference`
+- Recommended actions: `inspect_only:exhibit_index_detected`
 
 Start snippet:
 
@@ -6981,12 +7870,14 @@ End snippet:
 #### Item 8
 
 - Status: `success`
-- Confidence: `high` `0.90`
+- Confidence: `high` `1.00`
 - Text length: `606`
-- Warnings: `Section length is outside the expected first-pass range.`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `1898`
+- Warnings: none
 - Start evidence: `ITEM 8. FINANCIAL STATEMENTS AND SUPPLEMENTARY DATA`
 - End evidence: `ITEM 9. CHANGES IN AND DISAGREEMENTS WITH ACCOUNTANTS ON ACCOUNTING AND FINANCIAL DISCLOSURE`
-- Recommended actions: `needs_external_source:external_or_other_document_reference`
+- Recommended actions: `inspect_only:exhibit_index_detected`
 
 Start snippet:
 
@@ -7001,6 +7892,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `100`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `1203`
 - Warnings: none
 - Start evidence: `ITEM 9. CHANGES IN AND DISAGREEMENTS WITH ACCOUNTANTS ON ACCOUNTING AND FINANCIAL DISCLOSURE`
 - End evidence: `ITEM 9A. CONTROLS AND PROCEDURES`
@@ -7018,9 +7911,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `4370`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `6562`
 - Warnings: none
 - Start evidence: `ITEM 9A. CONTROLS AND PROCEDURES`
 - End evidence: `ITEM 9B. OTHER INFORMATION`
+- Recommended actions: `inspect_only:section_reference_detected`, `inspect_only:exhibit_index_detected`
 
 Start snippet:
 
@@ -7035,6 +7931,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `38`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `856`
 - Warnings: none
 - Start evidence: `ITEM 9B. OTHER INFORMATION`
 - End evidence: `PART III ITEM 10. DIRECTORS, EXECUTIVE OFFICERS AND CORPORATE GOVERNANCE`
@@ -7052,6 +7950,8 @@ End snippet:
 - Status: `not_present`
 - Confidence: `medium` `0.80`
 - Text length: `0`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `0`
 - Warnings: none
 
 Start snippet:
@@ -7067,9 +7967,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `2068`
+- Raw tables/images: `2` / `0`
+- Raw structure bytes: `4522`
 - Warnings: none
 - Start evidence: `PART III ITEM 10. DIRECTORS, EXECUTIVE OFFICERS AND CORPORATE GOVERNANCE`
 - End evidence: `ITEM 11. EXECUTIVE COMPENSATION`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -7084,9 +7987,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `444`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `1553`
 - Warnings: none
 - Start evidence: `ITEM 11. EXECUTIVE COMPENSATION`
 - End evidence: `ITEM 12. SECURITY OWNERSHIP OF CERTAIN BENEFICIAL OWNERS AND MANAGEMENT AND RELATED STOCKHOLDER MATTERS`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -7101,9 +8007,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `466`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `1569`
 - Warnings: none
 - Start evidence: `ITEM 12. SECURITY OWNERSHIP OF CERTAIN BENEFICIAL OWNERS AND MANAGEMENT AND RELATED STOCKHOLDER MATTERS`
 - End evidence: `ITEM 13. CERTAIN RELATIONSHIPS AND RELATED TRANSACTIONS, AND DIRECTOR INDEPENDENCE`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -7118,9 +8027,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `427`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `1548`
 - Warnings: none
 - Start evidence: `ITEM 13. CERTAIN RELATIONSHIPS AND RELATED TRANSACTIONS, AND DIRECTOR INDEPENDENCE`
 - End evidence: `ITEM 14. PRINCIPAL ACCOUNTING FEES AND SERVICES`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -7135,9 +8047,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `356`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `1191`
 - Warnings: none
 - Start evidence: `ITEM 14. PRINCIPAL ACCOUNTING FEES AND SERVICES`
 - End evidence: `PART IV ITEM 15. EXHIBITS, FINANCIAL STATEMENT SCHEDULES`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -7152,9 +8067,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `885`
+- Raw tables/images: `9` / `0`
+- Raw structure bytes: `162803`
 - Warnings: none
 - Start evidence: `PART IV ITEM 15. EXHIBITS, FINANCIAL STATEMENT SCHEDULES`
 - End evidence: `SIGNATURES`
+- Recommended actions: `inspect_only:section_reference_detected`, `inspect_only:exhibit_index_detected`
 
 Start snippet:
 
@@ -7169,6 +8087,8 @@ End snippet:
 - Status: `not_present`
 - Confidence: `medium` `0.80`
 - Text length: `0`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `0`
 - Warnings: none
 
 Start snippet:
@@ -7220,9 +8140,12 @@ TOC entries:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `46313`
+- Raw tables/images: `4` / `0`
+- Raw structure bytes: `106148`
 - Warnings: none
 - Start evidence: `ITEM 1. BUSINESS`
 - End evidence: `ITEM 1A. RISK FACTORS`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -7237,6 +8160,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `78168`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `102722`
 - Warnings: none
 - Start evidence: `ITEM 1A. RISK FACTORS`
 - End evidence: `ITEM 1B. UNRESOLVED STAFF COMMENTS`
@@ -7254,6 +8179,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `46`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `1438`
 - Warnings: none
 - Start evidence: `ITEM 1B. UNRESOLVED STAFF COMMENTS`
 - End evidence: `ITEM 2. PROPERTIES`
@@ -7271,6 +8198,8 @@ End snippet:
 - Status: `not_present`
 - Confidence: `high` `1.00`
 - Text length: `0`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `0`
 - Warnings: none
 
 Start snippet:
@@ -7286,6 +8215,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `5347`
+- Raw tables/images: `4` / `0`
+- Raw structure bytes: `203803`
 - Warnings: none
 - Start evidence: `ITEM 2. PROPERTIES`
 - End evidence: `ITEM 3. LEGAL PROCEEDINGS`
@@ -7303,9 +8234,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `10417`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `19038`
 - Warnings: none
 - Start evidence: `ITEM 3. LEGAL PROCEEDINGS`
 - End evidence: `ITEM 4. MINE SAFETY DISCLOSURES`
+- Recommended actions: `inspect_only:exhibit_index_detected`
 
 Start snippet:
 
@@ -7320,6 +8254,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `53`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `1136`
 - Warnings: none
 - Start evidence: `ITEM 4. MINE SAFETY DISCLOSURES`
 - End evidence: `PART II ITEM 5. MARKET FOR REGISTRANT'S COMMON EQUITY, RELATED STOCKHOLDER MATTERS AND ISSUER PURCHASES OF EQUITY SEC...`
@@ -7337,6 +8273,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `2969`
+- Raw tables/images: `5` / `1`
+- Raw structure bytes: `29982`
 - Warnings: none
 - Start evidence: `PART II ITEM 5. MARKET FOR REGISTRANT'S COMMON EQUITY, RELATED STOCKHOLDER MATTERS AND ISSUER PURCHASES OF EQUITY SEC...`
 - End evidence: `ITEM 6. RESERVED`
@@ -7352,9 +8290,11 @@ End snippet:
 #### Item 6
 
 - Status: `success`
-- Confidence: `high` `0.90`
+- Confidence: `high` `1.00`
 - Text length: `21`
-- Warnings: `Section length is outside the expected first-pass range.`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `1308`
+- Warnings: none
 - Start evidence: `ITEM 6. RESERVED`
 - End evidence: `ITEM 7. MANAGEMENT'S DISCUSSION AND ANALYSIS OF FINANCIAL CONDITION AND RESULTS OF OPERATIONS`
 
@@ -7371,9 +8311,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `65944`
+- Raw tables/images: `19` / `0`
+- Raw structure bytes: `323627`
 - Warnings: none
 - Start evidence: `ITEM 7. MANAGEMENT'S DISCUSSION AND ANALYSIS OF FINANCIAL CONDITION AND RESULTS OF OPERATIONS`
 - End evidence: `ITEM 7A. QUANTITATIVE AND QUALITATIVE DISCLOSURES ABOUT MARKET RISK`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -7388,6 +8331,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `5347`
+- Raw tables/images: `2` / `0`
+- Raw structure bytes: `51189`
 - Warnings: none
 - Start evidence: `ITEM 7A. QUANTITATIVE AND QUALITATIVE DISCLOSURES ABOUT MARKET RISK`
 - End evidence: `ITEM 8. FINANCIAL STATEMENTS AND SUPPLEMENTARY DATA`
@@ -7405,9 +8350,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `111834`
+- Raw tables/images: `44` / `0`
+- Raw structure bytes: `1347688`
 - Warnings: none
 - Start evidence: `ITEM 8. FINANCIAL STATEMENTS AND SUPPLEMENTARY DATA`
 - End evidence: `ITEM 9. CHANGES IN AND DISAGREEMENTS WITH ACCOUNTANTS ON ACCOUNTING AND FINANCIAL DISCLOSURE`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -7422,6 +8370,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `100`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `1104`
 - Warnings: none
 - Start evidence: `ITEM 9. CHANGES IN AND DISAGREEMENTS WITH ACCOUNTANTS ON ACCOUNTING AND FINANCIAL DISCLOSURE`
 - End evidence: `ITEM 9A. CONTROLS AND PROCEDURES`
@@ -7439,6 +8389,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `4560`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `6928`
 - Warnings: none
 - Start evidence: `ITEM 9A. CONTROLS AND PROCEDURES`
 - End evidence: `ITEM 9B. OTHER INFORMATION`
@@ -7456,6 +8408,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `34`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `1014`
 - Warnings: none
 - Start evidence: `ITEM 9B. OTHER INFORMATION`
 - End evidence: `ITEM 9C. DISCLOSURE REGARDING FOREIGN JURISDICTIONS THAT PREVENT INSPECTIONS`
@@ -7473,6 +8427,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `98`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `1148`
 - Warnings: none
 - Start evidence: `ITEM 9C. DISCLOSURE REGARDING FOREIGN JURISDICTIONS THAT PREVENT INSPECTIONS`
 - End evidence: `PART III ITEM 10. DIRECTORS, EXECUTIVE OFFICERS AND CORPORATE GOVERNANCE`
@@ -7490,9 +8446,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `1809`
+- Raw tables/images: `2` / `0`
+- Raw structure bytes: `4813`
 - Warnings: none
 - Start evidence: `PART III ITEM 10. DIRECTORS, EXECUTIVE OFFICERS AND CORPORATE GOVERNANCE`
 - End evidence: `ITEM 11. EXECUTIVE COMPENSATION`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -7507,9 +8466,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `257`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `1268`
 - Warnings: none
 - Start evidence: `ITEM 11. EXECUTIVE COMPENSATION`
 - End evidence: `ITEM 12. SECURITY OWNERSHIP OF CERTAIN BENEFICIAL OWNERS AND MANAGEMENT AND RELATED STOCKHOLDER MATTERS`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -7524,9 +8486,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `283`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `1287`
 - Warnings: none
 - Start evidence: `ITEM 12. SECURITY OWNERSHIP OF CERTAIN BENEFICIAL OWNERS AND MANAGEMENT AND RELATED STOCKHOLDER MATTERS`
 - End evidence: `ITEM 13. CERTAIN RELATIONSHIPS AND RELATED TRANSACTIONS, AND DIRECTOR INDEPENDENCE`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -7541,6 +8506,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `86`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `1413`
 - Warnings: none
 - Start evidence: `Item 13 Certain Relationships and Related Transactions, and Director Independence`
 - End evidence: `Item 14 Principal Accounting Fees and Services`
@@ -7557,52 +8524,60 @@ End snippet:
 
 - Status: `success`
 - Confidence: `high` `1.00`
-- Text length: `51`
+- Text length: `259`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `1326`
 - Warnings: none
-- Start evidence: `Item 14 Principal Accounting Fees and Services`
-- End evidence: `Part IV Item 15 Exhibits, Financial Statement Schedules`
+- Start evidence: `ITEM 14. PRINCIPAL ACCOUNTING FEES AND SERVICES`
+- End evidence: `PART IV ITEM 15. EXHIBITS, FINANCIAL STATEMENT SCHEDULES`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
-> Item 14 Principal Accounting Fees and Services 82
+> ITEM 14. PRINCIPAL ACCOUNTING FEES AND SERVICES The information required by this Item 14 is incorporated herein by reference to the information under the caption "Proposal No. 4 – Ratification of Independent Accountants" included in our Proxy Statement. 82
 
 End snippet:
 
-> Item 14 Principal Accounting Fees and Services 82
+> ITEM 14. PRINCIPAL ACCOUNTING FEES AND SERVICES The information required by this Item 14 is incorporated herein by reference to the information under the caption "Proposal No. 4 – Ratification of Independent Accountants" included in our Proxy Statement. 82
 
 #### Item 15
 
 - Status: `success`
 - Confidence: `high` `1.00`
-- Text length: `61`
+- Text length: `9956`
+- Raw tables/images: `8` / `0`
+- Raw structure bytes: `61409`
 - Warnings: none
-- Start evidence: `Part IV Item 15 Exhibits, Financial Statement Schedules`
-- End evidence: `Item 16 Form 10-K Summary`
+- Start evidence: `PART IV ITEM 15. EXHIBITS, FINANCIAL STATEMENT SCHEDULES`
+- End evidence: `ITEM 16. FORM 10-K SUMMARY`
+- Recommended actions: `inspect_only:section_reference_detected`, `inspect_only:exhibit_index_detected`
 
 Start snippet:
 
-> Part IV Item 15 Exhibits, Financial Statement Schedules 83
+> PART IV ITEM 15. EXHIBITS, FINANCIAL STATEMENT SCHEDULES (a) Documents filed as part of this report are as follows: 1. Financial Statements: See the Financial Statements in "Item 8. Financial Statements and Supplementary Data." 2. Financial Statement Schedu...
 
 End snippet:
 
-> Part IV Item 15 Exhibits, Financial Statement Schedules 83
+> ...holders of long-term debt securities of the Registrant are omitted pursuant to Item601(b)(4)(iii) of Regulation S-K. The Company hereby undertakes to furnish to the SEC, upon request, copies of any such instruments. (c) Financial Statement Schedules: None.
 
 #### Item 16
 
 - Status: `success`
 - Confidence: `high` `1.00`
-- Text length: `30`
+- Text length: `38`
+- Raw tables/images: `3` / `0`
+- Raw structure bytes: `41269`
 - Warnings: none
-- Start evidence: `Item 16 Form 10-K Summary`
+- Start evidence: `ITEM 16. FORM 10-K SUMMARY`
 - End evidence: `SIGNATURES`
 
 Start snippet:
 
-> Item 16 Form 10-K Summary 85
+> ITEM 16. FORM 10-K SUMMARY None. 85
 
 End snippet:
 
-> Item 16 Form 10-K Summary 85
+> ITEM 16. FORM 10-K SUMMARY None. 85
 
 ### amzn_2014_10k
 
@@ -7643,9 +8618,12 @@ TOC entries:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `11769`
+- Raw tables/images: `4` / `0`
+- Raw structure bytes: `46994`
 - Warnings: none
 - Start evidence: `PART I Item 1. Business`
 - End evidence: `Item 1A. Risk Factors`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -7660,6 +8638,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `43459`
+- Raw tables/images: `59` / `0`
+- Raw structure bytes: `89100`
 - Warnings: none
 - Start evidence: `Item 1A. Risk Factors`
 - End evidence: `Item 1B. Unresolved Staff Comments`
@@ -7677,9 +8657,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `1320`
+- Raw tables/images: `5` / `0`
+- Raw structure bytes: `25500`
 - Warnings: none
 - Start evidence: `Item 1B. Unresolved Staff Comments`
 - End evidence: `Item 4. Mine Safety Disclosures`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -7694,6 +8677,8 @@ End snippet:
 - Status: `not_present`
 - Confidence: `high` `1.00`
 - Text length: `0`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `0`
 - Warnings: none
 
 Start snippet:
@@ -7709,10 +8694,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `0.85`
 - Text length: `1253`
+- Raw tables/images: `4` / `0`
+- Raw structure bytes: `23717`
 - Warnings: `Start heading has TOC-like signals.`
 - Start evidence: `Item 2. Properties`
 - End evidence: `Item 4. Mine Safety Disclosures`
-- Recommended actions: `inspect_only:start_toc_like_signal`
+- Recommended actions: `inspect_only:start_toc_like_signal`, `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -7727,10 +8714,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `0.85`
 - Text length: `152`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `1408`
 - Warnings: `Start heading has TOC-like signals.`
 - Start evidence: `Item 3. Legal Proceedings`
 - End evidence: `Item 4. Mine Safety Disclosures`
-- Recommended actions: `inspect_only:start_toc_like_signal`
+- Recommended actions: `inspect_only:start_toc_like_signal`, `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -7745,6 +8734,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `72`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `1327`
 - Warnings: none
 - Start evidence: `Item 4. Mine Safety Disclosures`
 - End evidence: `PART II Item 5. Market for the Registrant’s Common Stock, Related Shareholder Matters, and Issuer Purchases of Equity...`
@@ -7762,9 +8753,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `1235`
+- Raw tables/images: `3` / `0`
+- Raw structure bytes: `22297`
 - Warnings: none
 - Start evidence: `PART II Item 5. Market for the Registrant’s Common Stock, Related Shareholder Matters, and Issuer Purchases of Equity...`
 - End evidence: `Item 6. Selected Consolidated Financial Data`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -7779,9 +8773,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `0.90`
 - Text length: `2423`
+- Raw tables/images: `4` / `0`
+- Raw structure bytes: `77789`
 - Warnings: `Start heading does not contain the expected canonical title.`
 - Start evidence: `Item 6. Selected Consolidated Financial Data`
 - End evidence: `Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -7796,9 +8793,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `64890`
+- Raw tables/images: `28` / `0`
+- Raw structure bytes: `527222`
 - Warnings: none
 - Start evidence: `Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations`
 - End evidence: `Item 7A. Quantitative and Qualitative Disclosures About Market Risk`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -7813,9 +8813,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `6892`
+- Raw tables/images: `3` / `0`
+- Raw structure bytes: `103147`
 - Warnings: none
 - Start evidence: `Item 7A. Quantitative and Qualitative Disclosures About Market Risk`
 - End evidence: `Item 8. Financial Statements and Supplementary Data`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -7830,6 +8833,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `122153`
+- Raw tables/images: `66` / `0`
+- Raw structure bytes: `1211173`
 - Warnings: none
 - Start evidence: `Item 8. Financial Statements and Supplementary Data`
 - End evidence: `Item 9. Changes in and Disagreements with Accountants On Accounting and Financial Disclosure`
@@ -7847,6 +8852,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `100`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `1269`
 - Warnings: none
 - Start evidence: `Item 9. Changes in and Disagreements with Accountants On Accounting and Financial Disclosure`
 - End evidence: `Item 9A. Controls and Procedures`
@@ -7864,6 +8871,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `0.90`
 - Text length: `7010`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `13593`
 - Warnings: `End heading has TOC-like signals.`
 - Start evidence: `Item 9A. Controls and Procedures`
 - End evidence: `Item 9B. Other Information`
@@ -7881,6 +8890,8 @@ End snippet:
 - Status: `success`
 - Confidence: `medium` `0.75`
 - Text length: `34`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `714`
 - Warnings: `Start heading has TOC-like signals.`, `End heading has TOC-like signals.`
 - Start evidence: `Item 9B. Other Information`
 - End evidence: `PART III Item 10. Directors, Executive Officers, and Corporate Governance`
@@ -7899,6 +8910,8 @@ End snippet:
 - Status: `not_present`
 - Confidence: `high` `1.00`
 - Text length: `0`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `0`
 - Warnings: none
 
 Start snippet:
@@ -7914,10 +8927,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `0.85`
 - Text length: `1545`
+- Raw tables/images: `4` / `0`
+- Raw structure bytes: `5286`
 - Warnings: `Start heading has TOC-like signals.`
 - Start evidence: `PART III Item 10. Directors, Executive Officers, and Corporate Governance`
 - End evidence: `Item 13. Certain Relationships and Related Transactions, and Director Independence`
-- Recommended actions: `inspect_only:start_toc_like_signal`
+- Recommended actions: `inspect_only:start_toc_like_signal`, `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -7932,10 +8947,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `0.85`
 - Text length: `484`
+- Raw tables/images: `2` / `0`
+- Raw structure bytes: `2514`
 - Warnings: `Start heading has TOC-like signals.`
 - Start evidence: `Item 11. Executive Compensation`
 - End evidence: `Item 13. Certain Relationships and Related Transactions, and Director Independence`
-- Recommended actions: `inspect_only:start_toc_like_signal`
+- Recommended actions: `inspect_only:start_toc_like_signal`, `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -7950,10 +8967,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `0.85`
 - Text length: `277`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `1293`
 - Warnings: `Start heading has TOC-like signals.`
 - Start evidence: `Item 12. Security Ownership of Certain Beneficial Owners and Management and Related Shareholder Matters`
 - End evidence: `Item 13. Certain Relationships and Related Transactions, and Director Independence`
-- Recommended actions: `inspect_only:start_toc_like_signal`
+- Recommended actions: `inspect_only:start_toc_like_signal`, `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -7968,6 +8987,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `87`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `865`
 - Warnings: none
 - Start evidence: `Item 13. Certain Relationships and Related Transactions, and Director Independence`
 - End evidence: `Item 14. Principal Accountant Fees and Services`
@@ -7985,6 +9006,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `52`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `1335`
 - Warnings: none
 - Start evidence: `Item 14. Principal Accountant Fees and Services`
 - End evidence: `PART IV Item 15. Exhibits, Financial Statement Schedules`
@@ -8002,9 +9025,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `62`
+- Raw tables/images: `185` / `0`
+- Raw structure bytes: `2209071`
 - Warnings: none
 - Start evidence: `PART IV Item 15. Exhibits, Financial Statement Schedules`
 - End evidence: `SIGNATURES`
+- Recommended actions: `inspect_only:exhibit_index_detected`
 
 Start snippet:
 
@@ -8019,6 +9045,8 @@ End snippet:
 - Status: `not_present`
 - Confidence: `high` `1.00`
 - Text length: `0`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `0`
 - Warnings: none
 
 Start snippet:
@@ -8071,9 +9099,12 @@ TOC entries:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `13347`
+- Raw tables/images: `4` / `0`
+- Raw structure bytes: `42838`
 - Warnings: none
 - Start evidence: `PART I Item 1. Business`
 - End evidence: `Item 1A. Risk Factors`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -8088,6 +9119,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `59144`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `105806`
 - Warnings: none
 - Start evidence: `Item 1A. Risk Factors`
 - End evidence: `Item 1B. Unresolved Staff Comments`
@@ -8105,6 +9138,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `42`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `1032`
 - Warnings: none
 - Start evidence: `Item 1B. Unresolved Staff Comments`
 - End evidence: `Item 1C. Cybersecurity`
@@ -8122,9 +9157,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `5511`
+- Raw tables/images: `5` / `0`
+- Raw structure bytes: `26996`
 - Warnings: none
 - Start evidence: `Item 1C. Cybersecurity`
 - End evidence: `Item 4. Mine Safety Disclosures`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -8139,10 +9177,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `0.85`
 - Text length: `79315`
+- Raw tables/images: `11` / `0`
+- Raw structure bytes: `201826`
 - Warnings: `Start heading has TOC-like signals.`
 - Start evidence: `Item 2. Properties`
 - End evidence: `Item 4. Mine Safety Disclosures`
-- Recommended actions: `inspect_only:start_toc_like_signal`
+- Recommended actions: `inspect_only:start_toc_like_signal`, `inspect_only:section_reference_detected`, `inspect_only:exhibit_index_detected`
 
 Start snippet:
 
@@ -8157,10 +9197,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `0.85`
 - Text length: `79290`
+- Raw tables/images: `11` / `0`
+- Raw structure bytes: `200709`
 - Warnings: `Start heading has TOC-like signals.`
 - Start evidence: `Item 3. Legal Proceedings`
 - End evidence: `Item 4. Mine Safety Disclosures`
-- Recommended actions: `inspect_only:start_toc_like_signal`
+- Recommended actions: `inspect_only:start_toc_like_signal`, `inspect_only:section_reference_detected`, `inspect_only:exhibit_index_detected`
 
 Start snippet:
 
@@ -8175,6 +9217,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `72`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `1610`
 - Warnings: none
 - Start evidence: `Item 4. Mine Safety Disclosures`
 - End evidence: `PART II Item 5. Market for the Registrant’s Common Stock, Related Shareholder Matters, and Issuer Purchases of Equity...`
@@ -8192,6 +9236,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `489`
+- Raw tables/images: `2` / `0`
+- Raw structure bytes: `3379`
 - Warnings: none
 - Start evidence: `PART II Item 5. Market for the Registrant’s Common Stock, Related Shareholder Matters, and Issuer Purchases of Equity...`
 - End evidence: `Item 6. Reserved`
@@ -8207,9 +9253,11 @@ End snippet:
 #### Item 6
 
 - Status: `success`
-- Confidence: `high` `0.90`
+- Confidence: `high` `1.00`
 - Text length: `40`
-- Warnings: `Section length is outside the expected first-pass range.`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `1685`
+- Warnings: none
 - Start evidence: `Item 6. Reserved`
 - End evidence: `Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations`
 
@@ -8226,9 +9274,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `48406`
+- Raw tables/images: `9` / `0`
+- Raw structure bytes: `187090`
 - Warnings: none
 - Start evidence: `Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations`
 - End evidence: `Item 7A. Quantitative and Qualitative Disclosures About Market Risk`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -8243,9 +9294,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `6276`
+- Raw tables/images: `2` / `0`
+- Raw structure bytes: `64855`
 - Warnings: none
 - Start evidence: `Item 7A. Quantitative and Qualitative Disclosures About Market Risk`
 - End evidence: `Item 8. Financial Statements and Supplementary Data`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -8260,6 +9314,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `124657`
+- Raw tables/images: `44` / `0`
+- Raw structure bytes: `1181972`
 - Warnings: none
 - Start evidence: `Item 8. Financial Statements and Supplementary Data`
 - End evidence: `Item 9. Changes in and Disagreements with Accountants On Accounting and Financial Disclosure`
@@ -8277,6 +9333,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `100`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `1089`
 - Warnings: none
 - Start evidence: `Item 9. Changes in and Disagreements with Accountants On Accounting and Financial Disclosure`
 - End evidence: `Item 9A. Controls and Procedures`
@@ -8294,6 +9352,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `7395`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `14326`
 - Warnings: none
 - Start evidence: `Item 9A. Controls and Procedures`
 - End evidence: `Item 9B. Other Information`
@@ -8311,6 +9371,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `2157`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `9245`
 - Warnings: none
 - Start evidence: `Item 9B. Other Information`
 - End evidence: `Item 9C. Disclosure Regarding Foreign Jurisdictions that Prevent Inspections`
@@ -8328,10 +9390,12 @@ End snippet:
 - Status: `success`
 - Confidence: `medium` `0.75`
 - Text length: `268364`
+- Raw tables/images: `72` / `0`
+- Raw structure bytes: `1654736`
 - Warnings: `Start heading has TOC-like signals.`, `Section length is outside the expected first-pass range.`
 - Start evidence: `Item 9C. Disclosure Regarding Foreign Jurisdictions that Prevent Inspections`
 - End evidence: `PART III Item 10. Directors, Executive Officers, and Corporate Governance`
-- Recommended actions: `inspect_only:start_toc_like_signal`
+- Recommended actions: `inspect_only:start_toc_like_signal`, `inspect_only:section_reference_detected`, `inspect_only:exhibit_index_detected`
 
 Start snippet:
 
@@ -8346,9 +9410,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `1085`
+- Raw tables/images: `2` / `0`
+- Raw structure bytes: `2770`
 - Warnings: none
 - Start evidence: `PART III Item 10. Directors, Executive Officers, and Corporate Governance`
 - End evidence: `Item 11. Executive Compensation`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -8363,9 +9430,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `205`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `1273`
 - Warnings: none
 - Start evidence: `Item 11. Executive Compensation`
 - End evidence: `Item 12. Security Ownership of Certain Beneficial Owners and Management and Related Shareholder Matters`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -8380,9 +9450,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `558`
+- Raw tables/images: `2` / `0`
+- Raw structure bytes: `3477`
 - Warnings: none
 - Start evidence: `Item 12. Security Ownership of Certain Beneficial Owners and Management and Related Shareholder Matters`
 - End evidence: `Item 14. Principal Accountant Fees and Services`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -8397,10 +9470,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `0.85`
 - Text length: `256`
+- Raw tables/images: `1` / `0`
+- Raw structure bytes: `1324`
 - Warnings: `Start heading has TOC-like signals.`
 - Start evidence: `Item 13. Certain Relationships and Related Transactions, and Director Independence`
 - End evidence: `Item 14. Principal Accountant Fees and Services`
-- Recommended actions: `inspect_only:start_toc_like_signal`
+- Recommended actions: `inspect_only:start_toc_like_signal`, `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -8415,9 +9490,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `244`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `1723`
 - Warnings: none
 - Start evidence: `Item 14. Principal Accountant Fees and Services`
 - End evidence: `PART IV Item 15. Exhibits, Financial Statement Schedules`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -8432,9 +9510,12 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `8493`
+- Raw tables/images: `5` / `0`
+- Raw structure bytes: `43878`
 - Warnings: none
 - Start evidence: `PART IV Item 15. Exhibits, Financial Statement Schedules`
 - End evidence: `Item 16. Form 10-K Summary`
+- Recommended actions: `inspect_only:exhibit_index_detected`
 
 Start snippet:
 
@@ -8449,6 +9530,8 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `1.00`
 - Text length: `31`
+- Raw tables/images: `84` / `0`
+- Raw structure bytes: `1718741`
 - Warnings: none
 - Start evidence: `Item 16. Form 10-K Summary`
 - End evidence: `SIGNATURES`

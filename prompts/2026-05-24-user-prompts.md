@@ -333,3 +333,9 @@ pg_2025_10k Item 7A: 本身僅一句sentence
 ```text
 好，做完在gold test 新增圖片跟table的還原度，並且跑一次gold test，我要看warning數以及分類
 ```
+
+## Seed Raw Media Coverage Request
+
+```text
+目前對於table 跟img的還原，只作用在某幾個filing中嗎，是的話推播到我目前的test filing中
+```

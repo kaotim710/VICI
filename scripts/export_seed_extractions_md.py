@@ -9,6 +9,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from sec_item_extractor import extract_items
+from sec_item_extractor.raw_structure import raw_section_fragment, raw_structure_counts
 
 
 MANIFEST_PATH = ROOT / "fixtures" / "gold" / "seed_filings.json"
@@ -42,7 +43,7 @@ def build_report(manifest: dict) -> str:
         content = path.read_text(encoding="utf-8", errors="replace")
         result = extract_items(content, target_items=manifest["items"], filing_id=filing["filing_id"])
         rows.append(_summary_row(filing, result))
-        detail_sections.append(_detail_section(filing, result))
+        detail_sections.append(_detail_section(filing, result, content))
 
     lines = [
         "# Seed 10-K Extraction Report",
@@ -92,7 +93,7 @@ def _item_summary_cell(item) -> str:
     return f"{item.status} / {item.confidence_level} {item.confidence_score:.2f}"
 
 
-def _detail_section(filing: dict, result) -> str:
+def _detail_section(filing: dict, result, content: str) -> str:
     lines = [
         f"### {filing['filing_id']}",
         "",
@@ -107,7 +108,7 @@ def _detail_section(filing: dict, result) -> str:
     if result.toc_entries:
         lines.extend(_toc_table(result.toc_entries))
     for item in result.item_results:
-        lines.extend(_item_detail(item))
+        lines.extend(_item_detail(item, content))
     return "\n".join(lines)
 
 
@@ -127,15 +128,19 @@ def _toc_table(entries) -> list[str]:
     return lines
 
 
-def _item_detail(item) -> list[str]:
+def _item_detail(item, content: str) -> list[str]:
     warnings = ", ".join(f"`{warning}`" for warning in item.warnings) if item.warnings else "none"
     text_length = len(item.text or "")
+    raw_structure = raw_structure_counts(content, item)
+    raw_bytes = _raw_bytes(content, item)
     lines = [
         f"#### Item {item.item}",
         "",
         f"- Status: `{item.status}`",
         f"- Confidence: `{item.confidence_level}` `{item.confidence_score:.2f}`",
         f"- Text length: `{text_length}`",
+        f"- Raw tables/images: `{raw_structure['table_count']}` / `{raw_structure['image_count']}`",
+        f"- Raw structure bytes: `{raw_bytes}`",
         f"- Warnings: {warnings}",
     ]
     if item.start_evidence:
@@ -170,6 +175,14 @@ def _edge_snippets(value: str, limit: int) -> tuple[str, str]:
     if len(compacted) <= limit:
         return start, start
     return start, _escape_markdown_cell("..." + compacted[-(limit - 3) :].lstrip())
+
+
+def _raw_bytes(content: str, item) -> int:
+    try:
+        _, _, fragment = raw_section_fragment(content, item)
+    except ValueError:
+        return 0
+    return len(fragment.encode("utf-8", errors="replace"))
 
 
 def _compact(value: str, limit: int) -> str:

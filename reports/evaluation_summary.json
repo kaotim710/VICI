@@ -27,6 +27,12 @@
     "title_policy_review": 4,
     "toc_signal_review": 22
   },
+  "raw_media_counts": {
+    "items_with_tables": 268,
+    "items_with_images": 30,
+    "total_tables": 6263,
+    "total_images": 159
+  },
   "retry_policy": {
     "contract_version": "retry_policy_v1",
     "mode": "bounded_deterministic",
