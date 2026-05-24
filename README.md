@@ -64,6 +64,12 @@ Export a warning-focused audit report:
 python3 scripts/export_warning_audit_md.py
 ```
 
+Evaluate lightweight gold boundary expectations:
+
+```bash
+python3 scripts/evaluate_gold_boundaries.py
+```
+
 Inspect normalized narrative blocks for a filing:
 
 ```bash

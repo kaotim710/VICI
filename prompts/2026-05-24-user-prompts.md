@@ -217,3 +217,9 @@ ok，進行下一個milestone
 ```text
 warning數有下降嗎？有的話再做後續的部分
 ```
+
+## Gold Boundary Implementation Request
+
+```text
+好，你先實作吧
+```
