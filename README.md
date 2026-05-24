@@ -51,3 +51,10 @@ Evaluate whatever seed filings are present locally:
 ```bash
 python3 scripts/evaluate_seed.py
 ```
+
+## SEC Intake Sources
+
+The ingestion utilities follow the official SEC EDGAR API shape documented in
+[docs/sec-data-sources.md](docs/sec-data-sources.md). Requests require a descriptive
+`User-Agent`, are rate-limited to 10 requests per second by default, and do not require
+an API key.

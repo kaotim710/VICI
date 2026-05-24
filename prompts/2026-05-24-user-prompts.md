@@ -145,3 +145,15 @@ Core Design Philosophy
 好，你可以開始實作。testing的部分可以照你說的先抽20個filing即可，另外prompts中也需要放我跟你下的prompt
 ```
 
+## SEC Data Source Request
+
+```text
+你可以使用以下來源
+資料來源
+* API overview：https://www.sec.gov/search-filings/edgar-application-programming-interfaces
+* Submissions API：https://data.sec.gov/submissions/CIK{10位補零}.json
+* Full-text Search：https://efts.sec.gov/LATEST/search-index?q={query}&forms=10-K
+* 檔案下載：https://www.sec.gov/Archives/edgar/data/{CIK}/{accession-去破折號}/{filename}
+* XBRL Company Facts（可用於交叉驗證）：https://data.sec.gov/api/xbrl/companyfacts/CIK{10位補零}.json
+* 規範：需帶 User-Agent header、10 req/sec、無需 API key
+```
