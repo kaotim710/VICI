@@ -23,3 +23,4 @@ estimated_prompt_tokens =
 | 2026-05-24 | sec_data_source_request | `prompts/2026-05-24-user-prompts.md` |  | 82 | Provided SEC data source endpoints and request constraints. |
 | 2026-05-24 | prompt_token_usage_request | `prompts/2026-05-24-user-prompts.md` |  | 13 | Requested prompt token usage tracking in `prompts/`. |
 | 2026-05-24 | seed_filing_download_request | `prompts/2026-05-24-user-prompts.md` |  | 14 | Requested downloading the 20 seed 10-K test filings. |
+| 2026-05-24 | next_milestone_request | `prompts/2026-05-24-user-prompts.md` |  | 6 | Requested continuing to the next implementation milestone. |

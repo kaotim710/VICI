@@ -5,7 +5,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 from sec_item_extractor import extract_items
-from sec_item_extractor.cleaning import html_to_text
+from sec_item_extractor.cleaning import html_to_text, parse_document
 
 
 SAMPLE_10K = """
@@ -59,6 +59,16 @@ class ExtractorTests(unittest.TestCase):
         text = html_to_text(SAMPLE_10K)
 
         self.assertNotIn("Hidden iXBRL noise", text)
+
+    def test_parse_document_preserves_clean_and_raw_offsets(self):
+        document = parse_document(SAMPLE_10K)
+        business_block = next(block for block in document.blocks if block.text == "Item 1. Business")
+
+        self.assertEqual(document.text[business_block.clean_start : business_block.clean_end], "Item 1. Business")
+        self.assertIsNotNone(business_block.raw_start)
+        self.assertIsNotNone(business_block.raw_end)
+        self.assertIn("Item 1. Business", SAMPLE_10K[business_block.raw_start : business_block.raw_end])
+        self.assertEqual(business_block.tag, "h1")
 
     def test_missing_end_boundary_fails_explicitly(self):
         result = extract_items("Item 1. Business\n" + ("Only business. " * 80), target_items=["1"])

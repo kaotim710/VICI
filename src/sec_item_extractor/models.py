@@ -4,6 +4,28 @@ from dataclasses import asdict, dataclass, field
 
 
 @dataclass(frozen=True)
+class NarrativeBlock:
+    text: str
+    clean_start: int
+    clean_end: int
+    raw_start: int | None
+    raw_end: int | None
+    tag: str | None = None
+    source: str = "html"
+    warnings: list[str] = field(default_factory=list)
+
+
+@dataclass(frozen=True)
+class CleanDocument:
+    text: str
+    blocks: list[NarrativeBlock]
+    warnings: list[str] = field(default_factory=list)
+
+    def to_dict(self) -> dict:
+        return asdict(self)
+
+
+@dataclass(frozen=True)
 class HeadingCandidate:
     item: str
     start: int
@@ -52,4 +74,3 @@ class ExtractionResult:
 
     def to_dict(self) -> dict:
         return asdict(self)
-

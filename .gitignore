@@ -1,5 +1,6 @@
 __pycache__/
 *.py[cod]
+.DS_Store
 .pytest_cache/
 .venv/
 venv/
@@ -8,4 +9,3 @@ fixtures/filings/raw/*.html
 fixtures/filings/raw/*.txt
 fixtures/filings/raw/*.json
 artifacts/
-

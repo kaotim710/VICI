@@ -52,9 +52,21 @@ Evaluate whatever seed filings are present locally:
 python3 scripts/evaluate_seed.py
 ```
 
+Inspect normalized narrative blocks for a filing:
+
+```bash
+python3 scripts/inspect_document.py fixtures/filings/raw/aapl_2023_10k.html --limit 10
+```
+
 ## SEC Intake Sources
 
 The ingestion utilities follow the official SEC EDGAR API shape documented in
 [docs/sec-data-sources.md](docs/sec-data-sources.md). Requests require a descriptive
 `User-Agent`, are rate-limited to 10 requests per second by default, and do not require
 an API key.
+
+## Milestone 2: Block Model
+
+HTML/text cleaning now produces a `CleanDocument` with normalized text plus `NarrativeBlock`
+records. Each block includes clean offsets, raw offsets, source type, and the nearest block tag
+when available. `html_to_text()` remains available for the deterministic extractor.
