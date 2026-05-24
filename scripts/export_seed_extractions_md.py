@@ -28,6 +28,7 @@ def main() -> int:
 
 
 def build_report(manifest: dict) -> str:
+    items = manifest["items"]
     rows = []
     detail_sections = []
     missing = []
@@ -48,7 +49,7 @@ def build_report(manifest: dict) -> str:
         "",
         f"Generated: {date.today().isoformat()}",
         "",
-        "Scope: 20 seed 10-K filings, extracting Item 1, Item 1A, and Item 7.",
+        f"Scope: 20 seed 10-K filings, extracting {len(items)} configured 10-K items.",
         "",
         f"Evaluated filings: {len(rows)}",
         f"Missing filings: {len(missing)}",
@@ -61,8 +62,8 @@ def build_report(manifest: dict) -> str:
         [
             "## Summary",
             "",
-            "| Filing | Ticker | Year | Overall | Item 1 | Item 1A | Item 7 |",
-            "| --- | --- | ---: | --- | --- | --- | --- |",
+            "| Filing | Ticker | Year | Overall | " + " | ".join(f"Item {item}" for item in items) + " |",
+            "| --- | --- | ---: | --- | " + " | ".join("---" for _ in items) + " |",
             *rows,
             "",
             "## Details",
@@ -80,9 +81,7 @@ def _summary_row(filing: dict, result) -> str:
         filing["ticker"],
         str(filing["fiscal_year"]),
         result.status,
-        _item_summary_cell(by_item.get("1")),
-        _item_summary_cell(by_item.get("1A")),
-        _item_summary_cell(by_item.get("7")),
+        *[_item_summary_cell(by_item.get(item.item)) for item in result.item_results],
     ]
     return "| " + " | ".join(cells) + " |"
 

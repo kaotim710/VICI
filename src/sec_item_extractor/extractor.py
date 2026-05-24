@@ -3,7 +3,7 @@ from __future__ import annotations
 import re
 from dataclasses import dataclass
 
-from .candidates import TARGET_ITEMS, find_heading_candidates, is_expected_title, legal_next_items
+from .candidates import ITEM_ORDER, find_heading_candidates, is_expected_title, legal_next_items
 from .cleaning import parse_document
 from .models import (
     CandidateAttempt,
@@ -30,7 +30,7 @@ class CandidatePair:
 def extract_items(content: str, target_items: list[str] | None = None, filing_id: str | None = None) -> ExtractionResult:
     document = parse_document(content)
     text = document.text
-    targets = [item.upper() for item in (target_items or sorted(TARGET_ITEMS))]
+    targets = [item.upper() for item in target_items] if target_items else list(ITEM_ORDER)
     candidates = find_heading_candidates(text, document.blocks)
     item_results = [_extract_one_item(text, candidates, item) for item in targets]
     successful = sum(1 for result in item_results if result.status == "success")
@@ -91,7 +91,7 @@ def _candidate_pairs(
 ) -> list[CandidatePair]:
     pairs = []
     for start in starts:
-        end, end_reasons = _find_end_candidate(candidates, start)
+        end, end_reasons = _find_end_candidate(text, candidates, start)
         section_text = text[start.start : end.start].strip() if end else ""
         validation_reasons = _start_validation_reasons(start) + end_reasons
         rejection_reasons = _pair_rejection_reasons(start, end, section_text)
@@ -107,7 +107,12 @@ def _candidate_pairs(
     return pairs
 
 
-def _find_end_candidate(candidates: list[HeadingCandidate], start: HeadingCandidate) -> tuple[HeadingCandidate | None, list[str]]:
+def _find_end_candidate(
+    text: str, candidates: list[HeadingCandidate], start: HeadingCandidate
+) -> tuple[HeadingCandidate | None, list[str]]:
+    if start.item == "16":
+        return _terminal_end_candidate(text, start), ["TERMINAL_END_BOUNDARY_USED"]
+
     legal_next = legal_next_items(start.item)
     later = [candidate for candidate in candidates if candidate.start > start.end and candidate.item in legal_next]
     if not later:
@@ -116,6 +121,19 @@ def _find_end_candidate(candidates: list[HeadingCandidate], start: HeadingCandid
     if non_toc:
         return min(non_toc, key=lambda candidate: candidate.start), ["LEGAL_END_HEADING_FOUND", "END_NOT_TOC_LIKE"]
     return min(later, key=lambda candidate: candidate.start), ["LEGAL_END_HEADING_FOUND", "END_TOC_LIKE_USED_AS_FALLBACK"]
+
+
+def _terminal_end_candidate(text: str, start: HeadingCandidate) -> HeadingCandidate:
+    signature = re.search(r"(?im)^signatures\s*$", text[start.end :])
+    boundary = start.end + signature.start() if signature else len(text)
+    return HeadingCandidate(
+        item="EOF",
+        start=boundary,
+        end=boundary,
+        text="SIGNATURES" if signature else "END_OF_DOCUMENT",
+        normalized_text="SIGNATURES" if signature else "END_OF_DOCUMENT",
+        reasons=["TERMINAL_BOUNDARY"],
+    )
 
 
 def _pair_rejection_reasons(
@@ -226,14 +244,15 @@ def _build_success_result(
         )
         warnings.append("Start heading does not contain the expected canonical title.")
 
-    if 1000 <= len(section_text) <= 250000:
+    min_length, max_length = _length_bounds(start.item)
+    if min_length <= len(section_text) <= max_length:
         confidence_components.append(
             ConfidenceComponent(
                 name="section_length_reasonable",
                 weight=0.10,
                 earned=0.10,
                 passed=True,
-                reason="Section length is within the first-pass expected range.",
+                reason="Section length is within the item-specific first-pass expected range.",
             )
         )
         reasons.append("SECTION_LENGTH_REASONABLE")
@@ -244,7 +263,7 @@ def _build_success_result(
                 weight=0.10,
                 earned=0.0,
                 passed=False,
-                reason="Section length is outside the first-pass expected range.",
+                reason="Section length is outside the item-specific first-pass expected range.",
             )
         )
         warnings.append("Section length is outside the expected first-pass range.")
@@ -282,10 +301,11 @@ def _build_success_result(
     )
 
 
-def _start_rank(candidate: HeadingCandidate) -> tuple[int, int, int]:
+def _start_rank(candidate: HeadingCandidate) -> tuple[int, int, int, int]:
     toc_penalty = 1 if candidate.is_toc_like else 0
+    dense_penalty = 1 if "TOC_DENSE_ITEM_CLUSTER" in candidate.reasons else 0
     title_penalty = 0 if is_expected_title(candidate.item, candidate.normalized_text) else 1
-    return (toc_penalty, title_penalty, candidate.start)
+    return (toc_penalty, dense_penalty, title_penalty, candidate.start)
 
 
 def _evidence(kind: str, candidate: HeadingCandidate) -> Evidence:
@@ -326,8 +346,10 @@ def _attempt_warnings(start: HeadingCandidate, end: HeadingCandidate | None) -> 
 
 
 def _is_likely_toc_span(start: HeadingCandidate, end: HeadingCandidate, section_text: str) -> bool:
-    ordered_toc_like = "TOC_DENSE_ITEM_CLUSTER" in start.reasons and "TOC_DENSE_ITEM_CLUSTER" in end.reasons
-    return ordered_toc_like and not _is_cross_reference_section(section_text) and len(section_text) < 800
+    ordered_toc_like = start.is_toc_like and end.is_toc_like
+    dense_only = "TOC_DENSE_ITEM_CLUSTER" in start.reasons and "TOC_DENSE_ITEM_CLUSTER" in end.reasons
+    short_heading_only = dense_only and len(section_text) < 200
+    return (ordered_toc_like or short_heading_only) and not _is_cross_reference_section(section_text) and len(section_text) < 800
 
 
 def _is_cross_reference_section(section_text: str) -> bool:
@@ -345,6 +367,18 @@ def _is_cross_reference_section(section_text: str) -> bool:
         )
     )
     return has_page_range and has_reference_language
+
+
+def _length_bounds(item: str) -> tuple[int, int]:
+    if item in {"1", "1A", "7"}:
+        return 1000, 250000
+    if item in {"7A", "8"}:
+        return 1000, 500000
+    if item in {"2", "3", "5", "6", "9A"}:
+        return 100, 250000
+    if item in {"10", "11", "12", "13", "14", "15", "16"}:
+        return 20, 250000
+    return 20, 50000
 
 
 def _recommended_actions(
@@ -383,7 +417,8 @@ def _recommended_actions(
         )
 
     if (
-        section_length < 1000
+        section_length < _length_bounds(start.item)[0]
+        and start.item in {"1", "1A", "7", "7A", "8"}
         and "Section appears to be a cross-reference rather than full narrative text." not in warnings
         and "Section length is outside the expected first-pass range." in warnings
     ):

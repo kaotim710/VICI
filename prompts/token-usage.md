@@ -33,3 +33,4 @@ estimated_prompt_tokens =
 | 2026-05-24 | warning_count_followup_request | `prompts/2026-05-24-user-prompts.md` |  | 13 | Asked whether warnings decreased and requested continuing with follow-up work if so. |
 | 2026-05-24 | gold_boundary_implementation_request | `prompts/2026-05-24-user-prompts.md` |  | 5 | Requested implementing the proposed gold boundary evaluation milestone. |
 | 2026-05-24 | recovery_runner_implementation_request | `prompts/2026-05-24-user-prompts.md` |  | 2 | Approved implementing deterministic recovery action runner. |
+| 2026-05-24 | full_item_testing_request | `prompts/2026-05-24-user-prompts.md` |  | 20 | Requested testing extraction across all supported 10-K items instead of only selected items. |

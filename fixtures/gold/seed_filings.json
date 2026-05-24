@@ -12,7 +12,7 @@
     "time_points_per_company": 2,
     "total_filings": 20
   },
-  "items": ["1", "1A", "7"],
+  "items": ["1", "1A", "1B", "1C", "2", "3", "4", "5", "6", "7", "7A", "8", "9", "9A", "9B", "9C", "10", "11", "12", "13", "14", "15", "16"],
   "filings": [
     {"filing_id": "aapl_2014_10k", "ticker": "AAPL", "cik": "0000320193", "industry": "Technology", "fiscal_year": 2014, "form": "10-K"},
     {"filing_id": "aapl_2023_10k", "ticker": "AAPL", "cik": "0000320193", "industry": "Technology", "fiscal_year": 2023, "form": "10-K"},
@@ -36,4 +36,3 @@
     {"filing_id": "amzn_2023_10k", "ticker": "AMZN", "cik": "0001018724", "industry": "Consumer/Retail", "fiscal_year": 2023, "form": "10-K"}
   ]
 }
-

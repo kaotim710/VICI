@@ -1,6 +1,12 @@
 import json
 import unittest
 from pathlib import Path
+import sys
+
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
+
+from sec_item_extractor.candidates import ITEM_ORDER
 
 
 class SeedManifestTests(unittest.TestCase):
@@ -10,7 +16,7 @@ class SeedManifestTests(unittest.TestCase):
 
         self.assertEqual(manifest["selection_strategy"]["total_filings"], 20)
         self.assertEqual(len(manifest["filings"]), 20)
-        self.assertEqual(sorted(manifest["items"]), ["1", "1A", "7"])
+        self.assertEqual(manifest["items"], ITEM_ORDER)
 
     def test_seed_manifest_has_unique_filing_ids(self):
         manifest_path = Path(__file__).resolve().parents[1] / "fixtures" / "gold" / "seed_filings.json"
@@ -22,4 +28,3 @@ class SeedManifestTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-

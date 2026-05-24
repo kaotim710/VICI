@@ -4,7 +4,7 @@ Generated: 2026-05-24
 
 Scope: deterministic recovery actions for seed filings with recommended actions.
 
-Recovery actions: 13
+Recovery actions: 50
 Missing filings: 0
 
 ## Status Counts
@@ -12,8 +12,8 @@ Missing filings: 0
 | Status | Count |
 | --- | ---: |
 | `blocked` | 1 |
-| `deferred` | 7 |
-| `inspect_only` | 2 |
+| `deferred` | 26 |
+| `inspect_only` | 20 |
 | `needs_review` | 1 |
 | `needs_user_selection` | 2 |
 
@@ -21,30 +21,75 @@ Missing filings: 0
 
 | Reason | Count |
 | --- | ---: |
-| `external_or_other_document_reference` | 7 |
+| `external_or_other_document_reference` | 26 |
 | `internal_item_toc_detected` | 2 |
 | `same_filing_page_reference` | 2 |
-| `start_toc_like_signal` | 2 |
+| `start_toc_like_signal` | 20 |
 
 ## Actions
 
 | Filing | Item | Action | Reason | Status | Before | After | Page Range | Selection |
 | --- | --- | --- | --- | --- | ---: | ---: | --- | --- |
+| `aapl_2023_10k` | 9C | `inspect_only` | `start_toc_like_signal` | `inspect_only` | 180958 | none | none | none |
 | `jpm_2014_10k` | 7 | `needs_user_confirmation` | `same_filing_page_reference` | `blocked` | 395 | none | 64-169 | none |
+| `jpm_2014_10k` | 7A | `needs_external_source` | `external_or_other_document_reference` | `deferred` | 253 | none | none | none |
+| `jpm_2014_10k` | 8 | `needs_external_source` | `external_or_other_document_reference` | `deferred` | 551 | none | none | none |
 | `jpm_2023_10k` | 7 | `needs_user_confirmation` | `same_filing_page_reference` | `needs_review` | 396 | 244421 | 48-161 | none |
+| `jpm_2023_10k` | 7A | `needs_external_source` | `external_or_other_document_reference` | `deferred` | 272 | none | none | none |
+| `jpm_2023_10k` | 8 | `needs_external_source` | `external_or_other_document_reference` | `deferred` | 370 | none | none | none |
 | `bac_2014_10k` | 7 | `needs_user_selection` | `internal_item_toc_detected` | `needs_user_selection` | 578441 | none | none | none |
+| `bac_2014_10k` | 7A | `needs_external_source` | `external_or_other_document_reference` | `deferred` | 218 | none | none | none |
 | `bac_2023_10k` | 7 | `needs_user_selection` | `internal_item_toc_detected` | `needs_user_selection` | 308102 | none | none | none |
+| `bac_2023_10k` | 7A | `needs_external_source` | `external_or_other_document_reference` | `deferred` | 218 | none | none | none |
+| `unh_2014_10k` | 1B | `inspect_only` | `start_toc_like_signal` | `inspect_only` | 132985 | none | none | none |
 | `unh_2014_10k` | 7 | `inspect_only` | `start_toc_like_signal` | `inspect_only` | 219335 | none | none | none |
+| `unh_2023_10k` | 2 | `inspect_only` | `start_toc_like_signal` | `inspect_only` | 122323 | none | none | none |
+| `unh_2023_10k` | 3 | `inspect_only` | `start_toc_like_signal` | `inspect_only` | 122298 | none | none | none |
+| `unh_2023_10k` | 6 | `inspect_only` | `start_toc_like_signal` | `inspect_only` | 165798 | none | none | none |
 | `unh_2023_10k` | 7 | `inspect_only` | `start_toc_like_signal` | `inspect_only` | 165775 | none | none | none |
 | `jnj_2014_10k` | 1A | `needs_external_source` | `external_or_other_document_reference` | `deferred` | 546 | none | none | none |
+| `jnj_2014_10k` | 7 | `inspect_only` | `start_toc_like_signal` | `inspect_only` | 386 | none | none | none |
 | `jnj_2014_10k` | 7 | `needs_external_source` | `external_or_other_document_reference` | `deferred` | 386 | none | none | none |
+| `jnj_2014_10k` | 7A | `needs_external_source` | `external_or_other_document_reference` | `deferred` | 531 | none | none | none |
+| `jnj_2014_10k` | 8 | `needs_external_source` | `external_or_other_document_reference` | `deferred` | 360 | none | none | none |
+| `jnj_2023_10k` | 7A | `needs_external_source` | `external_or_other_document_reference` | `deferred` | 486 | none | none | none |
 | `xom_2014_10k` | 7 | `needs_external_source` | `external_or_other_document_reference` | `deferred` | 265 | none | none | none |
+| `xom_2014_10k` | 7A | `needs_external_source` | `external_or_other_document_reference` | `deferred` | 510 | none | none | none |
+| `xom_2014_10k` | 8 | `needs_external_source` | `external_or_other_document_reference` | `deferred` | 780 | none | none | none |
 | `xom_2023_10k` | 7 | `needs_external_source` | `external_or_other_document_reference` | `deferred` | 265 | none | none | none |
+| `xom_2023_10k` | 7A | `needs_external_source` | `external_or_other_document_reference` | `deferred` | 411 | none | none | none |
+| `xom_2023_10k` | 8 | `needs_external_source` | `external_or_other_document_reference` | `deferred` | 737 | none | none | none |
 | `cvx_2014_10k` | 7 | `needs_external_source` | `external_or_other_document_reference` | `deferred` | 278 | none | none | none |
+| `cvx_2014_10k` | 7A | `needs_external_source` | `external_or_other_document_reference` | `deferred` | 451 | none | none | none |
+| `cvx_2014_10k` | 8 | `needs_external_source` | `external_or_other_document_reference` | `deferred` | 187 | none | none | none |
+| `cvx_2023_10k` | 6 | `inspect_only` | `start_toc_like_signal` | `inspect_only` | 262 | none | none | none |
+| `cvx_2023_10k` | 7 | `inspect_only` | `start_toc_like_signal` | `inspect_only` | 242 | none | none | none |
 | `cvx_2023_10k` | 7 | `needs_external_source` | `external_or_other_document_reference` | `deferred` | 242 | none | none | none |
+| `cvx_2023_10k` | 7A | `needs_external_source` | `external_or_other_document_reference` | `deferred` | 354 | none | none | none |
+| `cvx_2023_10k` | 8 | `needs_external_source` | `external_or_other_document_reference` | `deferred` | 158 | none | none | none |
 | `wmt_2014_10k` | 7 | `needs_external_source` | `external_or_other_document_reference` | `deferred` | 413 | none | none | none |
+| `wmt_2014_10k` | 7A | `needs_external_source` | `external_or_other_document_reference` | `deferred` | 423 | none | none | none |
+| `wmt_2014_10k` | 8 | `needs_external_source` | `external_or_other_document_reference` | `deferred` | 606 | none | none | none |
+| `wmt_2023_10k` | 9B | `inspect_only` | `start_toc_like_signal` | `inspect_only` | 340213 | none | none | none |
+| `amzn_2014_10k` | 2 | `inspect_only` | `start_toc_like_signal` | `inspect_only` | 1253 | none | none | none |
+| `amzn_2014_10k` | 3 | `inspect_only` | `start_toc_like_signal` | `inspect_only` | 152 | none | none | none |
+| `amzn_2014_10k` | 10 | `inspect_only` | `start_toc_like_signal` | `inspect_only` | 1059 | none | none | none |
+| `amzn_2014_10k` | 11 | `inspect_only` | `start_toc_like_signal` | `inspect_only` | 484 | none | none | none |
+| `amzn_2014_10k` | 12 | `inspect_only` | `start_toc_like_signal` | `inspect_only` | 277 | none | none | none |
+| `amzn_2023_10k` | 2 | `inspect_only` | `start_toc_like_signal` | `inspect_only` | 79315 | none | none | none |
+| `amzn_2023_10k` | 3 | `inspect_only` | `start_toc_like_signal` | `inspect_only` | 79290 | none | none | none |
+| `amzn_2023_10k` | 9C | `inspect_only` | `start_toc_like_signal` | `inspect_only` | 268364 | none | none | none |
+| `amzn_2023_10k` | 13 | `inspect_only` | `start_toc_like_signal` | `inspect_only` | 269906 | none | none | none |
 
 ## Details
+
+### aapl_2023_10k Item 9C - start_toc_like_signal
+
+- Ticker: `AAPL`
+- Fiscal year: `2023`
+- Status: `inspect_only`
+- Message: No deterministic recovery runner is registered for this action.
+- Before length: `180958`
 
 ### jpm_2014_10k Item 7 - same_filing_page_reference
 
@@ -55,6 +100,24 @@ Missing filings: 0
 - Before length: `395`
 - Parsed page range: `64-169`
 - Evidence: `parsed pages 64-169, page locators found: 978`
+
+### jpm_2014_10k Item 7A - external_or_other_document_reference
+
+- Ticker: `JPM`
+- Fiscal year: `2014`
+- Status: `deferred`
+- Message: External/reference document recovery is intentionally deferred until source resolution is implemented.
+- Before length: `253`
+- Options: `fetch_referenced_document, upload_reference_document, accept_short_text`
+
+### jpm_2014_10k Item 8 - external_or_other_document_reference
+
+- Ticker: `JPM`
+- Fiscal year: `2014`
+- Status: `deferred`
+- Message: External/reference document recovery is intentionally deferred until source resolution is implemented.
+- Before length: `551`
+- Options: `fetch_referenced_document, upload_reference_document, accept_short_text`
 
 ### jpm_2023_10k Item 7 - same_filing_page_reference
 
@@ -75,6 +138,24 @@ Recovered end snippet:
 
 > ...19,227 268 5,857 6,125 Non-U.S. 597 10,110 10,707 161 3,265 3,426 Federal funds purchased and securities loaned or sold under repurchase agreements: U.S. 1,293 6,263 7,556 (466) 3,327 2,861 Non-U.S. (480) 2,462 1,982
 
+### jpm_2023_10k Item 7A - external_or_other_document_reference
+
+- Ticker: `JPM`
+- Fiscal year: `2023`
+- Status: `deferred`
+- Message: External/reference document recovery is intentionally deferred until source resolution is implemented.
+- Before length: `272`
+- Options: `fetch_referenced_document, upload_reference_document, accept_short_text`
+
+### jpm_2023_10k Item 8 - external_or_other_document_reference
+
+- Ticker: `JPM`
+- Fiscal year: `2023`
+- Status: `deferred`
+- Message: External/reference document recovery is intentionally deferred until source resolution is implemented.
+- Before length: `370`
+- Options: `fetch_referenced_document, upload_reference_document, accept_short_text`
+
 ### bac_2014_10k Item 7 - internal_item_toc_detected
 
 - Ticker: `BAC`
@@ -83,6 +164,15 @@ Recovered end snippet:
 - Message: Choose one internal heading option to extract a subsection.
 - Before length: `578441`
 - Options: `Management’s Discussion and Analysis of Financial Condition and Results of Operation, Table of Contents, Executive Summary, Financial Highlights, Balance Sheet Overview, Supplemental Financial Data, Business Segment Operations, Consumer & Business Banking, Consumer Real Estate Services, Global Wealth & Investment Management, Global Banking, Global Markets`
+
+### bac_2014_10k Item 7A - external_or_other_document_reference
+
+- Ticker: `BAC`
+- Fiscal year: `2014`
+- Status: `deferred`
+- Message: External/reference document recovery is intentionally deferred until source resolution is implemented.
+- Before length: `218`
+- Options: `fetch_referenced_document, upload_reference_document, accept_short_text`
 
 ### bac_2023_10k Item 7 - internal_item_toc_detected
 
@@ -93,6 +183,23 @@ Recovered end snippet:
 - Before length: `308102`
 - Options: `Management's Discussion and Analysis of Financial Condition and Results of Operations, Table of Contents, Executive Summary, Recent Developments, Financial Highlights, Balance Sheet Overview, Supplemental Financial Data, Business Segment Operations, Consumer Banking, Global Wealth & Investment Management, Global Banking, Global Markets`
 
+### bac_2023_10k Item 7A - external_or_other_document_reference
+
+- Ticker: `BAC`
+- Fiscal year: `2023`
+- Status: `deferred`
+- Message: External/reference document recovery is intentionally deferred until source resolution is implemented.
+- Before length: `218`
+- Options: `fetch_referenced_document, upload_reference_document, accept_short_text`
+
+### unh_2014_10k Item 1B - start_toc_like_signal
+
+- Ticker: `UNH`
+- Fiscal year: `2014`
+- Status: `inspect_only`
+- Message: No deterministic recovery runner is registered for this action.
+- Before length: `132985`
+
 ### unh_2014_10k Item 7 - start_toc_like_signal
 
 - Ticker: `UNH`
@@ -100,6 +207,30 @@ Recovered end snippet:
 - Status: `inspect_only`
 - Message: No deterministic recovery runner is registered for this action.
 - Before length: `219335`
+
+### unh_2023_10k Item 2 - start_toc_like_signal
+
+- Ticker: `UNH`
+- Fiscal year: `2023`
+- Status: `inspect_only`
+- Message: No deterministic recovery runner is registered for this action.
+- Before length: `122323`
+
+### unh_2023_10k Item 3 - start_toc_like_signal
+
+- Ticker: `UNH`
+- Fiscal year: `2023`
+- Status: `inspect_only`
+- Message: No deterministic recovery runner is registered for this action.
+- Before length: `122298`
+
+### unh_2023_10k Item 6 - start_toc_like_signal
+
+- Ticker: `UNH`
+- Fiscal year: `2023`
+- Status: `inspect_only`
+- Message: No deterministic recovery runner is registered for this action.
+- Before length: `165798`
 
 ### unh_2023_10k Item 7 - start_toc_like_signal
 
@@ -118,6 +249,14 @@ Recovered end snippet:
 - Before length: `546`
 - Options: `fetch_referenced_document, upload_reference_document, accept_short_text`
 
+### jnj_2014_10k Item 7 - start_toc_like_signal
+
+- Ticker: `JNJ`
+- Fiscal year: `2014`
+- Status: `inspect_only`
+- Message: No deterministic recovery runner is registered for this action.
+- Before length: `386`
+
 ### jnj_2014_10k Item 7 - external_or_other_document_reference
 
 - Ticker: `JNJ`
@@ -125,6 +264,33 @@ Recovered end snippet:
 - Status: `deferred`
 - Message: External/reference document recovery is intentionally deferred until source resolution is implemented.
 - Before length: `386`
+- Options: `fetch_referenced_document, upload_reference_document, accept_short_text`
+
+### jnj_2014_10k Item 7A - external_or_other_document_reference
+
+- Ticker: `JNJ`
+- Fiscal year: `2014`
+- Status: `deferred`
+- Message: External/reference document recovery is intentionally deferred until source resolution is implemented.
+- Before length: `531`
+- Options: `fetch_referenced_document, upload_reference_document, accept_short_text`
+
+### jnj_2014_10k Item 8 - external_or_other_document_reference
+
+- Ticker: `JNJ`
+- Fiscal year: `2014`
+- Status: `deferred`
+- Message: External/reference document recovery is intentionally deferred until source resolution is implemented.
+- Before length: `360`
+- Options: `fetch_referenced_document, upload_reference_document, accept_short_text`
+
+### jnj_2023_10k Item 7A - external_or_other_document_reference
+
+- Ticker: `JNJ`
+- Fiscal year: `2023`
+- Status: `deferred`
+- Message: External/reference document recovery is intentionally deferred until source resolution is implemented.
+- Before length: `486`
 - Options: `fetch_referenced_document, upload_reference_document, accept_short_text`
 
 ### xom_2014_10k Item 7 - external_or_other_document_reference
@@ -136,6 +302,24 @@ Recovered end snippet:
 - Before length: `265`
 - Options: `fetch_referenced_document, upload_reference_document, accept_short_text`
 
+### xom_2014_10k Item 7A - external_or_other_document_reference
+
+- Ticker: `XOM`
+- Fiscal year: `2014`
+- Status: `deferred`
+- Message: External/reference document recovery is intentionally deferred until source resolution is implemented.
+- Before length: `510`
+- Options: `fetch_referenced_document, upload_reference_document, accept_short_text`
+
+### xom_2014_10k Item 8 - external_or_other_document_reference
+
+- Ticker: `XOM`
+- Fiscal year: `2014`
+- Status: `deferred`
+- Message: External/reference document recovery is intentionally deferred until source resolution is implemented.
+- Before length: `780`
+- Options: `fetch_referenced_document, upload_reference_document, accept_short_text`
+
 ### xom_2023_10k Item 7 - external_or_other_document_reference
 
 - Ticker: `XOM`
@@ -143,6 +327,24 @@ Recovered end snippet:
 - Status: `deferred`
 - Message: External/reference document recovery is intentionally deferred until source resolution is implemented.
 - Before length: `265`
+- Options: `fetch_referenced_document, upload_reference_document, accept_short_text`
+
+### xom_2023_10k Item 7A - external_or_other_document_reference
+
+- Ticker: `XOM`
+- Fiscal year: `2023`
+- Status: `deferred`
+- Message: External/reference document recovery is intentionally deferred until source resolution is implemented.
+- Before length: `411`
+- Options: `fetch_referenced_document, upload_reference_document, accept_short_text`
+
+### xom_2023_10k Item 8 - external_or_other_document_reference
+
+- Ticker: `XOM`
+- Fiscal year: `2023`
+- Status: `deferred`
+- Message: External/reference document recovery is intentionally deferred until source resolution is implemented.
+- Before length: `737`
 - Options: `fetch_referenced_document, upload_reference_document, accept_short_text`
 
 ### cvx_2014_10k Item 7 - external_or_other_document_reference
@@ -154,6 +356,40 @@ Recovered end snippet:
 - Before length: `278`
 - Options: `fetch_referenced_document, upload_reference_document, accept_short_text`
 
+### cvx_2014_10k Item 7A - external_or_other_document_reference
+
+- Ticker: `CVX`
+- Fiscal year: `2014`
+- Status: `deferred`
+- Message: External/reference document recovery is intentionally deferred until source resolution is implemented.
+- Before length: `451`
+- Options: `fetch_referenced_document, upload_reference_document, accept_short_text`
+
+### cvx_2014_10k Item 8 - external_or_other_document_reference
+
+- Ticker: `CVX`
+- Fiscal year: `2014`
+- Status: `deferred`
+- Message: External/reference document recovery is intentionally deferred until source resolution is implemented.
+- Before length: `187`
+- Options: `fetch_referenced_document, upload_reference_document, accept_short_text`
+
+### cvx_2023_10k Item 6 - start_toc_like_signal
+
+- Ticker: `CVX`
+- Fiscal year: `2023`
+- Status: `inspect_only`
+- Message: No deterministic recovery runner is registered for this action.
+- Before length: `262`
+
+### cvx_2023_10k Item 7 - start_toc_like_signal
+
+- Ticker: `CVX`
+- Fiscal year: `2023`
+- Status: `inspect_only`
+- Message: No deterministic recovery runner is registered for this action.
+- Before length: `242`
+
 ### cvx_2023_10k Item 7 - external_or_other_document_reference
 
 - Ticker: `CVX`
@@ -161,6 +397,24 @@ Recovered end snippet:
 - Status: `deferred`
 - Message: External/reference document recovery is intentionally deferred until source resolution is implemented.
 - Before length: `242`
+- Options: `fetch_referenced_document, upload_reference_document, accept_short_text`
+
+### cvx_2023_10k Item 7A - external_or_other_document_reference
+
+- Ticker: `CVX`
+- Fiscal year: `2023`
+- Status: `deferred`
+- Message: External/reference document recovery is intentionally deferred until source resolution is implemented.
+- Before length: `354`
+- Options: `fetch_referenced_document, upload_reference_document, accept_short_text`
+
+### cvx_2023_10k Item 8 - external_or_other_document_reference
+
+- Ticker: `CVX`
+- Fiscal year: `2023`
+- Status: `deferred`
+- Message: External/reference document recovery is intentionally deferred until source resolution is implemented.
+- Before length: `158`
 - Options: `fetch_referenced_document, upload_reference_document, accept_short_text`
 
 ### wmt_2014_10k Item 7 - external_or_other_document_reference
@@ -171,3 +425,101 @@ Recovered end snippet:
 - Message: External/reference document recovery is intentionally deferred until source resolution is implemented.
 - Before length: `413`
 - Options: `fetch_referenced_document, upload_reference_document, accept_short_text`
+
+### wmt_2014_10k Item 7A - external_or_other_document_reference
+
+- Ticker: `WMT`
+- Fiscal year: `2014`
+- Status: `deferred`
+- Message: External/reference document recovery is intentionally deferred until source resolution is implemented.
+- Before length: `423`
+- Options: `fetch_referenced_document, upload_reference_document, accept_short_text`
+
+### wmt_2014_10k Item 8 - external_or_other_document_reference
+
+- Ticker: `WMT`
+- Fiscal year: `2014`
+- Status: `deferred`
+- Message: External/reference document recovery is intentionally deferred until source resolution is implemented.
+- Before length: `606`
+- Options: `fetch_referenced_document, upload_reference_document, accept_short_text`
+
+### wmt_2023_10k Item 9B - start_toc_like_signal
+
+- Ticker: `WMT`
+- Fiscal year: `2023`
+- Status: `inspect_only`
+- Message: No deterministic recovery runner is registered for this action.
+- Before length: `340213`
+
+### amzn_2014_10k Item 2 - start_toc_like_signal
+
+- Ticker: `AMZN`
+- Fiscal year: `2014`
+- Status: `inspect_only`
+- Message: No deterministic recovery runner is registered for this action.
+- Before length: `1253`
+
+### amzn_2014_10k Item 3 - start_toc_like_signal
+
+- Ticker: `AMZN`
+- Fiscal year: `2014`
+- Status: `inspect_only`
+- Message: No deterministic recovery runner is registered for this action.
+- Before length: `152`
+
+### amzn_2014_10k Item 10 - start_toc_like_signal
+
+- Ticker: `AMZN`
+- Fiscal year: `2014`
+- Status: `inspect_only`
+- Message: No deterministic recovery runner is registered for this action.
+- Before length: `1059`
+
+### amzn_2014_10k Item 11 - start_toc_like_signal
+
+- Ticker: `AMZN`
+- Fiscal year: `2014`
+- Status: `inspect_only`
+- Message: No deterministic recovery runner is registered for this action.
+- Before length: `484`
+
+### amzn_2014_10k Item 12 - start_toc_like_signal
+
+- Ticker: `AMZN`
+- Fiscal year: `2014`
+- Status: `inspect_only`
+- Message: No deterministic recovery runner is registered for this action.
+- Before length: `277`
+
+### amzn_2023_10k Item 2 - start_toc_like_signal
+
+- Ticker: `AMZN`
+- Fiscal year: `2023`
+- Status: `inspect_only`
+- Message: No deterministic recovery runner is registered for this action.
+- Before length: `79315`
+
+### amzn_2023_10k Item 3 - start_toc_like_signal
+
+- Ticker: `AMZN`
+- Fiscal year: `2023`
+- Status: `inspect_only`
+- Message: No deterministic recovery runner is registered for this action.
+- Before length: `79290`
+
+### amzn_2023_10k Item 9C - start_toc_like_signal
+
+- Ticker: `AMZN`
+- Fiscal year: `2023`
+- Status: `inspect_only`
+- Message: No deterministic recovery runner is registered for this action.
+- Before length: `268364`
+
+### amzn_2023_10k Item 13 - start_toc_like_signal
+
+- Ticker: `AMZN`
+- Fiscal year: `2023`
+- Status: `inspect_only`
+- Message: No deterministic recovery runner is registered for this action.
+- Before length: `269906`

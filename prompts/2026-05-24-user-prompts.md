@@ -229,3 +229,9 @@ warning數有下降嗎？有的話再做後續的部分
 ```text
 好
 ```
+
+## Full Item Testing Request
+
+```text
+testing 方面開始去對全item抽取，而不是只會單一幾個item
+```

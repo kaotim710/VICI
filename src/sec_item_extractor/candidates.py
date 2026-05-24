@@ -5,8 +5,32 @@ import re
 from .models import HeadingCandidate, NarrativeBlock
 
 
-ITEM_ORDER = ["1", "1A", "1B", "1C", "2", "3", "4", "5", "6", "7", "7A", "8", "9", "9A", "9B", "9C"]
-TARGET_ITEMS = {"1", "1A", "7"}
+ITEM_ORDER = [
+    "1",
+    "1A",
+    "1B",
+    "1C",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "7A",
+    "8",
+    "9",
+    "9A",
+    "9B",
+    "9C",
+    "10",
+    "11",
+    "12",
+    "13",
+    "14",
+    "15",
+    "16",
+]
+TARGET_ITEMS = set(ITEM_ORDER)
 NEXT_ITEM_GRAPH = {
     "1": {"1A", "1B", "1C", "2"},
     "1A": {"1B", "1C", "2"},
@@ -16,7 +40,8 @@ NEXT_ITEM_GRAPH = {
 HEADING_RE = re.compile(
     r"(?im)(?:^|\n)[ \t]*(?:part\s+[ivx]+\s*[,:\-–—]?\s*)?"
     r"item\s+"
-    r"(?P<item>1a|1b|1c|1|2|3|4|5|6|7a|7|8|9a|9b|9c|9)"
+    r"(?P<item>1a|1b|1c|10|11|12|13|14|15|16|1|2|3|4|5|6|7a|7|8|9a|9b|9c|9)"
+    r"(?![a-z0-9])"
     r"\s*(?:[.\-–—:])?\s*"
     r"(?P<title>[^\n]{0,160})"
 )
@@ -26,9 +51,25 @@ EXPECTED_TITLES = {
     "1A": ("risk factors",),
     "1B": ("unresolved staff comments",),
     "1C": ("cybersecurity",),
+    "2": ("properties",),
+    "3": ("legal proceedings",),
+    "4": ("mine safety",),
+    "5": ("market for", "common equity", "equity securities"),
+    "6": ("selected financial data", "reserved"),
     "7": ("management", "discussion", "analysis"),
     "7A": ("quantitative", "qualitative", "market risk"),
     "8": ("financial statements",),
+    "9": ("changes in", "disagreements", "accounting"),
+    "9A": ("controls", "procedures"),
+    "9B": ("other information",),
+    "9C": ("foreign jurisdictions", "prevent inspections"),
+    "10": ("directors", "executive officers", "corporate governance"),
+    "11": ("executive compensation",),
+    "12": ("security ownership",),
+    "13": ("certain relationships", "related transactions", "director independence"),
+    "14": ("principal accountant", "fees", "services"),
+    "15": ("exhibit", "financial statement schedules"),
+    "16": ("form 10-k summary",),
 }
 
 TOC_REASON_CODES = {
@@ -109,10 +150,9 @@ def _heading_reasons(
         reasons.append("TOC_PAGE_NUMBER_PATTERN")
     if block and _block_has_toc_page_number(block.text):
         reasons.append("TOC_TABLE_ROW_PAGE_NUMBER")
-    window_start = max(0, start - 500)
     window_end = min(len(text), start + 1500)
-    window = text[window_start:window_end].lower()
-    if len(re.findall(r"\bitem\s+(?:1a|1b|1c|1|2|3|4|5|6|7a|7|8)\b", window)) >= 5:
+    window = text[start:window_end].lower()
+    if len(re.findall(r"\bitem\s+(?:1a|1b|1c|10|11|12|13|14|15|16|1|2|3|4|5|6|7a|7|8|9a|9b|9c|9)\b", window)) >= 5:
         reasons.append("TOC_DENSE_ITEM_CLUSTER")
     if "table of contents" in text[max(0, start - 1500) : start].lower():
         reasons.append("NEAR_TABLE_OF_CONTENTS_LABEL")
@@ -125,7 +165,7 @@ def _block_has_toc_page_number(block_text: str) -> bool:
     compact = " ".join(block_text.split())
     if len(compact) > 240:
         return False
-    if not re.search(r"\bitem\s+(?:1a|1b|1c|1|2|3|4|5|6|7a|7|8)\b", compact, re.IGNORECASE):
+    if not re.search(r"\bitem\s+(?:1a|1b|1c|10|11|12|13|14|15|16|1|2|3|4|5|6|7a|7|8|9a|9b|9c|9)\b", compact, re.IGNORECASE):
         return False
     return bool(re.search(r"(?:\.{2,}\s*|\s{2,})\d{1,4}\s*$", compact))
 

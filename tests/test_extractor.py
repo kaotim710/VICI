@@ -5,7 +5,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 from sec_item_extractor import extract_items
-from sec_item_extractor.candidates import find_heading_candidates
+from sec_item_extractor.candidates import ITEM_ORDER, find_heading_candidates
 from sec_item_extractor.cleaning import html_to_text, parse_document
 
 
@@ -44,7 +44,7 @@ SAMPLE_10K = """
 
 class ExtractorTests(unittest.TestCase):
     def test_extracts_requested_items_and_skips_toc(self):
-        result = extract_items(SAMPLE_10K, filing_id="sample")
+        result = extract_items(SAMPLE_10K, target_items=["1", "1A", "7"], filing_id="sample")
         by_item = {item.item: item for item in result.item_results}
 
         self.assertEqual(result.status, "success")
@@ -64,6 +64,12 @@ class ExtractorTests(unittest.TestCase):
         self.assertEqual(by_item["1"].candidate_attempts[0].decision, "selected")
         self.assertIn("START_HEADING_FOUND", by_item["1"].candidate_attempts[0].validation_reasons)
         self.assertEqual(by_item["7"].end_evidence.item, "7A")
+
+    def test_default_target_items_cover_full_supported_10k_item_list(self):
+        result = extract_items(SAMPLE_10K, filing_id="sample")
+
+        self.assertEqual([item.item for item in result.item_results], ITEM_ORDER)
+        self.assertEqual(result.status, "partial")
 
     def test_hidden_ixbrl_like_content_is_suppressed(self):
         text = html_to_text(SAMPLE_10K)
@@ -118,6 +124,38 @@ class ExtractorTests(unittest.TestCase):
 
         self.assertEqual(item.recommended_actions[0].action_type, "needs_external_source")
 
+    def test_short_administrative_sections_do_not_recommend_external_source(self):
+        filing = """
+        Item 1B. Unresolved Staff Comments
+        None.
+        Item 1C. Cybersecurity
+        Cybersecurity governance text.
+        """
+
+        result = extract_items(filing, target_items=["1B"])
+        item = result.item_results[0]
+
+        self.assertEqual(item.status, "success")
+        self.assertEqual(item.warnings, [])
+        self.assertEqual(item.recommended_actions, [])
+
+    def test_item_sixteen_uses_terminal_boundary(self):
+        filing = """
+        Item 16. Form 10-K Summary
+        None.
+
+        SIGNATURES
+        Signature text.
+        """
+
+        result = extract_items(filing, target_items=["16"])
+        item = result.item_results[0]
+
+        self.assertEqual(item.status, "success")
+        self.assertIn("None.", item.text)
+        self.assertNotIn("Signature text.", item.text)
+        self.assertEqual(item.end_evidence.item, "EOF")
+
     def test_long_noncanonical_section_recommends_subsection_selection(self):
         filing = """
         Item 7. Company and Subsidiaries
@@ -161,7 +199,30 @@ class ExtractorTests(unittest.TestCase):
 
         self.assertTrue(candidates[0].is_toc_like)
 
-    def test_short_dense_toc_span_is_rejected_for_later_body_candidate(self):
+    def test_item_ten_is_not_parsed_as_item_one(self):
+        candidates = find_heading_candidates("Item 10. Directors, Executive Officers and Corporate Governance")
+
+        self.assertEqual(candidates[0].item, "10")
+
+    def test_body_heading_after_toc_is_not_marked_toc_like_by_prior_toc_cluster(self):
+        text = """
+        Table of Contents
+        Item 12. Security Ownership
+        Item 13. Certain Relationships
+        Item 14. Principal Accounting Fees
+        Item 15. Exhibits
+        Item 16. Form 10-K Summary
+
+        PART I
+        Item 1. Business
+        This business section starts after the table of contents.
+        """
+
+        candidates = find_heading_candidates(text)
+
+        self.assertFalse(candidates[-1].is_toc_like)
+
+    def test_short_dense_toc_span_uses_later_body_candidate(self):
         filing = """
         Item 1. Business
         Item 1A. Risk Factors
@@ -178,8 +239,7 @@ class ExtractorTests(unittest.TestCase):
         item = result.item_results[0]
 
         self.assertIn("Business narrative.", item.text)
-        self.assertEqual(item.candidate_attempts[0].decision, "rejected")
-        self.assertIn("REJECTED_SHORT_ORDERED_TOC_SPAN", item.candidate_attempts[0].validation_reasons)
+        self.assertEqual(item.candidate_attempts[-1].decision, "selected")
 
 
 if __name__ == "__main__":
