@@ -60,6 +60,20 @@ def _run_action(
         return _recover_page_reference(document_text, filing_id, item, action)
     if action.reason == "internal_item_toc_detected":
         return _recover_internal_toc(filing_id, item, action, selected_option)
+    if action.reason in {"start_toc_like_signal", "section_reference_detected", "exhibit_index_detected"}:
+        return RecoveryResult(
+            filing_id=filing_id,
+            item=item.item,
+            action_type=action.action_type,
+            reason=action.reason,
+            status="inspect_only",
+            message=action.description,
+            before_length=len(item.text or ""),
+            options=action.options,
+            severity=action.severity,
+            requires_user_input=action.requires_user_input,
+            next_step=action.next_step,
+        )
     if action.reason == "external_or_other_document_reference":
         return RecoveryResult(
             filing_id=filing_id,

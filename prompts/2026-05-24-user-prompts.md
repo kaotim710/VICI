@@ -289,3 +289,23 @@ testing 方面開始去對全item抽取，而不是只會單一幾個item
 ```text
 好，接下來testing部分找另外5間公司前一年度和十年前的filing來做validatation
 ```
+
+## Validation Warning Review Request
+
+```text
+好，我review以下問題，並commet。大部分屬於length長度太小難以判斷，這部分若是可以以我剛說的上下段落是否是正常的item來確定位子是否正確，正確的話，仍要返回內容，即使只有標題或是一兩句話。另外有exhibit的話，也要展示，若有指向其他段落的引用，也要提供可讓user去查看的button。
+nvda_2015_10k Item 8: 本身僅一句sentence
+nvda_2025_10k Item 6: 本身段落too short（只有一個單詞）
+nvda_2025_10k Item 8: 本身僅一句sentence
+googl_2015_10k Item 1B: 本身僅一句sentence
+googl_2015_10k Item 15: 包含其他段落引用，以及表格
+meta_2025_10k Item 6: 本身段落too short（只有一個單詞）
+lly_2015_10k Item 7A: 本身僅兩句sentence
+lly_2015_10k Item 15: exhibit的部分
+lly_2025_10k Item 6: 本身段落too short（只有一個單詞）
+lly_2025_10k Item 7A: 本身僅兩句sentence
+lly_2025_10k Item 16: 本身僅一句sentence
+pg_2015_10k Item 7A: 本身僅一句sentence
+pg_2025_10k Item 6: 僅留有標題
+pg_2025_10k Item 7A: 本身僅一句sentence
+```

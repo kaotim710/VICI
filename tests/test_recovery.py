@@ -79,6 +79,22 @@ class RecoveryTests(unittest.TestCase):
         self.assertEqual(results[0].next_step, "provide_or_fetch_reference_document")
         self.assertIsNone(results[0].extracted_text)
 
+    def test_inspect_reference_recovery_returns_review_metadata(self):
+        filing = """
+        Item 15. Exhibits, Financial Statement Schedules
+        See the Exhibit Index immediately following the signature page.
+        Item 16. Form 10-K Summary
+        None.
+        """
+        extraction = extract_items(filing, target_items=["15"], filing_id="sample")
+
+        results = run_recovery_actions(filing, extraction)
+
+        self.assertEqual(results[0].reason, "section_reference_detected")
+        self.assertEqual(results[0].status, "inspect_only")
+        self.assertEqual(results[0].severity, "info")
+        self.assertEqual(results[0].next_step, "inspect_references")
+
 
 if __name__ == "__main__":
     unittest.main()

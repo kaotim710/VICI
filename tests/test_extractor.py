@@ -122,7 +122,42 @@ class ExtractorTests(unittest.TestCase):
         result = extract_items(filing, target_items=["7"])
         item = result.item_results[0]
 
-        self.assertEqual(item.recommended_actions[0].action_type, "needs_external_source")
+        self.assertNotIn("Section length is outside the expected first-pass range.", item.warnings)
+        self.assertIn("SECTION_LENGTH_SHORT_ACCEPTED_BY_BOUNDARY_CONTEXT", item.validation_reasons)
+        action_pairs = {(action.action_type, action.reason) for action in item.recommended_actions}
+        self.assertIn(("needs_external_source", "external_or_other_document_reference"), action_pairs)
+
+    def test_short_bounded_section_keeps_text_without_length_warning(self):
+        filing = """
+        Item 8. Financial Statements and Supplementary Data
+        The financial statements begin on the following page.
+        Item 9. Changes in and Disagreements With Accountants
+        None.
+        """
+
+        result = extract_items(filing, target_items=["8"])
+        item = result.item_results[0]
+
+        self.assertEqual(item.status, "success")
+        self.assertIn("financial statements begin", item.text)
+        self.assertNotIn("Section length is outside the expected first-pass range.", item.warnings)
+        self.assertIn("SECTION_LENGTH_SHORT_ACCEPTED_BY_BOUNDARY_CONTEXT", item.validation_reasons)
+
+    def test_exhibit_section_emits_review_action(self):
+        filing = """
+        Item 15. Exhibits, Financial Statement Schedules
+        Exhibit 10.1 Material agreement
+        Exhibit 21 Subsidiaries
+        Item 16. Form 10-K Summary
+        None.
+        """
+
+        result = extract_items(filing, target_items=["15"])
+        item = result.item_results[0]
+        action_pairs = {(action.action_type, action.reason) for action in item.recommended_actions}
+
+        self.assertIn("Exhibit 10.1", item.text)
+        self.assertIn(("inspect_only", "exhibit_index_detected"), action_pairs)
 
     def test_short_administrative_sections_do_not_recommend_external_source(self):
         filing = """
@@ -379,6 +414,27 @@ class ExtractorTests(unittest.TestCase):
         self.assertEqual(item.status, "success")
         self.assertIn("For five-year selected financial data", item.text)
         self.assertEqual(item.candidate_attempts[-1].decision, "selected")
+
+    def test_later_non_toc_duplicate_item_is_preferred_over_near_toc_entry(self):
+        filing = """
+        Table of Contents
+        Item 16. Form 10-K Summary
+        Forward-looking statements and exhibit text that should not be part of Item 16.
+        """ + ("Earlier page text. " * 120) + """
+        Item 16.Form 10-K Summary
+        Not applicable.
+
+        SIGNATURES
+        Signature text.
+        """
+
+        result = extract_items(filing, target_items=["16"])
+        item = result.item_results[0]
+
+        self.assertEqual(item.status, "success")
+        self.assertTrue(item.text.startswith("Item 16.Form 10-K Summary"))
+        self.assertIn("Not applicable.", item.text)
+        self.assertNotIn("Forward-looking statements", item.text)
 
 
 if __name__ == "__main__":

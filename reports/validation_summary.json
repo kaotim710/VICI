@@ -17,12 +17,12 @@
       "medium": 5
     },
     "warning_counts": {
-      "Section length is outside the expected first-pass range.": 14,
       "Start heading has TOC-like signals.": 4,
+      "Section length is outside the expected first-pass range.": 3,
       "Start heading does not contain the expected canonical title.": 1
     },
     "warning_category_counts": {
-      "length_policy_review": 14,
+      "length_policy_review": 3,
       "title_policy_review": 1,
       "toc_signal_review": 4
     },
@@ -143,10 +143,8 @@
       "status": "success",
       "candidate_count": 40,
       "toc_confidence": "high",
-      "warnings": [
-        "Section length is outside the expected first-pass range."
-      ],
-      "recommended_action_count": 1,
+      "warnings": [],
+      "recommended_action_count": 7,
       "items": {
         "1": {
           "status": "success",
@@ -186,7 +184,15 @@
           "confidence_score": 1.0,
           "text_length": 1679,
           "warnings": [],
-          "recommended_actions": []
+          "recommended_actions": [
+            {
+              "action_type": "inspect_only",
+              "reason": "section_reference_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_references"
+            }
+          ]
         },
         "3": {
           "status": "success",
@@ -194,7 +200,15 @@
           "confidence_score": 1.0,
           "text_length": 197,
           "warnings": [],
-          "recommended_actions": []
+          "recommended_actions": [
+            {
+              "action_type": "inspect_only",
+              "reason": "section_reference_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_references"
+            }
+          ]
         },
         "4": {
           "status": "success",
@@ -210,7 +224,15 @@
           "confidence_score": 1.0,
           "text_length": 8858,
           "warnings": [],
-          "recommended_actions": []
+          "recommended_actions": [
+            {
+              "action_type": "inspect_only",
+              "reason": "section_reference_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_references"
+            }
+          ]
         },
         "6": {
           "status": "success",
@@ -226,7 +248,15 @@
           "confidence_score": 1.0,
           "text_length": 59568,
           "warnings": [],
-          "recommended_actions": []
+          "recommended_actions": [
+            {
+              "action_type": "inspect_only",
+              "reason": "section_reference_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_references"
+            }
+          ]
         },
         "7A": {
           "status": "success",
@@ -234,25 +264,23 @@
           "confidence_score": 1.0,
           "text_length": 4278,
           "warnings": [],
-          "recommended_actions": []
+          "recommended_actions": [
+            {
+              "action_type": "inspect_only",
+              "reason": "section_reference_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_references"
+            }
+          ]
         },
         "8": {
           "status": "success",
           "confidence_level": "high",
-          "confidence_score": 0.9,
+          "confidence_score": 1.0,
           "text_length": 207,
-          "warnings": [
-            "Section length is outside the expected first-pass range."
-          ],
-          "recommended_actions": [
-            {
-              "action_type": "needs_external_source",
-              "reason": "external_or_other_document_reference",
-              "severity": "blocked",
-              "requires_user_input": true,
-              "next_step": "provide_or_fetch_reference_document"
-            }
-          ]
+          "warnings": [],
+          "recommended_actions": []
         },
         "9": {
           "status": "success",
@@ -276,7 +304,15 @@
           "confidence_score": 1.0,
           "text_length": 403,
           "warnings": [],
-          "recommended_actions": []
+          "recommended_actions": [
+            {
+              "action_type": "inspect_only",
+              "reason": "section_reference_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_references"
+            }
+          ]
         },
         "9C": {
           "status": "not_present",
@@ -332,7 +368,15 @@
           "confidence_score": 1.0,
           "text_length": 62,
           "warnings": [],
-          "recommended_actions": []
+          "recommended_actions": [
+            {
+              "action_type": "inspect_only",
+              "reason": "exhibit_index_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_exhibit_index"
+            }
+          ]
         },
         "16": {
           "status": "not_present",
@@ -351,10 +395,8 @@
       "status": "success",
       "candidate_count": 46,
       "toc_confidence": "high",
-      "warnings": [
-        "Section length is outside the expected first-pass range."
-      ],
-      "recommended_action_count": 1,
+      "warnings": [],
+      "recommended_action_count": 7,
       "items": {
         "1": {
           "status": "success",
@@ -394,7 +436,15 @@
           "confidence_score": 1.0,
           "text_length": 906,
           "warnings": [],
-          "recommended_actions": []
+          "recommended_actions": [
+            {
+              "action_type": "inspect_only",
+              "reason": "section_reference_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_references"
+            }
+          ]
         },
         "3": {
           "status": "success",
@@ -402,7 +452,15 @@
           "confidence_score": 1.0,
           "text_length": 197,
           "warnings": [],
-          "recommended_actions": []
+          "recommended_actions": [
+            {
+              "action_type": "inspect_only",
+              "reason": "section_reference_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_references"
+            }
+          ]
         },
         "4": {
           "status": "success",
@@ -418,16 +476,22 @@
           "confidence_score": 1.0,
           "text_length": 5618,
           "warnings": [],
-          "recommended_actions": []
+          "recommended_actions": [
+            {
+              "action_type": "inspect_only",
+              "reason": "section_reference_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_references"
+            }
+          ]
         },
         "6": {
           "status": "success",
           "confidence_level": "high",
-          "confidence_score": 0.9,
+          "confidence_score": 1.0,
           "text_length": 41,
-          "warnings": [
-            "Section length is outside the expected first-pass range."
-          ],
+          "warnings": [],
           "recommended_actions": []
         },
         "7": {
@@ -436,7 +500,15 @@
           "confidence_score": 1.0,
           "text_length": 38225,
           "warnings": [],
-          "recommended_actions": []
+          "recommended_actions": [
+            {
+              "action_type": "inspect_only",
+              "reason": "section_reference_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_references"
+            }
+          ]
         },
         "7A": {
           "status": "success",
@@ -444,25 +516,23 @@
           "confidence_score": 1.0,
           "text_length": 3316,
           "warnings": [],
-          "recommended_actions": []
+          "recommended_actions": [
+            {
+              "action_type": "inspect_only",
+              "reason": "section_reference_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_references"
+            }
+          ]
         },
         "8": {
           "status": "success",
           "confidence_level": "high",
-          "confidence_score": 0.9,
+          "confidence_score": 1.0,
           "text_length": 207,
-          "warnings": [
-            "Section length is outside the expected first-pass range."
-          ],
-          "recommended_actions": [
-            {
-              "action_type": "needs_external_source",
-              "reason": "external_or_other_document_reference",
-              "severity": "blocked",
-              "requires_user_input": true,
-              "next_step": "provide_or_fetch_reference_document"
-            }
-          ]
+          "warnings": [],
+          "recommended_actions": []
         },
         "9": {
           "status": "success",
@@ -494,7 +564,15 @@
           "confidence_score": 1.0,
           "text_length": 429,
           "warnings": [],
-          "recommended_actions": []
+          "recommended_actions": [
+            {
+              "action_type": "inspect_only",
+              "reason": "section_reference_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_references"
+            }
+          ]
         },
         "10": {
           "status": "success",
@@ -542,13 +620,21 @@
           "confidence_score": 1.0,
           "text_length": 65,
           "warnings": [],
-          "recommended_actions": []
+          "recommended_actions": [
+            {
+              "action_type": "inspect_only",
+              "reason": "exhibit_index_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_exhibit_index"
+            }
+          ]
         },
         "16": {
           "status": "success",
           "confidence_level": "high",
           "confidence_score": 1.0,
-          "text_length": 31,
+          "text_length": 47,
           "warnings": [],
           "recommended_actions": []
         }
@@ -565,7 +651,7 @@
         "Section length is outside the expected first-pass range.",
         "Start heading has TOC-like signals."
       ],
-      "recommended_action_count": 2,
+      "recommended_action_count": 17,
       "items": {
         "1": {
           "status": "success",
@@ -573,7 +659,15 @@
           "confidence_score": 1.0,
           "text_length": 18562,
           "warnings": [],
-          "recommended_actions": []
+          "recommended_actions": [
+            {
+              "action_type": "inspect_only",
+              "reason": "section_reference_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_references"
+            }
+          ]
         },
         "1A": {
           "status": "success",
@@ -599,6 +693,20 @@
               "severity": "info",
               "requires_user_input": false,
               "next_step": "inspect_evidence_only"
+            },
+            {
+              "action_type": "inspect_only",
+              "reason": "section_reference_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_references"
+            },
+            {
+              "action_type": "inspect_only",
+              "reason": "exhibit_index_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_exhibit_index"
             }
           ]
         },
@@ -624,7 +732,15 @@
           "confidence_score": 1.0,
           "text_length": 303,
           "warnings": [],
-          "recommended_actions": []
+          "recommended_actions": [
+            {
+              "action_type": "inspect_only",
+              "reason": "section_reference_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_references"
+            }
+          ]
         },
         "4": {
           "status": "success",
@@ -640,7 +756,15 @@
           "confidence_score": 1.0,
           "text_length": 5975,
           "warnings": [],
-          "recommended_actions": []
+          "recommended_actions": [
+            {
+              "action_type": "inspect_only",
+              "reason": "section_reference_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_references"
+            }
+          ]
         },
         "6": {
           "status": "success",
@@ -648,7 +772,15 @@
           "confidence_score": 1.0,
           "text_length": 4676,
           "warnings": [],
-          "recommended_actions": []
+          "recommended_actions": [
+            {
+              "action_type": "inspect_only",
+              "reason": "section_reference_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_references"
+            }
+          ]
         },
         "7": {
           "status": "success",
@@ -656,7 +788,15 @@
           "confidence_score": 1.0,
           "text_length": 76739,
           "warnings": [],
-          "recommended_actions": []
+          "recommended_actions": [
+            {
+              "action_type": "inspect_only",
+              "reason": "section_reference_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_references"
+            }
+          ]
         },
         "7A": {
           "status": "success",
@@ -672,7 +812,15 @@
           "confidence_score": 1.0,
           "text_length": 174023,
           "warnings": [],
-          "recommended_actions": []
+          "recommended_actions": [
+            {
+              "action_type": "inspect_only",
+              "reason": "section_reference_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_references"
+            }
+          ]
         },
         "9": {
           "status": "success",
@@ -712,7 +860,15 @@
           "confidence_score": 1.0,
           "text_length": 1073,
           "warnings": [],
-          "recommended_actions": []
+          "recommended_actions": [
+            {
+              "action_type": "inspect_only",
+              "reason": "section_reference_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_references"
+            }
+          ]
         },
         "11": {
           "status": "success",
@@ -729,6 +885,13 @@
               "severity": "info",
               "requires_user_input": false,
               "next_step": "inspect_evidence_only"
+            },
+            {
+              "action_type": "inspect_only",
+              "reason": "section_reference_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_references"
             }
           ]
         },
@@ -736,25 +899,49 @@
           "status": "success",
           "confidence_level": "high",
           "confidence_score": 1.0,
-          "text_length": 109,
+          "text_length": 356,
           "warnings": [],
-          "recommended_actions": []
+          "recommended_actions": [
+            {
+              "action_type": "inspect_only",
+              "reason": "section_reference_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_references"
+            }
+          ]
         },
         "13": {
           "status": "success",
           "confidence_level": "high",
           "confidence_score": 1.0,
-          "text_length": 88,
+          "text_length": 399,
           "warnings": [],
-          "recommended_actions": []
+          "recommended_actions": [
+            {
+              "action_type": "inspect_only",
+              "reason": "section_reference_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_references"
+            }
+          ]
         },
         "14": {
           "status": "success",
           "confidence_level": "high",
           "confidence_score": 1.0,
-          "text_length": 53,
+          "text_length": 294,
           "warnings": [],
-          "recommended_actions": []
+          "recommended_actions": [
+            {
+              "action_type": "inspect_only",
+              "reason": "section_reference_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_references"
+            }
+          ]
         },
         "15": {
           "status": "success",
@@ -764,7 +951,22 @@
           "warnings": [
             "Section length is outside the expected first-pass range."
           ],
-          "recommended_actions": []
+          "recommended_actions": [
+            {
+              "action_type": "inspect_only",
+              "reason": "section_reference_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_references"
+            },
+            {
+              "action_type": "inspect_only",
+              "reason": "exhibit_index_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_exhibit_index"
+            }
+          ]
         },
         "16": {
           "status": "not_present",
@@ -786,7 +988,7 @@
       "warnings": [
         "Start heading has TOC-like signals."
       ],
-      "recommended_action_count": 2,
+      "recommended_action_count": 20,
       "items": {
         "1": {
           "status": "success",
@@ -794,7 +996,15 @@
           "confidence_score": 1.0,
           "text_length": 23903,
           "warnings": [],
-          "recommended_actions": []
+          "recommended_actions": [
+            {
+              "action_type": "inspect_only",
+              "reason": "section_reference_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_references"
+            }
+          ]
         },
         "1A": {
           "status": "success",
@@ -818,7 +1028,15 @@
           "confidence_score": 1.0,
           "text_length": 3362,
           "warnings": [],
-          "recommended_actions": []
+          "recommended_actions": [
+            {
+              "action_type": "inspect_only",
+              "reason": "section_reference_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_references"
+            }
+          ]
         },
         "2": {
           "status": "success",
@@ -834,7 +1052,15 @@
           "confidence_score": 1.0,
           "text_length": 272,
           "warnings": [],
-          "recommended_actions": []
+          "recommended_actions": [
+            {
+              "action_type": "inspect_only",
+              "reason": "section_reference_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_references"
+            }
+          ]
         },
         "4": {
           "status": "success",
@@ -850,7 +1076,15 @@
           "confidence_score": 1.0,
           "text_length": 58199,
           "warnings": [],
-          "recommended_actions": []
+          "recommended_actions": [
+            {
+              "action_type": "inspect_only",
+              "reason": "section_reference_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_references"
+            }
+          ]
         },
         "6": {
           "status": "success",
@@ -867,6 +1101,20 @@
               "severity": "info",
               "requires_user_input": false,
               "next_step": "inspect_evidence_only"
+            },
+            {
+              "action_type": "inspect_only",
+              "reason": "section_reference_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_references"
+            },
+            {
+              "action_type": "inspect_only",
+              "reason": "exhibit_index_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_exhibit_index"
             }
           ]
         },
@@ -885,6 +1133,20 @@
               "severity": "info",
               "requires_user_input": false,
               "next_step": "inspect_evidence_only"
+            },
+            {
+              "action_type": "inspect_only",
+              "reason": "section_reference_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_references"
+            },
+            {
+              "action_type": "inspect_only",
+              "reason": "exhibit_index_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_exhibit_index"
             }
           ]
         },
@@ -894,7 +1156,15 @@
           "confidence_score": 1.0,
           "text_length": 8054,
           "warnings": [],
-          "recommended_actions": []
+          "recommended_actions": [
+            {
+              "action_type": "inspect_only",
+              "reason": "section_reference_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_references"
+            }
+          ]
         },
         "8": {
           "status": "success",
@@ -902,7 +1172,15 @@
           "confidence_score": 1.0,
           "text_length": 133745,
           "warnings": [],
-          "recommended_actions": []
+          "recommended_actions": [
+            {
+              "action_type": "inspect_only",
+              "reason": "section_reference_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_references"
+            }
+          ]
         },
         "9": {
           "status": "success",
@@ -926,7 +1204,15 @@
           "confidence_score": 1.0,
           "text_length": 2258,
           "warnings": [],
-          "recommended_actions": []
+          "recommended_actions": [
+            {
+              "action_type": "inspect_only",
+              "reason": "section_reference_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_references"
+            }
+          ]
         },
         "9C": {
           "status": "success",
@@ -942,7 +1228,22 @@
           "confidence_score": 1.0,
           "text_length": 1461,
           "warnings": [],
-          "recommended_actions": []
+          "recommended_actions": [
+            {
+              "action_type": "inspect_only",
+              "reason": "section_reference_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_references"
+            },
+            {
+              "action_type": "inspect_only",
+              "reason": "exhibit_index_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_exhibit_index"
+            }
+          ]
         },
         "11": {
           "status": "success",
@@ -950,7 +1251,15 @@
           "confidence_score": 1.0,
           "text_length": 506,
           "warnings": [],
-          "recommended_actions": []
+          "recommended_actions": [
+            {
+              "action_type": "inspect_only",
+              "reason": "section_reference_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_references"
+            }
+          ]
         },
         "12": {
           "status": "success",
@@ -958,23 +1267,47 @@
           "confidence_score": 1.0,
           "text_length": 358,
           "warnings": [],
-          "recommended_actions": []
+          "recommended_actions": [
+            {
+              "action_type": "inspect_only",
+              "reason": "section_reference_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_references"
+            }
+          ]
         },
         "13": {
           "status": "success",
           "confidence_level": "high",
           "confidence_score": 1.0,
-          "text_length": 87,
+          "text_length": 397,
           "warnings": [],
-          "recommended_actions": []
+          "recommended_actions": [
+            {
+              "action_type": "inspect_only",
+              "reason": "section_reference_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_references"
+            }
+          ]
         },
         "14": {
           "status": "success",
           "confidence_level": "high",
           "confidence_score": 1.0,
-          "text_length": 52,
+          "text_length": 276,
           "warnings": [],
-          "recommended_actions": []
+          "recommended_actions": [
+            {
+              "action_type": "inspect_only",
+              "reason": "section_reference_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_references"
+            }
+          ]
         },
         "15": {
           "status": "success",
@@ -982,7 +1315,15 @@
           "confidence_score": 1.0,
           "text_length": 62,
           "warnings": [],
-          "recommended_actions": []
+          "recommended_actions": [
+            {
+              "action_type": "inspect_only",
+              "reason": "exhibit_index_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_exhibit_index"
+            }
+          ]
         },
         "16": {
           "status": "success",
@@ -1002,7 +1343,7 @@
       "candidate_count": 40,
       "toc_confidence": "high",
       "warnings": [],
-      "recommended_action_count": 0,
+      "recommended_action_count": 6,
       "items": {
         "1": {
           "status": "success",
@@ -1010,7 +1351,15 @@
           "confidence_score": 1.0,
           "text_length": 14285,
           "warnings": [],
-          "recommended_actions": []
+          "recommended_actions": [
+            {
+              "action_type": "inspect_only",
+              "reason": "section_reference_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_references"
+            }
+          ]
         },
         "1A": {
           "status": "success",
@@ -1074,7 +1423,15 @@
           "confidence_score": 1.0,
           "text_length": 7028,
           "warnings": [],
-          "recommended_actions": []
+          "recommended_actions": [
+            {
+              "action_type": "inspect_only",
+              "reason": "section_reference_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_references"
+            }
+          ]
         },
         "7": {
           "status": "success",
@@ -1082,7 +1439,15 @@
           "confidence_score": 1.0,
           "text_length": 63442,
           "warnings": [],
-          "recommended_actions": []
+          "recommended_actions": [
+            {
+              "action_type": "inspect_only",
+              "reason": "section_reference_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_references"
+            }
+          ]
         },
         "7A": {
           "status": "success",
@@ -1098,7 +1463,15 @@
           "confidence_score": 1.0,
           "text_length": 80656,
           "warnings": [],
-          "recommended_actions": []
+          "recommended_actions": [
+            {
+              "action_type": "inspect_only",
+              "reason": "section_reference_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_references"
+            }
+          ]
         },
         "9": {
           "status": "success",
@@ -1160,7 +1533,7 @@
           "status": "success",
           "confidence_level": "high",
           "confidence_score": 1.0,
-          "text_length": 87,
+          "text_length": 303,
           "warnings": [],
           "recommended_actions": []
         },
@@ -1168,7 +1541,7 @@
           "status": "success",
           "confidence_level": "high",
           "confidence_score": 1.0,
-          "text_length": 52,
+          "text_length": 272,
           "warnings": [],
           "recommended_actions": []
         },
@@ -1176,9 +1549,24 @@
           "status": "success",
           "confidence_level": "high",
           "confidence_score": 1.0,
-          "text_length": 62,
+          "text_length": 859,
           "warnings": [],
-          "recommended_actions": []
+          "recommended_actions": [
+            {
+              "action_type": "inspect_only",
+              "reason": "section_reference_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_references"
+            },
+            {
+              "action_type": "inspect_only",
+              "reason": "exhibit_index_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_exhibit_index"
+            }
+          ]
         },
         "16": {
           "status": "not_present",
@@ -1197,10 +1585,8 @@
       "status": "success",
       "candidate_count": 46,
       "toc_confidence": "high",
-      "warnings": [
-        "Section length is outside the expected first-pass range."
-      ],
-      "recommended_action_count": 0,
+      "warnings": [],
+      "recommended_action_count": 9,
       "items": {
         "1": {
           "status": "success",
@@ -1208,7 +1594,15 @@
           "confidence_score": 1.0,
           "text_length": 24657,
           "warnings": [],
-          "recommended_actions": []
+          "recommended_actions": [
+            {
+              "action_type": "inspect_only",
+              "reason": "section_reference_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_references"
+            }
+          ]
         },
         "1A": {
           "status": "success",
@@ -1232,7 +1626,15 @@
           "confidence_score": 1.0,
           "text_length": 6943,
           "warnings": [],
-          "recommended_actions": []
+          "recommended_actions": [
+            {
+              "action_type": "inspect_only",
+              "reason": "section_reference_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_references"
+            }
+          ]
         },
         "2": {
           "status": "success",
@@ -1248,7 +1650,15 @@
           "confidence_score": 1.0,
           "text_length": 38551,
           "warnings": [],
-          "recommended_actions": []
+          "recommended_actions": [
+            {
+              "action_type": "inspect_only",
+              "reason": "section_reference_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_references"
+            }
+          ]
         },
         "4": {
           "status": "success",
@@ -1264,16 +1674,22 @@
           "confidence_score": 1.0,
           "text_length": 3262,
           "warnings": [],
-          "recommended_actions": []
+          "recommended_actions": [
+            {
+              "action_type": "inspect_only",
+              "reason": "section_reference_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_references"
+            }
+          ]
         },
         "6": {
           "status": "success",
           "confidence_level": "high",
-          "confidence_score": 0.9,
+          "confidence_score": 1.0,
           "text_length": 40,
-          "warnings": [
-            "Section length is outside the expected first-pass range."
-          ],
+          "warnings": [],
           "recommended_actions": []
         },
         "7": {
@@ -1282,7 +1698,15 @@
           "confidence_score": 1.0,
           "text_length": 61319,
           "warnings": [],
-          "recommended_actions": []
+          "recommended_actions": [
+            {
+              "action_type": "inspect_only",
+              "reason": "section_reference_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_references"
+            }
+          ]
         },
         "7A": {
           "status": "success",
@@ -1290,7 +1714,15 @@
           "confidence_score": 1.0,
           "text_length": 5989,
           "warnings": [],
-          "recommended_actions": []
+          "recommended_actions": [
+            {
+              "action_type": "inspect_only",
+              "reason": "section_reference_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_references"
+            }
+          ]
         },
         "8": {
           "status": "success",
@@ -1298,7 +1730,15 @@
           "confidence_score": 1.0,
           "text_length": 144976,
           "warnings": [],
-          "recommended_actions": []
+          "recommended_actions": [
+            {
+              "action_type": "inspect_only",
+              "reason": "section_reference_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_references"
+            }
+          ]
         },
         "9": {
           "status": "success",
@@ -1338,7 +1778,15 @@
           "confidence_score": 1.0,
           "text_length": 1246,
           "warnings": [],
-          "recommended_actions": []
+          "recommended_actions": [
+            {
+              "action_type": "inspect_only",
+              "reason": "exhibit_index_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_exhibit_index"
+            }
+          ]
         },
         "11": {
           "status": "success",
@@ -1368,7 +1816,7 @@
           "status": "success",
           "confidence_level": "high",
           "confidence_score": 1.0,
-          "text_length": 53,
+          "text_length": 290,
           "warnings": [],
           "recommended_actions": []
         },
@@ -1378,13 +1826,21 @@
           "confidence_score": 1.0,
           "text_length": 65,
           "warnings": [],
-          "recommended_actions": []
+          "recommended_actions": [
+            {
+              "action_type": "inspect_only",
+              "reason": "exhibit_index_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_exhibit_index"
+            }
+          ]
         },
         "16": {
           "status": "success",
           "confidence_level": "high",
           "confidence_score": 1.0,
-          "text_length": 32,
+          "text_length": 57,
           "warnings": [],
           "recommended_actions": []
         }
@@ -1397,10 +1853,8 @@
       "status": "success",
       "candidate_count": 40,
       "toc_confidence": "high",
-      "warnings": [
-        "Section length is outside the expected first-pass range."
-      ],
-      "recommended_action_count": 1,
+      "warnings": [],
+      "recommended_action_count": 8,
       "items": {
         "1": {
           "status": "success",
@@ -1408,7 +1862,22 @@
           "confidence_score": 1.0,
           "text_length": 61876,
           "warnings": [],
-          "recommended_actions": []
+          "recommended_actions": [
+            {
+              "action_type": "inspect_only",
+              "reason": "section_reference_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_references"
+            },
+            {
+              "action_type": "inspect_only",
+              "reason": "exhibit_index_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_exhibit_index"
+            }
+          ]
         },
         "1A": {
           "status": "success",
@@ -1416,7 +1885,15 @@
           "confidence_score": 1.0,
           "text_length": 26290,
           "warnings": [],
-          "recommended_actions": []
+          "recommended_actions": [
+            {
+              "action_type": "inspect_only",
+              "reason": "section_reference_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_references"
+            }
+          ]
         },
         "1B": {
           "status": "success",
@@ -1448,7 +1925,15 @@
           "confidence_score": 1.0,
           "text_length": 4394,
           "warnings": [],
-          "recommended_actions": []
+          "recommended_actions": [
+            {
+              "action_type": "inspect_only",
+              "reason": "section_reference_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_references"
+            }
+          ]
         },
         "4": {
           "status": "success",
@@ -1472,7 +1957,15 @@
           "confidence_score": 1.0,
           "text_length": 2313,
           "warnings": [],
-          "recommended_actions": []
+          "recommended_actions": [
+            {
+              "action_type": "inspect_only",
+              "reason": "section_reference_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_references"
+            }
+          ]
         },
         "7": {
           "status": "success",
@@ -1480,25 +1973,23 @@
           "confidence_score": 1.0,
           "text_length": 83212,
           "warnings": [],
-          "recommended_actions": []
+          "recommended_actions": [
+            {
+              "action_type": "inspect_only",
+              "reason": "section_reference_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_references"
+            }
+          ]
         },
         "7A": {
           "status": "success",
           "confidence_level": "high",
-          "confidence_score": 0.9,
+          "confidence_score": 1.0,
           "text_length": 307,
-          "warnings": [
-            "Section length is outside the expected first-pass range."
-          ],
-          "recommended_actions": [
-            {
-              "action_type": "needs_external_source",
-              "reason": "external_or_other_document_reference",
-              "severity": "blocked",
-              "requires_user_input": true,
-              "next_step": "provide_or_fetch_reference_document"
-            }
-          ]
+          "warnings": [],
+          "recommended_actions": []
         },
         "8": {
           "status": "success",
@@ -1506,7 +1997,15 @@
           "confidence_score": 1.0,
           "text_length": 171611,
           "warnings": [],
-          "recommended_actions": []
+          "recommended_actions": [
+            {
+              "action_type": "inspect_only",
+              "reason": "section_reference_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_references"
+            }
+          ]
         },
         "9": {
           "status": "success",
@@ -1560,7 +2059,7 @@
           "status": "success",
           "confidence_level": "high",
           "confidence_score": 1.0,
-          "text_length": 109,
+          "text_length": 1285,
           "warnings": [],
           "recommended_actions": []
         },
@@ -1576,19 +2075,25 @@
           "status": "success",
           "confidence_level": "high",
           "confidence_score": 1.0,
-          "text_length": 53,
+          "text_length": 415,
           "warnings": [],
           "recommended_actions": []
         },
         "15": {
           "status": "success",
           "confidence_level": "high",
-          "confidence_score": 0.9,
-          "text_length": 371275,
-          "warnings": [
-            "Section length is outside the expected first-pass range."
-          ],
-          "recommended_actions": []
+          "confidence_score": 1.0,
+          "text_length": 2860,
+          "warnings": [],
+          "recommended_actions": [
+            {
+              "action_type": "inspect_only",
+              "reason": "exhibit_index_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_exhibit_index"
+            }
+          ]
         },
         "16": {
           "status": "not_present",
@@ -1607,10 +2112,8 @@
       "status": "success",
       "candidate_count": 46,
       "toc_confidence": "high",
-      "warnings": [
-        "Section length is outside the expected first-pass range."
-      ],
-      "recommended_action_count": 1,
+      "warnings": [],
+      "recommended_action_count": 7,
       "items": {
         "1": {
           "status": "success",
@@ -1618,7 +2121,15 @@
           "confidence_score": 1.0,
           "text_length": 84367,
           "warnings": [],
-          "recommended_actions": []
+          "recommended_actions": [
+            {
+              "action_type": "inspect_only",
+              "reason": "section_reference_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_references"
+            }
+          ]
         },
         "1A": {
           "status": "success",
@@ -1626,7 +2137,15 @@
           "confidence_score": 1.0,
           "text_length": 77548,
           "warnings": [],
-          "recommended_actions": []
+          "recommended_actions": [
+            {
+              "action_type": "inspect_only",
+              "reason": "section_reference_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_references"
+            }
+          ]
         },
         "1B": {
           "status": "success",
@@ -1674,16 +2193,22 @@
           "confidence_score": 1.0,
           "text_length": 3456,
           "warnings": [],
-          "recommended_actions": []
+          "recommended_actions": [
+            {
+              "action_type": "inspect_only",
+              "reason": "section_reference_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_references"
+            }
+          ]
         },
         "6": {
           "status": "success",
           "confidence_level": "high",
-          "confidence_score": 0.9,
+          "confidence_score": 1.0,
           "text_length": 18,
-          "warnings": [
-            "Section length is outside the expected first-pass range."
-          ],
+          "warnings": [],
           "recommended_actions": []
         },
         "7": {
@@ -1692,25 +2217,23 @@
           "confidence_score": 1.0,
           "text_length": 49261,
           "warnings": [],
-          "recommended_actions": []
+          "recommended_actions": [
+            {
+              "action_type": "inspect_only",
+              "reason": "section_reference_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_references"
+            }
+          ]
         },
         "7A": {
           "status": "success",
           "confidence_level": "high",
-          "confidence_score": 0.9,
+          "confidence_score": 1.0,
           "text_length": 311,
-          "warnings": [
-            "Section length is outside the expected first-pass range."
-          ],
-          "recommended_actions": [
-            {
-              "action_type": "needs_external_source",
-              "reason": "external_or_other_document_reference",
-              "severity": "blocked",
-              "requires_user_input": true,
-              "next_step": "provide_or_fetch_reference_document"
-            }
-          ]
+          "warnings": [],
+          "recommended_actions": []
         },
         "8": {
           "status": "success",
@@ -1718,7 +2241,15 @@
           "confidence_score": 1.0,
           "text_length": 119344,
           "warnings": [],
-          "recommended_actions": []
+          "recommended_actions": [
+            {
+              "action_type": "inspect_only",
+              "reason": "section_reference_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_references"
+            }
+          ]
         },
         "9": {
           "status": "success",
@@ -1734,7 +2265,15 @@
           "confidence_score": 1.0,
           "text_length": 2504,
           "warnings": [],
-          "recommended_actions": []
+          "recommended_actions": [
+            {
+              "action_type": "inspect_only",
+              "reason": "section_reference_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_references"
+            }
+          ]
         },
         "9B": {
           "status": "success",
@@ -1788,7 +2327,7 @@
           "status": "success",
           "confidence_level": "high",
           "confidence_score": 1.0,
-          "text_length": 53,
+          "text_length": 449,
           "warnings": [],
           "recommended_actions": []
         },
@@ -1796,18 +2335,24 @@
           "status": "success",
           "confidence_level": "high",
           "confidence_score": 1.0,
-          "text_length": 57,
+          "text_length": 5834,
           "warnings": [],
-          "recommended_actions": []
+          "recommended_actions": [
+            {
+              "action_type": "inspect_only",
+              "reason": "exhibit_index_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_exhibit_index"
+            }
+          ]
         },
         "16": {
           "status": "success",
           "confidence_level": "high",
-          "confidence_score": 0.9,
-          "text_length": 363493,
-          "warnings": [
-            "Section length is outside the expected first-pass range."
-          ],
+          "confidence_score": 1.0,
+          "text_length": 47,
+          "warnings": [],
           "recommended_actions": []
         }
       }
@@ -1819,10 +2364,8 @@
       "status": "success",
       "candidate_count": 20,
       "toc_confidence": "none",
-      "warnings": [
-        "Section length is outside the expected first-pass range."
-      ],
-      "recommended_action_count": 1,
+      "warnings": [],
+      "recommended_action_count": 5,
       "items": {
         "1": {
           "status": "success",
@@ -1830,7 +2373,15 @@
           "confidence_score": 1.0,
           "text_length": 9464,
           "warnings": [],
-          "recommended_actions": []
+          "recommended_actions": [
+            {
+              "action_type": "inspect_only",
+              "reason": "section_reference_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_references"
+            }
+          ]
         },
         "1A": {
           "status": "success",
@@ -1870,7 +2421,15 @@
           "confidence_score": 1.0,
           "text_length": 2074,
           "warnings": [],
-          "recommended_actions": []
+          "recommended_actions": [
+            {
+              "action_type": "inspect_only",
+              "reason": "section_reference_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_references"
+            }
+          ]
         },
         "4": {
           "status": "success",
@@ -1902,25 +2461,23 @@
           "confidence_score": 1.0,
           "text_length": 114249,
           "warnings": [],
-          "recommended_actions": []
+          "recommended_actions": [
+            {
+              "action_type": "inspect_only",
+              "reason": "section_reference_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_references"
+            }
+          ]
         },
         "7A": {
           "status": "success",
           "confidence_level": "high",
-          "confidence_score": 0.9,
+          "confidence_score": 1.0,
           "text_length": 308,
-          "warnings": [
-            "Section length is outside the expected first-pass range."
-          ],
-          "recommended_actions": [
-            {
-              "action_type": "needs_external_source",
-              "reason": "external_or_other_document_reference",
-              "severity": "blocked",
-              "requires_user_input": true,
-              "next_step": "provide_or_fetch_reference_document"
-            }
-          ]
+          "warnings": [],
+          "recommended_actions": []
         },
         "8": {
           "status": "success",
@@ -1928,7 +2485,15 @@
           "confidence_score": 1.0,
           "text_length": 128495,
           "warnings": [],
-          "recommended_actions": []
+          "recommended_actions": [
+            {
+              "action_type": "inspect_only",
+              "reason": "section_reference_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_references"
+            }
+          ]
         },
         "9": {
           "status": "success",
@@ -2008,7 +2573,15 @@
           "confidence_score": 1.0,
           "text_length": 11337,
           "warnings": [],
-          "recommended_actions": []
+          "recommended_actions": [
+            {
+              "action_type": "inspect_only",
+              "reason": "exhibit_index_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_exhibit_index"
+            }
+          ]
         },
         "16": {
           "status": "not_present",
@@ -2031,7 +2604,7 @@
         "Section length is outside the expected first-pass range.",
         "Start heading does not contain the expected canonical title."
       ],
-      "recommended_action_count": 1,
+      "recommended_action_count": 5,
       "items": {
         "1": {
           "status": "success",
@@ -2039,7 +2612,15 @@
           "confidence_score": 1.0,
           "text_length": 14179,
           "warnings": [],
-          "recommended_actions": []
+          "recommended_actions": [
+            {
+              "action_type": "inspect_only",
+              "reason": "section_reference_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_references"
+            }
+          ]
         },
         "1A": {
           "status": "success",
@@ -2079,7 +2660,15 @@
           "confidence_score": 1.0,
           "text_length": 1885,
           "warnings": [],
-          "recommended_actions": []
+          "recommended_actions": [
+            {
+              "action_type": "inspect_only",
+              "reason": "section_reference_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_references"
+            }
+          ]
         },
         "4": {
           "status": "success",
@@ -2114,25 +2703,23 @@
           "confidence_score": 1.0,
           "text_length": 93136,
           "warnings": [],
-          "recommended_actions": []
+          "recommended_actions": [
+            {
+              "action_type": "inspect_only",
+              "reason": "section_reference_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_references"
+            }
+          ]
         },
         "7A": {
           "status": "success",
           "confidence_level": "high",
-          "confidence_score": 0.9,
+          "confidence_score": 1.0,
           "text_length": 276,
-          "warnings": [
-            "Section length is outside the expected first-pass range."
-          ],
-          "recommended_actions": [
-            {
-              "action_type": "needs_external_source",
-              "reason": "external_or_other_document_reference",
-              "severity": "blocked",
-              "requires_user_input": true,
-              "next_step": "provide_or_fetch_reference_document"
-            }
-          ]
+          "warnings": [],
+          "recommended_actions": []
         },
         "8": {
           "status": "success",
@@ -2140,7 +2727,15 @@
           "confidence_score": 1.0,
           "text_length": 115368,
           "warnings": [],
-          "recommended_actions": []
+          "recommended_actions": [
+            {
+              "action_type": "inspect_only",
+              "reason": "section_reference_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_references"
+            }
+          ]
         },
         "9": {
           "status": "success",
@@ -2220,7 +2815,15 @@
           "confidence_score": 1.0,
           "text_length": 65,
           "warnings": [],
-          "recommended_actions": []
+          "recommended_actions": [
+            {
+              "action_type": "inspect_only",
+              "reason": "exhibit_index_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_exhibit_index"
+            }
+          ]
         },
         "16": {
           "status": "success",

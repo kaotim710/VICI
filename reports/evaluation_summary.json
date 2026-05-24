@@ -15,14 +15,14 @@
     "medium": 13
   },
   "warning_counts": {
-    "Section length is outside the expected first-pass range.": 47,
+    "Section length is outside the expected first-pass range.": 12,
     "Start heading has TOC-like signals.": 20,
     "Start heading does not contain the expected canonical title.": 4,
     "Section appears to be a cross-reference rather than full narrative text.": 2,
     "End heading has TOC-like signals.": 2
   },
   "warning_category_counts": {
-    "length_policy_review": 47,
+    "length_policy_review": 12,
     "reference_recovery": 2,
     "title_policy_review": 4,
     "toc_signal_review": 22
@@ -155,19 +155,7 @@
         "passed": true,
         "actual": 0,
         "expected": "<= 0"
-      },
-      {
-        "name": "failed_gold_checks",
-        "passed": true,
-        "actual": 0,
-        "expected": "<= 0"
       }
     ]
-  },
-  "gold_boundary": {
-    "filings": 5,
-    "items": 15,
-    "passed_checks": 45,
-    "failed_checks": 0
   }
 }

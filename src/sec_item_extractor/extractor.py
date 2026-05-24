@@ -281,7 +281,8 @@ def _build_success_result(
         warnings.append("Start heading does not contain the expected canonical title.")
 
     min_length, max_length = _length_bounds(start.item)
-    if min_length <= len(section_text) <= max_length:
+    section_length = len(section_text)
+    if min_length <= section_length <= max_length:
         confidence_components.append(
             ConfidenceComponent(
                 name="section_length_reasonable",
@@ -292,6 +293,17 @@ def _build_success_result(
             )
         )
         reasons.append("SECTION_LENGTH_REASONABLE")
+    elif section_length < min_length and _has_strong_boundary_context(start, end):
+        confidence_components.append(
+            ConfidenceComponent(
+                name="section_length_reasonable",
+                weight=0.10,
+                earned=0.10,
+                passed=True,
+                reason="Section is shorter than the first-pass range but is bounded by normal item headings.",
+            )
+        )
+        reasons.append("SECTION_LENGTH_SHORT_ACCEPTED_BY_BOUNDARY_CONTEXT")
     else:
         confidence_components.append(
             ConfidenceComponent(
@@ -340,8 +352,9 @@ def _build_success_result(
 def _start_rank(candidate: HeadingCandidate) -> tuple[int, int, int, int]:
     toc_penalty = 1 if candidate.is_toc_like else 0
     dense_penalty = 1 if "TOC_DENSE_ITEM_CLUSTER" in candidate.reasons else 0
+    near_toc_penalty = 1 if "NEAR_TABLE_OF_CONTENTS_LABEL" in candidate.reasons else 0
     title_penalty = 0 if is_expected_title(candidate.item, candidate.normalized_text) else 1
-    return (toc_penalty, dense_penalty, title_penalty, candidate.start)
+    return (toc_penalty, dense_penalty, near_toc_penalty, title_penalty, candidate.start)
 
 
 def _evidence(kind: str, candidate: HeadingCandidate) -> Evidence:
@@ -472,13 +485,31 @@ def _length_bounds(item: str) -> tuple[int, int]:
     return 20, 50000
 
 
+def _has_strong_boundary_context(start: HeadingCandidate, end: HeadingCandidate) -> bool:
+    end_title_matches = end.item == "EOF" or is_expected_title(end.item, end.normalized_text)
+    return (
+        not start.is_toc_like
+        and not end.is_toc_like
+        and is_expected_title(start.item, start.normalized_text)
+        and end_title_matches
+    )
+
+
 def _recommended_actions(
     start: HeadingCandidate, end: HeadingCandidate, section_text: str, warnings: list[str]
 ) -> list[RecommendedAction]:
     actions: list[RecommendedAction] = []
     section_length = len(section_text)
+    has_cross_reference_warning = "Section appears to be a cross-reference rather than full narrative text." in warnings
+    has_reference = _has_reference_language(section_text)
+    needs_external_reference = (
+        section_length < _length_bounds(start.item)[0]
+        and start.item in {"1", "1A", "7", "7A", "8"}
+        and not has_cross_reference_warning
+        and has_reference
+    )
 
-    if "Section appears to be a cross-reference rather than full narrative text." in warnings:
+    if has_cross_reference_warning:
         actions.append(
             _recommended_action(
                 action_type="needs_user_confirmation",
@@ -507,12 +538,27 @@ def _recommended_actions(
             )
         )
 
-    if (
-        section_length < _length_bounds(start.item)[0]
-        and start.item in {"1", "1A", "7", "7A", "8"}
-        and "Section appears to be a cross-reference rather than full narrative text." not in warnings
-        and "Section length is outside the expected first-pass range." in warnings
-    ):
+    if has_reference and not has_cross_reference_warning and not needs_external_reference:
+        actions.append(
+            _recommended_action(
+                action_type="inspect_only",
+                reason="section_reference_detected",
+                description="Review detected reference language before deciding whether to follow another section, exhibit, proxy, or annual report.",
+                options=["inspect_references", "accept_current_section"],
+            )
+        )
+
+    if _has_exhibit_language(section_text):
+        actions.append(
+            _recommended_action(
+                action_type="inspect_only",
+                reason="exhibit_index_detected",
+                description="Review the exhibit-related text or table captured inside this section.",
+                options=["inspect_exhibit_index", "accept_current_section"],
+            )
+        )
+
+    if needs_external_reference:
         actions.append(
             _recommended_action(
                 action_type="needs_external_source",
@@ -523,6 +569,24 @@ def _recommended_actions(
         )
 
     return actions
+
+
+def _has_reference_language(section_text: str) -> bool:
+    compact = " ".join(section_text.split()).lower()
+    if not compact:
+        return False
+    reference_patterns = (
+        r"\bincorporated\s+herein\s+by\s+reference\b",
+        r"\bsee\s+(?:the\s+)?(?:annual report|proxy statement|exhibit index|note\s+\d+|part\s+[ivx]+|item\s+\d)",
+        r"\brefer(?:red|s|ring)?\s+to\s+(?:the\s+)?(?:annual report|proxy statement|exhibit index|note\s+\d+|part\s+[ivx]+|item\s+\d)",
+        r"\bappears?\s+on\s+pages?\s+\d+",
+    )
+    return any(re.search(pattern, compact) for pattern in reference_patterns)
+
+
+def _has_exhibit_language(section_text: str) -> bool:
+    compact = " ".join(section_text.split()).lower()
+    return bool(re.search(r"\bexhibit(?:s| index)?\b", compact))
 
 
 def _recommended_action(action_type: str, reason: str, description: str, options: list[str] | None = None) -> RecommendedAction:

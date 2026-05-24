@@ -39,6 +39,16 @@ RECOVERY_ACTION_CONTRACTS = {
         "requires_user_input": False,
         "next_step": "inspect_evidence_only",
     },
+    ("inspect_only", "section_reference_detected"): {
+        "severity": "info",
+        "requires_user_input": False,
+        "next_step": "inspect_references",
+    },
+    ("inspect_only", "exhibit_index_detected"): {
+        "severity": "info",
+        "requires_user_input": False,
+        "next_step": "inspect_exhibit_index",
+    },
 }
 
 BASELINE_THRESHOLDS = {
