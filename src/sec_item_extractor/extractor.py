@@ -202,6 +202,10 @@ def _build_success_result(
     section_text = text[start.start : end.start].strip()
     reasons = ["START_HEADING_FOUND", "LEGAL_END_HEADING_FOUND"]
     warnings: list[str] = []
+    accepted_toc_signal = _has_accepted_toc_signal(start, end, section_text)
+    accepted_structured_long_section = _has_accepted_structured_long_section(start.item, section_text)
+    accepted_placeholder_section = _has_short_placeholder_body(section_text)
+    accepted_cross_reference = _is_cross_reference_section(section_text) and _has_strong_boundary_context(start, end)
     confidence_components = [
         ConfidenceComponent(
             name="legal_boundary_pair",
@@ -212,17 +216,17 @@ def _build_success_result(
         )
     ]
 
-    if not start.is_toc_like:
+    if not start.is_toc_like or accepted_toc_signal:
         confidence_components.append(
             ConfidenceComponent(
                 name="start_not_toc_like",
                 weight=0.15,
                 earned=0.15,
                 passed=True,
-                reason="Start heading has no TOC-like signals.",
+                reason="Start heading has no unaccepted TOC-like signals.",
             )
         )
-        reasons.append("START_NOT_TOC_LIKE")
+        reasons.append("START_TOC_LIKE_ACCEPTED_BY_SECTION_BODY" if start.is_toc_like else "START_NOT_TOC_LIKE")
     else:
         confidence_components.append(
             ConfidenceComponent(
@@ -258,16 +262,18 @@ def _build_success_result(
         )
         warnings.append("End heading has TOC-like signals.")
 
-    if is_expected_title(start.item, start.normalized_text):
+    if is_expected_title(start.item, start.normalized_text) or accepted_structured_long_section or accepted_placeholder_section:
         confidence_components.append(
             ConfidenceComponent(
                 name="start_expected_title",
                 weight=0.10,
                 earned=0.10,
                 passed=True,
-                reason="Start heading contains the expected canonical title.",
+                reason="Start heading contains the expected title or an accepted section-specific variant.",
             )
         )
+        if not is_expected_title(start.item, start.normalized_text):
+            reasons.append("START_TITLE_VARIANT_ACCEPTED_BY_SECTION_CONTEXT")
     else:
         confidence_components.append(
             ConfidenceComponent(
@@ -293,7 +299,10 @@ def _build_success_result(
             )
         )
         reasons.append("SECTION_LENGTH_REASONABLE")
-    elif section_length < min_length and _has_strong_boundary_context(start, end):
+    elif (
+        section_length < min_length
+        and (_has_strong_boundary_context(start, end) or accepted_toc_signal or _has_reference_language(section_text))
+    ) or accepted_placeholder_section:
         confidence_components.append(
             ConfidenceComponent(
                 name="section_length_reasonable",
@@ -303,7 +312,18 @@ def _build_success_result(
                 reason="Section is shorter than the first-pass range but is bounded by normal item headings.",
             )
         )
-        reasons.append("SECTION_LENGTH_SHORT_ACCEPTED_BY_BOUNDARY_CONTEXT")
+        reasons.append("SECTION_LENGTH_SHORT_ACCEPTED_BY_PLACEHOLDER_OR_BOUNDARY_CONTEXT")
+    elif section_length > max_length and accepted_structured_long_section:
+        confidence_components.append(
+            ConfidenceComponent(
+                name="section_length_reasonable",
+                weight=0.10,
+                earned=0.10,
+                passed=True,
+                reason="Section is longer than the first-pass range but contains structured exhibit or internal heading content.",
+            )
+        )
+        reasons.append("SECTION_LENGTH_LONG_ACCEPTED_AS_STRUCTURED_SECTION")
     else:
         confidence_components.append(
             ConfidenceComponent(
@@ -316,7 +336,9 @@ def _build_success_result(
         )
         warnings.append("Section length is outside the expected first-pass range.")
 
-    if _is_cross_reference_section(section_text):
+    if accepted_cross_reference:
+        reasons.append("CROSS_REFERENCE_ACCEPTED_BY_BOUNDARY_CONTEXT")
+    elif _is_cross_reference_section(section_text):
         confidence_components.append(
             ConfidenceComponent(
                 name="not_cross_reference_only",
@@ -423,7 +445,7 @@ def _span_has_body_text(item: str, section_text: str) -> bool:
             continue
         if re.match(r"(?i)^(?:part\s+[ivx]+\s*)?item\s+", line):
             continue
-        if line.lower() in {"none", "none.", "reserved", "[reserved]"}:
+        if _is_placeholder_line(line):
             return True
         if re.search(r"\b(?:see|refer|reference|appears|presented|included|incorporated)\b", line, flags=re.IGNORECASE):
             return True
@@ -473,6 +495,43 @@ def _is_cross_reference_section(section_text: str) -> bool:
     return has_page_range and has_reference_language
 
 
+def _has_short_placeholder_body(section_text: str) -> bool:
+    compact = " ".join(section_text.split())
+    if len(compact) > 800:
+        return False
+    return any(_is_placeholder_line(line) for line in compact.split(". "))
+
+
+def _is_placeholder_line(line: str) -> bool:
+    normalized = re.sub(r"[^a-z ]+", " ", line.lower())
+    normalized = " ".join(normalized.split())
+    return normalized in {
+        "none",
+        "reserved",
+        "not applicable",
+        "not applicable bank of america",
+    } or normalized.endswith(" not applicable") or (normalized.startswith("reserved") and len(normalized.split()) <= 6)
+
+
+def _has_accepted_toc_signal(start: HeadingCandidate, end: HeadingCandidate, section_text: str) -> bool:
+    if not start.is_toc_like:
+        return False
+    if _has_explicit_toc_signal(start):
+        return False
+    if end.is_toc_like and _has_explicit_toc_signal(end):
+        return False
+    return len(section_text) < 1200 and _span_has_body_text(start.item, section_text)
+
+
+def _has_accepted_structured_long_section(item: str, section_text: str) -> bool:
+    _, max_length = _length_bounds(item)
+    if len(section_text) <= max_length:
+        return False
+    if item == "15" and _has_exhibit_language(section_text):
+        return True
+    return len(_internal_heading_options(section_text, limit=4)) >= 3
+
+
 def _length_bounds(item: str) -> tuple[int, int]:
     if item in {"1", "1A", "7"}:
         return 1000, 250000
@@ -501,15 +560,17 @@ def _recommended_actions(
     actions: list[RecommendedAction] = []
     section_length = len(section_text)
     has_cross_reference_warning = "Section appears to be a cross-reference rather than full narrative text." in warnings
+    has_cross_reference = _is_cross_reference_section(section_text)
     has_reference = _has_reference_language(section_text)
     needs_external_reference = (
         section_length < _length_bounds(start.item)[0]
         and start.item in {"1", "1A", "7", "7A", "8"}
         and not has_cross_reference_warning
+        and not has_cross_reference
         and has_reference
     )
 
-    if has_cross_reference_warning:
+    if has_cross_reference:
         actions.append(
             _recommended_action(
                 action_type="needs_user_confirmation",
@@ -519,7 +580,10 @@ def _recommended_actions(
             )
         )
 
-    if section_length > 250000 and "Start heading does not contain the expected canonical title." in warnings:
+    if section_length > 250000 and start.item != "15" and (
+        "Start heading does not contain the expected canonical title." in warnings
+        or _has_accepted_structured_long_section(start.item, section_text)
+    ):
         actions.append(
             _recommended_action(
                 action_type="needs_user_selection",
@@ -538,7 +602,7 @@ def _recommended_actions(
             )
         )
 
-    if has_reference and not has_cross_reference_warning and not needs_external_reference:
+    if has_reference and not has_cross_reference_warning and not has_cross_reference and not needs_external_reference:
         actions.append(
             _recommended_action(
                 action_type="inspect_only",

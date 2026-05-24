@@ -10,7 +10,13 @@ from pathlib import Path
 from urllib.parse import unquote, urlparse
 
 from .extractor import extract_items
-from .raw_structure import raw_fragment_structure, raw_section_fragment, raw_section_srcdoc, raw_structure_counts
+from .raw_structure import (
+    raw_fragment_outline,
+    raw_fragment_structure,
+    raw_section_fragment,
+    raw_section_srcdoc,
+    raw_structure_counts,
+)
 from .recovery import run_recovery_actions
 
 
@@ -166,6 +172,7 @@ def raw_section_preview(filing_id: str, item: str) -> dict:
 
 
 def _item_contract(item, raw_content: str | None = None) -> dict:
+    raw_structure = _raw_structure_contract(raw_content, item) if raw_content is not None else {"table_count": 0, "image_count": 0}
     return {
         "item": item.item,
         "status": item.status,
@@ -178,9 +185,7 @@ def _item_contract(item, raw_content: str | None = None) -> dict:
         },
         "text": item.text or "",
         "text_length": len(item.text or ""),
-        "raw_structure": raw_structure_counts(raw_content, item)
-        if raw_content is not None
-        else {"table_count": 0, "image_count": 0},
+        "raw_structure": raw_structure,
     }
 
 
@@ -230,7 +235,20 @@ def _archive_base_url(filing_id: str) -> str | None:
 
 def _attach_raw_structure(result_dict: dict, content: str, item_results: list) -> None:
     for item_payload, item_result in zip(result_dict.get("item_results", []), item_results):
-        item_payload["raw_structure"] = raw_structure_counts(content, item_result)
+        item_payload["raw_structure"] = _raw_structure_contract(content, item_result)
+
+
+def _raw_structure_contract(content: str, item_result) -> dict:
+    structure = raw_structure_counts(content, item_result)
+    structure["outline"] = []
+    structure["raw_bytes"] = 0
+    try:
+        _, _, fragment = raw_section_fragment(content, item_result)
+    except ValueError:
+        return structure
+    structure["raw_bytes"] = len(fragment.encode("utf-8", errors="replace"))
+    structure["outline"] = raw_fragment_outline(fragment)
+    return structure
 
 
 class WebUiHandler(BaseHTTPRequestHandler):
@@ -509,6 +527,7 @@ def render_detail(filing_id: str) -> str:
             const startSnippet = edgeSnippet(text, 'start');
             const endSnippet = edgeSnippet(text, 'end');
             const structureTags = renderStructureTags(item.raw_structure || {{}});
+            const structurePanel = renderStructurePanel(item);
             article.innerHTML = `
               <header class="item-header">
                 <div>
@@ -533,6 +552,7 @@ def render_detail(filing_id: str) -> str:
                   <pre></pre>
                 </div>
               </details>
+              ${{structurePanel}}
               <div class="raw-section-tools">
                 <button class="secondary-button compact" data-raw-item="${{escapeHtml(item.item)}}">Show original filing structure</button>
                 <span class="raw-section-meta"></span>
@@ -599,6 +619,53 @@ def render_detail(filing_id: str) -> str:
           if (tableCount > 0) tags.push(`<span class="structure-tag table">tables ${{tableCount}}</span>`);
           if (imageCount > 0) tags.push(`<span class="structure-tag image">images ${{imageCount}}</span>`);
           return tags.join('');
+        }}
+
+        function renderStructurePanel(item) {{
+          const rawStructure = item.raw_structure || {{}};
+          const rawOutline = Array.isArray(rawStructure.outline) ? rawStructure.outline : [];
+          const textOutline = outlineEntriesForText(item.text || '');
+          const outline = rawOutline.length ? rawOutline : textOutline;
+          const rawBytes = Number(rawStructure.raw_bytes || 0);
+          const tableCount = Number(rawStructure.table_count || 0);
+          const shouldShow = outline.length || rawBytes > 250000 || tableCount > 50;
+          if (!shouldShow) return '';
+          const items = outline.length
+            ? outline.slice(0, 30).map(label => `<li>${{escapeHtml(label)}}</li>`).join('')
+            : '<li>No bold/internal headings detected; use original filing structure for full review.</li>';
+          return `
+            <details class="structure-outline">
+              <summary>Section structure</summary>
+              <div class="structure-outline-meta">${{Number(rawBytes).toLocaleString()}} raw bytes | ${{tableCount}} tables | ${{Number(rawStructure.image_count || 0)}} images</div>
+              <ol>${{items}}</ol>
+            </details>
+          `;
+        }}
+
+        function outlineEntriesForText(text) {{
+          const result = [];
+          const seen = new Set();
+          const lines = String(text || '').split(/\\n+/).map(line => line.replace(/\\s+/g, ' ').trim()).filter(Boolean);
+          for (const line of lines) {{
+            if (result.length >= 30) break;
+            if (!looksLikeOutlineLabel(line)) continue;
+            const key = line.toLowerCase();
+            if (seen.has(key)) continue;
+            seen.add(key);
+            result.push(line.slice(0, 140));
+          }}
+          return result;
+        }}
+
+        function looksLikeOutlineLabel(line) {{
+          if (line.length < 8 || line.length > 160) return false;
+          if (/^item\\s+/i.test(line)) return false;
+          if (/\\.{2,}\\s*\\d+\\s*$/.test(line)) return false;
+          if (/^[\\d.,$%()\\s-]+$/.test(line)) return false;
+          const letters = (line.match(/[A-Za-z]/g) || []).length;
+          if (letters < 5) return false;
+          const uppercase = (line.match(/[A-Z]/g) || []).length / Math.max(letters, 1);
+          return uppercase > 0.55 || (/^[A-Z]/.test(line) && !line.endsWith('.'));
         }}
 
         async function runRecovery() {{
@@ -990,6 +1057,29 @@ dd { margin: 0; overflow-wrap: anywhere; }
   overflow: auto;
   white-space: pre-wrap;
   font: 13px/1.5 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+.structure-outline {
+  border: 1px solid #d8e1ea;
+  border-radius: 6px;
+  margin-bottom: 12px;
+  background: #fbfcfd;
+}
+.structure-outline summary { cursor: pointer; padding: 10px 12px; color: #304255; }
+.structure-outline-meta {
+  padding: 0 12px 8px;
+  color: #647080;
+  font-size: 13px;
+}
+.structure-outline ol {
+  margin: 0;
+  padding: 0 12px 12px 32px;
+  columns: 2;
+  column-gap: 28px;
+}
+.structure-outline li {
+  break-inside: avoid;
+  margin-bottom: 5px;
+  color: #19212a;
 }
 .raw-section-tools {
   display: flex;

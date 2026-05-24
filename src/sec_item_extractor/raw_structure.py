@@ -21,6 +21,20 @@ def raw_fragment_structure(fragment: str) -> dict:
     }
 
 
+def raw_fragment_outline(fragment: str, limit: int = 30) -> list[str]:
+    candidates: list[str] = []
+    patterns = (
+        r"(?is)<(?:b|strong)\b[^>]*>(.*?)</(?:b|strong)>",
+        r"(?is)<h[1-6]\b[^>]*>(.*?)</h[1-6]>",
+    )
+    for pattern in patterns:
+        for match in re.finditer(pattern, fragment):
+            text = _html_text(match.group(1))
+            if _looks_like_outline_label(text):
+                candidates.append(text[:140])
+    return _dedupe(candidates, limit)
+
+
 def raw_section_fragment(content: str, item_result) -> tuple[int, int, str]:
     raw_start = item_result.start_evidence.raw_offset if item_result.start_evidence else None
     if raw_start is None:
@@ -60,3 +74,41 @@ def _raw_container_start(content: str, raw_offset: int) -> int:
     if matches:
         return window_start + matches[-1].start()
     return raw_offset
+
+
+def _html_text(value: str) -> str:
+    value = re.sub(r"(?is)<[^>]+>", " ", value)
+    value = re.sub(r"&nbsp;?", " ", value, flags=re.IGNORECASE)
+    value = re.sub(r"&amp;?", "&", value, flags=re.IGNORECASE)
+    value = re.sub(r"&lt;?", "<", value, flags=re.IGNORECASE)
+    value = re.sub(r"&gt;?", ">", value, flags=re.IGNORECASE)
+    return " ".join(value.split())
+
+
+def _looks_like_outline_label(value: str) -> bool:
+    if not 4 <= len(value) <= 160:
+        return False
+    lower = value.lower()
+    if lower.startswith("item "):
+        return False
+    if re.fullmatch(r"[\d.,$%() -]+", value):
+        return False
+    alpha_count = sum(1 for character in value if character.isalpha())
+    if alpha_count < 4:
+        return False
+    uppercase_ratio = sum(1 for character in value if character.isupper()) / max(alpha_count, 1)
+    return uppercase_ratio > 0.55 or (value[:1].isupper() and not value.endswith("."))
+
+
+def _dedupe(values: list[str], limit: int) -> list[str]:
+    seen = set()
+    result = []
+    for value in values:
+        key = value.lower()
+        if key in seen:
+            continue
+        seen.add(key)
+        result.append(value)
+        if len(result) >= limit:
+            break
+    return result

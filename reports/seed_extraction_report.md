@@ -11,26 +11,26 @@ Missing filings: 0
 
 | Filing | Ticker | Year | Overall | Item 1 | Item 1A | Item 1B | Item 1C | Item 2 | Item 3 | Item 4 | Item 5 | Item 6 | Item 7 | Item 7A | Item 8 | Item 9 | Item 9A | Item 9B | Item 9C | Item 10 | Item 11 | Item 12 | Item 13 | Item 14 | Item 15 | Item 16 |
 | --- | --- | ---: | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| `aapl_2014_10k` | AAPL | 2014 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 0.90 | not_present / high 1.00 |
-| `aapl_2023_10k` | AAPL | 2023 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / medium 0.75 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 |
+| `aapl_2014_10k` | AAPL | 2014 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 |
+| `aapl_2023_10k` | AAPL | 2023 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 |
 | `msft_2014_10k` | MSFT | 2014 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 |
 | `msft_2023_10k` | MSFT | 2023 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 |
-| `jpm_2014_10k` | JPM | 2014 | success | success / high 1.00 | success / high 1.00 | success / high 0.90 | not_present / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 0.90 | not_present / high 1.00 |
-| `jpm_2023_10k` | JPM | 2023 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 0.90 | not_present / high 1.00 |
-| `bac_2014_10k` | BAC | 2014 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / medium 0.80 | success / high 1.00 | success / high 0.90 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 |
-| `bac_2023_10k` | BAC | 2023 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 0.90 | success / medium 0.80 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 |
+| `jpm_2014_10k` | JPM | 2014 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 |
+| `jpm_2023_10k` | JPM | 2023 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 |
+| `bac_2014_10k` | BAC | 2014 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 |
+| `bac_2023_10k` | BAC | 2023 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 |
 | `unh_2014_10k` | UNH | 2014 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 | success / high 0.85 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 0.85 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 |
 | `unh_2023_10k` | UNH | 2023 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 0.85 | success / high 0.85 | success / high 1.00 | success / high 1.00 | success / high 0.85 | success / high 0.85 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 |
-| `jnj_2014_10k` | JNJ | 2014 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / medium 0.75 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 |
+| `jnj_2014_10k` | JNJ | 2014 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 |
 | `jnj_2023_10k` | JNJ | 2023 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 |
 | `xom_2014_10k` | XOM | 2014 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 |
 | `xom_2023_10k` | XOM | 2023 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 |
 | `cvx_2014_10k` | CVX | 2014 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / medium 0.80 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / medium 0.80 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / medium 0.80 |
-| `cvx_2023_10k` | CVX | 2023 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 0.85 | success / medium 0.75 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 0.90 | success / high 1.00 | success / high 1.00 |
+| `cvx_2023_10k` | CVX | 2023 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 |
 | `wmt_2014_10k` | WMT | 2014 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / medium 0.80 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / medium 0.80 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / medium 0.80 |
 | `wmt_2023_10k` | WMT | 2023 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 |
-| `amzn_2014_10k` | AMZN | 2014 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 | success / high 0.85 | success / high 0.85 | success / high 1.00 | success / high 1.00 | success / high 0.90 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 0.90 | success / medium 0.75 | not_present / high 1.00 | success / high 0.85 | success / high 0.85 | success / high 0.85 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 |
-| `amzn_2023_10k` | AMZN | 2023 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 0.85 | success / high 0.85 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / medium 0.75 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 0.85 | success / high 1.00 | success / high 1.00 | success / high 1.00 |
+| `amzn_2014_10k` | AMZN | 2014 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 | success / high 0.85 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 0.90 | success / high 0.90 | not_present / high 1.00 | success / high 0.85 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | not_present / high 1.00 |
+| `amzn_2023_10k` | AMZN | 2023 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 0.85 | success / high 0.85 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 | success / high 1.00 |
 
 ## Details
 
@@ -473,11 +473,11 @@ End snippet:
 #### Item 15
 
 - Status: `success`
-- Confidence: `high` `0.90`
+- Confidence: `high` `1.00`
 - Text length: `302976`
 - Raw tables/images: `116` / `1`
 - Raw structure bytes: `1290748`
-- Warnings: `Section length is outside the expected first-pass range.`
+- Warnings: none
 - Start evidence: `Part IV Item 15. Exhibits, Financial Statement Schedules`
 - End evidence: `SIGNATURES`
 - Recommended actions: `inspect_only:section_reference_detected`, `inspect_only:exhibit_index_detected`
@@ -833,22 +833,21 @@ End snippet:
 #### Item 9C
 
 - Status: `success`
-- Confidence: `medium` `0.75`
-- Text length: `180958`
-- Raw tables/images: `47` / `1`
-- Raw structure bytes: `1246822`
-- Warnings: `Start heading has TOC-like signals.`, `Section length is outside the expected first-pass range.`
+- Confidence: `high` `1.00`
+- Text length: `93`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `545`
+- Warnings: none
 - Start evidence: `Item 9C. Disclosure Regarding Foreign Jurisdictions that Prevent Inspections`
 - End evidence: `PART III Item 10. Directors, Executive Officers and Corporate Governance`
-- Recommended actions: `inspect_only:start_toc_like_signal`, `inspect_only:section_reference_detected`, `inspect_only:exhibit_index_detected`
 
 Start snippet:
 
-> Item 9C. Disclosure Regarding Foreign Jurisdictions that Prevent Inspections 53 Part III Item 10. Directors, Executive Officers and Corporate Governance 53 Item 11. Executive Compensation 53 Item 12. Security Ownership of Certain Beneficial Owners and Manag...
+> Item 9C. Disclosure Regarding Foreign Jurisdictions that Prevent Inspections Not applicable.
 
 End snippet:
 
-> ...pire on October 15, 2024, and Mr. Williams’ plan will expire on December 15, 2024, subject to early termination for certain specified events set forth in the plans. Item 9C. Disclosure Regarding Foreign Jurisdictions that Prevent Inspections Not applicable.
+> Item 9C. Disclosure Regarding Foreign Jurisdictions that Prevent Inspections Not applicable.
 
 #### Item 10
 
@@ -2022,11 +2021,11 @@ End snippet:
 #### Item 1B
 
 - Status: `success`
-- Confidence: `high` `0.90`
+- Confidence: `high` `1.00`
 - Text length: `45`
 - Raw tables/images: `0` / `0`
 - Raw structure bytes: `383`
-- Warnings: `Start heading does not contain the expected canonical title.`
+- Warnings: none
 - Start evidence: `ITEM 1B: UNRESOLVED SEC STAFF COMMENTS`
 - End evidence: `ITEM 2: PROPERTIES`
 
@@ -2159,7 +2158,7 @@ End snippet:
 - Text length: `395`
 - Raw tables/images: `0` / `0`
 - Raw structure bytes: `1011`
-- Warnings: `Section appears to be a cross-reference rather than full narrative text.`
+- Warnings: none
 - Start evidence: `ITEM 7: MANAGEMENT’S DISCUSSION AND ANALYSIS OF FINANCIAL CONDITION AND RESULTS OF OPERATIONS`
 - End evidence: `ITEM 7A: QUANTITATIVE AND QUALITATIVE DISCLOSURES ABOUT MARKET RISK`
 - Recommended actions: `needs_user_confirmation:same_filing_page_reference`
@@ -2385,11 +2384,11 @@ End snippet:
 #### Item 15
 
 - Status: `success`
-- Confidence: `high` `0.90`
+- Confidence: `high` `1.00`
 - Text length: `1274373`
 - Raw tables/images: `1302` / `13`
 - Raw structure bytes: `16079531`
-- Warnings: `Section length is outside the expected first-pass range.`
+- Warnings: none
 - Start evidence: `Part IV Item 15 Exhibits, financial statement schedules`
 - End evidence: `SIGNATURES`
 - Recommended actions: `inspect_only:section_reference_detected`, `inspect_only:exhibit_index_detected`
@@ -2636,7 +2635,7 @@ End snippet:
 - Text length: `396`
 - Raw tables/images: `0` / `0`
 - Raw structure bytes: `965`
-- Warnings: `Section appears to be a cross-reference rather than full narrative text.`
+- Warnings: none
 - Start evidence: `Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations.`
 - End evidence: `Item 7A. Quantitative and Qualitative Disclosures About Market Risk.`
 - Recommended actions: `needs_user_confirmation:same_filing_page_reference`
@@ -2865,11 +2864,11 @@ End snippet:
 #### Item 15
 
 - Status: `success`
-- Confidence: `high` `0.90`
+- Confidence: `high` `1.00`
 - Text length: `1246677`
 - Raw tables/images: `665` / `13`
 - Raw structure bytes: `11923242`
-- Warnings: `Section length is outside the expected first-pass range.`
+- Warnings: none
 - Start evidence: `Part IV Item 15. Exhibits, Financial Statement Schedules.`
 - End evidence: `SIGNATURES`
 - Recommended actions: `inspect_only:section_reference_detected`, `inspect_only:exhibit_index_detected`
@@ -3110,11 +3109,11 @@ End snippet:
 #### Item 7
 
 - Status: `success`
-- Confidence: `medium` `0.80`
+- Confidence: `high` `1.00`
 - Text length: `578441`
 - Raw tables/images: `469` / `4`
 - Raw structure bytes: `8615210`
-- Warnings: `Start heading does not contain the expected canonical title.`, `Section length is outside the expected first-pass range.`
+- Warnings: none
 - Start evidence: `Item 7. Bank of America Corporation and Subsidiaries`
 - End evidence: `Item 7A. Quantitative and Qualitative Disclosures About Market Risk`
 - Recommended actions: `needs_user_selection:internal_item_toc_detected`, `inspect_only:section_reference_detected`
@@ -3149,14 +3148,14 @@ End snippet:
 #### Item 8
 
 - Status: `success`
-- Confidence: `high` `0.90`
+- Confidence: `high` `1.00`
 - Text length: `569098`
 - Raw tables/images: `455` / `3`
 - Raw structure bytes: `9684834`
-- Warnings: `Section length is outside the expected first-pass range.`
+- Warnings: none
 - Start evidence: `Item 8. Financial Statements and Supplementary Data`
 - End evidence: `Item 9. Changes in and Disagreements with Accountants on Accounting and Financial Disclosure`
-- Recommended actions: `inspect_only:section_reference_detected`
+- Recommended actions: `needs_user_selection:internal_item_toc_detected`, `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -3574,11 +3573,11 @@ End snippet:
 #### Item 6
 
 - Status: `success`
-- Confidence: `high` `0.90`
+- Confidence: `high` `1.00`
 - Text length: `38`
 - Raw tables/images: `2` / `0`
 - Raw structure bytes: `1880`
-- Warnings: `Section length is outside the expected first-pass range.`
+- Warnings: none
 - Start evidence: `Item 6. [Reserved]`
 - End evidence: `Item 7. Bank of America Corporation and Subsidiaries`
 
@@ -3593,11 +3592,11 @@ End snippet:
 #### Item 7
 
 - Status: `success`
-- Confidence: `medium` `0.80`
+- Confidence: `high` `1.00`
 - Text length: `308102`
 - Raw tables/images: `121` / `4`
 - Raw structure bytes: `3217361`
-- Warnings: `Start heading does not contain the expected canonical title.`, `Section length is outside the expected first-pass range.`
+- Warnings: none
 - Start evidence: `Item 7. Bank of America Corporation and Subsidiaries`
 - End evidence: `Item 7A. Quantitative and Qualitative Disclosures about Market Risk`
 - Recommended actions: `needs_user_selection:internal_item_toc_detected`, `inspect_only:section_reference_detected`
@@ -5040,14 +5039,14 @@ End snippet:
 #### Item 7
 
 - Status: `success`
-- Confidence: `medium` `0.75`
+- Confidence: `high` `1.00`
 - Text length: `386`
 - Raw tables/images: `1` / `0`
 - Raw structure bytes: `1137`
-- Warnings: `Start heading has TOC-like signals.`, `Section length is outside the expected first-pass range.`
+- Warnings: none
 - Start evidence: `Item 7. MANAGEMENT’S DISCUSSION AND ANALYSIS OF FINANCIAL CONDITION AND RESULTS OF OPERATIONS`
 - End evidence: `Item 7A. QUANTITATIVE AND QUALITATIVE DISCLOSURES ABOUT MARKET RISK`
-- Recommended actions: `inspect_only:start_toc_like_signal`, `inspect_only:exhibit_index_detected`, `needs_external_source:external_or_other_document_reference`
+- Recommended actions: `inspect_only:exhibit_index_detected`, `needs_external_source:external_or_other_document_reference`
 
 Start snippet:
 
@@ -7356,14 +7355,13 @@ End snippet:
 #### Item 6
 
 - Status: `success`
-- Confidence: `high` `0.85`
+- Confidence: `high` `1.00`
 - Text length: `262`
 - Raw tables/images: `0` / `0`
 - Raw structure bytes: `1354`
-- Warnings: `Start heading has TOC-like signals.`
+- Warnings: none
 - Start evidence: `Item 6. [Reserved]`
 - End evidence: `Item 7A. Quantitative and Qualitative Disclosures About Market Risk`
-- Recommended actions: `inspect_only:start_toc_like_signal`
 
 Start snippet:
 
@@ -7376,14 +7374,13 @@ End snippet:
 #### Item 7
 
 - Status: `success`
-- Confidence: `medium` `0.75`
+- Confidence: `high` `1.00`
 - Text length: `242`
 - Raw tables/images: `0` / `0`
 - Raw structure bytes: `1116`
-- Warnings: `Start heading has TOC-like signals.`, `Section length is outside the expected first-pass range.`
+- Warnings: none
 - Start evidence: `Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations`
 - End evidence: `Item 7A. Quantitative and Qualitative Disclosures About Market Risk`
-- Recommended actions: `inspect_only:start_toc_like_signal`
 
 Start snippet:
 
@@ -7587,14 +7584,14 @@ End snippet:
 #### Item 14
 
 - Status: `success`
-- Confidence: `high` `0.90`
+- Confidence: `high` `1.00`
 - Text length: `313143`
 - Raw tables/images: `191` / `4`
 - Raw structure bytes: `4436506`
-- Warnings: `Section length is outside the expected first-pass range.`
+- Warnings: none
 - Start evidence: `Item 14. Principal Accountant Fees and Services`
 - End evidence: `PART IV Item 15. Exhibit and Financial Statement Schedules`
-- Recommended actions: `inspect_only:section_reference_detected`
+- Recommended actions: `needs_user_selection:internal_item_toc_detected`, `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -8712,14 +8709,14 @@ End snippet:
 #### Item 3
 
 - Status: `success`
-- Confidence: `high` `0.85`
+- Confidence: `high` `1.00`
 - Text length: `152`
 - Raw tables/images: `1` / `0`
 - Raw structure bytes: `1408`
-- Warnings: `Start heading has TOC-like signals.`
+- Warnings: none
 - Start evidence: `Item 3. Legal Proceedings`
 - End evidence: `Item 4. Mine Safety Disclosures`
-- Recommended actions: `inspect_only:start_toc_like_signal`, `inspect_only:section_reference_detected`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -8771,11 +8768,11 @@ End snippet:
 #### Item 6
 
 - Status: `success`
-- Confidence: `high` `0.90`
+- Confidence: `high` `1.00`
 - Text length: `2423`
 - Raw tables/images: `4` / `0`
 - Raw structure bytes: `77789`
-- Warnings: `Start heading does not contain the expected canonical title.`
+- Warnings: none
 - Start evidence: `Item 6. Selected Consolidated Financial Data`
 - End evidence: `Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations`
 - Recommended actions: `inspect_only:section_reference_detected`
@@ -8888,14 +8885,13 @@ End snippet:
 #### Item 9B
 
 - Status: `success`
-- Confidence: `medium` `0.75`
+- Confidence: `high` `0.90`
 - Text length: `34`
 - Raw tables/images: `0` / `0`
 - Raw structure bytes: `714`
-- Warnings: `Start heading has TOC-like signals.`, `End heading has TOC-like signals.`
+- Warnings: `End heading has TOC-like signals.`
 - Start evidence: `Item 9B. Other Information`
 - End evidence: `PART III Item 10. Directors, Executive Officers, and Corporate Governance`
-- Recommended actions: `inspect_only:start_toc_like_signal`
 
 Start snippet:
 
@@ -8945,14 +8941,14 @@ End snippet:
 #### Item 11
 
 - Status: `success`
-- Confidence: `high` `0.85`
+- Confidence: `high` `1.00`
 - Text length: `484`
 - Raw tables/images: `2` / `0`
 - Raw structure bytes: `2514`
-- Warnings: `Start heading has TOC-like signals.`
+- Warnings: none
 - Start evidence: `Item 11. Executive Compensation`
 - End evidence: `Item 13. Certain Relationships and Related Transactions, and Director Independence`
-- Recommended actions: `inspect_only:start_toc_like_signal`, `inspect_only:section_reference_detected`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -8965,14 +8961,14 @@ End snippet:
 #### Item 12
 
 - Status: `success`
-- Confidence: `high` `0.85`
+- Confidence: `high` `1.00`
 - Text length: `277`
 - Raw tables/images: `1` / `0`
 - Raw structure bytes: `1293`
-- Warnings: `Start heading has TOC-like signals.`
+- Warnings: none
 - Start evidence: `Item 12. Security Ownership of Certain Beneficial Owners and Management and Related Shareholder Matters`
 - End evidence: `Item 13. Certain Relationships and Related Transactions, and Director Independence`
-- Recommended actions: `inspect_only:start_toc_like_signal`, `inspect_only:section_reference_detected`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 
@@ -9388,22 +9384,21 @@ End snippet:
 #### Item 9C
 
 - Status: `success`
-- Confidence: `medium` `0.75`
-- Text length: `268364`
-- Raw tables/images: `72` / `0`
-- Raw structure bytes: `1654736`
-- Warnings: `Start heading has TOC-like signals.`, `Section length is outside the expected first-pass range.`
+- Confidence: `high` `1.00`
+- Text length: `94`
+- Raw tables/images: `0` / `0`
+- Raw structure bytes: `776`
+- Warnings: none
 - Start evidence: `Item 9C. Disclosure Regarding Foreign Jurisdictions that Prevent Inspections`
 - End evidence: `PART III Item 10. Directors, Executive Officers, and Corporate Governance`
-- Recommended actions: `inspect_only:start_toc_like_signal`, `inspect_only:section_reference_detected`, `inspect_only:exhibit_index_detected`
 
 Start snippet:
 
-> Item 9C. Disclosure Regarding Foreign Jurisdictions that Prevent Inspections 73 PART III Item 10. Directors, Executive Officers, and Corporate Governance 73 Item 11. Executive Compensation 73 Item 12. Security Ownership of Certain Beneficial Owners and Mana...
+> Item 9C. Disclosure Regarding Foreign Jurisdictions that Prevent Inspections Not applicable.
 
 End snippet:
 
-> ...intended to satisfy Rule 10b5-1(c) to sell up to 5,760 shares of Amazon.com, Inc. common stock over a period ending on March 8, 2024, subject to certain conditions. Item 9C. Disclosure Regarding Foreign Jurisdictions that Prevent Inspections Not applicable.
+> Item 9C. Disclosure Regarding Foreign Jurisdictions that Prevent Inspections Not applicable.
 
 #### Item 10
 
@@ -9468,14 +9463,14 @@ End snippet:
 #### Item 13
 
 - Status: `success`
-- Confidence: `high` `0.85`
+- Confidence: `high` `1.00`
 - Text length: `256`
 - Raw tables/images: `1` / `0`
 - Raw structure bytes: `1324`
-- Warnings: `Start heading has TOC-like signals.`
+- Warnings: none
 - Start evidence: `Item 13. Certain Relationships and Related Transactions, and Director Independence`
 - End evidence: `Item 14. Principal Accountant Fees and Services`
-- Recommended actions: `inspect_only:start_toc_like_signal`, `inspect_only:section_reference_detected`
+- Recommended actions: `inspect_only:section_reference_detected`
 
 Start snippet:
 

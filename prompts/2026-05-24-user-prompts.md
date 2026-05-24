@@ -339,3 +339,31 @@ pg_2025_10k Item 7A: 本身僅一句sentence
 ```text
 目前對於table 跟img的還原，只作用在某幾個filing中嗎，是的話推播到我目前的test filing中
 ```
+
+## Seed Warning Review Request
+
+```text
+length_policy_review — 12
+aapl_2014_10k	15	此為exhibit 段落，包含signature和exhibit index，應該一同顯示
+aapl_2023_10k	9C	9C僅一標題和一句Not applicable.
+jpm_2014_10k	15	此為exhibit 段落，段落過於龐大，應該利用粗體辦別其中的部分，並作成 toggle list讓user決定是否展開
+jpm_2023_10k	15	此為exhibit 段落，段落過於龐大，應該利用粗體辦別其中的部分，並作成 toggle list讓user決定是否展開
+bac_2014_10k	7	此為較長段落，內部有自己的toc，也是一樣作成 toggle list讓user決定是否展開
+bac_2014_10k	8	此為較長段落，內部有自己的toc，也是一樣作成 toggle list讓user決定是否展開
+bac_2023_10k	6	為reserved部分，抽取沒問題
+bac_2023_10k	7	此為較長段落，內部有自己的toc，也是一樣作成 toggle list讓user決定是否展開
+jnj_2014_10k	7	抽取正常
+cvx_2023_10k	7	抽取正常
+cvx_2023_10k	14	此為較長段落，內部有自己的toc，也是一樣作成 toggle list讓user決定是否展開
+amzn_2023_10k	9C 多extract了，item 9c僅為一標題和not applicable.
+
+reference_recovery — 2
+jpm_2014_10k	7	抽取正常
+jpm_2023_10k	7 抽取正常
+
+title_policy_review — 4
+jpm_2014_10k	1B	原文僅為一標題與一單詞，抽取正常
+bac_2014_10k	7	上述已處理
+bac_2023_10k	7	上述已處理
+amzn_2014_10k	6	抽取正常
+```

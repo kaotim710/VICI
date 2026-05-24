@@ -95,7 +95,7 @@ class ExtractorTests(unittest.TestCase):
         self.assertIn("LEGAL_END_HEADING_NOT_FOUND", item.validation_reasons)
         self.assertEqual(item.candidate_attempts[0].decision, "rejected")
 
-    def test_cross_reference_section_gets_specific_warning(self):
+    def test_cross_reference_section_with_strong_boundaries_is_inspectable_without_warning(self):
         filing = """
         Item 7. Management's Discussion and Analysis of Financial Condition and Results of Operations
         Management's discussion and analysis appears on pages 48-161. Such information should be read in conjunction
@@ -107,9 +107,8 @@ class ExtractorTests(unittest.TestCase):
         result = extract_items(filing, target_items=["7"])
         item = result.item_results[0]
 
-        self.assertIn("Section appears to be a cross-reference rather than full narrative text.", item.warnings)
-        self.assertEqual(item.recommended_actions[0].action_type, "needs_user_confirmation")
-        self.assertEqual(item.recommended_actions[0].reason, "same_filing_page_reference")
+        self.assertNotIn("Section appears to be a cross-reference rather than full narrative text.", item.warnings)
+        self.assertIn("CROSS_REFERENCE_ACCEPTED_BY_BOUNDARY_CONTEXT", item.validation_reasons)
 
     def test_short_unexplained_section_recommends_external_source(self):
         filing = """
@@ -123,7 +122,7 @@ class ExtractorTests(unittest.TestCase):
         item = result.item_results[0]
 
         self.assertNotIn("Section length is outside the expected first-pass range.", item.warnings)
-        self.assertIn("SECTION_LENGTH_SHORT_ACCEPTED_BY_BOUNDARY_CONTEXT", item.validation_reasons)
+        self.assertIn("SECTION_LENGTH_SHORT_ACCEPTED_BY_PLACEHOLDER_OR_BOUNDARY_CONTEXT", item.validation_reasons)
         action_pairs = {(action.action_type, action.reason) for action in item.recommended_actions}
         self.assertIn(("needs_external_source", "external_or_other_document_reference"), action_pairs)
 
@@ -141,7 +140,7 @@ class ExtractorTests(unittest.TestCase):
         self.assertEqual(item.status, "success")
         self.assertIn("financial statements begin", item.text)
         self.assertNotIn("Section length is outside the expected first-pass range.", item.warnings)
-        self.assertIn("SECTION_LENGTH_SHORT_ACCEPTED_BY_BOUNDARY_CONTEXT", item.validation_reasons)
+        self.assertIn("SECTION_LENGTH_SHORT_ACCEPTED_BY_PLACEHOLDER_OR_BOUNDARY_CONTEXT", item.validation_reasons)
 
     def test_exhibit_section_emits_review_action(self):
         filing = """
@@ -435,6 +434,55 @@ class ExtractorTests(unittest.TestCase):
         self.assertTrue(item.text.startswith("Item 16.Form 10-K Summary"))
         self.assertIn("Not applicable.", item.text)
         self.assertNotIn("Forward-looking statements", item.text)
+
+    def test_not_applicable_short_item_is_not_rejected_as_toc_span(self):
+        filing = """
+        Table of Contents
+        Item 9B. Other Information........ 72
+        Item 9C. Disclosure Regarding Foreign Jurisdictions that Prevent Inspections........ 73
+        Item 10. Directors, Executive Officers, and Corporate Governance........ 73
+
+        Item 9C. Disclosure Regarding Foreign Jurisdictions that Prevent Inspections
+        Not applicable.
+        Item 10. Directors, Executive Officers, and Corporate Governance
+        Director text.
+        """
+
+        result = extract_items(filing, target_items=["9C"])
+        item = result.item_results[0]
+
+        self.assertEqual(item.status, "success")
+        self.assertIn("Not applicable.", item.text)
+        self.assertNotIn("Director text.", item.text)
+        self.assertEqual(item.warnings, [])
+
+    def test_reserved_item_is_accepted_without_length_warning(self):
+        filing = """
+        Item 6. [Reserved]
+        Item 7. Management's Discussion and Analysis
+        Discussion text.
+        """
+
+        result = extract_items(filing, target_items=["6"])
+        item = result.item_results[0]
+
+        self.assertEqual(item.status, "success")
+        self.assertNotIn("Section length is outside the expected first-pass range.", item.warnings)
+
+    def test_long_structured_exhibit_section_uses_review_action_without_length_warning(self):
+        filing = """
+        Item 15. Exhibits, Financial Statement Schedules
+        EXHIBIT INDEX
+        """ + ("Exhibit 10.1 Material agreement. " * 12000) + """
+        SIGNATURES
+        Signature text.
+        """
+
+        result = extract_items(filing, target_items=["15"])
+        item = result.item_results[0]
+
+        self.assertNotIn("Section length is outside the expected first-pass range.", item.warnings)
+        self.assertIn("SECTION_LENGTH_LONG_ACCEPTED_AS_STRUCTURED_SECTION", item.validation_reasons)
 
 
 if __name__ == "__main__":
