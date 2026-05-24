@@ -31,6 +31,12 @@ EXPECTED_TITLES = {
     "8": ("financial statements",),
 }
 
+TOC_REASON_CODES = {
+    "TOC_DOT_LEADER_PAGE_NUMBER",
+    "TOC_PAGE_NUMBER_PATTERN",
+    "TOC_TABLE_ROW_PAGE_NUMBER",
+}
+
 
 def find_heading_candidates(text: str, blocks: list[NarrativeBlock] | None = None) -> list[HeadingCandidate]:
     candidates: list[HeadingCandidate] = []
@@ -40,10 +46,10 @@ def find_heading_candidates(text: str, blocks: list[NarrativeBlock] | None = Non
         item = match.group("item").upper()
         raw = text[start : match.end()].strip()
         normalized = _normalize_heading(raw)
-        reasons = _heading_reasons(item, normalized, start, text)
         block = None
         if blocks:
             block, block_index = _block_for_offset(start, blocks, block_index)
+        reasons = _heading_reasons(item, normalized, start, text, block)
         candidates.append(
             HeadingCandidate(
                 item=item,
@@ -51,7 +57,7 @@ def find_heading_candidates(text: str, blocks: list[NarrativeBlock] | None = Non
                 end=match.end(),
                 text=raw,
                 normalized_text=normalized,
-                is_toc_like="TOC_DENSE_ITEM_CLUSTER" in reasons or "TOC_PAGE_NUMBER_PATTERN" in reasons,
+                is_toc_like=_is_toc_like(reasons),
                 reasons=reasons,
                 raw_start=_raw_offset(block, start) if block else None,
                 raw_end=_raw_offset(block, match.end()) if block else None,
@@ -90,13 +96,19 @@ def _first_nonspace(text: str, start: int, end: int) -> int:
     return start
 
 
-def _heading_reasons(item: str, normalized: str, start: int, text: str) -> list[str]:
+def _heading_reasons(
+    item: str, normalized: str, start: int, text: str, block: NarrativeBlock | None = None
+) -> list[str]:
     reasons = ["REGEX_ITEM_HEADING"]
     lower = normalized.lower()
     if is_expected_title(item, normalized):
         reasons.append("EXPECTED_TITLE_MATCH")
-    if re.search(r"\.{2,}\s*\d+\s*$", normalized) or re.search(r"\s\d{1,4}\s*$", normalized):
+    if re.search(r"\.{2,}\s*\d+\s*$", normalized):
+        reasons.append("TOC_DOT_LEADER_PAGE_NUMBER")
+    if re.search(r"\s\d{1,4}\s*$", normalized):
         reasons.append("TOC_PAGE_NUMBER_PATTERN")
+    if block and _block_has_toc_page_number(block.text):
+        reasons.append("TOC_TABLE_ROW_PAGE_NUMBER")
     window_start = max(0, start - 500)
     window_end = min(len(text), start + 1500)
     window = text[window_start:window_end].lower()
@@ -107,6 +119,22 @@ def _heading_reasons(item: str, normalized: str, start: int, text: str) -> list[
     if "see item" in lower or "refer to item" in lower:
         reasons.append("INLINE_REFERENCE_RISK")
     return reasons
+
+
+def _block_has_toc_page_number(block_text: str) -> bool:
+    compact = " ".join(block_text.split())
+    if len(compact) > 240:
+        return False
+    if not re.search(r"\bitem\s+(?:1a|1b|1c|1|2|3|4|5|6|7a|7|8)\b", compact, re.IGNORECASE):
+        return False
+    return bool(re.search(r"(?:\.{2,}\s*|\s{2,})\d{1,4}\s*$", compact))
+
+
+def _is_toc_like(reasons: list[str]) -> bool:
+    reason_set = set(reasons)
+    if TOC_REASON_CODES.intersection(reason_set):
+        return True
+    return "TOC_DENSE_ITEM_CLUSTER" in reason_set and "NEAR_TABLE_OF_CONTENTS_LABEL" in reason_set
 
 
 def _block_for_offset(

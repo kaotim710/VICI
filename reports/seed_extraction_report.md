@@ -19,17 +19,17 @@ Missing filings: 0
 | `jpm_2023_10k` | JPM | 2023 | success | success / high 1.00 | success / high 1.00 | success / high 0.90 |
 | `bac_2014_10k` | BAC | 2014 | success | success / high 1.00 | success / high 1.00 | success / medium 0.80 |
 | `bac_2023_10k` | BAC | 2023 | success | success / high 1.00 | success / high 1.00 | success / medium 0.80 |
-| `unh_2014_10k` | UNH | 2014 | success | success / high 1.00 | success / high 0.90 | success / high 0.85 |
+| `unh_2014_10k` | UNH | 2014 | success | success / high 1.00 | success / high 1.00 | success / high 0.85 |
 | `unh_2023_10k` | UNH | 2023 | success | success / high 1.00 | success / high 1.00 | success / high 0.85 |
 | `jnj_2014_10k` | JNJ | 2014 | success | success / high 1.00 | success / high 0.90 | success / high 0.90 |
 | `jnj_2023_10k` | JNJ | 2023 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 |
 | `xom_2014_10k` | XOM | 2014 | success | success / high 1.00 | success / high 1.00 | success / high 0.90 |
 | `xom_2023_10k` | XOM | 2023 | success | success / high 1.00 | success / high 1.00 | success / high 0.90 |
-| `cvx_2014_10k` | CVX | 2014 | success | success / high 1.00 | success / high 0.90 | success / high 0.90 |
+| `cvx_2014_10k` | CVX | 2014 | success | success / high 1.00 | success / high 1.00 | success / high 0.90 |
 | `cvx_2023_10k` | CVX | 2023 | success | success / high 1.00 | success / high 1.00 | success / high 0.90 |
 | `wmt_2014_10k` | WMT | 2014 | success | success / high 1.00 | success / high 1.00 | success / high 0.90 |
 | `wmt_2023_10k` | WMT | 2023 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 |
-| `amzn_2014_10k` | AMZN | 2014 | success | success / high 1.00 | success / high 0.90 | success / high 1.00 |
+| `amzn_2014_10k` | AMZN | 2014 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 |
 | `amzn_2023_10k` | AMZN | 2023 | success | success / high 1.00 | success / high 1.00 | success / high 1.00 |
 
 ## Details
@@ -253,14 +253,14 @@ End snippet:
 
 - Status: `success`
 - Confidence: `high` `1.00`
-- Text length: `1942`
+- Text length: `56228`
 - Warnings: none
-- Start evidence: `PART II Item 7 STATEMENT OF MANAGEMENT’S RESPONSIBILITY FOR FINANCIAL STATEMENTS`
+- Start evidence: `PART II Item 7 ITEM 7. MANAGEMENT’S DISCUSSION AND ANALYSIS OF FINANCIAL CONDITION AND RESULTS OF OPERATIONS`
 - End evidence: `PART II Item 7A ITEM 7A. QUANTITATIVE AND QUALITATIVE DISCLOSURES ABOUT MARKET RISK`
 
 Start snippet:
 
-> PART II Item 7 STATEMENT OF MANAGEMENT’S RESPONSIBILITY FOR FINANCIAL STATEMENTS Management is responsible for the preparation of the consolidated financial statements and related information that are presented in this report. The consolidated financial sta...
+> PART II Item 7 ITEM 7. MANAGEMENT’S DISCUSSION AND ANALYSIS OF FINANCIAL CONDITION AND RESULTS OF OPERATIONS The following Management’s Discussion and Analysis of Financial Condition and Results of Operations (“MD&A”) is intended to help the reader understa...
 
 End snippet:
 
@@ -312,7 +312,7 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `0.90`
 - Text length: `395`
-- Warnings: `Section length is outside the expected first-pass range.`
+- Warnings: `Section length is outside the expected first-pass range.`, `Section appears to be a cross-reference rather than full narrative text.`
 - Start evidence: `ITEM 7: MANAGEMENT’S DISCUSSION AND ANALYSIS OF FINANCIAL CONDITION AND RESULTS OF OPERATIONS`
 - End evidence: `ITEM 7A: QUANTITATIVE AND QUALITATIVE DISCLOSURES ABOUT MARKET RISK`
 
@@ -370,7 +370,7 @@ End snippet:
 - Status: `success`
 - Confidence: `high` `0.90`
 - Text length: `396`
-- Warnings: `Section length is outside the expected first-pass range.`
+- Warnings: `Section length is outside the expected first-pass range.`, `Section appears to be a cross-reference rather than full narrative text.`
 - Start evidence: `Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations.`
 - End evidence: `Item 7A. Quantitative and Qualitative Disclosures About Market Risk.`
 
@@ -525,9 +525,9 @@ End snippet:
 #### Item 1A
 
 - Status: `success`
-- Confidence: `high` `0.90`
+- Confidence: `high` `1.00`
 - Text length: `62471`
-- Warnings: `End heading has TOC-like signals.`
+- Warnings: none
 - Start evidence: `ITEM 1A. RISK FACTORS`
 - End evidence: `ITEM 1B. UNRESOLVED STAFF COMMENTS`
 
@@ -717,10 +717,10 @@ End snippet:
 
 - Status: `success`
 - Confidence: `high` `1.00`
-- Text length: `66439`
+- Text length: `65951`
 - Warnings: none
 - Start evidence: `Item 7. Management’s discussion and analysis of results of operations and financial condition`
-- End evidence: `Item 8. Financial statements and supplementary data`
+- End evidence: `Item 7A. Quantitative and qualitative disclosures about market risk`
 
 Start snippet:
 
@@ -728,7 +728,7 @@ Start snippet:
 
 End snippet:
 
-> ...ial condition - Liquidity and capital resources - Financing and market risk of this Report; and Note 1 Summary of significant accounting policies - Financial instruments of the Notes to Consolidated Financial Statements included in Item 8 of this Report. 42
+> ...this report for further information regarding legal proceedings. Common stock The Company’s Common Stock is listed on the New York Stock Exchange under the symbol JNJ. As of February 9, 2024, there were 118,772 record holders of Common Stock of the Company.
 
 ### xom_2014_10k
 
@@ -873,9 +873,9 @@ End snippet:
 #### Item 1A
 
 - Status: `success`
-- Confidence: `high` `0.90`
+- Confidence: `high` `1.00`
 - Text length: `12013`
-- Warnings: `End heading has TOC-like signals.`
+- Warnings: none
 - Start evidence: `Item 1A. Risk Factors`
 - End evidence: `Item 1B. Unresolved Staff Comments`
 
@@ -1105,9 +1105,9 @@ End snippet:
 #### Item 1A
 
 - Status: `success`
-- Confidence: `high` `0.90`
+- Confidence: `high` `1.00`
 - Text length: `43459`
-- Warnings: `End heading has TOC-like signals.`
+- Warnings: none
 - Start evidence: `Item 1A. Risk Factors`
 - End evidence: `Item 1B. Unresolved Staff Comments`
 

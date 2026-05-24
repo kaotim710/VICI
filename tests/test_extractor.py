@@ -5,6 +5,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 from sec_item_extractor import extract_items
+from sec_item_extractor.candidates import find_heading_candidates
 from sec_item_extractor.cleaning import html_to_text, parse_document
 
 
@@ -87,6 +88,66 @@ class ExtractorTests(unittest.TestCase):
         self.assertEqual(item.status, "failed")
         self.assertIn("LEGAL_END_HEADING_NOT_FOUND", item.validation_reasons)
         self.assertEqual(item.candidate_attempts[0].decision, "rejected")
+
+    def test_cross_reference_section_gets_specific_warning(self):
+        filing = """
+        Item 7. Management's Discussion and Analysis of Financial Condition and Results of Operations
+        Management's discussion and analysis appears on pages 48-161. Such information should be read in conjunction
+        with the Consolidated Financial Statements.
+        Item 7A. Quantitative and Qualitative Disclosures About Market Risk
+        Market risk text.
+        """
+
+        result = extract_items(filing, target_items=["7"])
+        item = result.item_results[0]
+
+        self.assertIn("Section appears to be a cross-reference rather than full narrative text.", item.warnings)
+
+    def test_dense_item_cluster_alone_is_not_toc_like(self):
+        text = """
+        Item 1A. Risk Factors
+        Discussion references Item 2 and Item 3 and Item 4 and Item 5 and Item 6 in ordinary narrative.
+        Item 1B. Unresolved Staff Comments
+        """
+
+        candidates = find_heading_candidates(text)
+
+        self.assertFalse(candidates[0].is_toc_like)
+
+    def test_dense_item_cluster_near_table_of_contents_is_toc_like(self):
+        text = """
+        Table of Contents
+        Item 1. Business
+        Item 1A. Risk Factors
+        Item 1B. Unresolved Staff Comments
+        Item 2. Properties
+        Item 3. Legal Proceedings
+        Item 4. Mine Safety Disclosures
+        """
+
+        candidates = find_heading_candidates(text)
+
+        self.assertTrue(candidates[0].is_toc_like)
+
+    def test_short_dense_toc_span_is_rejected_for_later_body_candidate(self):
+        filing = """
+        Item 1. Business
+        Item 1A. Risk Factors
+        Item 1B. Unresolved Staff Comments
+        Item 2. Properties
+        Item 3. Legal Proceedings
+
+        Item 1. Business
+        """ + ("Business narrative. " * 80) + """
+        Item 1A. Risk Factors
+        """ + ("Risk narrative. " * 80)
+
+        result = extract_items(filing, target_items=["1"])
+        item = result.item_results[0]
+
+        self.assertIn("Business narrative.", item.text)
+        self.assertEqual(item.candidate_attempts[0].decision, "rejected")
+        self.assertIn("REJECTED_SHORT_DENSE_TOC_SPAN", item.candidate_attempts[0].validation_reasons)
 
 
 if __name__ == "__main__":

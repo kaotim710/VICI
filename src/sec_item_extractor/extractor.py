@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import re
+
 from .candidates import TARGET_ITEMS, find_heading_candidates, is_expected_title, legal_next_items
 from .cleaning import parse_document
 from .models import CandidateAttempt, ConfidenceComponent, Evidence, ExtractionResult, HeadingCandidate, ItemResult
@@ -50,6 +52,19 @@ def _extract_one_item(text: str, candidates: list[HeadingCandidate], item: str) 
         end, end_reasons = _find_end_candidate(candidates, start)
         reasons = _start_validation_reasons(start) + end_reasons
         if end:
+            section_text = text[start.start : end.start].strip()
+            if _is_likely_toc_span(start, section_text):
+                attempts.append(
+                    CandidateAttempt(
+                        item=item,
+                        decision="rejected",
+                        start_evidence=_evidence("start_heading", start),
+                        end_evidence=_evidence("end_heading", end),
+                        validation_reasons=reasons + ["REJECTED_SHORT_DENSE_TOC_SPAN"],
+                        warnings=["Candidate span is too short and has dense TOC-like item clustering."],
+                    )
+                )
+                continue
             attempts.append(
                 CandidateAttempt(
                     item=item,
@@ -203,6 +218,18 @@ def _build_success_result(
         )
         warnings.append("Section length is outside the expected first-pass range.")
 
+    if _is_cross_reference_section(section_text):
+        confidence_components.append(
+            ConfidenceComponent(
+                name="not_cross_reference_only",
+                weight=0.0,
+                earned=0.0,
+                passed=False,
+                reason="Section appears to cross-reference another page range rather than contain full narrative text.",
+            )
+        )
+        warnings.append("Section appears to be a cross-reference rather than full narrative text.")
+
     score = sum(component.earned for component in confidence_components)
     confidence_level = "high" if score >= 0.85 else "medium" if score >= 0.60 else "low"
     return ItemResult(
@@ -263,3 +290,28 @@ def _attempt_warnings(start: HeadingCandidate, end: HeadingCandidate | None) -> 
     if end and end.is_toc_like:
         warnings.append("End heading has TOC-like signals.")
     return warnings
+
+
+def _is_likely_toc_span(start: HeadingCandidate, section_text: str) -> bool:
+    return (
+        "TOC_DENSE_ITEM_CLUSTER" in start.reasons
+        and not _is_cross_reference_section(section_text)
+        and len(section_text) < 800
+    )
+
+
+def _is_cross_reference_section(section_text: str) -> bool:
+    compact = " ".join(section_text.split()).lower()
+    if len(compact) > 1200:
+        return False
+    has_page_range = bool(re.search(r"\bpages?\s+\d+\s*[–-]\s*\d+\b", compact))
+    has_reference_language = any(
+        phrase in compact
+        for phrase in (
+            "appears on page",
+            "appears on pages",
+            "is incorporated",
+            "such information should be read in conjunction",
+        )
+    )
+    return has_page_range and has_reference_language

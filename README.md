@@ -58,6 +58,12 @@ Export a Markdown extraction report for the seed filings:
 python3 scripts/export_seed_extractions_md.py
 ```
 
+Export a warning-focused audit report:
+
+```bash
+python3 scripts/export_warning_audit_md.py
+```
+
 Inspect normalized narrative blocks for a filing:
 
 ```bash
