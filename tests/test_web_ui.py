@@ -34,6 +34,20 @@ class WebUiTests(unittest.TestCase):
         self.assertIn("reviewSnippetsFor", html)
         self.assertIn("exhibit_index_detected", html)
 
+    def test_detail_page_can_load_original_filing_structure(self):
+        html = web_ui.render_detail("wmt_2014_10k")
+
+        self.assertIn("Show original filing structure", html)
+        self.assertIn("raw-section-frame", html)
+        self.assertIn("/raw-section/", html)
+
+    def test_raw_section_preview_preserves_tables_and_archive_base(self):
+        payload = web_ui.raw_section_preview("wmt_2014_10k", "15")
+
+        self.assertGreater(payload["table_count"], 0)
+        self.assertIn("<table", payload["srcdoc"].lower())
+        self.assertIn("<base href=\"https://www.sec.gov/Archives/edgar/data/", payload["srcdoc"])
+
     def test_extract_endpoint_runs_pipeline_on_demand(self):
         class Result:
             parser_version = "test"

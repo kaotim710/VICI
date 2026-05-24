@@ -315,3 +315,9 @@ pg_2025_10k Item 7A: 本身僅一句sentence
 ```text
 過長的部分目前都是偏exhibit或是table的話，在前端也簡單實作讓其可以顯示。另外若有圖片目前的處理策略是什麼
 ```
+
+## Raw Filing Structure Preview Request
+
+```text
+我剛檢查發現表格還是沒有很好的顯示，在網站上還原成原本檔案的結構，圖片部分先試作
+```

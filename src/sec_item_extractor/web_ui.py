@@ -3,7 +3,9 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import re
 import time
+from html import escape as html_escape
 from http import HTTPStatus
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
@@ -130,6 +132,47 @@ def recover_seed_filing(filing_id: str, selections: dict[tuple[str | None, str],
     }
 
 
+def raw_section_preview(filing_id: str, item: str) -> dict:
+    manifest = json.loads(MANIFEST_PATH.read_text(encoding="utf-8"))
+    filings = {filing["filing_id"]: filing for filing in manifest["filings"]}
+    if filing_id not in filings:
+        raise KeyError(filing_id)
+
+    path = RAW_DIR / f"{filing_id}.html"
+    if not path.exists():
+        raise FileNotFoundError(path)
+
+    item = item.upper()
+    content = path.read_text(encoding="utf-8", errors="replace")
+    result = extract_items(content, target_items=[item], filing_id=filing_id)
+    item_result = result.item_results[0]
+    if item_result.status != "success" or not item_result.start_evidence:
+        raise ValueError(f"raw section is unavailable for Item {item}")
+
+    raw_start = item_result.start_evidence.raw_offset
+    if raw_start is None:
+        raise ValueError(f"raw section has no raw start offset for Item {item}")
+    raw_end = item_result.end_evidence.raw_offset if item_result.end_evidence else None
+    start = _raw_container_start(content, raw_start)
+    end = _raw_container_start(content, raw_end) if raw_end is not None else len(content)
+    if end <= start:
+        end = len(content)
+
+    fragment = content[start:end]
+    base_url = _archive_base_url(filing_id)
+    return {
+        "filing": filings[filing_id],
+        "item": item,
+        "raw_start": start,
+        "raw_end": end,
+        "raw_bytes": len(fragment.encode("utf-8", errors="replace")),
+        "table_count": len(re.findall(r"<table\b", fragment, flags=re.IGNORECASE)),
+        "image_count": len(re.findall(r"<img\b", fragment, flags=re.IGNORECASE)),
+        "base_url": base_url,
+        "srcdoc": _raw_section_srcdoc(fragment, base_url),
+    }
+
+
 def _item_contract(item) -> dict:
     return {
         "item": item.item,
@@ -177,6 +220,48 @@ def _parse_recovery_selections(payload: dict, filing_id: str) -> dict[tuple[str 
     return selections
 
 
+def _archive_base_url(filing_id: str) -> str | None:
+    record = _inventory_by_filing_id().get(filing_id)
+    if not record:
+        return None
+    cik = record.get("cik")
+    accession = record.get("accession_number")
+    if not cik or not accession:
+        return None
+    cik_no_padding = str(int("".join(character for character in str(cik) if character.isdigit())))
+    accession_no_dashes = str(accession).replace("-", "")
+    return f"https://www.sec.gov/Archives/edgar/data/{cik_no_padding}/{accession_no_dashes}/"
+
+
+def _raw_container_start(content: str, raw_offset: int) -> int:
+    window_start = max(0, raw_offset - 5000)
+    window = content[window_start:raw_offset]
+    matches = list(re.finditer(r"<(?:div|p|table|tr|h[1-6]|section|article|a)\b", window, flags=re.IGNORECASE))
+    if matches:
+        return window_start + matches[-1].start()
+    return raw_offset
+
+
+def _raw_section_srcdoc(fragment: str, base_url: str | None) -> str:
+    fragment = re.sub(r"(?is)<script\b.*?</script>", "", fragment)
+    base = f'<base href="{html_escape(base_url, quote=True)}">' if base_url else ""
+    return f"""<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  {base}
+  <style>
+    body {{ margin: 12px; color: #111827; font-family: Times New Roman, serif; font-size: 13px; }}
+    table {{ max-width: 100%; border-collapse: collapse; }}
+    img {{ max-width: 100%; height: auto; }}
+  </style>
+</head>
+<body>
+{fragment}
+</body>
+</html>"""
+
+
 class WebUiHandler(BaseHTTPRequestHandler):
     server_version = "SecItemExtractorWeb/0.1"
 
@@ -201,6 +286,10 @@ class WebUiHandler(BaseHTTPRequestHandler):
         if path.startswith("/api/filings/") and path.endswith("/extract"):
             filing_id = unquote(path.removeprefix("/api/filings/").removesuffix("/extract"))
             self._handle_extract(filing_id)
+            return
+        if path.startswith("/api/filings/") and "/raw-section/" in path:
+            filing_id, item = unquote(path.removeprefix("/api/filings/")).split("/raw-section/", 1)
+            self._handle_raw_section(filing_id, item)
             return
 
         self._send_json({"error": "not_found"}, status=HTTPStatus.NOT_FOUND)
@@ -232,6 +321,16 @@ class WebUiHandler(BaseHTTPRequestHandler):
             self._send_json({"error": "unknown_filing", "filing_id": filing_id}, status=HTTPStatus.NOT_FOUND)
         except FileNotFoundError:
             self._send_json({"error": "missing_raw_filing", "filing_id": filing_id}, status=HTTPStatus.NOT_FOUND)
+
+    def _handle_raw_section(self, filing_id: str, item: str) -> None:
+        try:
+            self._send_json(raw_section_preview(filing_id, item))
+        except KeyError:
+            self._send_json({"error": "unknown_filing", "filing_id": filing_id}, status=HTTPStatus.NOT_FOUND)
+        except FileNotFoundError:
+            self._send_json({"error": "missing_raw_filing", "filing_id": filing_id}, status=HTTPStatus.NOT_FOUND)
+        except ValueError as error:
+            self._send_json({"error": "raw_section_unavailable", "message": str(error)}, status=HTTPStatus.NOT_FOUND)
 
     def _handle_recover(self, filing_id: str) -> None:
         try:
@@ -459,12 +558,18 @@ def render_detail(filing_id: str) -> str:
                   <pre></pre>
                 </div>
               </details>
+              <div class="raw-section-tools">
+                <button class="secondary-button compact" data-raw-item="${{escapeHtml(item.item)}}">Show original filing structure</button>
+                <span class="raw-section-meta"></span>
+              </div>
+              <div class="raw-section-preview"></div>
               <pre class="item-text"></pre>
             `;
             const snippets = article.querySelectorAll('.snippet-grid pre');
             snippets[0].textContent = startSnippet;
             snippets[1].textContent = endSnippet;
             article.querySelector('.item-text').textContent = item.text || '';
+            article.querySelector('[data-raw-item]').addEventListener('click', () => loadRawSection(item.item, article));
             items.appendChild(article);
           }}
         }}
@@ -554,6 +659,30 @@ def render_detail(filing_id: str) -> str:
             resultBlock.appendChild(card);
           }}
           recoveryPanel.appendChild(resultBlock);
+        }}
+
+        async function loadRawSection(itemId, article) {{
+          const button = article.querySelector('[data-raw-item]');
+          const meta = article.querySelector('.raw-section-meta');
+          const preview = article.querySelector('.raw-section-preview');
+          button.disabled = true;
+          meta.textContent = 'Loading original HTML...';
+          preview.innerHTML = '';
+          try {{
+            const response = await fetch(`/api/filings/${{encodeURIComponent(filingId)}}/raw-section/${{encodeURIComponent(itemId)}}`, {{cache: 'no-store'}});
+            const payload = await response.json();
+            if (!response.ok) throw new Error(payload.message || payload.error || 'raw_section_failed');
+            meta.textContent = `${{payload.table_count}} tables | ${{payload.image_count}} images | ${{Number(payload.raw_bytes).toLocaleString()}} bytes`;
+            const iframe = document.createElement('iframe');
+            iframe.className = 'raw-section-frame';
+            iframe.setAttribute('sandbox', '');
+            iframe.srcdoc = payload.srcdoc;
+            preview.appendChild(iframe);
+          }} catch (error) {{
+            meta.textContent = `Original view failed: ${{error.message}}`;
+          }} finally {{
+            button.disabled = false;
+          }}
         }}
 
         function edgeSnippet(text, mode) {{
@@ -661,6 +790,11 @@ h1, h2, p { margin: 0; }
   padding: 0 14px;
   cursor: pointer;
   width: 100%;
+}
+.secondary-button.compact {
+  width: auto;
+  min-height: 34px;
+  padding: 0 10px;
 }
 .primary-button:disabled, .secondary-button:disabled { opacity: 0.55; cursor: wait; }
 .filing-grid {
@@ -861,6 +995,22 @@ dd { margin: 0; overflow-wrap: anywhere; }
   overflow: auto;
   white-space: pre-wrap;
   font: 13px/1.5 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+.raw-section-tools {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+.raw-section-meta { color: #647080; font-size: 13px; }
+.raw-section-preview { margin-bottom: 12px; }
+.raw-section-frame {
+  width: 100%;
+  min-height: 520px;
+  border: 1px solid #c9d1da;
+  border-radius: 6px;
+  background: #ffffff;
 }
 .item-text {
   max-height: 460px;
