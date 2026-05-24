@@ -40,3 +40,4 @@ estimated_prompt_tokens =
 | 2026-05-24 | failed_item_recovery_request | `prompts/2026-05-24-user-prompts.md` |  | 18 | Requested continuing the milestone plan by handling the 13 failed seed extraction items. |
 | 2026-05-24 | reliability_milestone_request | `prompts/2026-05-24-user-prompts.md` |  | 9 | Requested implementing milestone items 1-5 before API or deployment work. |
 | 2026-05-24 | retry_policy_contract_request | `prompts/2026-05-24-user-prompts.md` |  | 18 | Requested adding RetryPolicy and confirming outstanding working tree changes first. |
+| 2026-05-24 | frontend_test_filing_ui_request | `prompts/2026-05-24-user-prompts.md` |  | 85 | Requested a simple frontend to select current test filings and run extraction only after the user opens a filing. |
