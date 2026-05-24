@@ -579,6 +579,7 @@ def _has_reference_language(section_text: str) -> bool:
         r"\bincorporated\s+herein\s+by\s+reference\b",
         r"\bsee\s+(?:the\s+)?(?:annual report|proxy statement|exhibit index|note\s+\d+|part\s+[ivx]+|item\s+\d)",
         r"\brefer(?:red|s|ring)?\s+to\s+(?:the\s+)?(?:annual report|proxy statement|exhibit index|note\s+\d+|part\s+[ivx]+|item\s+\d)",
+        r"\breference\s+is\s+made\s+to\s+(?:the\s+)?section\s+entitled\b",
         r"\bappears?\s+on\s+pages?\s+\d+",
     )
     return any(re.search(pattern, compact) for pattern in reference_patterns)

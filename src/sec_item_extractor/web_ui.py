@@ -3,15 +3,14 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
-import re
 import time
-from html import escape as html_escape
 from http import HTTPStatus
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import unquote, urlparse
 
 from .extractor import extract_items
+from .raw_structure import raw_fragment_structure, raw_section_fragment, raw_section_srcdoc, raw_structure_counts
 from .recovery import run_recovery_actions
 
 
@@ -150,18 +149,19 @@ def raw_section_preview(filing_id: str, item: str) -> dict:
     if item_result.status != "success" or not item_result.start_evidence:
         raise ValueError(f"raw section is unavailable for Item {item}")
 
-    start, end, fragment = _raw_section_fragment(content, item_result)
+    start, end, fragment = raw_section_fragment(content, item_result)
     base_url = _archive_base_url(filing_id)
+    structure = raw_fragment_structure(fragment)
     return {
         "filing": filings[filing_id],
         "item": item,
         "raw_start": start,
         "raw_end": end,
         "raw_bytes": len(fragment.encode("utf-8", errors="replace")),
-        "table_count": len(re.findall(r"<table\b", fragment, flags=re.IGNORECASE)),
-        "image_count": len(re.findall(r"<img\b", fragment, flags=re.IGNORECASE)),
+        "table_count": structure["table_count"],
+        "image_count": structure["image_count"],
         "base_url": base_url,
-        "srcdoc": _raw_section_srcdoc(fragment, base_url),
+        "srcdoc": raw_section_srcdoc(fragment, base_url),
     }
 
 
@@ -178,7 +178,9 @@ def _item_contract(item, raw_content: str | None = None) -> dict:
         },
         "text": item.text or "",
         "text_length": len(item.text or ""),
-        "raw_structure": _raw_structure_counts(raw_content, item) if raw_content is not None else {"table_count": 0, "image_count": 0},
+        "raw_structure": raw_structure_counts(raw_content, item)
+        if raw_content is not None
+        else {"table_count": 0, "image_count": 0},
     }
 
 
@@ -228,61 +230,7 @@ def _archive_base_url(filing_id: str) -> str | None:
 
 def _attach_raw_structure(result_dict: dict, content: str, item_results: list) -> None:
     for item_payload, item_result in zip(result_dict.get("item_results", []), item_results):
-        item_payload["raw_structure"] = _raw_structure_counts(content, item_result)
-
-
-def _raw_structure_counts(content: str, item_result) -> dict:
-    if item_result.status != "success":
-        return {"table_count": 0, "image_count": 0}
-    try:
-        _, _, fragment = _raw_section_fragment(content, item_result)
-    except ValueError:
-        return {"table_count": 0, "image_count": 0}
-    return {
-        "table_count": len(re.findall(r"<table\b", fragment, flags=re.IGNORECASE)),
-        "image_count": len(re.findall(r"<img\b", fragment, flags=re.IGNORECASE)),
-    }
-
-
-def _raw_section_fragment(content: str, item_result) -> tuple[int, int, str]:
-    raw_start = item_result.start_evidence.raw_offset if item_result.start_evidence else None
-    if raw_start is None:
-        raise ValueError(f"raw section has no raw start offset for Item {item_result.item}")
-    raw_end = item_result.end_evidence.raw_offset if item_result.end_evidence else None
-    start = _raw_container_start(content, raw_start)
-    end = _raw_container_start(content, raw_end) if raw_end is not None else len(content)
-    if end <= start:
-        end = len(content)
-    return start, end, content[start:end]
-
-
-def _raw_container_start(content: str, raw_offset: int) -> int:
-    window_start = max(0, raw_offset - 5000)
-    window = content[window_start:raw_offset]
-    matches = list(re.finditer(r"<(?:div|p|table|tr|h[1-6]|section|article|a)\b", window, flags=re.IGNORECASE))
-    if matches:
-        return window_start + matches[-1].start()
-    return raw_offset
-
-
-def _raw_section_srcdoc(fragment: str, base_url: str | None) -> str:
-    fragment = re.sub(r"(?is)<script\b.*?</script>", "", fragment)
-    base = f'<base href="{html_escape(base_url, quote=True)}">' if base_url else ""
-    return f"""<!doctype html>
-<html>
-<head>
-  <meta charset="utf-8">
-  {base}
-  <style>
-    body {{ margin: 12px; color: #111827; font-family: Times New Roman, serif; font-size: 13px; }}
-    table {{ max-width: 100%; border-collapse: collapse; }}
-    img {{ max-width: 100%; height: auto; }}
-  </style>
-</head>
-<body>
-{fragment}
-</body>
-</html>"""
+        item_payload["raw_structure"] = raw_structure_counts(content, item_result)
 
 
 class WebUiHandler(BaseHTTPRequestHandler):

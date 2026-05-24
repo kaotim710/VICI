@@ -47,3 +47,4 @@ estimated_prompt_tokens =
 | 2026-05-24 | exhibit_table_frontend_request | `prompts/2026-05-24-user-prompts.md` |  | 32 | Requested simple frontend display for exhibit/table overlong sections and asked about image handling strategy. |
 | 2026-05-24 | raw_filing_structure_preview_request | `prompts/2026-05-24-user-prompts.md` |  | 34 | Requested restoring original filing table structure in the UI and prototyping image display. |
 | 2026-05-24 | raw_structure_tag_request | `prompts/2026-05-24-user-prompts.md` |  | 13 | Requested adding tags to extracted items when raw tables or images are detected. |
+| 2026-05-24 | gold_raw_media_fidelity_request | `prompts/2026-05-24-user-prompts.md` |  | 31 | Requested adding gold checks for table/image restoration fidelity and rerunning gold warning classification. |
