@@ -34,6 +34,10 @@ class HeadingCandidate:
     normalized_text: str
     is_toc_like: bool = False
     reasons: list[str] = field(default_factory=list)
+    raw_start: int | None = None
+    raw_end: int | None = None
+    block_index: int | None = None
+    block_tag: str | None = None
 
 
 @dataclass(frozen=True)
@@ -43,6 +47,19 @@ class Evidence:
     offset: int
     text: str
     reasons: list[str] = field(default_factory=list)
+    raw_offset: int | None = None
+    block_index: int | None = None
+    block_tag: str | None = None
+
+
+@dataclass(frozen=True)
+class CandidateAttempt:
+    item: str
+    decision: str
+    start_evidence: Evidence
+    end_evidence: Evidence | None = None
+    validation_reasons: list[str] = field(default_factory=list)
+    warnings: list[str] = field(default_factory=list)
 
 
 @dataclass(frozen=True)
@@ -56,6 +73,7 @@ class ItemResult:
     confidence_score: float = 0.0
     start_evidence: Evidence | None = None
     end_evidence: Evidence | None = None
+    candidate_attempts: list[CandidateAttempt] = field(default_factory=list)
     validation_reasons: list[str] = field(default_factory=list)
     warnings: list[str] = field(default_factory=list)
     strategy_used: str = "deterministic_text_v1"
@@ -71,6 +89,8 @@ class ExtractionResult:
     parser_version: str
     item_results: list[ItemResult]
     warnings: list[str] = field(default_factory=list)
+    candidate_count: int = 0
+    document_warnings: list[str] = field(default_factory=list)
 
     def to_dict(self) -> dict:
         return asdict(self)

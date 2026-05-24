@@ -53,6 +53,10 @@ class ExtractorTests(unittest.TestCase):
         self.assertNotIn("Table of Contents", by_item["1"].text)
         self.assertGreater(by_item["1"].start_offset, 0)
         self.assertEqual(by_item["1"].start_evidence.item, "1")
+        self.assertIsNotNone(by_item["1"].start_evidence.raw_offset)
+        self.assertIsNotNone(by_item["1"].start_evidence.block_index)
+        self.assertEqual(by_item["1"].candidate_attempts[0].decision, "selected")
+        self.assertIn("START_HEADING_FOUND", by_item["1"].candidate_attempts[0].validation_reasons)
         self.assertEqual(by_item["7"].end_evidence.item, "7A")
 
     def test_hidden_ixbrl_like_content_is_suppressed(self):
@@ -77,6 +81,7 @@ class ExtractorTests(unittest.TestCase):
         self.assertEqual(result.status, "failed")
         self.assertEqual(item.status, "failed")
         self.assertIn("LEGAL_END_HEADING_NOT_FOUND", item.validation_reasons)
+        self.assertEqual(item.candidate_attempts[0].decision, "rejected")
 
 
 if __name__ == "__main__":

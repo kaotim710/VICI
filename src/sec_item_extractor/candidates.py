@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import re
 
-from .models import HeadingCandidate
+from .models import HeadingCandidate, NarrativeBlock
 
 
 ITEM_ORDER = ["1", "1A", "1B", "1C", "2", "3", "4", "5", "6", "7", "7A", "8", "9", "9A", "9B", "9C"]
@@ -32,22 +32,31 @@ EXPECTED_TITLES = {
 }
 
 
-def find_heading_candidates(text: str) -> list[HeadingCandidate]:
+def find_heading_candidates(text: str, blocks: list[NarrativeBlock] | None = None) -> list[HeadingCandidate]:
     candidates: list[HeadingCandidate] = []
+    block_index = 0
     for match in HEADING_RE.finditer(text):
+        start = _first_nonspace(text, match.start(), match.end())
         item = match.group("item").upper()
-        raw = match.group(0).strip()
+        raw = text[start : match.end()].strip()
         normalized = _normalize_heading(raw)
-        reasons = _heading_reasons(item, normalized, match.start(), text)
+        reasons = _heading_reasons(item, normalized, start, text)
+        block = None
+        if blocks:
+            block, block_index = _block_for_offset(start, blocks, block_index)
         candidates.append(
             HeadingCandidate(
                 item=item,
-                start=match.start(),
+                start=start,
                 end=match.end(),
                 text=raw,
                 normalized_text=normalized,
                 is_toc_like="TOC_DENSE_ITEM_CLUSTER" in reasons or "TOC_PAGE_NUMBER_PATTERN" in reasons,
                 reasons=reasons,
+                raw_start=_raw_offset(block, start) if block else None,
+                raw_end=_raw_offset(block, match.end()) if block else None,
+                block_index=block_index if block else None,
+                block_tag=block.tag if block else None,
             )
         )
     return candidates
@@ -75,6 +84,12 @@ def _normalize_heading(value: str) -> str:
     return value
 
 
+def _first_nonspace(text: str, start: int, end: int) -> int:
+    while start < end and text[start].isspace():
+        start += 1
+    return start
+
+
 def _heading_reasons(item: str, normalized: str, start: int, text: str) -> list[str]:
     reasons = ["REGEX_ITEM_HEADING"]
     lower = normalized.lower()
@@ -93,3 +108,22 @@ def _heading_reasons(item: str, normalized: str, start: int, text: str) -> list[
         reasons.append("INLINE_REFERENCE_RISK")
     return reasons
 
+
+def _block_for_offset(
+    offset: int, blocks: list[NarrativeBlock], start_index: int
+) -> tuple[NarrativeBlock | None, int]:
+    index = max(0, min(start_index, len(blocks) - 1))
+    while index + 1 < len(blocks) and blocks[index].clean_end <= offset:
+        index += 1
+    while index > 0 and blocks[index].clean_start > offset:
+        index -= 1
+    block = blocks[index]
+    if block.clean_start <= offset <= block.clean_end:
+        return block, index
+    return None, index
+
+
+def _raw_offset(block: NarrativeBlock, clean_offset: int) -> int | None:
+    if block.raw_start is None:
+        return None
+    return block.raw_start + max(0, clean_offset - block.clean_start)

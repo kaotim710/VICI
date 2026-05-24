@@ -58,6 +58,12 @@ Inspect normalized narrative blocks for a filing:
 python3 scripts/inspect_document.py fixtures/filings/raw/aapl_2023_10k.html --limit 10
 ```
 
+Inspect item heading candidates:
+
+```bash
+python3 scripts/inspect_candidates.py fixtures/filings/raw/aapl_2023_10k.html --limit 25
+```
+
 ## SEC Intake Sources
 
 The ingestion utilities follow the official SEC EDGAR API shape documented in
@@ -70,3 +76,9 @@ an API key.
 HTML/text cleaning now produces a `CleanDocument` with normalized text plus `NarrativeBlock`
 records. Each block includes clean offsets, raw offsets, source type, and the nearest block tag
 when available. `html_to_text()` remains available for the deterministic extractor.
+
+## Milestone 3: Candidate Evidence
+
+Candidate retrieval now attaches block/raw metadata to heading candidates and records selected or
+rejected candidate attempts in each item result. This keeps boundary decisions inspectable without
+introducing embeddings or LLM calls.

@@ -24,3 +24,4 @@ estimated_prompt_tokens =
 | 2026-05-24 | prompt_token_usage_request | `prompts/2026-05-24-user-prompts.md` |  | 13 | Requested prompt token usage tracking in `prompts/`. |
 | 2026-05-24 | seed_filing_download_request | `prompts/2026-05-24-user-prompts.md` |  | 14 | Requested downloading the 20 seed 10-K test filings. |
 | 2026-05-24 | next_milestone_request | `prompts/2026-05-24-user-prompts.md` |  | 6 | Requested continuing to the next implementation milestone. |
+| 2026-05-24 | continue_milestones_request | `prompts/2026-05-24-user-prompts.md` |  | 7 | Requested continuing with subsequent milestones. |

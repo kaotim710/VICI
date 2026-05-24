@@ -175,3 +175,9 @@ Core Design Philosophy
 ```text
 ok，進行下一個milestone
 ```
+
+## Continue Milestones Request
+
+```text
+好，繼續實作後續的milestone
+```
