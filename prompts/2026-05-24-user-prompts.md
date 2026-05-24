@@ -277,3 +277,9 @@ testing 方面開始去對全item抽取，而不是只會單一幾個item
 ```text
 先簡單創建前端UI，入口頁面先讓user從當前的test filing裡選擇要看哪一份的，之後進入下層頁面，左邊navi bar是放toc，主要extract出來的item放在中間至右邊。不要使用cache會任何預設的資料，我要整個pipeline是在確認跑哪一份filing時才開始執行的
 ```
+
+## Frontend Recovery UI Request
+
+```text
+1-3直接做，4的話把未使用的部分清掉，5先不做。
+```

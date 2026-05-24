@@ -1,6 +1,7 @@
 import sys
 import unittest
 from pathlib import Path
+from types import SimpleNamespace
 from unittest.mock import patch
 
 
@@ -28,16 +29,54 @@ class WebUiTests(unittest.TestCase):
 
     def test_extract_endpoint_runs_pipeline_on_demand(self):
         class Result:
+            parser_version = "test"
+            status = "success"
+            candidate_count = 0
+            toc_confidence = "none"
+            toc_entries = []
+            item_results = []
+
             def to_dict(self):
-                return {"status": "success", "item_results": []}
+                return {"status": "success", "toc_entries": [], "item_results": []}
 
         with patch("sec_item_extractor.web_ui.extract_items", return_value=Result()) as extract_items:
             payload = web_ui.extract_seed_filing("aapl_2014_10k")
 
         extract_items.assert_called_once()
         self.assertEqual(payload["filing"]["filing_id"], "aapl_2014_10k")
+        self.assertEqual(payload["pipeline"]["trigger"], "on_demand_extract_request")
+        self.assertEqual(payload["summary"]["status"], "success")
         self.assertEqual(payload["result"]["status"], "success")
         self.assertGreater(payload["source_bytes"], 0)
+
+    def test_raw_metadata_does_not_run_extraction(self):
+        with patch("sec_item_extractor.web_ui.extract_items") as extract_items:
+            payload = web_ui.raw_filing_metadata("aapl_2014_10k")
+
+        extract_items.assert_not_called()
+        self.assertEqual(payload["filing"]["filing_id"], "aapl_2014_10k")
+        self.assertEqual(payload["cache_policy"], "no-store")
+        self.assertTrue(payload["raw"]["sha256"])
+
+    def test_recover_endpoint_runs_pipeline_and_recovery_on_demand(self):
+        extraction = SimpleNamespace(
+            parser_version="test",
+            status="warning",
+            item_results=[],
+        )
+        recovery = SimpleNamespace(to_dict=lambda: {"item": "7", "status": "needs_review"})
+
+        with patch("sec_item_extractor.web_ui.extract_items", return_value=extraction) as extract_items:
+            with patch("sec_item_extractor.web_ui.run_recovery_actions", return_value=[recovery]) as run_recovery:
+                payload = web_ui.recover_seed_filing(
+                    "aapl_2014_10k", selections={("aapl_2014_10k", "7"): "Management"}
+                )
+
+        extract_items.assert_called_once()
+        run_recovery.assert_called_once()
+        self.assertEqual(payload["pipeline"]["trigger"], "on_demand_recovery_request")
+        self.assertEqual(payload["summary"]["recovery_actions"], 1)
+        self.assertEqual(payload["recoveries"][0]["status"], "needs_review")
 
 
 if __name__ == "__main__":
