@@ -241,3 +241,9 @@ testing 方面開始去對全item抽取，而不是只會單一幾個item
 ```text
 首先，每一份filing都可能會長得不同，不一定都有明確的item1-16，這部分需要透過toc還判斷開頭以及結尾
 ```
+
+## Continue TOC Implementation Request
+
+```text
+好，繼續實作
+```

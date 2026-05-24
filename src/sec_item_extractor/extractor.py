@@ -55,6 +55,7 @@ def extract_items(content: str, target_items: list[str] | None = None, filing_id
         document_warnings=document.warnings,
         toc_items=toc_profile.items,
         toc_confidence=toc_profile.confidence,
+        toc_entries=toc_profile.entries,
     )
 
 

@@ -5,7 +5,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 from sec_item_extractor import extract_items
-from sec_item_extractor.candidates import ITEM_ORDER, find_heading_candidates
+from sec_item_extractor.candidates import ITEM_ORDER, find_heading_candidates, infer_toc_profile
 from sec_item_extractor.cleaning import html_to_text, parse_document
 
 
@@ -175,6 +175,8 @@ class ExtractorTests(unittest.TestCase):
         self.assertEqual(item.status, "not_present")
         self.assertIn("ITEM_NOT_DECLARED_IN_TOC", item.validation_reasons)
         self.assertEqual(item.warnings, [])
+        self.assertEqual(result.toc_items, ["1", "2"])
+        self.assertEqual(result.toc_confidence, "high")
 
     def test_toc_next_item_can_skip_absent_intermediate_items_for_boundary(self):
         filing = """
@@ -195,6 +197,24 @@ class ExtractorTests(unittest.TestCase):
         self.assertEqual(item.end_evidence.item, "2")
         self.assertIn("Business narrative.", item.text)
         self.assertNotIn("Properties narrative.", item.text)
+
+    def test_toc_profile_preserves_structured_entries(self):
+        candidates = find_heading_candidates(
+            """
+            Table of Contents
+            Item 1. Business........ 3
+            Item 1A. Risk Factors........ 12
+            Item 7. Management's Discussion and Analysis........ 44
+            """
+        )
+
+        profile = infer_toc_profile(candidates)
+
+        self.assertEqual(profile.confidence, "high")
+        self.assertEqual([entry.item for entry in profile.entries], ["1", "1A", "7"])
+        self.assertEqual(profile.entries[0].title, "Business")
+        self.assertEqual(profile.entries[0].page_number, 3)
+        self.assertGreaterEqual(profile.entries[0].offset, 0)
 
     def test_long_noncanonical_section_recommends_subsection_selection(self):
         filing = """

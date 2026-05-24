@@ -44,7 +44,19 @@ class HeadingCandidate:
 class TocProfile:
     items: list[str]
     confidence: str
+    entries: list["TocEntry"] = field(default_factory=list)
     evidence: list[str] = field(default_factory=list)
+
+
+@dataclass(frozen=True)
+class TocEntry:
+    item: str
+    title: str
+    text: str
+    offset: int
+    raw_offset: int | None = None
+    page_number: int | None = None
+    reasons: list[str] = field(default_factory=list)
 
 
 @dataclass(frozen=True)
@@ -119,6 +131,7 @@ class ExtractionResult:
     document_warnings: list[str] = field(default_factory=list)
     toc_items: list[str] = field(default_factory=list)
     toc_confidence: str = "none"
+    toc_entries: list[TocEntry] = field(default_factory=list)
 
     def to_dict(self) -> dict:
         return asdict(self)

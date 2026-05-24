@@ -100,11 +100,31 @@ def _detail_section(filing: dict, result) -> str:
         f"- Fiscal year: `{filing['fiscal_year']}`",
         f"- Overall status: `{result.status}`",
         f"- Candidate count: `{result.candidate_count}`",
+        f"- TOC confidence: `{result.toc_confidence}`",
+        f"- TOC items: `{', '.join(result.toc_items) if result.toc_items else 'none'}`",
         "",
     ]
+    if result.toc_entries:
+        lines.extend(_toc_table(result.toc_entries))
     for item in result.item_results:
         lines.extend(_item_detail(item))
     return "\n".join(lines)
+
+
+def _toc_table(entries) -> list[str]:
+    lines = [
+        "TOC entries:",
+        "",
+        "| Item | Title | Page | Offset |",
+        "| --- | --- | ---: | ---: |",
+    ]
+    for entry in entries[:30]:
+        page = str(entry.page_number) if entry.page_number is not None else ""
+        lines.append(
+            f"| {entry.item} | {_compact(entry.title or entry.text, 80)} | {page} | {entry.offset} |"
+        )
+    lines.append("")
+    return lines
 
 
 def _item_detail(item) -> list[str]:

@@ -40,6 +40,33 @@ Missing filings: 0
 - Fiscal year: `2014`
 - Overall status: `success`
 - Candidate count: `40`
+- TOC confidence: `high`
+- TOC items: `1, 1A, 1B, 2, 3, 4, 5, 6, 7, 7A, 8, 9, 9A, 9B, 10, 11, 12, 13, 14, 15`
+
+TOC entries:
+
+| Item | Title | Page | Offset |
+| --- | --- | ---: | ---: |
+| 1 | Business |  | 4249 |
+| 1A | Risk Factors |  | 4279 |
+| 1B | Unresolved Staff Comments |  | 4306 |
+| 2 | Properties |  | 4347 |
+| 3 | Legal Proceedings |  | 4372 |
+| 4 | Mine Safety Disclosures |  | 4404 |
+| 5 | Market for Registrant’s Common Equity, Related Stockholder Matters and Issuer... |  | 4442 |
+| 6 | Selected Financial Data |  | 4574 |
+| 7 | Management’s Discussion and Analysis of Financial Condition and Results of Op... |  | 4612 |
+| 7A | Quantitative and Qualitative Disclosures About Market Risk |  | 4712 |
+| 8 | Financial Statements and Supplementary Data |  | 4786 |
+| 9 | Changes in and Disagreements With Accountants on Accounting and Financial Dis... |  | 4844 |
+| 9A | Controls and Procedures |  | 4943 |
+| 9B | Other Information |  | 4982 |
+| 10 | Directors, Executive Officers and Corporate Governance |  | 5015 |
+| 11 | Executive Compensation |  | 5095 |
+| 12 | Security Ownership of Certain Beneficial Owners and Management and Related St... |  | 5133 |
+| 13 | Certain Relationships and Related Transactions and Director Independence |  | 5243 |
+| 14 | Principal Accounting Fees and Services |  | 5331 |
+| 15 | Exhibits, Financial Statement Schedules |  | 5385 |
 
 #### Item 1
 
@@ -432,6 +459,36 @@ End snippet:
 - Fiscal year: `2023`
 - Overall status: `success`
 - Candidate count: `46`
+- TOC confidence: `high`
+- TOC items: `1, 1A, 1B, 1C, 2, 3, 4, 5, 6, 7, 7A, 8, 9, 9A, 9B, 9C, 10, 11, 12, 13, 14, 15, 16`
+
+TOC entries:
+
+| Item | Title | Page | Offset |
+| --- | --- | ---: | ---: |
+| 1 | Business |  | 5416 |
+| 1A | Risk Factors |  | 5446 |
+| 1B | Unresolved Staff Comments |  | 5473 |
+| 1C | Cybersecurity |  | 5514 |
+| 2 | Properties |  | 5543 |
+| 3 | Legal Proceedings |  | 5568 |
+| 4 | Mine Safety Disclosures |  | 5600 |
+| 5 | Market for Registrant’s Common Equity, Related Stockholder Matters and Issuer... |  | 5638 |
+| 6 | [Reserved] |  | 5770 |
+| 7 | Management’s Discussion and Analysis of Financial Condition and Results of Op... |  | 5795 |
+| 7A | Quantitative and Qualitative Disclosures About Market Risk |  | 5895 |
+| 8 | Financial Statements and Supplementary Data |  | 5969 |
+| 9 | Changes in and Disagreements with Accountants on Accounting and Financial Dis... |  | 6027 |
+| 9A | Controls and Procedures |  | 6126 |
+| 9B | Other Information |  | 6165 |
+| 9C | Disclosure Regarding Foreign Jurisdictions that Prevent Inspections |  | 6198 |
+| 10 | Directors, Executive Officers and Corporate Governance |  | 6281 |
+| 11 | Executive Compensation |  | 6361 |
+| 12 | Security Ownership of Certain Beneficial Owners and Management and Related St... |  | 6399 |
+| 13 | Certain Relationships and Related Transactions, and Director Independence |  | 6509 |
+| 14 | Principal Accountant Fees and Services |  | 6598 |
+| 15 | Exhibit and Financial Statement Schedules |  | 6652 |
+| 16 | Form 10-K Summary |  | 6718 |
 
 #### Item 1
 
@@ -831,6 +888,33 @@ End snippet:
 - Fiscal year: `2014`
 - Overall status: `success`
 - Candidate count: `140`
+- TOC confidence: `high`
+- TOC items: `1, 1A, 1B, 2, 3, 4, 5, 6, 7, 7A, 8, 9, 9A, 9B, 10, 11, 12, 13, 14, 15`
+
+TOC entries:
+
+| Item | Title | Page | Offset |
+| --- | --- | ---: | ---: |
+| 1 | Business |  | 3405 |
+| 1A | Risk Factors |  | 3477 |
+| 1B | Unresolved Staff Comments |  | 3505 |
+| 2 | Properties |  | 3546 |
+| 3 | Legal Proceedings |  | 3571 |
+| 4 | Mine Safety Disclosures |  | 3603 |
+| 5 | Market for Registrant’s Common Equity, Related Stockholder Matters, and Issue... |  | 3641 |
+| 6 | Selected Financial Data |  | 3774 |
+| 7 | Management’s Discussion and Analysis of Financial Condition and Results of Op... |  | 3812 |
+| 7A | Quantitative and Qualitative Disclosures about Market Risk |  | 3912 |
+| 8 | Financial Statements and Supplementary Data |  | 3986 |
+| 9 | Changes in and Disagreements with Accountants on Accounting and Financial Dis... |  | 4044 |
+| 9A | Controls and Procedures |  | 4143 |
+| 9B | Other Information |  | 4314 |
+| 10 | Directors, Executive Officers and Corporate Governance |  | 4348 |
+| 11 | Executive Compensation |  | 4429 |
+| 12 | Security Ownership of Certain Beneficial Owners and Management and Related St... |  | 4468 |
+| 13 | Certain Relationships and Related Transactions, and Director Independence |  | 4579 |
+| 14 | Principal Accounting Fees and Services |  | 4669 |
+| 15 | Exhibits, Financial Statement Schedules |  | 4724 |
 
 #### Item 1
 
@@ -1223,6 +1307,35 @@ End snippet:
 - Fiscal year: `2023`
 - Overall status: `success`
 - Candidate count: `144`
+- TOC confidence: `medium`
+- TOC items: `1, 1A, 1B, 2, 3, 4, 5, 6, 7, 7A, 8, 9, 9A, 9B, 9C, 10, 11, 12, 13, 14, 15, 16`
+
+TOC entries:
+
+| Item | Title | Page | Offset |
+| --- | --- | ---: | ---: |
+| 1 | Business |  | 4183 |
+| 1A | Risk Factors |  | 4259 |
+| 1B | Unresolved Staff Comments |  | 4287 |
+| 2 | Properties |  | 4328 |
+| 3 | Legal Proceedings |  | 4353 |
+| 4 | Mine Safety Disclosures |  | 4385 |
+| 5 | Market for Registrant’s Common Equity, Related Stockholder Matters, and Issue... |  | 4423 |
+| 6 | [Reserved] |  | 4556 |
+| 7 | Management’s Discussion and Analysis of Financial Condition and Results of Op... |  | 4581 |
+| 7A | Quantitative and Qualitative Disclosures about Market Risk |  | 4681 |
+| 8 | Financial Statements and Supplementary Data |  | 4755 |
+| 9 | Changes in and Disagreements with Accountants on Accounting and Financial Dis... |  | 4813 |
+| 9A | Controls and Procedures |  | 4912 |
+| 9B | Other Information |  | 5084 |
+| 9C | Disclosure Regarding Foreign Jurisdictions that Prevent Inspections |  | 5118 |
+| 10 | Directors, Executive Officers, and Corporate Governance |  | 5202 |
+| 11 | Executive Compensation |  | 5284 |
+| 12 | Security Ownership of Certain Beneficial Owners and Management and Related St... |  | 5323 |
+| 13 | Certain Relationships and Related Transactions, and Director Independence |  | 5434 |
+| 14 | Principal Accountant Fees and Services |  | 5524 |
+| 15 | Exhibit and Financial Statement Schedules |  | 5579 |
+| 16 | Form 10-K Summary |  | 5646 |
 
 #### Item 1
 
@@ -1619,6 +1732,33 @@ End snippet:
 - Fiscal year: `2014`
 - Overall status: `partial`
 - Candidate count: `40`
+- TOC confidence: `medium`
+- TOC items: `1, 1A, 1B, 2, 3, 4, 5, 6, 7, 7A, 8, 9, 9A, 9B, 10, 11, 12, 13, 14, 15`
+
+TOC entries:
+
+| Item | Title | Page | Offset |
+| --- | --- | ---: | ---: |
+| 1 | Business |  | 4222 |
+| 1A | Risk factors |  | 4708 |
+| 1B | Unresolved SEC Staff comments |  | 4737 |
+| 2 | Properties |  | 4781 |
+| 3 | Legal proceedings |  | 4808 |
+| 4 | Mine safety disclosures |  | 4839 |
+| 5 | Market for registrant’s common equity, related stockholder matters and issuer... |  | 4876 |
+| 6 | Selected financial data |  | 5010 |
+| 7 | Management’s discussion and analysis of financial condition and results of op... |  | 5047 |
+| 7A | Quantitative and qualitative disclosures about market risk |  | 5146 |
+| 8 | Financial statements and supplementary data |  | 5219 |
+| 9 | Changes in and disagreements with accountants on accounting and financial dis... |  | 5276 |
+| 9A | Controls and procedures |  | 5374 |
+| 9B | Other information |  | 5412 |
+| 10 | Directors, executive officers and corporate governance |  | 5444 |
+| 11 | Executive compensation |  | 5523 |
+| 12 | Security ownership of certain beneficial owners and management and related st... |  | 5560 |
+| 13 | Certain relationships and related transactions, and director independence |  | 5669 |
+| 14 | Principal accounting fees and services |  | 5757 |
+| 15 | Exhibits, financial statement schedules |  | 5810 |
 
 #### Item 1
 
@@ -2012,6 +2152,34 @@ End snippet:
 - Fiscal year: `2023`
 - Overall status: `partial`
 - Candidate count: `43`
+- TOC confidence: `medium`
+- TOC items: `1, 1A, 1B, 2, 3, 4, 5, 6, 7, 7A, 8, 9, 9A, 9B, 9C, 10, 11, 12, 13, 14, 15`
+
+TOC entries:
+
+| Item | Title | Page | Offset |
+| --- | --- | ---: | ---: |
+| 1 | Business |  | 5355 |
+| 1A | Risk Factors |  | 5764 |
+| 1B | Unresolved Staff Comments |  | 5795 |
+| 2 | Properties |  | 5837 |
+| 3 | Legal Proceedings |  | 5863 |
+| 4 | Mine Safety Disclosures |  | 5896 |
+| 5 | Market for Registrant’s Common Equity, Related Stockholder Matters and Issuer... |  | 5935 |
+| 6 | Reserved |  | 6068 |
+| 7 | Management’s Discussion and Analysis of Financial Condition and Results of Op... |  | 6091 |
+| 7A | Quantitative and Qualitative Disclosures About Market Risk |  | 6192 |
+| 8 | Financial Statements and Supplementary Data |  | 6267 |
+| 9 | Changes in and Disagreements with Accountants on Accounting and Financial Dis... |  | 6326 |
+| 9A | Controls and Procedures |  | 6426 |
+| 9B | Other Information |  | 6466 |
+| 9C | Disclosure regarding Foreign Jurisdictions that Prevent Inspections |  | 6500 |
+| 10 | Directors, Executive Officers and Corporate Governance |  | 6584 |
+| 11 | Executive Compensation |  | 6665 |
+| 12 | Security Ownership of Certain Beneficial Owners and Management and Related St... |  | 6704 |
+| 13 | Certain Relationships and Related Transactions, and Director Independence |  | 6815 |
+| 14 | Principal Accounting Fees and Services |  | 6905 |
+| 15 | Exhibits, Financial Statement Schedules |  | 6960 |
 
 #### Item 1
 
@@ -2410,6 +2578,33 @@ End snippet:
 - Fiscal year: `2014`
 - Overall status: `success`
 - Candidate count: `40`
+- TOC confidence: `high`
+- TOC items: `1, 1A, 1B, 2, 3, 4, 5, 6, 7, 7A, 8, 9, 9A, 9B, 10, 11, 12, 13, 14, 15`
+
+TOC entries:
+
+| Item | Title | Page | Offset |
+| --- | --- | ---: | ---: |
+| 1 | Business |  | 8392 |
+| 1A | Risk Factors |  | 8414 |
+| 1B | Unresolved Staff Comments |  | 8441 |
+| 2 | Properties |  | 8482 |
+| 3 | Legal Proceedings |  | 8507 |
+| 4 | Mine Safety Disclosures |  | 8539 |
+| 5 | Market for Registrant’s Common Equity, Related Stockholder Matters and |  | 8577 |
+| 6 | Selected Financial Data |  | 8710 |
+| 7 | Management’s Discussion and Analysis of Financial Condition and Results of Op... |  | 8748 |
+| 7A | Quantitative and Qualitative Disclosures About Market Risk |  | 8848 |
+| 8 | Financial Statements and Supplementary Data |  | 8923 |
+| 9 | Changes in and Disagreements with Accountants on Accounting and Financial Dis... |  | 8982 |
+| 9A | Controls And Procedures |  | 9082 |
+| 9B | Other Information |  | 9122 |
+| 10 | Directors, Executive Officers and Corporate Governance |  | 9156 |
+| 11 | Executive Compensation |  | 9237 |
+| 12 | Security Ownership of Certain Beneficial Owners and Management and Related St... |  | 9276 |
+| 13 | Certain Relationships and Related Transactions, and Director Independence |  | 9387 |
+| 14 | Principal Accounting Fees and Services |  | 9477 |
+| 15 | Exhibits, Financial Statement Schedules |  | 9532 |
 
 #### Item 1
 
@@ -2804,6 +2999,36 @@ End snippet:
 - Fiscal year: `2023`
 - Overall status: `success`
 - Candidate count: `46`
+- TOC confidence: `high`
+- TOC items: `1, 1A, 1B, 1C, 2, 3, 4, 5, 6, 7, 7A, 8, 9, 9A, 9B, 9C, 10, 11, 12, 13, 14, 15, 16`
+
+TOC entries:
+
+| Item | Title | Page | Offset |
+| --- | --- | ---: | ---: |
+| 1 | Business |  | 7306 |
+| 1A | Risk Factors |  | 7328 |
+| 1B | Unresolved Staff Comments |  | 7355 |
+| 1C | Cybersecurity |  | 7396 |
+| 2 | Properties |  | 7425 |
+| 3 | Legal Proceedings |  | 7450 |
+| 4 | Mine Safety Disclosures |  | 7482 |
+| 5 | Market for Registrant’s Common Equity, Related Stockholder Matters and Issuer... |  | 7520 |
+| 6 | [Reserved] |  | 7652 |
+| 7 | Management’s Discussion and Analysis of Financial Condition and Results of Op... |  | 7677 |
+| 7A | Quantitative and Qualitative Disclosures about Market Risk |  | 7777 |
+| 8 | Financial Statements and Supplementary Data |  | 7851 |
+| 9 | Changes in and Disagreements with Accountants on Accounting and Financial Dis... |  | 7909 |
+| 9A | Controls and Procedures |  | 8009 |
+| 9B | Other Information |  | 8049 |
+| 9C | Disclosure Regarding Foreign Jurisdictions that Prevent Inspections |  | 8083 |
+| 10 | Directors, Executive Officers and Corporate Governance |  | 8167 |
+| 11 | Executive Compensation |  | 8248 |
+| 12 | Security Ownership of Certain Beneficial Owners and Management and Related St... |  | 8287 |
+| 13 | Certain Relationships and Related Transactions, and Director Independence |  | 8398 |
+| 14 | Principal Accounting Fees and Services |  | 8488 |
+| 15 | Exhibits, Financial Statement Schedules |  | 8543 |
+| 16 | Form 10-K Summary |  | 8608 |
 
 #### Item 1
 
@@ -3204,6 +3429,33 @@ End snippet:
 - Fiscal year: `2014`
 - Overall status: `success`
 - Candidate count: `40`
+- TOC confidence: `high`
+- TOC items: `1, 1A, 1B, 2, 3, 4, 5, 6, 7, 7A, 8, 9, 9A, 9B, 10, 11, 12, 13, 14, 15`
+
+TOC entries:
+
+| Item | Title | Page | Offset |
+| --- | --- | ---: | ---: |
+| 1 | Business |  | 4145 |
+| 1A | Risk Factors |  | 4175 |
+| 1B | Unresolved Staff Comments |  | 4203 |
+| 2 | Properties |  | 4244 |
+| 3 | Legal Proceedings |  | 4269 |
+| 4 | Mine Safety Disclosures |  | 4301 |
+| 5 | Market for Registrant's Common Equity, Related Stockholder Matters and Issuer... |  | 4339 |
+| 6 | Selected Financial Data |  | 4471 |
+| 7 | Management’s Discussion and Analysis of Financial Condition and Results of Op... |  | 4509 |
+| 7A | Quantitative and Qualitative Disclosures About Market Risk |  | 4609 |
+| 8 | Financial Statements |  | 4683 |
+| 9 | Changes in and Disagreements With Accountants on Accounting and Financial Dis... |  | 4718 |
+| 9A | Controls and Procedures |  | 4817 |
+| 9B | Other Information |  | 4856 |
+| 10 | Directors, Executive Officers and Corporate Governance |  | 4889 |
+| 11 | Executive Compensation |  | 4969 |
+| 12 | Security Ownership of Certain Beneficial Owners and Management and Related St... |  | 5007 |
+| 13 | Certain Relationships and Related Transactions, and Director Independence |  | 5117 |
+| 14 | Principal Accountant Fees and Services |  | 5206 |
+| 15 | Exhibits and Financial Statement Schedules |  | 5260 |
 
 #### Item 1
 
@@ -3598,6 +3850,36 @@ End snippet:
 - Fiscal year: `2023`
 - Overall status: `success`
 - Candidate count: `46`
+- TOC confidence: `high`
+- TOC items: `1, 1A, 1B, 1C, 2, 3, 4, 5, 6, 7, 7A, 8, 9, 9A, 9B, 9C, 10, 11, 12, 13, 14, 15, 16`
+
+TOC entries:
+
+| Item | Title | Page | Offset |
+| --- | --- | ---: | ---: |
+| 1 | Business |  | 4982 |
+| 1A | Risk Factors |  | 5012 |
+| 1B | Unresolved Staff Comments |  | 5040 |
+| 1C | Cybersecurity |  | 5081 |
+| 2 | Properties |  | 5110 |
+| 3 | Legal Proceedings |  | 5135 |
+| 4 | Mine Safety Disclosures |  | 5167 |
+| 5 | Market for Registrant's Common Equity, Related Stockholder Matters and Issuer... |  | 5205 |
+| 6 | Reserved |  | 5337 |
+| 7 | Management’s Discussion and Analysis of Financial Condition and Results of Op... |  | 5360 |
+| 7A | Quantitative and Qualitative Disclosures About Market Risk |  | 5460 |
+| 8 | Financial Statements and Supplementary Data |  | 5534 |
+| 9 | Changes in and Disagreements With Accountants on Accounting and Financial Dis... |  | 5592 |
+| 9A | Controls and Procedures |  | 5691 |
+| 9B | Other Information |  | 5730 |
+| 9C | Disclosure Regarding Foreign Jurisdictions That Prevent Inspections |  | 5763 |
+| 10 | Directors, Executive Officers and Corporate Governance |  | 5846 |
+| 11 | Executive Compensation |  | 5926 |
+| 12 | Security Ownership of Certain Beneficial Owners and Management and Related St... |  | 5964 |
+| 13 | Certain Relationships and Related Transactions, and Director Independence |  | 6074 |
+| 14 | Principal Accountant Fees and Services |  | 6163 |
+| 15 | Exhibit and Financial Statement Schedules |  | 6217 |
+| 16 | Form 10-K Summary |  | 6283 |
 
 #### Item 1
 
@@ -4000,6 +4282,33 @@ End snippet:
 - Fiscal year: `2014`
 - Overall status: `success`
 - Candidate count: `20`
+- TOC confidence: `high`
+- TOC items: `1, 1A, 1B, 2, 3, 4, 5, 6, 7, 7A, 8, 9, 9A, 9B, 10, 11, 12, 13, 14, 15`
+
+TOC entries:
+
+| Item | Title | Page | Offset |
+| --- | --- | ---: | ---: |
+| 1 | BUSINESS |  | 4895 |
+| 1A | RISK FACTORS |  | 23523 |
+| 1B | UNRESOLVED STAFF COMMENTS |  | 24071 |
+| 2 | PROPERTIES |  | 24147 |
+| 3 | LEGAL PROCEEDINGS |  | 28406 |
+| 4 | MINE SAFETY DISCLOSURES |  | 29342 |
+| 5 | MARKET FOR REGISTRANT’S COMMON EQUITY, RELATED STOCKHOLDER MATTERS AND ISSUER... |  | 34354 |
+| 6 | SELECTED FINANCIAL DATA |  | 37633 |
+| 7 | MANAGEMENT’S DISCUSSION AND ANALYSIS OF FINANCIAL CONDITION AND RESULTS OF OP... |  | 37907 |
+| 7A | QUANTITATIVE AND QUALITATIVE DISCLOSURES ABOUT MARKET RISK |  | 38295 |
+| 8 | FINANCIAL STATEMENTS AND SUPPLEMENTARY DATA |  | 38828 |
+| 9 | CHANGES IN AND DISAGREEMENTS WITH ACCOUNTANTS ON ACCOUNTING AND FINANCIAL DIS... |  | 39190 |
+| 9A | CONTROLS AND PROCEDURES |  | 39302 |
+| 9B | OTHER INFORMATION |  | 42071 |
+| 10 | DIRECTORS, EXECUTIVE OFFICERS AND CORPORATE GOVERNANCE |  | 42117 |
+| 11 | EXECUTIVE COMPENSATION |  | 44295 |
+| 12 | SECURITY OWNERSHIP OF CERTAIN BENEFICIAL OWNERS AND MANAGEMENT AND RELATED ST... |  | 45123 |
+| 13 | CERTAIN RELATIONSHIPS AND RELATED TRANSACTIONS, AND DIRECTOR INDEPENDENCE |  | 46923 |
+| 14 | PRINCIPAL ACCOUNTANT FEES AND SERVICES |  | 47231 |
+| 15 | EXHIBITS AND FINANCIAL STATEMENT SCHEDULES |  | 47518 |
 
 #### Item 1
 
@@ -4396,6 +4705,8 @@ End snippet:
 - Fiscal year: `2023`
 - Overall status: `success`
 - Candidate count: `23`
+- TOC confidence: `none`
+- TOC items: `none`
 
 #### Item 1
 
@@ -4795,6 +5106,33 @@ End snippet:
 - Fiscal year: `2014`
 - Overall status: `success`
 - Candidate count: `40`
+- TOC confidence: `high`
+- TOC items: `1, 1A, 1B, 2, 3, 4, 5, 6, 7, 7A, 8, 9, 9A, 9B, 10, 11, 12, 13, 14, 15`
+
+TOC entries:
+
+| Item | Title | Page | Offset |
+| --- | --- | ---: | ---: |
+| 1 | Business |  | 3408 |
+| 1A | Risk Factors |  | 3438 |
+| 1B | Unresolved Staff Comments |  | 3465 |
+| 2 | Properties |  | 3505 |
+| 3 | Legal Proceedings |  | 3529 |
+| 4 | Mine Safety Disclosures |  | 3561 |
+| 5 | Market for Registrant’s Common Equity, Related Stockholder Matters and Issuer... |  | 3700 |
+| 6 | Selected Financial Data |  | 3832 |
+| 7 | Management’s Discussion and Analysis of Financial Condition and Results of Op... |  | 3870 |
+| 7A | Quantitative and Qualitative Disclosures About Market Risk |  | 3970 |
+| 8 | Financial Statements and Supplementary Data |  | 4044 |
+| 9 | Changes in and Disagreements With Accountants on Accounting and Financial Dis... |  | 4102 |
+| 9A | Controls and Procedures |  | 4201 |
+| 9B | Other Information |  | 4240 |
+| 10 | Directors, Executive Officers and Corporate Governance |  | 4273 |
+| 11 | Executive Compensation |  | 4353 |
+| 12 | Security Ownership of Certain Beneficial Owners and Management and Related St... |  | 4391 |
+| 13 | Certain Relationships and Related Transactions, and Director Independence |  | 4501 |
+| 14 | Principal Accounting Fees and Services |  | 4590 |
+| 15 | Exhibits, Financial Statement Schedules |  | 4644 |
 
 #### Item 1
 
@@ -5190,6 +5528,35 @@ End snippet:
 - Fiscal year: `2023`
 - Overall status: `success`
 - Candidate count: `44`
+- TOC confidence: `high`
+- TOC items: `1, 1A, 1B, 1C, 2, 3, 4, 5, 7, 7A, 8, 9, 9A, 9B, 9C, 10, 11, 12, 13, 14, 15, 16`
+
+TOC entries:
+
+| Item | Title | Page | Offset |
+| --- | --- | ---: | ---: |
+| 1 | Business |  | 4498 |
+| 1A | Risk Factors |  | 4528 |
+| 1B | Unresolved Staff Comments |  | 4555 |
+| 1C | Cybersecurity |  | 4595 |
+| 2 | Properties |  | 4623 |
+| 3 | Legal Proceedings |  | 4647 |
+| 4 | Mine Safety Disclosures |  | 4679 |
+| 5 | Market for Registrant’s Common Equity, Related Stockholder Matters and Issuer... |  | 4763 |
+| 7 | Management’s Discussion and Analysis of Financial Condition and Results of Op... |  | 4895 |
+| 7A | Quantitative and Qualitative Disclosures About Market Risk |  | 4995 |
+| 8 | Financial Statements and Supplementary Data |  | 5069 |
+| 9 | Changes in and Disagreements With Accountants on Accounting and Financial Dis... |  | 5127 |
+| 9A | Controls and Procedures |  | 5226 |
+| 9B | Other Information |  | 5265 |
+| 9C | Disclosure Regarding Foreign Jurisdictions that Prevent Inspections |  | 5298 |
+| 10 | Directors, Executive Officers and Corporate Governance |  | 5381 |
+| 11 | Executive Compensation |  | 5461 |
+| 12 | Security Ownership of Certain Beneficial Owners and Management and Related St... |  | 5499 |
+| 13 | Certain Relationships and Related Transactions, and Director Independence |  | 5609 |
+| 14 | Principal Accounting Fees and Services |  | 5698 |
+| 15 | Exhibit and Financial Statement Schedules |  | 5752 |
+| 16 | Form 10-K Summary |  | 5818 |
 
 #### Item 1
 
@@ -5589,6 +5956,8 @@ End snippet:
 - Fiscal year: `2014`
 - Overall status: `partial`
 - Candidate count: `20`
+- TOC confidence: `none`
+- TOC items: `none`
 
 #### Item 1
 
@@ -5982,6 +6351,36 @@ End snippet:
 - Fiscal year: `2023`
 - Overall status: `success`
 - Candidate count: `23`
+- TOC confidence: `high`
+- TOC items: `1, 1A, 1B, 1C, 2, 3, 4, 5, 6, 7, 7A, 8, 9, 9A, 9B, 9C, 10, 11, 12, 13, 14, 15, 16`
+
+TOC entries:
+
+| Item | Title | Page | Offset |
+| --- | --- | ---: | ---: |
+| 1 | Business |  | 12507 |
+| 1A | Risk Factors |  | 89304 |
+| 1B | Unresolved Staff Comments |  | 124361 |
+| 1C | Cybersecurity |  | 124404 |
+| 2 | Properties |  | 132138 |
+| 3 | Legal Proceedings |  | 132623 |
+| 4 | Mine Safety Disclosures |  | 135377 |
+| 5 | Market for the Registrant’s Common Equity, Related Stockholder Matters and Is... |  | 135450 |
+| 6 | [Reserved] |  | 136667 |
+| 7 | Management’s Discussion and Analysis of Financial Condition and Results of Op... |  | 136687 |
+| 7A | Quantitative and Qualitative Disclosures About Market Risk |  | 136931 |
+| 8 | Financial Statements and Supplementary Data |  | 137287 |
+| 9 | Changes in and Disagreements With Accountants on Accounting and Financial Dis... |  | 137447 |
+| 9A | Controls and Procedures |  | 137548 |
+| 9B | Other Information |  | 139911 |
+| 9C | Disclosure Regarding Foreign Jurisdictions that Prevent Inspections |  | 141214 |
+| 10 | Directors, Executive Officers and Corporate Governance |  | 141332 |
+| 11 | Executive Compensation |  | 145500 |
+| 12 | Security Ownership of Certain Beneficial Owners and Management and Related St... |  | 146489 |
+| 13 | Certain Relationships and Related Transactions, and Director Independence |  | 147097 |
+| 14 | Principal Accountant Fees and Services |  | 147627 |
+| 15 | Exhibit and Financial Statement Schedules |  | 460772 |
+| 16 | Form 10-K Summary |  | 462659 |
 
 #### Item 1
 
@@ -6384,6 +6783,8 @@ End snippet:
 - Fiscal year: `2014`
 - Overall status: `partial`
 - Candidate count: `20`
+- TOC confidence: `none`
+- TOC items: `none`
 
 #### Item 1
 
@@ -6778,6 +7179,35 @@ End snippet:
 - Fiscal year: `2023`
 - Overall status: `success`
 - Candidate count: `44`
+- TOC confidence: `high`
+- TOC items: `1, 1A, 1B, 2, 3, 4, 5, 6, 7, 7A, 8, 9, 9A, 9B, 9C, 10, 11, 12, 13, 14, 15, 16`
+
+TOC entries:
+
+| Item | Title | Page | Offset |
+| --- | --- | ---: | ---: |
+| 1 | Business |  | 4850 |
+| 1A | Risk Factors |  | 4879 |
+| 1B | Unresolved Staff Comments |  | 4906 |
+| 2 | Properties |  | 4946 |
+| 3 | Legal Proceedings |  | 4970 |
+| 4 | Mine Safety Disclosures |  | 5001 |
+| 5 | Market for Registrant's Common Equity, Related Stockholder Matters and Issuer... |  | 5038 |
+| 6 | Reserved |  | 5169 |
+| 7 | Management's Discussion and Analysis of Financial Condition and Results of Op... |  | 5191 |
+| 7A | Quantitative and Qualitative Disclosures About Market Risk |  | 5290 |
+| 8 | Financial Statements and Supplementary Data |  | 5363 |
+| 9 | Changes in and Disagreements with Accountants on Accounting and Financial Dis... |  | 5420 |
+| 9A | Controls and Procedures |  | 5518 |
+| 9B | Other Information |  | 5556 |
+| 9C | Disclosure Regarding Foreign Jurisdictions that Prevent Inspections |  | 5588 |
+| 10 | Directors, Executive Officers and Corporate Governance |  | 5670 |
+| 11 | Executive Compensation |  | 5749 |
+| 12 | Security Ownership of Certain Beneficial Owners and Management and Related St... |  | 5786 |
+| 13 | Certain Relationships and Related Transactions, and Director Independence |  | 5895 |
+| 14 | Principal Accounting Fees and Services |  | 5983 |
+| 15 | Exhibits, Financial Statement Schedules |  | 6036 |
+| 16 | Form 10-K Summary |  | 6099 |
 
 #### Item 1
 
@@ -7175,6 +7605,33 @@ End snippet:
 - Fiscal year: `2014`
 - Overall status: `partial`
 - Candidate count: `40`
+- TOC confidence: `medium`
+- TOC items: `1, 1A, 1B, 2, 3, 4, 5, 6, 7, 7A, 8, 9, 9A, 9B, 10, 11, 12, 13, 14, 15`
+
+TOC entries:
+
+| Item | Title | Page | Offset |
+| --- | --- | ---: | ---: |
+| 1 | Business |  | 3888 |
+| 1A | Risk Factors |  | 3918 |
+| 1B | Unresolved Staff Comments |  | 3945 |
+| 2 | Properties |  | 3986 |
+| 3 | Legal Proceedings |  | 4011 |
+| 4 | Mine Safety Disclosures |  | 4043 |
+| 5 | Market for the Registrant’s Common Stock, Related Shareholder Matters, and Is... |  | 4081 |
+| 6 | Selected Consolidated Financial Data |  | 4217 |
+| 7 | Management’s Discussion and Analysis of Financial Condition and Results of Op... |  | 4268 |
+| 7A | Quantitative and Qualitative Disclosure About Market Risk |  | 4367 |
+| 8 | Financial Statements and Supplementary Data |  | 4440 |
+| 9 | Changes in and Disagreements with Accountants on Accounting and Financial Dis... |  | 4498 |
+| 9A | Controls and Procedures |  | 4597 |
+| 9B | Other Information |  | 4636 |
+| 10 | Directors, Executive Officers, and Corporate Governance |  | 4669 |
+| 11 | Executive Compensation |  | 4750 |
+| 12 | Security Ownership of Certain Beneficial Owners and Management and Related Sh... |  | 4788 |
+| 13 | Certain Relationships and Related Transactions, and Director Independence |  | 4898 |
+| 14 | Principal Accountant Fees and Services |  | 4987 |
+| 15 | Exhibits, Financial Statement Schedules |  | 5041 |
 
 #### Item 1
 
@@ -7571,6 +8028,36 @@ End snippet:
 - Fiscal year: `2023`
 - Overall status: `success`
 - Candidate count: `46`
+- TOC confidence: `high`
+- TOC items: `1, 1A, 1B, 1C, 2, 3, 4, 5, 6, 7, 7A, 8, 9, 9A, 9B, 9C, 10, 11, 12, 13, 14, 15, 16`
+
+TOC entries:
+
+| Item | Title | Page | Offset |
+| --- | --- | ---: | ---: |
+| 1 | Business |  | 4669 |
+| 1A | Risk Factors |  | 4699 |
+| 1B | Unresolved Staff Comments |  | 4726 |
+| 1C | Cybersecurity |  | 4767 |
+| 2 | Properties |  | 4796 |
+| 3 | Legal Proceedings |  | 4821 |
+| 4 | Mine Safety Disclosures |  | 4853 |
+| 5 | Market for the Registrant’s Common Stock, Related Shareholder Matters, and Is... |  | 4891 |
+| 6 | Reserved |  | 5027 |
+| 7 | Management’s Discussion and Analysis of Financial Condition and Results of Op... |  | 5050 |
+| 7A | Quantitative and Qualitative Disclosures About Market Risk |  | 5150 |
+| 8 | Financial Statements and Supplementary Data |  | 5224 |
+| 9 | Changes in and Disagreements with Accountants on Accounting and Financial Dis... |  | 5282 |
+| 9A | Controls and Procedures |  | 5381 |
+| 9B | Other Information |  | 5420 |
+| 9C | Disclosure Regarding Foreign Jurisdictions that Prevent Inspections |  | 5453 |
+| 10 | Directors, Executive Officers, and Corporate Governance |  | 5536 |
+| 11 | Executive Compensation |  | 5617 |
+| 12 | Security Ownership of Certain Beneficial Owners and Management and Related Sh... |  | 5655 |
+| 13 | Certain Relationships and Related Transactions, and Director Independence |  | 5765 |
+| 14 | Principal Accountant Fees and Services |  | 5854 |
+| 15 | Exhibits, Financial Statement Schedules |  | 5908 |
+| 16 | Form 10-K Summary |  | 5972 |
 
 #### Item 1
 

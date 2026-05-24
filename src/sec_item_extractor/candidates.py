@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import re
 
-from .models import HeadingCandidate, NarrativeBlock, TocProfile
+from .models import HeadingCandidate, NarrativeBlock, TocEntry, TocProfile
 
 
 ITEM_ORDER = [
@@ -137,6 +137,7 @@ def infer_toc_profile(candidates: list[HeadingCandidate]) -> TocProfile:
     return TocProfile(
         items=[candidate.item for candidate in prefix],
         confidence=confidence,
+        entries=[_toc_entry(candidate) for candidate in prefix],
         evidence=[f"prefix_items={len(prefix)}", f"dense_items={dense_count}", f"ordered_pairs={ordered_count}"],
     )
 
@@ -154,10 +155,36 @@ def toc_next_items(item: str, toc_items: list[str], limit: int = 3) -> list[str]
     return toc_items[index + 1 : index + 1 + limit]
 
 
+def _toc_entry(candidate: HeadingCandidate) -> TocEntry:
+    return TocEntry(
+        item=candidate.item,
+        title=_toc_title(candidate),
+        text=candidate.text,
+        offset=candidate.start,
+        raw_offset=candidate.raw_start,
+        page_number=_toc_page_number(candidate.text),
+        reasons=candidate.reasons,
+    )
+
+
 def _normalize_heading(value: str) -> str:
     value = re.sub(r"\s+", " ", value)
     value = value.strip(" .\t\n\r")
     return value
+
+
+def _toc_page_number(value: str) -> int | None:
+    compact = " ".join(value.split())
+    match = re.search(r"(?:\.{2,}\s*|\s+)(\d{1,4})\s*$", compact)
+    return int(match.group(1)) if match else None
+
+
+def _toc_title(candidate: HeadingCandidate) -> str:
+    value = " ".join(candidate.text.split())
+    value = re.sub(r"(?i)^part\s+[ivx]+\s*[,:\-–—]?\s*", "", value).strip()
+    value = re.sub(rf"(?i)^item\s+{re.escape(candidate.item)}(?![a-z0-9])\s*(?:[.\-–—:])?\s*", "", value).strip()
+    value = re.sub(r"(?:\.{2,}\s*|\s+)\d{1,4}\s*$", "", value).strip()
+    return value.strip(" .\t\n\r")
 
 
 def _toc_prefix(candidates: list[HeadingCandidate]) -> list[HeadingCandidate]:

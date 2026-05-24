@@ -41,6 +41,17 @@ def main() -> int:
                 "filing_id": filing["filing_id"],
                 "status": result.status,
                 "candidate_count": result.candidate_count,
+                "toc_confidence": result.toc_confidence,
+                "toc_items": result.toc_items,
+                "toc_entries": [
+                    {
+                        "item": entry.item,
+                        "title": entry.title,
+                        "page_number": entry.page_number,
+                        "offset": entry.offset,
+                    }
+                    for entry in result.toc_entries
+                ],
                 "items": {
                     item.item: {
                         "status": item.status,
