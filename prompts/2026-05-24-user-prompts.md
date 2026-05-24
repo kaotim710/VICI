@@ -157,3 +157,9 @@ Core Design Philosophy
 * XBRL Company Facts（可用於交叉驗證）：https://data.sec.gov/api/xbrl/companyfacts/CIK{10位補零}.json
 * 規範：需帶 User-Agent header、10 req/sec、無需 API key
 ```
+
+## Prompt Token Usage Request
+
+```text
+另外我想在prompts/中記錄我的prompt token消耗
+```
