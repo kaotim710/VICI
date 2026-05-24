@@ -147,7 +147,7 @@ class ExtractorTests(unittest.TestCase):
 
         self.assertIn("Business narrative.", item.text)
         self.assertEqual(item.candidate_attempts[0].decision, "rejected")
-        self.assertIn("REJECTED_SHORT_DENSE_TOC_SPAN", item.candidate_attempts[0].validation_reasons)
+        self.assertIn("REJECTED_SHORT_ORDERED_TOC_SPAN", item.candidate_attempts[0].validation_reasons)
 
 
 if __name__ == "__main__":

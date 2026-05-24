@@ -1,12 +1,22 @@
 from __future__ import annotations
 
 import re
+from dataclasses import dataclass
 
 from .candidates import TARGET_ITEMS, find_heading_candidates, is_expected_title, legal_next_items
 from .cleaning import parse_document
 from .models import CandidateAttempt, ConfidenceComponent, Evidence, ExtractionResult, HeadingCandidate, ItemResult
 
 PARSER_VERSION = "deterministic_text_v1"
+
+
+@dataclass(frozen=True)
+class CandidatePair:
+    start: HeadingCandidate
+    end: HeadingCandidate | None
+    section_text: str
+    validation_reasons: list[str]
+    rejection_reasons: list[str]
 
 
 def extract_items(content: str, target_items: list[str] | None = None, filing_id: str | None = None) -> ExtractionResult:
@@ -48,43 +58,11 @@ def _extract_one_item(text: str, candidates: list[HeadingCandidate], item: str) 
 
     ranked_starts = sorted(start_candidates, key=_start_rank)
     attempts: list[CandidateAttempt] = []
-    for start in ranked_starts:
-        end, end_reasons = _find_end_candidate(candidates, start)
-        reasons = _start_validation_reasons(start) + end_reasons
-        if end:
-            section_text = text[start.start : end.start].strip()
-            if _is_likely_toc_span(start, section_text):
-                attempts.append(
-                    CandidateAttempt(
-                        item=item,
-                        decision="rejected",
-                        start_evidence=_evidence("start_heading", start),
-                        end_evidence=_evidence("end_heading", end),
-                        validation_reasons=reasons + ["REJECTED_SHORT_DENSE_TOC_SPAN"],
-                        warnings=["Candidate span is too short and has dense TOC-like item clustering."],
-                    )
-                )
-                continue
-            attempts.append(
-                CandidateAttempt(
-                    item=item,
-                    decision="selected",
-                    start_evidence=_evidence("start_heading", start),
-                    end_evidence=_evidence("end_heading", end),
-                    validation_reasons=reasons,
-                    warnings=_attempt_warnings(start, end),
-                )
-            )
-            return _build_success_result(text, start, end, attempts)
-        attempts.append(
-            CandidateAttempt(
-                item=item,
-                decision="rejected",
-                start_evidence=_evidence("start_heading", start),
-                validation_reasons=reasons,
-                warnings=_attempt_warnings(start, None),
-            )
-        )
+    for pair in _candidate_pairs(text, candidates, ranked_starts):
+        if pair.end and not pair.rejection_reasons:
+            attempts.append(_attempt_from_pair(item, "selected", pair))
+            return _build_success_result(text, pair.start, pair.end, attempts)
+        attempts.append(_attempt_from_pair(item, "rejected", pair))
 
     best = ranked_starts[0]
     return ItemResult(
@@ -100,6 +78,27 @@ def _extract_one_item(text: str, candidates: list[HeadingCandidate], item: str) 
     )
 
 
+def _candidate_pairs(
+    text: str, candidates: list[HeadingCandidate], starts: list[HeadingCandidate]
+) -> list[CandidatePair]:
+    pairs = []
+    for start in starts:
+        end, end_reasons = _find_end_candidate(candidates, start)
+        section_text = text[start.start : end.start].strip() if end else ""
+        validation_reasons = _start_validation_reasons(start) + end_reasons
+        rejection_reasons = _pair_rejection_reasons(start, end, section_text)
+        pairs.append(
+            CandidatePair(
+                start=start,
+                end=end,
+                section_text=section_text,
+                validation_reasons=validation_reasons,
+                rejection_reasons=rejection_reasons,
+            )
+        )
+    return pairs
+
+
 def _find_end_candidate(candidates: list[HeadingCandidate], start: HeadingCandidate) -> tuple[HeadingCandidate | None, list[str]]:
     legal_next = legal_next_items(start.item)
     later = [candidate for candidate in candidates if candidate.start > start.end and candidate.item in legal_next]
@@ -109,6 +108,30 @@ def _find_end_candidate(candidates: list[HeadingCandidate], start: HeadingCandid
     if non_toc:
         return min(non_toc, key=lambda candidate: candidate.start), ["LEGAL_END_HEADING_FOUND", "END_NOT_TOC_LIKE"]
     return min(later, key=lambda candidate: candidate.start), ["LEGAL_END_HEADING_FOUND", "END_TOC_LIKE_USED_AS_FALLBACK"]
+
+
+def _pair_rejection_reasons(
+    start: HeadingCandidate, end: HeadingCandidate | None, section_text: str
+) -> list[str]:
+    if end is None:
+        return ["LEGAL_END_HEADING_NOT_FOUND"]
+    if _is_likely_toc_span(start, end, section_text):
+        return ["REJECTED_SHORT_ORDERED_TOC_SPAN"]
+    return []
+
+
+def _attempt_from_pair(item: str, decision: str, pair: CandidatePair) -> CandidateAttempt:
+    warnings = _attempt_warnings(pair.start, pair.end)
+    if "REJECTED_SHORT_ORDERED_TOC_SPAN" in pair.rejection_reasons:
+        warnings.append("Candidate pair is too short and follows an ordered TOC-like transition.")
+    return CandidateAttempt(
+        item=item,
+        decision=decision,
+        start_evidence=_evidence("start_heading", pair.start),
+        end_evidence=_evidence("end_heading", pair.end) if pair.end else None,
+        validation_reasons=pair.validation_reasons + pair.rejection_reasons,
+        warnings=warnings,
+    )
 
 
 def _build_success_result(
@@ -292,12 +315,9 @@ def _attempt_warnings(start: HeadingCandidate, end: HeadingCandidate | None) -> 
     return warnings
 
 
-def _is_likely_toc_span(start: HeadingCandidate, section_text: str) -> bool:
-    return (
-        "TOC_DENSE_ITEM_CLUSTER" in start.reasons
-        and not _is_cross_reference_section(section_text)
-        and len(section_text) < 800
-    )
+def _is_likely_toc_span(start: HeadingCandidate, end: HeadingCandidate, section_text: str) -> bool:
+    ordered_toc_like = "TOC_DENSE_ITEM_CLUSTER" in start.reasons and "TOC_DENSE_ITEM_CLUSTER" in end.reasons
+    return ordered_toc_like and not _is_cross_reference_section(section_text) and len(section_text) < 800
 
 
 def _is_cross_reference_section(section_text: str) -> bool:

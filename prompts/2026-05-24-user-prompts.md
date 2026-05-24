@@ -205,3 +205,9 @@ ok，進行下一個milestone
 ```text
 好，先把這部分搞定，並產生我可以看的test report
 ```
+
+## Candidate Pair Resolver Request
+
+```text
+先實作看看，並跑測試
+```
