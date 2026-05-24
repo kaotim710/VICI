@@ -72,6 +72,11 @@ Internal TOCs inside normal items stay inside the item.
 
 - Examples: long Item 7, Item 8, or Item 14 sections with their own financial or management TOC.
 - These stay inside the item and can be inspected through `Show original filing structure`.
+- If a normal item has a large raw span plus an internal TOC, expose the TOC-derived subsections as
+  the primary review surface, with per-title original filing structure toggles.
+- Front-matter TOC entries must not drive item extraction when a later body heading exists. Dense
+  item clusters are TOC-like only when they are in the early document region or have explicit
+  page-number signals.
 - They should not be moved into a virtual supplemental item unless they are terminal filing content
   after Item 15 or Item 16.
 
@@ -100,6 +105,8 @@ Current detection rules:
 - Suppress small unstructured chunks when no sections are found and raw media count is low.
 - In the UI, supplemental items with reconstructed subsections should render the child sections as
   the primary review surface and avoid duplicating the full supplemental text chunk below them.
+- Each reconstructed supplemental subsection must carry raw fragment offsets so `Show original
+  filing structure` can be toggled per subsection, not only for the whole supplemental item.
 
 Current seed coverage:
 
@@ -124,6 +131,8 @@ Warnings should be categorized into reviewable causes:
 Recovery remains explicit:
 
 - same-filing page references can be parsed deterministically and returned for user review.
+- short sections that cite same-filing page ranges should remain extracted as the section text and
+  emit `same_filing_page_reference`; following the range is a user-confirmed recovery action.
 - internal TOC actions should ask the user which subsection to inspect.
 - external exhibits or incorporated documents are deferred unless a dedicated exhibit retrieval
   strategy is implemented.
@@ -134,6 +143,8 @@ Any strategy change should include focused tests for the behavior being changed.
 
 - Unit tests should cover synthetic edge cases when possible.
 - Seed tests should cover known production filings when strategy depends on real filing structure.
+- Reviewed issue cases should be recorded in `fixtures/gold/reviewed_issue_cases.json`; add new
+  validation filings there when a reviewer identifies a concrete boundary, TOC, or recovery failure.
 - Supplemental partition tests must scan the 20 seed filings for expected virtual sections and must
   verify raw preview scope.
 - Regression reports should combine seed and validation filings into one review surface with status,
@@ -152,3 +163,7 @@ Any strategy change should include focused tests for the behavior being changed.
   made original filing structure a reversible view toggle instead of an appended one-way preview.
 - 2026-05-25: Added regression evaluation as the reliability review surface before live SEC intake;
   recovery readiness is tracked separately from autonomous external fetching.
+- 2026-05-25: Added per-subsection raw structure preview for supplemental partitions by preserving
+  raw offsets on each reconstructed subsection.
+- 2026-05-25: Added internal TOC partitioning for large normal items and tightened front-matter TOC
+  candidate ranking so body headings win over table-of-contents entries.

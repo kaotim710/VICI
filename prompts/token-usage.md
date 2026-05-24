@@ -59,3 +59,7 @@ estimated_prompt_tokens =
 | 2026-05-24 | supplemental_toc_subsection_request | `prompts/2026-05-24-user-prompts.md` |  | 35 | Requested classifying supplemental partitions into child subsections using their own TOC, similar to item extraction. |
 | 2026-05-24 | item_ui_simplification_raw_toggle_request | `prompts/2026-05-24-user-prompts.md` |  | 37 | Requested removing section snippets and section-structure toggles from normal items, and making original filing structure toggle back to extracted view. |
 | 2026-05-25 | regression_milestone_implementation_request | `prompts/2026-05-25-user-prompts.md` |  | 28 | Approved implementing milestone planning items 1-4 while excluding live SEC intake, and noted JPM needs follow-up review. |
+| 2026-05-25 | recovery_action_placement_request | `prompts/2026-05-25-user-prompts.md` |  | 7 | Requested moving recovery actions after the extracted item content in the UI. |
+| 2026-05-25 | supplemental_subsection_raw_preview_request | `prompts/2026-05-25-user-prompts.md` |  | 15 | Requested per-title original filing structure previews for supplemental subsections. |
+| 2026-05-25 | filing_review_followup_request | `prompts/2026-05-25-user-prompts.md` |  | 523 | Reviewed filing-specific boundary, front-TOC, internal-TOC, and reference recovery issues across BAC, JPM, UNH, JNJ, XOM, CVX, and AMZN. |
+| 2026-05-25 | reviewed_issue_regression_test_request | `prompts/2026-05-25-user-prompts.md` |  | 16 | Requested converting the reviewed filing issues into tests for future validation filings. |

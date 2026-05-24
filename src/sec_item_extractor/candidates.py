@@ -284,12 +284,13 @@ def _is_toc_like(reasons: list[str]) -> bool:
     reason_set = set(reasons)
     if TOC_REASON_CODES.intersection(reason_set):
         return True
-    if "TOC_FOLLOWED_BY_PAGE_NUMBER" in reason_set and (
-        "EARLY_DOCUMENT_REGION" in reason_set
-        or "NEAR_TABLE_OF_CONTENTS_LABEL" in reason_set
-    ):
+    if "TOC_FOLLOWED_BY_PAGE_NUMBER" in reason_set and "EARLY_DOCUMENT_REGION" in reason_set:
         return True
-    return "TOC_DENSE_ITEM_CLUSTER" in reason_set and "NEAR_TABLE_OF_CONTENTS_LABEL" in reason_set
+    return (
+        "TOC_DENSE_ITEM_CLUSTER" in reason_set
+        and "NEAR_TABLE_OF_CONTENTS_LABEL" in reason_set
+        and "EARLY_DOCUMENT_REGION" in reason_set
+    )
 
 
 def _block_for_offset(

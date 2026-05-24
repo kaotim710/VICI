@@ -13,6 +13,7 @@ from urllib.parse import unquote, urlparse
 from .extractor import extract_items
 from .raw_structure import (
     raw_fragment_exhibit_links,
+    raw_fragment_internal_toc_chunk,
     raw_fragment_outline,
     raw_fragment_outline_sections,
     raw_fragment_supplemental_fragment,
@@ -159,17 +160,38 @@ def raw_section_preview(filing_id: str, item: str) -> dict:
     content = path.read_text(encoding="utf-8", errors="replace")
     if item.startswith("SUPPLEMENTAL-"):
         return _supplemental_raw_section_preview(filings[filing_id], filing_id, item, content)
+    item, section_index = _parse_item_preview_item(item)
     result = extract_items(content, target_items=[item], filing_id=filing_id)
     item_result = result.item_results[0]
     if item_result.status != "success" or not item_result.start_evidence:
         raise ValueError(f"raw section is unavailable for Item {item}")
 
-    start, end, fragment = raw_section_fragment(content, item_result)
+    start, _, item_fragment = raw_section_fragment(content, item_result)
+    section_label = None
+    if section_index is None:
+        fragment = item_fragment
+        section_relative_start = 0
+    else:
+        raw_structure = _raw_structure_contract(content, item_result)
+        sections = raw_structure.get("sections", [])
+        if section_index < 0 or section_index >= len(sections):
+            raise ValueError(f"raw section is unavailable for Item {item}")
+        section = sections[section_index]
+        raw_start = int(section.get("raw_start", 0))
+        raw_end = int(section.get("raw_end", 0))
+        if raw_end <= raw_start:
+            raise ValueError(f"raw section is unavailable for Item {item}")
+        fragment = item_fragment[raw_start:raw_end]
+        section_relative_start = raw_start
+        section_label = section.get("label")
+    start = start + section_relative_start
+    end = start + len(fragment)
     base_url = _archive_base_url(filing_id)
     structure = raw_fragment_structure(fragment)
     return {
         "filing": filings[filing_id],
         "item": item,
+        "section_label": section_label,
         "raw_start": start,
         "raw_end": end,
         "raw_bytes": len(fragment.encode("utf-8", errors="replace")),
@@ -181,7 +203,7 @@ def raw_section_preview(filing_id: str, item: str) -> dict:
 
 
 def _supplemental_raw_section_preview(filing: dict, filing_id: str, item: str, content: str) -> dict:
-    source_item = item.removeprefix("SUPPLEMENTAL-")
+    source_item, section_index = _parse_supplemental_preview_item(item)
     result = extract_items(content, target_items=[source_item], filing_id=filing_id)
     item_result = result.item_results[0]
     if item_result.status != "success" or not item_result.start_evidence:
@@ -191,14 +213,32 @@ def _supplemental_raw_section_preview(filing: dict, filing_id: str, item: str, c
     supplemental = raw_fragment_supplemental_fragment(source_fragment)
     if supplemental is None:
         raise ValueError(f"raw section is unavailable for Item {item}")
-    relative_start, fragment = supplemental
-    start = source_start + relative_start
+    relative_start, supplemental_fragment = supplemental
+    section_label = None
+    if section_index is None:
+        fragment = supplemental_fragment
+        section_relative_start = 0
+    else:
+        chunk = raw_fragment_supplemental_chunk(source_fragment)
+        sections = chunk.get("sections", []) if chunk else []
+        if section_index < 0 or section_index >= len(sections):
+            raise ValueError(f"raw section is unavailable for Item {item}")
+        section = sections[section_index]
+        raw_start = int(section.get("raw_start", 0))
+        raw_end = int(section.get("raw_end", 0))
+        if raw_end <= raw_start:
+            raise ValueError(f"raw section is unavailable for Item {item}")
+        fragment = supplemental_fragment[raw_start:raw_end]
+        section_relative_start = raw_start
+        section_label = section.get("label")
+    start = source_start + relative_start + section_relative_start
     end = start + len(fragment)
     base_url = _archive_base_url(filing_id)
     structure = raw_fragment_structure(fragment)
     return {
         "filing": filing,
         "item": item,
+        "section_label": section_label,
         "raw_start": start,
         "raw_end": end,
         "raw_bytes": len(fragment.encode("utf-8", errors="replace")),
@@ -207,6 +247,20 @@ def _supplemental_raw_section_preview(filing: dict, filing_id: str, item: str, c
         "base_url": base_url,
         "srcdoc": raw_section_srcdoc(fragment, base_url),
     }
+
+
+def _parse_supplemental_preview_item(item: str) -> tuple[str, int | None]:
+    source_item = item.removeprefix("SUPPLEMENTAL-")
+    return _parse_item_preview_item(source_item)
+
+
+def _parse_item_preview_item(item: str) -> tuple[str, int | None]:
+    if ":" not in item:
+        return item, None
+    source_item, raw_index = item.split(":", 1)
+    if not raw_index.isdigit():
+        raise ValueError(f"raw section is unavailable for Item {item}")
+    return source_item, int(raw_index)
 
 
 def _item_contract(item, raw_content: str | None = None) -> dict:
@@ -322,14 +376,21 @@ def _raw_structure_contract(content: str, item_result) -> dict:
     structure["outline"] = []
     structure["sections"] = []
     structure["supplemental_chunk"] = None
+    structure["section_mode"] = None
     structure["raw_bytes"] = 0
     try:
         _, _, fragment = raw_section_fragment(content, item_result)
     except ValueError:
         return structure
     structure["raw_bytes"] = len(fragment.encode("utf-8", errors="replace"))
-    structure["outline"] = raw_fragment_outline(fragment)
-    structure["sections"] = raw_fragment_outline_sections(fragment)
+    internal_chunk = raw_fragment_internal_toc_chunk(fragment, item_result.item)
+    if internal_chunk and _should_use_internal_toc_sections(item_result.item, fragment, internal_chunk):
+        structure["outline"] = [section["label"] for section in internal_chunk.get("sections", [])]
+        structure["sections"] = internal_chunk.get("sections", [])
+        structure["section_mode"] = "internal_toc"
+    else:
+        structure["outline"] = raw_fragment_outline(fragment)
+        structure["sections"] = raw_fragment_outline_sections(fragment)
     exhibit_links = raw_fragment_exhibit_links(fragment)
     if not structure["sections"] and item_result.text:
         structure["sections"] = _text_outline_sections(item_result.text, exhibit_links)
@@ -343,6 +404,16 @@ def _raw_structure_contract(content: str, item_result) -> dict:
 
 def _can_partition_supplemental(item_name: str) -> bool:
     return item_name.upper() in {"15", "16"}
+
+
+def _should_use_internal_toc_sections(item_name: str, fragment: str, chunk: dict) -> bool:
+    sections = chunk.get("sections", [])
+    if len(sections) < 3:
+        return False
+    if item_name.upper() in {"8", "14", "15"}:
+        return True
+    raw_bytes = len(fragment.encode("utf-8", errors="replace"))
+    return raw_bytes > 750000 and chunk.get("table_count", 0) >= 3
 
 
 def _text_outline_sections(text: str, exhibit_links: dict[str, dict] | None = None, limit: int = 30) -> list[dict]:
@@ -594,8 +665,8 @@ def render_detail(filing_id: str) -> str:
           <section class="item-panel">
             <div id="status-banner" class="status-banner">Select Run extraction to parse this filing now.</div>
             <section id="metadata-panel" class="metadata-panel"></section>
-            <section id="recovery-panel" class="recovery-panel"></section>
             <div id="items" class="items"></div>
+            <section id="recovery-panel" class="recovery-panel"></section>
           </section>
         </main>
         <script>
@@ -697,8 +768,9 @@ def render_detail(filing_id: str) -> str:
             const isSupplemental = String(item.item || '').startsWith('supplemental-');
             const structureTags = renderStructureTags(item.raw_structure || {{}});
             const rawSections = Array.isArray(item.raw_structure?.sections) ? item.raw_structure.sections : [];
-            const structurePanel = isSupplemental ? renderStructurePanel(item) : '';
-            const showMainText = !(isSupplemental && rawSections.length);
+            const hasInternalTocSections = item.raw_structure?.section_mode === 'internal_toc';
+            const structurePanel = (isSupplemental || hasInternalTocSections) ? renderStructurePanel(item) : '';
+            const showMainText = !((isSupplemental || hasInternalTocSections) && rawSections.length);
             const rawTools = item.raw_section_available === false ? '' : `
               <div class="raw-section-tools">
                 <button class="secondary-button compact" data-raw-item="${{escapeHtml(item.item)}}">Show original filing structure</button>
@@ -733,7 +805,10 @@ def render_detail(filing_id: str) -> str:
             const itemText = article.querySelector('.item-text');
             if (itemText) itemText.textContent = item.text || '';
             const rawButton = article.querySelector('[data-raw-item]');
-            if (rawButton) rawButton.addEventListener('click', () => loadRawSection(item.item, article));
+            if (rawButton) rawButton.addEventListener('click', () => loadRawSection(item.item, article, rawButton));
+            for (const sectionButton of article.querySelectorAll('[data-raw-section-item]')) {{
+              sectionButton.addEventListener('click', () => loadRawSection(sectionButton.dataset.rawSectionItem, sectionButton.closest('.structure-section'), sectionButton));
+            }}
             items.appendChild(article);
           }}
         }}
@@ -801,7 +876,7 @@ def render_detail(filing_id: str) -> str:
           const shouldShow = rawSections.length || outline.length || rawBytes > 250000 || tableCount > 50;
           if (!shouldShow) return '';
           const sectionContent = rawSections.length
-            ? `<div class="structure-section-list">${{rawSections.slice(0, 30).map(renderStructureSection).join('')}}</div>`
+            ? `<div class="structure-section-list">${{rawSections.slice(0, 30).map((section, index) => renderStructureSection(section, index, item)).join('')}}</div>`
             : `<ol>${{outline.length ? outline.slice(0, 30).map(label => `<li>${{escapeHtml(label)}}</li>`).join('') : '<li>No bold/internal headings detected; use original filing structure for full review.</li>'}}</ol>`;
           return `
             <details class="structure-outline">
@@ -812,10 +887,11 @@ def render_detail(filing_id: str) -> str:
           `;
         }}
 
-        function renderStructureSection(section, index) {{
+        function renderStructureSection(section, index, item) {{
           const text = String(section.text || '').trim() || String(section.label || '').trim() || 'No text extracted for this subsection.';
           const tableCount = Number(section.table_count || 0);
           const imageCount = Number(section.image_count || 0);
+          const rawItem = `${{item.item}}:${{index}}`;
           const label = section.href
             ? `<a href="${{escapeHtml(section.href)}}" target="_blank" rel="noopener noreferrer">${{escapeHtml(section.label || `Section ${{index + 1}}`)}}</a>`
             : `<span>${{escapeHtml(section.label || `Section ${{index + 1}}`)}}</span>`;
@@ -825,7 +901,12 @@ def render_detail(filing_id: str) -> str:
                 ${{label}}
                 <small>${{Number(section.raw_bytes || 0).toLocaleString()}} bytes | ${{tableCount}} tables | ${{imageCount}} images</small>
               </summary>
-              <pre>${{escapeHtml(text)}}</pre>
+              <pre class="structure-section-text extracted-view">${{escapeHtml(text)}}</pre>
+              <div class="raw-section-tools nested">
+                <button class="secondary-button compact" data-raw-section-item="${{escapeHtml(rawItem)}}">Show original filing structure</button>
+                <span class="raw-section-meta"></span>
+              </div>
+              <div class="raw-section-preview nested" hidden></div>
             </details>
           `;
         }}
@@ -900,20 +981,23 @@ def render_detail(filing_id: str) -> str:
           recoveryPanel.appendChild(resultBlock);
         }}
 
-        async function loadRawSection(itemId, article) {{
-          const button = article.querySelector('[data-raw-item]');
-          const meta = article.querySelector('.raw-section-meta');
-          const preview = article.querySelector('.raw-section-preview');
-          const extractedView = article.querySelector('.extracted-view');
-          if (article.dataset.rawVisible === 'true') {{
-            article.dataset.rawVisible = 'false';
+        async function loadRawSection(itemId, container, triggerButton) {{
+          const button = triggerButton || container.querySelector('[data-raw-item]');
+          const toolRow = button.closest('.raw-section-tools');
+          const meta = toolRow ? toolRow.querySelector('.raw-section-meta') : container.querySelector('.raw-section-meta');
+          const preview = toolRow && toolRow.nextElementSibling?.classList.contains('raw-section-preview')
+            ? toolRow.nextElementSibling
+            : container.querySelector('.raw-section-preview');
+          const extractedView = container.querySelector('.extracted-view');
+          if (container.dataset.rawVisible === 'true') {{
+            container.dataset.rawVisible = 'false';
             if (extractedView) extractedView.hidden = false;
             preview.hidden = true;
             button.textContent = 'Show original filing structure';
             meta.textContent = '';
             return;
           }}
-          article.dataset.rawVisible = 'true';
+          container.dataset.rawVisible = 'true';
           if (extractedView) extractedView.hidden = true;
           preview.hidden = false;
           button.textContent = 'Show extracted view';
@@ -1339,8 +1423,18 @@ dd { margin: 0; overflow-wrap: anywhere; }
   flex-wrap: wrap;
   margin-bottom: 12px;
 }
+.raw-section-tools.nested {
+  padding: 0 10px 10px;
+  margin-bottom: 0;
+}
 .raw-section-meta { color: #647080; font-size: 13px; }
 .raw-section-preview { margin-bottom: 12px; }
+.raw-section-preview.nested {
+  padding: 0 10px 10px;
+}
+.raw-section-preview.nested .raw-section-frame {
+  min-height: 360px;
+}
 .raw-section-frame {
   width: 100%;
   min-height: 520px;

@@ -48,8 +48,9 @@ def raw_fragment_outline_sections(fragment: str, limit: int = 30) -> list[dict]:
         if label.lower() in candidates:
             continue
         candidates.append(label.lower())
+        start = match.start()
         next_start = matches[index + 1].start() if index + 1 < len(matches) else len(fragment)
-        section_html = fragment[match.end() : next_start]
+        section_html = fragment[start:next_start]
         structure = raw_fragment_structure(section_html)
         sections.append(
             {
@@ -58,6 +59,8 @@ def raw_fragment_outline_sections(fragment: str, limit: int = 30) -> list[dict]:
                 "raw_bytes": len(section_html.encode("utf-8", errors="replace")),
                 "table_count": structure["table_count"],
                 "image_count": structure["image_count"],
+                "raw_start": start,
+                "raw_end": next_start,
             }
         )
         if len(sections) >= limit:
@@ -93,7 +96,35 @@ def raw_fragment_supplemental_chunk(fragment: str, limit: int = 40) -> dict | No
     supplemental = raw_fragment_supplemental_fragment(fragment)
     if supplemental is None:
         return None
-    _, chunk = supplemental
+    start, chunk = supplemental
+    return _raw_fragment_toc_chunk(chunk, limit, label="Supplemental filing content after Item 15", raw_offset=start)
+
+
+def raw_fragment_internal_toc_chunk(fragment: str, item_name: str | None = None, limit: int = 40) -> dict | None:
+    if item_name and item_name.upper() == "8":
+        direct = _raw_fragment_toc_chunk(fragment, limit, label="Internal filing content from item TOC")
+        if direct and len(direct.get("sections", [])) >= 5:
+            return direct
+
+    supplemental = raw_fragment_supplemental_fragment(fragment)
+    if supplemental is not None:
+        start, chunk = supplemental
+        return _raw_fragment_toc_chunk(
+            chunk, limit, label="Internal filing content from item TOC", raw_offset=start, adjust_section_offsets=True
+        )
+
+    start = _internal_toc_start(fragment)
+    if start is None:
+        return None
+    chunk = fragment[start:]
+    return _raw_fragment_toc_chunk(
+        chunk, limit, label="Internal filing content from item TOC", raw_offset=start, adjust_section_offsets=True
+    )
+
+
+def _raw_fragment_toc_chunk(
+    chunk: str, limit: int, label: str, raw_offset: int = 0, adjust_section_offsets: bool = False
+) -> dict | None:
     structure = raw_fragment_structure(chunk)
     toc_entries = _supplemental_toc_entries(chunk, limit)
     sections = _supplemental_sections_from_toc(chunk, toc_entries)
@@ -101,14 +132,25 @@ def raw_fragment_supplemental_chunk(fragment: str, limit: int = 40) -> dict | No
         sections = raw_fragment_outline_sections(chunk, limit)
     if not sections and structure["table_count"] + structure["image_count"] < 20:
         return None
+    if raw_offset and adjust_section_offsets:
+        sections = [_offset_section(section, raw_offset) for section in sections]
     return {
-        "label": "Supplemental filing content after Item 15",
+        "label": label,
         "text": _truncate(_html_text(chunk), 10000),
         "raw_bytes": len(chunk.encode("utf-8", errors="replace")),
         "table_count": structure["table_count"],
         "image_count": structure["image_count"],
         "sections": sections,
+        "raw_start": raw_offset,
+        "raw_end": raw_offset + len(chunk),
     }
+
+
+def _offset_section(section: dict, raw_offset: int) -> dict:
+    updated = dict(section)
+    updated["raw_start"] = int(updated.get("raw_start", 0)) + raw_offset
+    updated["raw_end"] = int(updated.get("raw_end", 0)) + raw_offset
+    return updated
 
 
 def raw_fragment_supplemental_fragment(fragment: str) -> tuple[int, str] | None:
@@ -123,6 +165,18 @@ def _supplemental_toc_start(fragment: str) -> int | None:
         start = _financial_toc_start(fragment, match.start())
         if start is not None:
             return start
+    return None
+
+
+def _internal_toc_start(fragment: str) -> int | None:
+    search = fragment[:250000]
+    for pattern in (
+        r"(?is)table\s+of\s+contents",
+        r"(?is)index\s+to\s+(?:audited\s+)?(?:consolidated\s+)?financial\s+statements",
+    ):
+        match = re.search(pattern, search)
+        if match:
+            return match.start()
     return None
 
 
@@ -169,13 +223,21 @@ def _nearby_financial_heading_start(fragment: str, toc_offset: int) -> int | Non
 def _supplemental_toc_entries(chunk: str, limit: int) -> list[dict]:
     toc_entries = []
     seen = set()
+    no_entry_streak = 0
     for row_match in re.finditer(r"(?is)<tr\b.*?</tr>", chunk[:250000]):
         row_html = row_match.group(0)
         row_text = _html_text(row_html)
         row_lower = row_text.lower()
         if ("annual report" in row_lower or "form 10-k" in row_lower) and toc_entries:
             break
-        for entry in _supplemental_toc_entries_from_row(row_html):
+        row_entries = _supplemental_toc_entries_from_row(row_html)
+        if toc_entries and not row_entries:
+            no_entry_streak += 1
+            if no_entry_streak >= 8:
+                break
+        elif row_entries:
+            no_entry_streak = 0
+        for entry in row_entries:
             key = entry["label"].lower()
             href_key = entry.get("href", "").lower()
             if key in seen or (href_key and href_key in seen):
@@ -194,11 +256,16 @@ def _supplemental_toc_entries(chunk: str, limit: int) -> list[dict]:
 def _supplemental_toc_entries_from_row(row_html: str) -> list[dict]:
     row_text = _html_text(row_html)
     entries: list[dict] = []
+    row_label = _toc_label_from_row_text(row_text)
     for link_match in re.finditer(r"(?is)<a\b[^>]*href=[\"'](?P<href>#[^\"']+)[\"'][^>]*>(?P<label>.*?)</a>", row_html):
         linked_text = _html_text(link_match.group("label"))
-        label = linked_text
+        label = _clean_toc_label(linked_text)
         if re.fullmatch(r"\d+[A-Za-z]?", linked_text):
-            label = re.sub(rf"\s+{re.escape(linked_text)}\s*$", "", row_text).strip()
+            label = row_label or re.sub(rf"\s+{re.escape(linked_text)}\s*$", "", row_text).strip()
+        elif row_label and len(linked_text) < min(len(row_label), 24):
+            label = row_label
+        if label.lower().startswith("bank of america"):
+            continue
         if not _looks_like_supplemental_label(label):
             continue
         entries.append(
@@ -215,6 +282,9 @@ def _supplemental_toc_entries_from_row(row_html: str) -> list[dict]:
 def _unlinked_supplemental_toc_entries(row_text: str) -> list[dict]:
     if "annual report" in row_text.lower():
         return []
+    row_label = _toc_label_from_row_text(row_text)
+    if row_label and _looks_like_supplemental_label(row_label):
+        return [{"label": row_label[:180]}]
     entries = []
     matches = list(re.finditer(r"(?<!\d)(?P<page>\d{1,3})\s+(?P<label>.*?)(?=\s+\d{1,3}\s+|$)", row_text))
     for match in matches:
@@ -223,6 +293,30 @@ def _unlinked_supplemental_toc_entries(row_text: str) -> list[dict]:
             continue
         entries.append({"label": label[:180]})
     return entries
+
+
+def _toc_label_from_row_text(row_text: str) -> str | None:
+    compact = " ".join(row_text.split()).strip(" :")
+    if not compact:
+        return None
+    match = re.match(r"(?P<label>.+?)\s+(?P<page>\d{1,4}[A-Za-z]?)$", compact)
+    if not match:
+        return None
+    label = match.group("label").strip(" :")
+    if re.search(r"\b(?:for the year|total|assets|liabilities|revenue|income|loss)\b", label, flags=re.IGNORECASE):
+        return None
+    label = _clean_toc_label(label)
+    if label.lower().startswith("bank of america"):
+        return None
+    return label
+
+
+def _clean_toc_label(label: str) -> str:
+    label = " ".join(label.split())
+    for _ in range(3):
+        label = re.sub(r"\b([A-Za-z])\s+([a-z]{2,})\b", r"\1\2", label)
+    label = re.sub(r"(’s)([A-Za-z])", r"\1 \2", label)
+    return label
 
 
 def raw_section_fragment(content: str, item_result) -> tuple[int, int, str]:
@@ -321,6 +415,8 @@ def _supplemental_sections_from_toc(chunk: str, toc_entries: list[dict]) -> list
                 "raw_bytes": len(section_html.encode("utf-8", errors="replace")),
                 "table_count": structure["table_count"],
                 "image_count": structure["image_count"],
+                "raw_start": start,
+                "raw_end": end,
             }
         )
     return sections

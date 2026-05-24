@@ -1,0 +1,149 @@
+{
+  "front_toc_false_positive": [
+    {
+      "issue": "JPM 2023 Item 6 selected the front table of contents instead of the body heading.",
+      "filing_id": "jpm_2023_10k",
+      "cross_check_filing_id": "jpm_2014_10k",
+      "item": "6",
+      "must_start_with": "Item 6. Reserved"
+    },
+    {
+      "issue": "UNH 2014 Item 2 selected the front table of contents instead of the body heading.",
+      "filing_id": "unh_2014_10k",
+      "cross_check_filing_id": "unh_2023_10k",
+      "item": "2",
+      "must_start_with": "ITEM 2."
+    },
+    {
+      "issue": "UNH 2014 Item 7 selected the front table of contents instead of the body heading.",
+      "filing_id": "unh_2014_10k",
+      "cross_check_filing_id": "unh_2023_10k",
+      "item": "7",
+      "must_start_with": "ITEM 7."
+    },
+    {
+      "issue": "UNH 2014 Item 13 selected the front table of contents instead of the body heading.",
+      "filing_id": "unh_2014_10k",
+      "cross_check_filing_id": "unh_2023_10k",
+      "item": "13",
+      "must_start_with": "ITEM 13."
+    },
+    {
+      "issue": "UNH 2014 Item 14 selected the front table of contents instead of the body heading.",
+      "filing_id": "unh_2014_10k",
+      "cross_check_filing_id": "unh_2023_10k",
+      "item": "14",
+      "must_start_with": "ITEM 14."
+    },
+    {
+      "issue": "AMZN 2023 Item 2 selected the front table of contents instead of the body heading.",
+      "filing_id": "amzn_2023_10k",
+      "cross_check_filing_id": "amzn_2014_10k",
+      "item": "2",
+      "must_start_with": "Item 2."
+    },
+    {
+      "issue": "AMZN 2023 Item 3 selected the front table of contents instead of the body heading.",
+      "filing_id": "amzn_2023_10k",
+      "cross_check_filing_id": "amzn_2014_10k",
+      "item": "3",
+      "must_start_with": "Item 3."
+    },
+    {
+      "issue": "AMZN 2023 Item 16 selected the front table of contents instead of the body heading.",
+      "filing_id": "amzn_2023_10k",
+      "cross_check_filing_id": "amzn_2014_10k",
+      "item": "16",
+      "must_start_with": "Item 16."
+    }
+  ],
+  "over_inclusion": [
+    {
+      "issue": "CVX 2023 Item 5 included later Item 6 and Item 7 headings.",
+      "filing_id": "cvx_2023_10k",
+      "cross_check_filing_id": "cvx_2014_10k",
+      "item": "5",
+      "forbid_text": ["Item 6.", "Item 7."]
+    },
+    {
+      "issue": "AMZN 2023 Item 1C included Item 2 and Item 3 content.",
+      "filing_id": "amzn_2023_10k",
+      "cross_check_filing_id": "amzn_2014_10k",
+      "item": "1C",
+      "forbid_text": ["Item 2.", "Item 3."]
+    },
+    {
+      "issue": "AMZN 2023 Item 5 included later Item 6 content.",
+      "filing_id": "amzn_2023_10k",
+      "cross_check_filing_id": "amzn_2014_10k",
+      "item": "5",
+      "forbid_text": ["Item 6."]
+    }
+  ],
+  "internal_toc_partition": [
+    {
+      "issue": "BAC 2023 Item 8 is a very large financial statements item with its own table of contents.",
+      "filing_id": "bac_2023_10k",
+      "cross_check_filing_id": "bac_2014_10k",
+      "item": "8",
+      "min_sections": 20,
+      "expected_labels": ["Consolidated Statement of Income", "Consolidated Balance Sheet"]
+    },
+    {
+      "issue": "UNH 2014 Item 8 contains a financial statements table of contents.",
+      "filing_id": "unh_2014_10k",
+      "cross_check_filing_id": "unh_2023_10k",
+      "item": "8",
+      "min_sections": 15,
+      "expected_labels": ["Report of Independent Registered Public Accounting Firm", "Consolidated Balance Sheets"]
+    },
+    {
+      "issue": "JNJ 2023 Item 8 contains a financial statements table of contents.",
+      "filing_id": "jnj_2023_10k",
+      "cross_check_filing_id": "jnj_2014_10k",
+      "item": "8",
+      "min_sections": 5,
+      "expected_labels": ["Consolidated balance sheets", "Notes to consolidated financial statements"]
+    },
+    {
+      "issue": "JPM 2023 Item 15 is followed by same-filing financial content with its own table of contents.",
+      "filing_id": "jpm_2023_10k",
+      "cross_check_filing_id": "jnj_2014_10k",
+      "item": "15",
+      "min_sections": 15,
+      "expected_labels": ["Three-Year Summary", "Five-Year Stock Performance"]
+    },
+    {
+      "issue": "XOM 2014 Item 15 contains a financial section table of contents that should be partitioned inside Item 15.",
+      "filing_id": "xom_2014_10k",
+      "cross_check_filing_id": "xom_2023_10k",
+      "item": "15",
+      "min_sections": 10,
+      "expected_labels": ["Financial Summary", "Quarterly Information"]
+    },
+    {
+      "issue": "CVX 2023 Item 14 is followed by a financial table of contents and should expose internal sections.",
+      "filing_id": "cvx_2023_10k",
+      "cross_check_filing_id": "cvx_2014_10k",
+      "item": "14",
+      "min_sections": 10,
+      "expected_labels": ["Key Financial Results", "Liquidity and Capital Resources"]
+    }
+  ],
+  "same_filing_reference_recovery": [
+    {
+      "issue": "JPM 2023 Item 1C is short and references later same-filing pages.",
+      "filing_id": "jpm_2023_10k",
+      "cross_check_filing_id": "jpm_2014_10k",
+      "item": "1C",
+      "required_action": "needs_user_confirmation:same_filing_page_reference"
+    },
+    {
+      "issue": "JPM 2023 Item 8 is short and references later same-filing pages.",
+      "filing_id": "jpm_2023_10k",
+      "cross_check_filing_id": "jpm_2014_10k",
+      "item": "8",
+      "required_action": "needs_user_confirmation:same_filing_page_reference"
+    }
+  ]
+}

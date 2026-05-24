@@ -516,6 +516,47 @@ class ExtractorTests(unittest.TestCase):
         self.assertEqual(item.status, "success")
         self.assertNotIn("Section length is outside the expected first-pass range.", item.warnings)
 
+    def test_body_placeholder_heading_is_preferred_over_front_toc_entry(self):
+        filing = """
+        Table of Contents
+        Item 5. Market for Registrant's Common Equity 10
+        Item 6. Reserved 11
+        Item 7. Management's Discussion and Analysis 12
+
+        PART II
+        Item 5. Market for Registrant's Common Equity
+        Market text.
+
+        Item 6. Reserved
+        11
+        Table of Contents
+
+        Item 7. Management's Discussion and Analysis
+        MD&A text.
+        """
+
+        result = extract_items(filing, target_items=["6"])
+        item = result.item_results[0]
+
+        self.assertEqual(item.status, "success")
+        self.assertTrue(item.text.startswith("Item 6. Reserved"))
+        self.assertNotIn("Start heading has TOC-like signals.", item.warnings)
+
+    def test_short_same_filing_page_reference_emits_recovery_action(self):
+        filing = """
+        Item 1C. Cybersecurity
+        Refer to the Operational Risk Management section on pages 147-150 for cybersecurity risk.
+        Item 2. Properties
+        Property text.
+        """
+
+        result = extract_items(filing, target_items=["1C"])
+        item = result.item_results[0]
+        actions = {(action.action_type, action.reason) for action in item.recommended_actions}
+
+        self.assertEqual(item.status, "success")
+        self.assertIn(("needs_user_confirmation", "same_filing_page_reference"), actions)
+
     def test_long_structured_exhibit_section_uses_review_action_without_length_warning(self):
         filing = """
         Item 15. Exhibits, Financial Statement Schedules

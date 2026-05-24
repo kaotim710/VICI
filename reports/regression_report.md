@@ -9,11 +9,11 @@ Item rows: 695
 ## Aggregate Counts
 
 - Status: `{'success': 646, 'not_present': 49}`
-- Confidence: `{'high': 685, 'medium': 10}`
-- Warning categories: `{'length_policy_review': 1, 'title_policy_review': 1, 'toc_signal_review': 23}`
+- Confidence: `{'high': 682, 'medium': 13}`
+- Warning categories: `{'length_policy_review': 1, 'title_policy_review': 1, 'toc_signal_review': 2}`
 - Raw preview available items: `646`
 - Supplemental items: `5`
-- Recovery action counts: `{'inspect_only:exhibit_index_detected': 88, 'inspect_only:section_reference_detected': 255, 'inspect_only:start_toc_like_signal': 21, 'needs_external_source:external_or_other_document_reference': 10, 'needs_user_confirmation:same_filing_page_reference': 2, 'needs_user_selection:internal_item_toc_detected': 10}`
+- Recovery action counts: `{'inspect_only:exhibit_index_detected': 69, 'inspect_only:section_reference_detected': 247, 'inspect_only:start_toc_like_signal': 2, 'needs_external_source:external_or_other_document_reference': 8, 'needs_user_confirmation:same_filing_page_reference': 7, 'needs_user_selection:internal_item_toc_detected': 5}`
 
 ## Supplemental Coverage
 
@@ -21,8 +21,8 @@ Item rows: 695
 | --- | --- | ---: | ---: | ---: | --- |
 | `seed:jpm_2014_10k` | `supplemental-15` | 23 | 1258 | 13 | True |
 | `seed:jpm_2023_10k` | `supplemental-15` | 26 | 607 | 13 | True |
-| `seed:xom_2014_10k` | `supplemental-15` | 40 | 99 | 4 | True |
-| `seed:xom_2023_10k` | `supplemental-16` | 40 | 128 | 15 | True |
+| `seed:xom_2014_10k` | `supplemental-15` | 18 | 99 | 4 | True |
+| `seed:xom_2023_10k` | `supplemental-16` | 40 | 127 | 15 | True |
 | `seed:cvx_2014_10k` | `supplemental-15` | 37 | 140 | 4 | True |
 
 ## Warning And Recovery Readiness
@@ -69,7 +69,7 @@ Item rows: 695
 | `seed:jpm_2014_10k` | `3` | high 1.00 | none | inspect_only:section_reference_detected | 0 tables / 0 images |
 | `seed:jpm_2014_10k` | `5` | high 1.00 | none | inspect_only:section_reference_detected | 4 tables / 0 images |
 | `seed:jpm_2014_10k` | `7` | high 1.00 | none | needs_user_confirmation:same_filing_page_reference | 0 tables / 0 images |
-| `seed:jpm_2014_10k` | `8` | high 1.00 | none | needs_external_source:external_or_other_document_reference | 0 tables / 0 images |
+| `seed:jpm_2014_10k` | `8` | high 1.00 | none | needs_user_confirmation:same_filing_page_reference | 0 tables / 0 images |
 | `seed:jpm_2014_10k` | `9A` | high 1.00 | none | inspect_only:exhibit_index_detected | 1 tables / 0 images |
 | `seed:jpm_2014_10k` | `11` | high 1.00 | none | inspect_only:section_reference_detected | 0 tables / 0 images |
 | `seed:jpm_2014_10k` | `12` | high 1.00 | none | inspect_only:section_reference_detected | 2 tables / 0 images |
@@ -78,11 +78,13 @@ Item rows: 695
 | `seed:jpm_2014_10k` | `15` | high 1.00 | none | inspect_only:section_reference_detected, inspect_only:exhibit_index_detected | 1273 tables / 13 images |
 | `seed:jpm_2023_10k` | `1` | high 1.00 | none | inspect_only:section_reference_detected | 10 tables / 0 images |
 | `seed:jpm_2023_10k` | `1A` | high 1.00 | none | inspect_only:exhibit_index_detected | 25 tables / 0 images |
+| `seed:jpm_2023_10k` | `1B` | high 1.00 | none | needs_user_confirmation:same_filing_page_reference | 0 tables / 0 images |
+| `seed:jpm_2023_10k` | `1C` | high 1.00 | none | needs_user_confirmation:same_filing_page_reference | 0 tables / 0 images |
 | `seed:jpm_2023_10k` | `3` | high 1.00 | none | inspect_only:section_reference_detected | 0 tables / 0 images |
 | `seed:jpm_2023_10k` | `5` | high 1.00 | none | inspect_only:section_reference_detected | 1 tables / 0 images |
-| `seed:jpm_2023_10k` | `6` | high 0.85 | toc_signal_review | inspect_only:start_toc_like_signal, inspect_only:section_reference_detected, inspect_only:exhibit_index_detected | 38 tables / 0 images |
 | `seed:jpm_2023_10k` | `7` | high 1.00 | none | needs_user_confirmation:same_filing_page_reference | 0 tables / 0 images |
-| `seed:jpm_2023_10k` | `8` | high 1.00 | none | needs_external_source:external_or_other_document_reference | 0 tables / 0 images |
+| `seed:jpm_2023_10k` | `7A` | high 1.00 | none | needs_user_confirmation:same_filing_page_reference | 1 tables / 0 images |
+| `seed:jpm_2023_10k` | `8` | high 1.00 | none | needs_user_confirmation:same_filing_page_reference | 0 tables / 0 images |
 | `seed:jpm_2023_10k` | `9A` | high 1.00 | none | inspect_only:exhibit_index_detected | 1 tables / 0 images |
 | `seed:jpm_2023_10k` | `11` | high 1.00 | none | inspect_only:section_reference_detected | 0 tables / 0 images |
 | `seed:jpm_2023_10k` | `12` | high 1.00 | none | inspect_only:section_reference_detected | 1 tables / 0 images |
@@ -117,24 +119,19 @@ Item rows: 695
 | `seed:bac_2023_10k` | `14` | high 1.00 | none | inspect_only:section_reference_detected | 1 tables / 0 images |
 | `seed:bac_2023_10k` | `15` | high 1.00 | none | inspect_only:section_reference_detected, inspect_only:exhibit_index_detected | 7 tables / 0 images |
 | `seed:unh_2014_10k` | `1` | high 1.00 | none | inspect_only:section_reference_detected | 51 tables / 0 images |
-| `seed:unh_2014_10k` | `2` | high 0.85 | toc_signal_review | inspect_only:start_toc_like_signal, inspect_only:section_reference_detected, inspect_only:exhibit_index_detected | 52 tables / 0 images |
 | `seed:unh_2014_10k` | `3` | high 1.00 | none | inspect_only:section_reference_detected | 1 tables / 0 images |
-| `seed:unh_2014_10k` | `6` | high 1.00 | none | inspect_only:section_reference_detected | 37 tables / 0 images |
-| `seed:unh_2014_10k` | `7` | high 0.85 | toc_signal_review | inspect_only:start_toc_like_signal, inspect_only:section_reference_detected, inspect_only:exhibit_index_detected | 97 tables / 2 images |
+| `seed:unh_2014_10k` | `7` | high 1.00 | none | inspect_only:section_reference_detected | 33 tables / 0 images |
 | `seed:unh_2014_10k` | `8` | high 1.00 | none | inspect_only:section_reference_detected | 77 tables / 0 images |
 | `seed:unh_2014_10k` | `10` | high 1.00 | none | inspect_only:section_reference_detected | 3 tables / 0 images |
 | `seed:unh_2014_10k` | `11` | high 1.00 | none | inspect_only:section_reference_detected | 1 tables / 0 images |
 | `seed:unh_2014_10k` | `12` | high 1.00 | none | inspect_only:section_reference_detected | 1 tables / 0 images |
-| `seed:unh_2014_10k` | `13` | high 0.85 | toc_signal_review | needs_user_selection:internal_item_toc_detected, inspect_only:start_toc_like_signal, inspect_only:section_reference_detected, inspect_only:exhibit_index_detected | 185 tables / 2 images |
-| `seed:unh_2014_10k` | `14` | high 0.85 | toc_signal_review | needs_user_selection:internal_item_toc_detected, inspect_only:start_toc_like_signal, inspect_only:section_reference_detected, inspect_only:exhibit_index_detected | 185 tables / 2 images |
+| `seed:unh_2014_10k` | `13` | high 1.00 | none | inspect_only:section_reference_detected | 0 tables / 0 images |
+| `seed:unh_2014_10k` | `14` | high 1.00 | none | inspect_only:section_reference_detected | 0 tables / 0 images |
 | `seed:unh_2014_10k` | `15` | high 1.00 | none | inspect_only:section_reference_detected, inspect_only:exhibit_index_detected | 26 tables / 0 images |
 | `seed:unh_2023_10k` | `1` | high 1.00 | none | inspect_only:section_reference_detected | 1 tables / 0 images |
 | `seed:unh_2023_10k` | `1C` | high 1.00 | none | inspect_only:section_reference_detected | 0 tables / 0 images |
-| `seed:unh_2023_10k` | `2` | high 0.85 | toc_signal_review | inspect_only:start_toc_like_signal, inspect_only:section_reference_detected, inspect_only:exhibit_index_detected | 1 tables / 0 images |
-| `seed:unh_2023_10k` | `3` | high 0.85 | toc_signal_review | inspect_only:start_toc_like_signal, inspect_only:section_reference_detected, inspect_only:exhibit_index_detected | 1 tables / 0 images |
-| `seed:unh_2023_10k` | `5` | high 1.00 | none | inspect_only:section_reference_detected | 10 tables / 1 images |
-| `seed:unh_2023_10k` | `6` | high 0.85 | toc_signal_review | inspect_only:start_toc_like_signal, inspect_only:section_reference_detected, inspect_only:exhibit_index_detected | 11 tables / 1 images |
-| `seed:unh_2023_10k` | `7` | high 0.85 | toc_signal_review | inspect_only:start_toc_like_signal, inspect_only:section_reference_detected, inspect_only:exhibit_index_detected | 11 tables / 1 images |
+| `seed:unh_2023_10k` | `3` | high 1.00 | none | inspect_only:section_reference_detected | 0 tables / 0 images |
+| `seed:unh_2023_10k` | `7` | high 1.00 | none | inspect_only:section_reference_detected | 8 tables / 0 images |
 | `seed:unh_2023_10k` | `8` | high 1.00 | none | inspect_only:section_reference_detected | 38 tables / 0 images |
 | `seed:unh_2023_10k` | `10` | high 1.00 | none | inspect_only:section_reference_detected | 1 tables / 0 images |
 | `seed:unh_2023_10k` | `11` | high 1.00 | none | inspect_only:section_reference_detected | 0 tables / 0 images |
@@ -148,7 +145,7 @@ Item rows: 695
 | `seed:jnj_2014_10k` | `3` | high 1.00 | none | inspect_only:section_reference_detected, inspect_only:exhibit_index_detected | 1 tables / 0 images |
 | `seed:jnj_2014_10k` | `4` | high 1.00 | none | inspect_only:section_reference_detected | 6 tables / 0 images |
 | `seed:jnj_2014_10k` | `5` | high 1.00 | none | inspect_only:section_reference_detected, inspect_only:exhibit_index_detected | 6 tables / 0 images |
-| `seed:jnj_2014_10k` | `6` | high 1.00 | none | inspect_only:section_reference_detected, inspect_only:exhibit_index_detected | 2 tables / 0 images |
+| `seed:jnj_2014_10k` | `6` | high 1.00 | none | inspect_only:section_reference_detected, inspect_only:exhibit_index_detected | 1 tables / 0 images |
 | `seed:jnj_2014_10k` | `7` | high 1.00 | none | inspect_only:exhibit_index_detected, needs_external_source:external_or_other_document_reference | 1 tables / 0 images |
 | `seed:jnj_2014_10k` | `7A` | high 1.00 | none | inspect_only:exhibit_index_detected, needs_external_source:external_or_other_document_reference | 1 tables / 0 images |
 | `seed:jnj_2014_10k` | `8` | high 1.00 | none | inspect_only:exhibit_index_detected, needs_external_source:external_or_other_document_reference | 1 tables / 0 images |
@@ -183,7 +180,7 @@ Item rows: 695
 | `seed:xom_2023_10k` | `7A` | high 1.00 | none | needs_external_source:external_or_other_document_reference | 1 tables / 0 images |
 | `seed:xom_2023_10k` | `9A` | high 1.00 | none | inspect_only:exhibit_index_detected | 1 tables / 0 images |
 | `seed:xom_2023_10k` | `15` | high 1.00 | none | inspect_only:exhibit_index_detected | 2 tables / 0 images |
-| `seed:xom_2023_10k` | `16` | high 1.00 | none | inspect_only:exhibit_index_detected | 177 tables / 15 images |
+| `seed:xom_2023_10k` | `16` | high 1.00 | none | needs_user_selection:internal_item_toc_detected, inspect_only:section_reference_detected, inspect_only:exhibit_index_detected | 127 tables / 15 images |
 | `seed:cvx_2014_10k` | `1` | high 1.00 | none | inspect_only:section_reference_detected, inspect_only:exhibit_index_detected | 13 tables / 0 images |
 | `seed:cvx_2014_10k` | `1A` | high 1.00 | none | inspect_only:section_reference_detected | 0 tables / 0 images |
 | `seed:cvx_2014_10k` | `4` | high 1.00 | none | inspect_only:exhibit_index_detected | 0 tables / 0 images |
@@ -222,29 +219,25 @@ Item rows: 695
 | `seed:wmt_2023_10k` | `14` | high 1.00 | none | inspect_only:section_reference_detected | 0 tables / 0 images |
 | `seed:wmt_2023_10k` | `15` | high 1.00 | none | inspect_only:section_reference_detected, inspect_only:exhibit_index_detected | 8 tables / 0 images |
 | `seed:amzn_2014_10k` | `1` | high 1.00 | none | inspect_only:section_reference_detected | 4 tables / 0 images |
-| `seed:amzn_2014_10k` | `1B` | high 1.00 | none | inspect_only:section_reference_detected | 5 tables / 0 images |
-| `seed:amzn_2014_10k` | `2` | high 0.85 | toc_signal_review | inspect_only:start_toc_like_signal, inspect_only:section_reference_detected, inspect_only:exhibit_index_detected | 68 tables / 0 images |
-| `seed:amzn_2014_10k` | `3` | high 0.85 | toc_signal_review | inspect_only:start_toc_like_signal, inspect_only:section_reference_detected, inspect_only:exhibit_index_detected | 68 tables / 0 images |
+| `seed:amzn_2014_10k` | `3` | high 1.00 | none | inspect_only:section_reference_detected | 1 tables / 0 images |
 | `seed:amzn_2014_10k` | `5` | high 1.00 | none | inspect_only:section_reference_detected | 3 tables / 0 images |
 | `seed:amzn_2014_10k` | `6` | high 1.00 | none | inspect_only:section_reference_detected | 4 tables / 0 images |
 | `seed:amzn_2014_10k` | `7` | high 1.00 | none | inspect_only:section_reference_detected | 28 tables / 0 images |
 | `seed:amzn_2014_10k` | `7A` | high 1.00 | none | inspect_only:section_reference_detected | 3 tables / 0 images |
-| `seed:amzn_2014_10k` | `9A` | high 0.90 | toc_signal_review | none | 1 tables / 0 images |
-| `seed:amzn_2014_10k` | `9B` | high 0.90 | toc_signal_review | none | 0 tables / 0 images |
-| `seed:amzn_2014_10k` | `10` | high 0.85 | toc_signal_review | needs_user_selection:internal_item_toc_detected, inspect_only:start_toc_like_signal, inspect_only:section_reference_detected, inspect_only:exhibit_index_detected | 178 tables / 0 images |
-| `seed:amzn_2014_10k` | `11` | high 0.85 | toc_signal_review | needs_user_selection:internal_item_toc_detected, inspect_only:start_toc_like_signal, inspect_only:section_reference_detected, inspect_only:exhibit_index_detected | 178 tables / 0 images |
+| `seed:amzn_2014_10k` | `10` | high 1.00 | none | inspect_only:section_reference_detected | 2 tables / 0 images |
+| `seed:amzn_2014_10k` | `11` | high 1.00 | none | inspect_only:section_reference_detected | 1 tables / 0 images |
+| `seed:amzn_2014_10k` | `12` | high 1.00 | none | inspect_only:section_reference_detected | 1 tables / 0 images |
 | `seed:amzn_2014_10k` | `13` | high 1.00 | none | inspect_only:section_reference_detected | 1 tables / 0 images |
 | `seed:amzn_2014_10k` | `14` | high 1.00 | none | inspect_only:section_reference_detected | 0 tables / 0 images |
-| `seed:amzn_2014_10k` | `15` | high 1.00 | none | inspect_only:exhibit_index_detected | 185 tables / 0 images |
+| `seed:amzn_2014_10k` | `15` | high 1.00 | none | inspect_only:exhibit_index_detected | 6 tables / 0 images |
 | `seed:amzn_2023_10k` | `1` | high 1.00 | none | inspect_only:section_reference_detected | 4 tables / 0 images |
-| `seed:amzn_2023_10k` | `1C` | high 1.00 | none | inspect_only:section_reference_detected | 5 tables / 0 images |
-| `seed:amzn_2023_10k` | `2` | high 0.85 | toc_signal_review | inspect_only:start_toc_like_signal, inspect_only:section_reference_detected, inspect_only:exhibit_index_detected | 11 tables / 0 images |
-| `seed:amzn_2023_10k` | `3` | high 0.85 | toc_signal_review | inspect_only:start_toc_like_signal, inspect_only:section_reference_detected, inspect_only:exhibit_index_detected | 11 tables / 0 images |
+| `seed:amzn_2023_10k` | `2` | high 1.00 | none | inspect_only:section_reference_detected | 3 tables / 0 images |
+| `seed:amzn_2023_10k` | `3` | high 1.00 | none | inspect_only:section_reference_detected | 1 tables / 0 images |
 | `seed:amzn_2023_10k` | `7` | high 1.00 | none | inspect_only:section_reference_detected | 9 tables / 0 images |
 | `seed:amzn_2023_10k` | `7A` | high 1.00 | none | inspect_only:section_reference_detected | 2 tables / 0 images |
 | `seed:amzn_2023_10k` | `10` | high 1.00 | none | inspect_only:section_reference_detected | 2 tables / 0 images |
 | `seed:amzn_2023_10k` | `11` | high 1.00 | none | inspect_only:section_reference_detected | 1 tables / 0 images |
-| `seed:amzn_2023_10k` | `12` | high 1.00 | none | inspect_only:section_reference_detected | 2 tables / 0 images |
+| `seed:amzn_2023_10k` | `12` | high 1.00 | none | inspect_only:section_reference_detected | 1 tables / 0 images |
 | `seed:amzn_2023_10k` | `13` | high 1.00 | none | inspect_only:section_reference_detected | 1 tables / 0 images |
 | `seed:amzn_2023_10k` | `14` | high 1.00 | none | inspect_only:section_reference_detected | 0 tables / 0 images |
 | `seed:amzn_2023_10k` | `15` | high 1.00 | none | inspect_only:exhibit_index_detected | 5 tables / 0 images |
@@ -254,11 +247,10 @@ Item rows: 695
 | `validation:nvda_2015_10k` | `7` | high 1.00 | none | inspect_only:section_reference_detected | 15 tables / 0 images |
 | `validation:nvda_2015_10k` | `7A` | high 1.00 | none | inspect_only:section_reference_detected | 0 tables / 0 images |
 | `validation:nvda_2015_10k` | `9B` | high 1.00 | none | inspect_only:section_reference_detected | 0 tables / 0 images |
-| `validation:nvda_2015_10k` | `15` | high 1.00 | none | inspect_only:exhibit_index_detected | 169 tables / 2 images |
+| `validation:nvda_2015_10k` | `15` | high 1.00 | none | inspect_only:section_reference_detected, inspect_only:exhibit_index_detected | 58 tables / 0 images |
 | `validation:nvda_2025_10k` | `2` | high 1.00 | none | inspect_only:section_reference_detected | 0 tables / 0 images |
 | `validation:nvda_2025_10k` | `3` | high 1.00 | none | inspect_only:section_reference_detected | 0 tables / 0 images |
 | `validation:nvda_2025_10k` | `5` | high 1.00 | none | inspect_only:section_reference_detected | 2 tables / 1 images |
-| `validation:nvda_2025_10k` | `6` | high 0.85 | toc_signal_review | inspect_only:start_toc_like_signal, inspect_only:section_reference_detected, inspect_only:exhibit_index_detected | 3 tables / 1 images |
 | `validation:nvda_2025_10k` | `7` | high 1.00 | none | inspect_only:section_reference_detected | 10 tables / 0 images |
 | `validation:nvda_2025_10k` | `7A` | high 1.00 | none | inspect_only:section_reference_detected | 0 tables / 0 images |
 | `validation:nvda_2025_10k` | `9C` | high 1.00 | none | inspect_only:section_reference_detected | 0 tables / 0 images |
@@ -270,18 +262,18 @@ Item rows: 695
 | `validation:googl_2015_10k` | `6` | high 1.00 | none | inspect_only:section_reference_detected | 10 tables / 0 images |
 | `validation:googl_2015_10k` | `7` | high 1.00 | none | inspect_only:section_reference_detected | 115 tables / 0 images |
 | `validation:googl_2015_10k` | `8` | high 1.00 | none | inspect_only:section_reference_detected | 156 tables / 0 images |
-| `validation:googl_2015_10k` | `10` | high 1.00 | none | inspect_only:section_reference_detected | 3 tables / 0 images |
-| `validation:googl_2015_10k` | `11` | high 0.85 | toc_signal_review | needs_user_selection:internal_item_toc_detected, inspect_only:start_toc_like_signal, inspect_only:section_reference_detected, inspect_only:exhibit_index_detected | 417 tables / 1 images |
+| `validation:googl_2015_10k` | `10` | high 1.00 | none | inspect_only:section_reference_detected | 2 tables / 0 images |
+| `validation:googl_2015_10k` | `11` | high 1.00 | none | inspect_only:section_reference_detected | 1 tables / 0 images |
 | `validation:googl_2015_10k` | `12` | high 1.00 | none | inspect_only:section_reference_detected | 1 tables / 0 images |
 | `validation:googl_2015_10k` | `13` | high 1.00 | none | inspect_only:section_reference_detected | 1 tables / 0 images |
 | `validation:googl_2015_10k` | `14` | high 1.00 | none | inspect_only:section_reference_detected | 1 tables / 0 images |
-| `validation:googl_2015_10k` | `15` | high 1.00 | none | inspect_only:section_reference_detected, inspect_only:exhibit_index_detected | 439 tables / 1 images |
+| `validation:googl_2015_10k` | `15` | high 1.00 | none | inspect_only:section_reference_detected, inspect_only:exhibit_index_detected | 19 tables / 0 images |
 | `validation:googl_2025_10k` | `1` | high 1.00 | none | inspect_only:section_reference_detected | 6 tables / 0 images |
 | `validation:googl_2025_10k` | `1C` | high 1.00 | none | inspect_only:section_reference_detected | 1 tables / 0 images |
 | `validation:googl_2025_10k` | `3` | high 1.00 | none | inspect_only:section_reference_detected | 0 tables / 0 images |
-| `validation:googl_2025_10k` | `5` | high 1.00 | none | inspect_only:section_reference_detected | 29 tables / 2 images |
-| `validation:googl_2025_10k` | `6` | high 0.85 | toc_signal_review | inspect_only:start_toc_like_signal, inspect_only:section_reference_detected, inspect_only:exhibit_index_detected | 52 tables / 2 images |
-| `validation:googl_2025_10k` | `7` | high 0.85 | toc_signal_review | inspect_only:start_toc_like_signal, inspect_only:section_reference_detected, inspect_only:exhibit_index_detected | 52 tables / 2 images |
+| `validation:googl_2025_10k` | `5` | high 1.00 | none | inspect_only:section_reference_detected | 3 tables / 2 images |
+| `validation:googl_2025_10k` | `6` | high 0.85 | toc_signal_review | inspect_only:start_toc_like_signal, inspect_only:section_reference_detected, inspect_only:exhibit_index_detected | 27 tables / 2 images |
+| `validation:googl_2025_10k` | `7` | high 1.00 | none | inspect_only:section_reference_detected | 25 tables / 0 images |
 | `validation:googl_2025_10k` | `7A` | high 1.00 | none | inspect_only:section_reference_detected | 5 tables / 0 images |
 | `validation:googl_2025_10k` | `8` | high 1.00 | none | inspect_only:section_reference_detected | 97 tables / 0 images |
 | `validation:googl_2025_10k` | `9B` | high 1.00 | none | inspect_only:section_reference_detected | 1 tables / 0 images |
@@ -300,7 +292,6 @@ Item rows: 695
 | `validation:meta_2025_10k` | `1C` | high 1.00 | none | inspect_only:section_reference_detected | 0 tables / 0 images |
 | `validation:meta_2025_10k` | `3` | high 1.00 | none | inspect_only:section_reference_detected | 0 tables / 0 images |
 | `validation:meta_2025_10k` | `5` | high 1.00 | none | inspect_only:section_reference_detected | 0 tables / 1 images |
-| `validation:meta_2025_10k` | `6` | high 0.85 | toc_signal_review | needs_user_selection:internal_item_toc_detected, inspect_only:start_toc_like_signal, inspect_only:section_reference_detected, inspect_only:exhibit_index_detected | 0 tables / 1 images |
 | `validation:meta_2025_10k` | `7` | high 1.00 | none | inspect_only:section_reference_detected | 15 tables / 19 images |
 | `validation:meta_2025_10k` | `7A` | high 1.00 | none | inspect_only:section_reference_detected | 0 tables / 0 images |
 | `validation:meta_2025_10k` | `8` | high 1.00 | none | inspect_only:section_reference_detected | 45 tables / 0 images |
@@ -382,7 +373,7 @@ Item rows: 695
 | `seed:aapl_2023_10k` | `14` | success | high 1.00 | none | 0 | 0 | 0 | True |
 | `seed:aapl_2023_10k` | `15` | success | high 1.00 | none | 5 | 0 | 0 | True |
 | `seed:aapl_2023_10k` | `16` | success | high 1.00 | none | 2 | 0 | 0 | True |
-| `seed:msft_2014_10k` | `1` | success | high 1.00 | none | 20 | 0 | 0 | True |
+| `seed:msft_2014_10k` | `1` | success | high 1.00 | none | 12 | 0 | 0 | True |
 | `seed:msft_2014_10k` | `1A` | success | high 1.00 | none | 16 | 0 | 0 | True |
 | `seed:msft_2014_10k` | `1B` | success | high 1.00 | none | 0 | 0 | 0 | True |
 | `seed:msft_2014_10k` | `1C` | not_present | high 1.00 | none | 0 | 0 | 0 | False |
@@ -405,7 +396,7 @@ Item rows: 695
 | `seed:msft_2014_10k` | `14` | success | high 1.00 | none | 0 | 0 | 0 | True |
 | `seed:msft_2014_10k` | `15` | success | high 1.00 | none | 11 | 0 | 0 | True |
 | `seed:msft_2014_10k` | `16` | not_present | high 1.00 | none | 0 | 0 | 0 | False |
-| `seed:msft_2023_10k` | `1` | success | high 1.00 | none | 1 | 0 | 0 | True |
+| `seed:msft_2023_10k` | `1` | success | high 1.00 | none | 0 | 0 | 0 | True |
 | `seed:msft_2023_10k` | `1A` | success | high 1.00 | none | 0 | 0 | 0 | True |
 | `seed:msft_2023_10k` | `1B` | success | high 1.00 | none | 0 | 0 | 0 | True |
 | `seed:msft_2023_10k` | `1C` | not_present | high 1.00 | none | 0 | 0 | 0 | False |
@@ -460,7 +451,7 @@ Item rows: 695
 | `seed:jpm_2023_10k` | `3` | success | high 1.00 | none | 0 | 0 | 0 | True |
 | `seed:jpm_2023_10k` | `4` | success | high 1.00 | none | 1 | 0 | 0 | True |
 | `seed:jpm_2023_10k` | `5` | success | high 1.00 | none | 1 | 0 | 0 | True |
-| `seed:jpm_2023_10k` | `6` | success | high 0.85 | toc_signal_review | 38 | 0 | 0 | True |
+| `seed:jpm_2023_10k` | `6` | success | high 1.00 | none | 0 | 0 | 0 | True |
 | `seed:jpm_2023_10k` | `7` | success | high 1.00 | none | 0 | 0 | 0 | True |
 | `seed:jpm_2023_10k` | `7A` | success | high 1.00 | none | 1 | 0 | 0 | True |
 | `seed:jpm_2023_10k` | `8` | success | high 1.00 | none | 0 | 0 | 0 | True |
@@ -526,12 +517,12 @@ Item rows: 695
 | `seed:unh_2014_10k` | `1A` | success | high 1.00 | none | 0 | 0 | 0 | True |
 | `seed:unh_2014_10k` | `1B` | success | high 1.00 | none | 1 | 0 | 0 | True |
 | `seed:unh_2014_10k` | `1C` | not_present | high 1.00 | none | 0 | 0 | 0 | False |
-| `seed:unh_2014_10k` | `2` | success | high 0.85 | toc_signal_review | 52 | 0 | 0 | True |
+| `seed:unh_2014_10k` | `2` | success | high 1.00 | none | 0 | 0 | 0 | True |
 | `seed:unh_2014_10k` | `3` | success | high 1.00 | none | 1 | 0 | 0 | True |
 | `seed:unh_2014_10k` | `4` | success | high 1.00 | none | 0 | 0 | 0 | True |
 | `seed:unh_2014_10k` | `5` | success | high 1.00 | none | 7 | 2 | 0 | True |
-| `seed:unh_2014_10k` | `6` | success | high 1.00 | none | 37 | 0 | 0 | True |
-| `seed:unh_2014_10k` | `7` | success | high 0.85 | toc_signal_review | 97 | 2 | 0 | True |
+| `seed:unh_2014_10k` | `6` | success | high 1.00 | none | 4 | 0 | 0 | True |
+| `seed:unh_2014_10k` | `7` | success | high 1.00 | none | 33 | 0 | 0 | True |
 | `seed:unh_2014_10k` | `7A` | success | high 1.00 | none | 3 | 0 | 0 | True |
 | `seed:unh_2014_10k` | `8` | success | high 1.00 | none | 77 | 0 | 0 | True |
 | `seed:unh_2014_10k` | `9` | success | high 1.00 | none | 1 | 0 | 0 | True |
@@ -541,20 +532,20 @@ Item rows: 695
 | `seed:unh_2014_10k` | `10` | success | high 1.00 | none | 3 | 0 | 0 | True |
 | `seed:unh_2014_10k` | `11` | success | high 1.00 | none | 1 | 0 | 0 | True |
 | `seed:unh_2014_10k` | `12` | success | high 1.00 | none | 1 | 0 | 0 | True |
-| `seed:unh_2014_10k` | `13` | success | high 0.85 | toc_signal_review | 185 | 2 | 0 | True |
-| `seed:unh_2014_10k` | `14` | success | high 0.85 | toc_signal_review | 185 | 2 | 0 | True |
+| `seed:unh_2014_10k` | `13` | success | high 1.00 | none | 0 | 0 | 0 | True |
+| `seed:unh_2014_10k` | `14` | success | high 1.00 | none | 0 | 0 | 0 | True |
 | `seed:unh_2014_10k` | `15` | success | high 1.00 | none | 26 | 0 | 0 | True |
 | `seed:unh_2014_10k` | `16` | not_present | high 1.00 | none | 0 | 0 | 0 | False |
 | `seed:unh_2023_10k` | `1` | success | high 1.00 | none | 1 | 0 | 0 | True |
 | `seed:unh_2023_10k` | `1A` | success | high 1.00 | none | 0 | 0 | 0 | True |
 | `seed:unh_2023_10k` | `1B` | success | high 1.00 | none | 0 | 0 | 0 | True |
 | `seed:unh_2023_10k` | `1C` | success | high 1.00 | none | 0 | 0 | 0 | True |
-| `seed:unh_2023_10k` | `2` | success | high 0.85 | toc_signal_review | 1 | 0 | 0 | True |
-| `seed:unh_2023_10k` | `3` | success | high 0.85 | toc_signal_review | 1 | 0 | 0 | True |
+| `seed:unh_2023_10k` | `2` | success | high 1.00 | none | 0 | 0 | 0 | True |
+| `seed:unh_2023_10k` | `3` | success | high 1.00 | none | 0 | 0 | 0 | True |
 | `seed:unh_2023_10k` | `4` | success | high 1.00 | none | 0 | 0 | 0 | True |
-| `seed:unh_2023_10k` | `5` | success | high 1.00 | none | 10 | 1 | 0 | True |
-| `seed:unh_2023_10k` | `6` | success | high 0.85 | toc_signal_review | 11 | 1 | 0 | True |
-| `seed:unh_2023_10k` | `7` | success | high 0.85 | toc_signal_review | 11 | 1 | 0 | True |
+| `seed:unh_2023_10k` | `5` | success | high 1.00 | none | 2 | 1 | 0 | True |
+| `seed:unh_2023_10k` | `6` | success | high 1.00 | none | 0 | 0 | 0 | True |
+| `seed:unh_2023_10k` | `7` | success | high 1.00 | none | 8 | 0 | 0 | True |
 | `seed:unh_2023_10k` | `7A` | success | high 1.00 | none | 1 | 0 | 0 | True |
 | `seed:unh_2023_10k` | `8` | success | high 1.00 | none | 38 | 0 | 0 | True |
 | `seed:unh_2023_10k` | `9` | success | high 1.00 | none | 0 | 0 | 0 | True |
@@ -571,26 +562,26 @@ Item rows: 695
 | `seed:jnj_2014_10k` | `1` | success | high 1.00 | none | 2 | 0 | 0 | True |
 | `seed:jnj_2014_10k` | `1A` | success | high 1.00 | none | 1 | 0 | 0 | True |
 | `seed:jnj_2014_10k` | `1B` | success | high 1.00 | none | 1 | 0 | 0 | True |
-| `seed:jnj_2014_10k` | `1C` | not_present | high 1.00 | none | 0 | 0 | 0 | False |
+| `seed:jnj_2014_10k` | `1C` | not_present | medium 0.80 | none | 0 | 0 | 0 | False |
 | `seed:jnj_2014_10k` | `2` | success | high 1.00 | none | 3 | 0 | 0 | True |
 | `seed:jnj_2014_10k` | `3` | success | high 1.00 | none | 1 | 0 | 0 | True |
 | `seed:jnj_2014_10k` | `4` | success | high 1.00 | none | 6 | 0 | 0 | True |
 | `seed:jnj_2014_10k` | `5` | success | high 1.00 | none | 6 | 0 | 0 | True |
-| `seed:jnj_2014_10k` | `6` | success | high 1.00 | none | 2 | 0 | 0 | True |
+| `seed:jnj_2014_10k` | `6` | success | high 1.00 | none | 1 | 0 | 0 | True |
 | `seed:jnj_2014_10k` | `7` | success | high 1.00 | none | 1 | 0 | 0 | True |
 | `seed:jnj_2014_10k` | `7A` | success | high 1.00 | none | 1 | 0 | 0 | True |
 | `seed:jnj_2014_10k` | `8` | success | high 1.00 | none | 1 | 0 | 0 | True |
 | `seed:jnj_2014_10k` | `9` | success | high 1.00 | none | 1 | 0 | 0 | True |
 | `seed:jnj_2014_10k` | `9A` | success | high 1.00 | none | 1 | 0 | 0 | True |
 | `seed:jnj_2014_10k` | `9B` | success | high 1.00 | none | 0 | 0 | 0 | True |
-| `seed:jnj_2014_10k` | `9C` | not_present | high 1.00 | none | 0 | 0 | 0 | False |
+| `seed:jnj_2014_10k` | `9C` | not_present | medium 0.80 | none | 0 | 0 | 0 | False |
 | `seed:jnj_2014_10k` | `10` | success | high 1.00 | none | 2 | 0 | 0 | True |
 | `seed:jnj_2014_10k` | `11` | success | high 1.00 | none | 1 | 0 | 0 | True |
 | `seed:jnj_2014_10k` | `12` | success | high 1.00 | none | 5 | 0 | 0 | True |
 | `seed:jnj_2014_10k` | `13` | success | high 1.00 | none | 1 | 0 | 0 | True |
 | `seed:jnj_2014_10k` | `14` | success | high 1.00 | none | 0 | 0 | 0 | True |
 | `seed:jnj_2014_10k` | `15` | success | high 1.00 | none | 8 | 0 | 0 | True |
-| `seed:jnj_2014_10k` | `16` | not_present | high 1.00 | none | 0 | 0 | 0 | False |
+| `seed:jnj_2014_10k` | `16` | not_present | medium 0.80 | none | 0 | 0 | 0 | False |
 | `seed:jnj_2023_10k` | `1` | success | high 1.00 | none | 9 | 5 | 0 | True |
 | `seed:jnj_2023_10k` | `1A` | success | high 1.00 | none | 8 | 4 | 0 | True |
 | `seed:jnj_2023_10k` | `1B` | success | high 1.00 | none | 0 | 0 | 0 | True |
@@ -636,7 +627,7 @@ Item rows: 695
 | `seed:xom_2014_10k` | `13` | success | high 1.00 | none | 0 | 0 | 0 | True |
 | `seed:xom_2014_10k` | `14` | success | high 1.00 | none | 0 | 0 | 0 | True |
 | `seed:xom_2014_10k` | `15` | success | high 1.00 | none | 99 | 4 | 0 | True |
-| `seed:xom_2014_10k` | `supplemental-15` | success | high 1.00 | none | 99 | 4 | 40 | True |
+| `seed:xom_2014_10k` | `supplemental-15` | success | high 1.00 | none | 99 | 4 | 18 | True |
 | `seed:xom_2014_10k` | `16` | not_present | high 1.00 | none | 0 | 0 | 0 | False |
 | `seed:xom_2023_10k` | `1` | success | high 1.00 | none | 2 | 0 | 0 | True |
 | `seed:xom_2023_10k` | `1A` | success | high 1.00 | none | 1 | 0 | 0 | True |
@@ -660,8 +651,8 @@ Item rows: 695
 | `seed:xom_2023_10k` | `13` | success | high 1.00 | none | 1 | 0 | 0 | True |
 | `seed:xom_2023_10k` | `14` | success | high 1.00 | none | 0 | 0 | 0 | True |
 | `seed:xom_2023_10k` | `15` | success | high 1.00 | none | 2 | 0 | 0 | True |
-| `seed:xom_2023_10k` | `16` | success | high 1.00 | none | 177 | 15 | 0 | True |
-| `seed:xom_2023_10k` | `supplemental-16` | success | high 1.00 | none | 128 | 15 | 40 | True |
+| `seed:xom_2023_10k` | `16` | success | high 1.00 | none | 127 | 15 | 0 | True |
+| `seed:xom_2023_10k` | `supplemental-16` | success | high 1.00 | none | 127 | 15 | 40 | True |
 | `seed:cvx_2014_10k` | `1` | success | high 1.00 | none | 13 | 0 | 0 | True |
 | `seed:cvx_2014_10k` | `1A` | success | high 1.00 | none | 0 | 0 | 0 | True |
 | `seed:cvx_2014_10k` | `1B` | success | high 1.00 | none | 0 | 0 | 0 | True |
@@ -757,10 +748,10 @@ Item rows: 695
 | `seed:wmt_2023_10k` | `16` | success | high 1.00 | none | 3 | 0 | 0 | True |
 | `seed:amzn_2014_10k` | `1` | success | high 1.00 | none | 4 | 0 | 0 | True |
 | `seed:amzn_2014_10k` | `1A` | success | high 1.00 | none | 59 | 0 | 0 | True |
-| `seed:amzn_2014_10k` | `1B` | success | high 1.00 | none | 5 | 0 | 0 | True |
+| `seed:amzn_2014_10k` | `1B` | success | high 1.00 | none | 1 | 0 | 0 | True |
 | `seed:amzn_2014_10k` | `1C` | not_present | high 1.00 | none | 0 | 0 | 0 | False |
-| `seed:amzn_2014_10k` | `2` | success | high 0.85 | toc_signal_review | 68 | 0 | 0 | True |
-| `seed:amzn_2014_10k` | `3` | success | high 0.85 | toc_signal_review | 68 | 0 | 0 | True |
+| `seed:amzn_2014_10k` | `2` | success | high 1.00 | none | 3 | 0 | 0 | True |
+| `seed:amzn_2014_10k` | `3` | success | high 1.00 | none | 1 | 0 | 0 | True |
 | `seed:amzn_2014_10k` | `4` | success | high 1.00 | none | 0 | 0 | 0 | True |
 | `seed:amzn_2014_10k` | `5` | success | high 1.00 | none | 3 | 0 | 0 | True |
 | `seed:amzn_2014_10k` | `6` | success | high 1.00 | none | 4 | 0 | 0 | True |
@@ -768,24 +759,24 @@ Item rows: 695
 | `seed:amzn_2014_10k` | `7A` | success | high 1.00 | none | 3 | 0 | 0 | True |
 | `seed:amzn_2014_10k` | `8` | success | high 1.00 | none | 66 | 0 | 0 | True |
 | `seed:amzn_2014_10k` | `9` | success | high 1.00 | none | 1 | 0 | 0 | True |
-| `seed:amzn_2014_10k` | `9A` | success | high 0.90 | toc_signal_review | 1 | 0 | 0 | True |
-| `seed:amzn_2014_10k` | `9B` | success | high 0.90 | toc_signal_review | 0 | 0 | 0 | True |
+| `seed:amzn_2014_10k` | `9A` | success | high 1.00 | none | 1 | 0 | 0 | True |
+| `seed:amzn_2014_10k` | `9B` | success | high 1.00 | none | 0 | 0 | 0 | True |
 | `seed:amzn_2014_10k` | `9C` | not_present | high 1.00 | none | 0 | 0 | 0 | False |
-| `seed:amzn_2014_10k` | `10` | success | high 0.85 | toc_signal_review | 178 | 0 | 0 | True |
-| `seed:amzn_2014_10k` | `11` | success | high 0.85 | toc_signal_review | 178 | 0 | 0 | True |
-| `seed:amzn_2014_10k` | `12` | success | high 1.00 | none | 0 | 0 | 0 | True |
+| `seed:amzn_2014_10k` | `10` | success | high 1.00 | none | 2 | 0 | 0 | True |
+| `seed:amzn_2014_10k` | `11` | success | high 1.00 | none | 1 | 0 | 0 | True |
+| `seed:amzn_2014_10k` | `12` | success | high 1.00 | none | 1 | 0 | 0 | True |
 | `seed:amzn_2014_10k` | `13` | success | high 1.00 | none | 1 | 0 | 0 | True |
 | `seed:amzn_2014_10k` | `14` | success | high 1.00 | none | 0 | 0 | 0 | True |
-| `seed:amzn_2014_10k` | `15` | success | high 1.00 | none | 185 | 0 | 0 | True |
+| `seed:amzn_2014_10k` | `15` | success | high 1.00 | none | 6 | 0 | 0 | True |
 | `seed:amzn_2014_10k` | `16` | not_present | high 1.00 | none | 0 | 0 | 0 | False |
 | `seed:amzn_2023_10k` | `1` | success | high 1.00 | none | 4 | 0 | 0 | True |
 | `seed:amzn_2023_10k` | `1A` | success | high 1.00 | none | 1 | 0 | 0 | True |
 | `seed:amzn_2023_10k` | `1B` | success | high 1.00 | none | 1 | 0 | 0 | True |
-| `seed:amzn_2023_10k` | `1C` | success | high 1.00 | none | 5 | 0 | 0 | True |
-| `seed:amzn_2023_10k` | `2` | success | high 0.85 | toc_signal_review | 11 | 0 | 0 | True |
-| `seed:amzn_2023_10k` | `3` | success | high 0.85 | toc_signal_review | 11 | 0 | 0 | True |
+| `seed:amzn_2023_10k` | `1C` | success | high 1.00 | none | 1 | 0 | 0 | True |
+| `seed:amzn_2023_10k` | `2` | success | high 1.00 | none | 3 | 0 | 0 | True |
+| `seed:amzn_2023_10k` | `3` | success | high 1.00 | none | 1 | 0 | 0 | True |
 | `seed:amzn_2023_10k` | `4` | success | high 1.00 | none | 0 | 0 | 0 | True |
-| `seed:amzn_2023_10k` | `5` | success | high 1.00 | none | 3 | 0 | 0 | True |
+| `seed:amzn_2023_10k` | `5` | success | high 1.00 | none | 2 | 0 | 0 | True |
 | `seed:amzn_2023_10k` | `6` | success | high 1.00 | none | 1 | 0 | 0 | True |
 | `seed:amzn_2023_10k` | `7` | success | high 1.00 | none | 9 | 0 | 0 | True |
 | `seed:amzn_2023_10k` | `7A` | success | high 1.00 | none | 2 | 0 | 0 | True |
@@ -796,11 +787,11 @@ Item rows: 695
 | `seed:amzn_2023_10k` | `9C` | success | high 1.00 | none | 0 | 0 | 0 | True |
 | `seed:amzn_2023_10k` | `10` | success | high 1.00 | none | 2 | 0 | 0 | True |
 | `seed:amzn_2023_10k` | `11` | success | high 1.00 | none | 1 | 0 | 0 | True |
-| `seed:amzn_2023_10k` | `12` | success | high 1.00 | none | 2 | 0 | 0 | True |
+| `seed:amzn_2023_10k` | `12` | success | high 1.00 | none | 1 | 0 | 0 | True |
 | `seed:amzn_2023_10k` | `13` | success | high 1.00 | none | 1 | 0 | 0 | True |
 | `seed:amzn_2023_10k` | `14` | success | high 1.00 | none | 0 | 0 | 0 | True |
 | `seed:amzn_2023_10k` | `15` | success | high 1.00 | none | 5 | 0 | 0 | True |
-| `seed:amzn_2023_10k` | `16` | success | high 1.00 | none | 84 | 0 | 0 | True |
+| `seed:amzn_2023_10k` | `16` | success | high 1.00 | none | 2 | 0 | 0 | True |
 | `validation:nvda_2015_10k` | `1` | success | high 1.00 | none | 12 | 0 | 0 | True |
 | `validation:nvda_2015_10k` | `1A` | success | high 1.00 | none | 73 | 0 | 0 | True |
 | `validation:nvda_2015_10k` | `1B` | success | high 1.00 | none | 0 | 0 | 0 | True |
@@ -822,7 +813,7 @@ Item rows: 695
 | `validation:nvda_2015_10k` | `12` | success | high 1.00 | none | 0 | 0 | 0 | True |
 | `validation:nvda_2015_10k` | `13` | success | high 1.00 | none | 0 | 0 | 0 | True |
 | `validation:nvda_2015_10k` | `14` | success | high 1.00 | none | 0 | 0 | 0 | True |
-| `validation:nvda_2015_10k` | `15` | success | high 1.00 | none | 169 | 2 | 0 | True |
+| `validation:nvda_2015_10k` | `15` | success | high 1.00 | none | 58 | 0 | 0 | True |
 | `validation:nvda_2015_10k` | `16` | not_present | high 1.00 | none | 0 | 0 | 0 | False |
 | `validation:nvda_2025_10k` | `1` | success | high 1.00 | none | 1 | 0 | 0 | True |
 | `validation:nvda_2025_10k` | `1A` | success | high 1.00 | none | 0 | 0 | 0 | True |
@@ -832,7 +823,7 @@ Item rows: 695
 | `validation:nvda_2025_10k` | `3` | success | high 1.00 | none | 0 | 0 | 0 | True |
 | `validation:nvda_2025_10k` | `4` | success | high 1.00 | none | 0 | 0 | 0 | True |
 | `validation:nvda_2025_10k` | `5` | success | high 1.00 | none | 2 | 1 | 0 | True |
-| `validation:nvda_2025_10k` | `6` | success | high 0.85 | toc_signal_review | 3 | 1 | 0 | True |
+| `validation:nvda_2025_10k` | `6` | success | high 1.00 | none | 0 | 0 | 0 | True |
 | `validation:nvda_2025_10k` | `7` | success | high 1.00 | none | 10 | 0 | 0 | True |
 | `validation:nvda_2025_10k` | `7A` | success | high 1.00 | none | 0 | 0 | 0 | True |
 | `validation:nvda_2025_10k` | `8` | success | high 1.00 | none | 0 | 0 | 0 | True |
@@ -863,12 +854,12 @@ Item rows: 695
 | `validation:googl_2015_10k` | `9A` | success | high 1.00 | none | 2 | 0 | 0 | True |
 | `validation:googl_2015_10k` | `9B` | success | high 1.00 | none | 6 | 0 | 0 | True |
 | `validation:googl_2015_10k` | `9C` | not_present | high 1.00 | none | 0 | 0 | 0 | False |
-| `validation:googl_2015_10k` | `10` | success | high 1.00 | none | 3 | 0 | 0 | True |
-| `validation:googl_2015_10k` | `11` | success | high 0.85 | toc_signal_review | 417 | 1 | 0 | True |
+| `validation:googl_2015_10k` | `10` | success | high 1.00 | none | 2 | 0 | 0 | True |
+| `validation:googl_2015_10k` | `11` | success | high 1.00 | none | 1 | 0 | 0 | True |
 | `validation:googl_2015_10k` | `12` | success | high 1.00 | none | 1 | 0 | 0 | True |
 | `validation:googl_2015_10k` | `13` | success | high 1.00 | none | 1 | 0 | 0 | True |
 | `validation:googl_2015_10k` | `14` | success | high 1.00 | none | 1 | 0 | 0 | True |
-| `validation:googl_2015_10k` | `15` | success | high 1.00 | none | 439 | 1 | 0 | True |
+| `validation:googl_2015_10k` | `15` | success | high 1.00 | none | 19 | 0 | 0 | True |
 | `validation:googl_2015_10k` | `16` | not_present | high 1.00 | none | 0 | 0 | 0 | False |
 | `validation:googl_2025_10k` | `1` | success | high 1.00 | none | 6 | 0 | 0 | True |
 | `validation:googl_2025_10k` | `1A` | success | high 1.00 | none | 14 | 0 | 0 | True |
@@ -877,9 +868,9 @@ Item rows: 695
 | `validation:googl_2025_10k` | `2` | success | high 1.00 | none | 0 | 0 | 0 | True |
 | `validation:googl_2025_10k` | `3` | success | high 1.00 | none | 0 | 0 | 0 | True |
 | `validation:googl_2025_10k` | `4` | success | high 1.00 | none | 1 | 0 | 0 | True |
-| `validation:googl_2025_10k` | `5` | success | high 1.00 | none | 29 | 2 | 0 | True |
-| `validation:googl_2025_10k` | `6` | success | high 0.85 | toc_signal_review | 52 | 2 | 0 | True |
-| `validation:googl_2025_10k` | `7` | success | high 0.85 | toc_signal_review | 52 | 2 | 0 | True |
+| `validation:googl_2025_10k` | `5` | success | high 1.00 | none | 3 | 2 | 0 | True |
+| `validation:googl_2025_10k` | `6` | success | high 0.85 | toc_signal_review | 27 | 2 | 0 | True |
+| `validation:googl_2025_10k` | `7` | success | high 1.00 | none | 25 | 0 | 0 | True |
 | `validation:googl_2025_10k` | `7A` | success | high 1.00 | none | 5 | 0 | 0 | True |
 | `validation:googl_2025_10k` | `8` | success | high 1.00 | none | 97 | 0 | 0 | True |
 | `validation:googl_2025_10k` | `9` | success | high 1.00 | none | 0 | 0 | 0 | True |
@@ -892,7 +883,7 @@ Item rows: 695
 | `validation:googl_2025_10k` | `13` | success | high 1.00 | none | 0 | 0 | 0 | True |
 | `validation:googl_2025_10k` | `14` | success | high 1.00 | none | 1 | 0 | 0 | True |
 | `validation:googl_2025_10k` | `15` | success | high 1.00 | none | 12 | 0 | 0 | True |
-| `validation:googl_2025_10k` | `16` | success | high 1.00 | none | 173 | 2 | 0 | True |
+| `validation:googl_2025_10k` | `16` | success | high 1.00 | none | 4 | 0 | 0 | True |
 | `validation:meta_2015_10k` | `1` | success | high 1.00 | none | 10 | 0 | 0 | True |
 | `validation:meta_2015_10k` | `1A` | success | high 1.00 | none | 114 | 0 | 0 | True |
 | `validation:meta_2015_10k` | `1B` | success | high 1.00 | none | 1 | 0 | 0 | True |
@@ -924,7 +915,7 @@ Item rows: 695
 | `validation:meta_2025_10k` | `3` | success | high 1.00 | none | 0 | 0 | 0 | True |
 | `validation:meta_2025_10k` | `4` | success | high 1.00 | none | 0 | 0 | 0 | True |
 | `validation:meta_2025_10k` | `5` | success | high 1.00 | none | 0 | 1 | 0 | True |
-| `validation:meta_2025_10k` | `6` | success | high 0.85 | toc_signal_review | 0 | 1 | 0 | True |
+| `validation:meta_2025_10k` | `6` | success | high 1.00 | none | 0 | 0 | 0 | True |
 | `validation:meta_2025_10k` | `7` | success | high 1.00 | none | 15 | 19 | 0 | True |
 | `validation:meta_2025_10k` | `7A` | success | high 1.00 | none | 0 | 0 | 0 | True |
 | `validation:meta_2025_10k` | `8` | success | high 1.00 | none | 45 | 0 | 0 | True |

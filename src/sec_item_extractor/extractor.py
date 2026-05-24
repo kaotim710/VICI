@@ -371,12 +371,22 @@ def _build_success_result(
     )
 
 
-def _start_rank(candidate: HeadingCandidate) -> tuple[int, int, int, int]:
+def _start_rank(candidate: HeadingCandidate) -> tuple[int, int, int, int, int, int, int]:
     toc_penalty = 1 if candidate.is_toc_like else 0
     dense_penalty = 1 if "TOC_DENSE_ITEM_CLUSTER" in candidate.reasons else 0
     near_toc_penalty = 1 if "NEAR_TABLE_OF_CONTENTS_LABEL" in candidate.reasons else 0
+    followed_page_penalty = 1 if "TOC_FOLLOWED_BY_PAGE_NUMBER" in candidate.reasons else 0
+    early_penalty = 1 if "EARLY_DOCUMENT_REGION" in candidate.reasons else 0
     title_penalty = 0 if is_expected_title(candidate.item, candidate.normalized_text) else 1
-    return (toc_penalty, dense_penalty, near_toc_penalty, title_penalty, candidate.start)
+    return (
+        toc_penalty,
+        followed_page_penalty,
+        early_penalty,
+        dense_penalty,
+        near_toc_penalty,
+        title_penalty,
+        candidate.start,
+    )
 
 
 def _evidence(kind: str, candidate: HeadingCandidate) -> Evidence:
@@ -421,6 +431,8 @@ def _is_likely_toc_span(
 ) -> bool:
     if len(section_text) >= 800 or _is_cross_reference_section(section_text):
         return False
+    if _has_short_placeholder_body(section_text):
+        return False
     if _span_has_body_text(start.item, section_text):
         return False
 
@@ -449,7 +461,7 @@ def _span_has_body_text(item: str, section_text: str) -> bool:
             return True
         if re.search(r"\b(?:see|refer|reference|appears|presented|included|incorporated)\b", line, flags=re.IGNORECASE):
             return True
-        if is_expected_title(item, line):
+        if is_expected_title(item, line) and len(line.split()) <= 12:
             continue
         if len(line.split()) >= 8:
             return True
@@ -488,6 +500,12 @@ def _is_cross_reference_section(section_text: str) -> bool:
         for phrase in (
             "appears on page",
             "appears on pages",
+            "appear on page",
+            "appear on pages",
+            "included on page",
+            "included on pages",
+            "refer to",
+            "see pages",
             "is incorporated",
             "such information should be read in conjunction",
         )
@@ -505,6 +523,7 @@ def _has_short_placeholder_body(section_text: str) -> bool:
 def _is_placeholder_line(line: str) -> bool:
     normalized = re.sub(r"[^a-z ]+", " ", line.lower())
     normalized = " ".join(normalized.split())
+    normalized = re.sub(r"^(?:part [ivx]+ )?item (?:1a|1b|1c|10|11|12|13|14|15|16|1|2|3|4|5|6|7a|7|8|9a|9b|9c) ", "", normalized)
     return normalized in {
         "none",
         "reserved",

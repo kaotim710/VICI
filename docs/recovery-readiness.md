@@ -7,6 +7,8 @@ regression reporting.
 
 Recovery is explicit. It runs only when the user calls recovery actions from the UI or scripts.
 The extractor must not autonomously fetch external documents or replace item content without review.
+In the UI, recovery actions belong after the extracted item list so users can review primary item
+content before choosing recovery paths.
 
 ## Action Classes
 

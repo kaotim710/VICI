@@ -51,13 +51,21 @@ class WebUiTests(unittest.TestCase):
         self.assertIn("renderStructurePanel", html)
         self.assertIn("structure-section", html)
         self.assertIn("renderStructureSection", html)
+        self.assertIn("data-raw-section-item", html)
+        self.assertIn("sectionButton.dataset.rawSectionItem", html)
+        self.assertIn("button.closest('.raw-section-tools')", html)
         self.assertNotIn("Section snippets", html)
 
-    def test_detail_page_limits_structure_panel_to_supplemental_items(self):
+    def test_detail_page_limits_structure_panel_to_partitioned_items(self):
         html = web_ui.render_detail("wmt_2014_10k")
 
-        self.assertIn("isSupplemental ? renderStructurePanel(item) : ''", html)
-        self.assertIn("!(isSupplemental && rawSections.length)", html)
+        self.assertIn("hasInternalTocSections", html)
+        self.assertIn("(isSupplemental || hasInternalTocSections) ? renderStructurePanel(item) : ''", html)
+
+    def test_detail_page_places_recovery_panel_after_items(self):
+        html = web_ui.render_detail("wmt_2014_10k")
+
+        self.assertLess(html.index('id="items"'), html.index('id="recovery-panel"'))
 
     def test_raw_section_preview_preserves_tables_and_archive_base(self):
         payload = web_ui.raw_section_preview("wmt_2014_10k", "15")
@@ -103,9 +111,8 @@ class WebUiTests(unittest.TestCase):
         self.assertIsInstance(by_item["15"]["raw_structure"]["outline"], list)
         self.assertIsInstance(by_item["15"]["raw_structure"]["sections"], list)
         self.assertGreater(len(by_item["15"]["raw_structure"]["sections"]), 0)
-        exhibit_section = by_item["15"]["raw_structure"]["sections"][3]
-        self.assertIn("Restated Certificate", exhibit_section["label"])
-        self.assertIn("href", exhibit_section)
+        self.assertEqual(by_item["15"]["raw_structure"]["section_mode"], "internal_toc")
+        self.assertIn("Three-Year Summary", by_item["15"]["raw_structure"]["sections"][0]["label"])
         self.assertIsNone(by_item["15"]["raw_structure"]["supplemental_chunk"])
         self.assertIn("supplemental-15", by_item)
         supplemental = by_item["supplemental-15"]
@@ -127,6 +134,8 @@ class WebUiTests(unittest.TestCase):
         self.assertIn("Financial Information", labels)
         self.assertIn("Business Results", labels)
         self.assertGreater(supplemental["raw_structure"]["sections"][0]["table_count"], 0)
+        self.assertIn("raw_start", supplemental["raw_structure"]["sections"][0])
+        self.assertIn("raw_end", supplemental["raw_structure"]["sections"][0])
 
     def test_supplemental_raw_section_preview_preserves_own_raw_structure(self):
         payload = web_ui.raw_section_preview("jpm_2023_10k", "supplemental-15")
@@ -135,6 +144,63 @@ class WebUiTests(unittest.TestCase):
         self.assertGreater(payload["image_count"], 0)
         self.assertIn("Table of contents", payload["srcdoc"])
         self.assertIn("Three-Year Summary", payload["srcdoc"])
+
+    def test_supplemental_raw_section_preview_can_scope_to_subsection(self):
+        whole = web_ui.raw_section_preview("xom_2023_10k", "supplemental-16")
+        subsection = web_ui.raw_section_preview("xom_2023_10k", "supplemental-16:0")
+
+        self.assertEqual(subsection["section_label"], "Business Profile")
+        self.assertGreater(subsection["table_count"], 0)
+        self.assertGreater(subsection["raw_bytes"], 1000)
+        self.assertLess(subsection["raw_bytes"], whole["raw_bytes"])
+        self.assertIn("<table", subsection["srcdoc"].lower())
+
+    def test_internal_toc_items_render_partitioned_sections(self):
+        cases = [
+            ("bac_2023_10k", "8", "Consolidated Statement of Income"),
+            ("bac_2014_10k", "8", "Consolidated Statement of Income"),
+            ("unh_2014_10k", "8", "Report of Independent Registered Public Accounting Firm"),
+            ("unh_2023_10k", "8", "Report of Independent Registered Public Accounting Firm"),
+            ("jnj_2023_10k", "8", "Consolidated"),
+            ("jpm_2023_10k", "15", "Three-Year Summary"),
+            ("xom_2014_10k", "15", "Financial Summary"),
+            ("cvx_2023_10k", "14", "Key Financial Results"),
+        ]
+
+        for filing_id, item_name, expected_label in cases:
+            with self.subTest(filing_id=filing_id, item=item_name):
+                payload = web_ui.extract_seed_filing(filing_id)
+                item = {row["item"]: row for row in payload["result"]["item_results"]}[item_name]
+                labels = [section["label"] for section in item["raw_structure"]["sections"]]
+                self.assertEqual(item["raw_structure"]["section_mode"], "internal_toc")
+                self.assertTrue(any(expected_label in label for label in labels))
+                self.assertGreaterEqual(len(labels), 3)
+
+    def test_internal_toc_subsection_raw_preview_is_scoped(self):
+        payload = web_ui.raw_section_preview("bac_2023_10k", "8:0")
+
+        self.assertEqual(payload["section_label"], "Consolidated Statement of Income")
+        self.assertGreater(payload["table_count"], 0)
+        self.assertIn("<table", payload["srcdoc"].lower())
+
+    def test_known_front_toc_false_positives_use_body_headings(self):
+        cases = [
+            ("jpm_2023_10k", "6", "Item 6. Reserved"),
+            ("unh_2014_10k", "2", "ITEM 2."),
+            ("unh_2014_10k", "7", "ITEM 7."),
+            ("unh_2014_10k", "13", "ITEM 13."),
+            ("unh_2014_10k", "14", "ITEM 14."),
+            ("amzn_2023_10k", "2", "Item 2."),
+            ("amzn_2023_10k", "3", "Item 3."),
+            ("amzn_2023_10k", "16", "Item 16."),
+        ]
+
+        for filing_id, item_name, expected_start in cases:
+            with self.subTest(filing_id=filing_id, item=item_name):
+                payload = web_ui.extract_seed_filing(filing_id)
+                item = {row["item"]: row for row in payload["result"]["item_results"]}[item_name]
+                self.assertTrue(item["text"].startswith(expected_start))
+                self.assertNotIn("Start heading has TOC-like signals.", item["warnings"])
 
     def test_supplemental_partitioning_runs_across_seed_filings(self):
         expected = {
