@@ -309,3 +309,9 @@ pg_2015_10k Item 7A: 本身僅一句sentence
 pg_2025_10k Item 6: 僅留有標題
 pg_2025_10k Item 7A: 本身僅一句sentence
 ```
+
+## Exhibit Table Frontend Request
+
+```text
+過長的部分目前都是偏exhibit或是table的話，在前端也簡單實作讓其可以顯示。另外若有圖片目前的處理策略是什麼
+```

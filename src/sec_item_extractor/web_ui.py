@@ -498,12 +498,14 @@ def render_detail(filing_id: str) -> str:
             const selector = action.reason === 'internal_item_toc_detected'
               ? `<label>Selection<select data-recovery-selection="${{escapeHtml(item.item)}}">${{action.options.map(option => `<option value="${{escapeHtml(option)}}">${{escapeHtml(option)}}</option>`).join('')}}</select></label>`
               : '';
+            const reviewSnippets = renderReviewSnippets(item, action);
             row.innerHTML = `
               <div>
                 <strong>Item ${{escapeHtml(item.item)}} | ${{escapeHtml(action.action_type)}}:${{escapeHtml(action.reason)}}</strong>
                 <p>${{escapeHtml(action.description)}}</p>
                 <small>${{escapeHtml(action.severity)}} | user input ${{action.requires_user_input ? 'yes' : 'no'}} | ${{escapeHtml(action.next_step || 'none')}}</small>
               </div>
+              ${{reviewSnippets}}
               ${{selector}}
             `;
             container.appendChild(row);
@@ -558,6 +560,40 @@ def render_detail(filing_id: str) -> str:
           const value = String(text || '').replace(/\\s+/g, ' ').trim();
           if (value.length <= 520) return value;
           return mode === 'end' ? value.slice(-520) : value.slice(0, 520);
+        }}
+
+        function renderReviewSnippets(item, action) {{
+          if (!['section_reference_detected', 'exhibit_index_detected', 'external_or_other_document_reference'].includes(action.reason)) {{
+            return '';
+          }}
+          const snippets = reviewSnippetsFor(item.text || '', action.reason);
+          if (!snippets.length) {{
+            return '';
+          }}
+          return `
+            <details class="review-snippets" open>
+              <summary>Review snippets</summary>
+              ${{snippets.map(snippet => `<pre>${{escapeHtml(snippet)}}</pre>`).join('')}}
+            </details>
+          `;
+        }}
+
+        function reviewSnippetsFor(text, reason) {{
+          const patterns = reason === 'exhibit_index_detected'
+            ? [/\\bexhibit(?:s| index)?\\b/i, /\\bschedule(?:s)?\\b/i, /\\btable\\b/i]
+            : [/\\bincorporated\\s+herein\\s+by\\s+reference\\b/i, /\\bsee\\s+(?:the\\s+)?(?:annual report|proxy statement|exhibit index|note\\s+\\d+|part\\s+[ivx]+|item\\s+\\d)/i, /\\brefer(?:red|s|ring)?\\s+to\\b/i, /\\bappears?\\s+on\\s+pages?\\s+\\d+/i];
+          const lines = String(text || '').split(/\\n+/).map(line => line.replace(/\\s+/g, ' ').trim()).filter(Boolean);
+          const snippets = [];
+          for (let index = 0; index < lines.length && snippets.length < 4; index += 1) {{
+            if (!patterns.some(pattern => pattern.test(lines[index]))) continue;
+            const start = Math.max(0, index - 1);
+            const end = Math.min(lines.length, index + 2);
+            snippets.push(lines.slice(start, end).join('\\n'));
+          }}
+          if (!snippets.length && text.trim()) {{
+            snippets.push(edgeSnippet(text, 'start'));
+          }}
+          return snippets;
         }}
         </script>
         """,
@@ -733,6 +769,21 @@ h1, h2, p { margin: 0; }
   border-radius: 6px;
   background: #ffffff;
   color: #19212a;
+}
+.review-snippets {
+  border: 1px solid #e0e4e9;
+  border-radius: 6px;
+  background: #fbfcfd;
+}
+.review-snippets summary { cursor: pointer; padding: 8px 10px; color: #44515f; }
+.review-snippets pre {
+  max-height: 180px;
+  overflow: auto;
+  margin: 0;
+  padding: 8px 10px;
+  border-top: 1px solid #e0e4e9;
+  white-space: pre-wrap;
+  font: 12px/1.5 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 }
 .recovery-result h3 { margin: 0; font-size: 16px; }
 .recovery-result pre {

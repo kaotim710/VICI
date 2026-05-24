@@ -27,6 +27,13 @@ class WebUiTests(unittest.TestCase):
         self.assertIn("/api/filings/", html)
         self.assertNotIn("The Company designs", html)
 
+    def test_detail_page_can_render_action_review_snippets(self):
+        html = web_ui.render_detail("aapl_2023_10k")
+
+        self.assertIn("review-snippets", html)
+        self.assertIn("reviewSnippetsFor", html)
+        self.assertIn("exhibit_index_detected", html)
+
     def test_extract_endpoint_runs_pipeline_on_demand(self):
         class Result:
             parser_version = "test"
