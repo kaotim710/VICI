@@ -40,6 +40,9 @@ class WebUiTests(unittest.TestCase):
         html = web_ui.render_detail("wmt_2014_10k")
 
         self.assertIn("Show original filing structure", html)
+        self.assertIn("Show extracted view", html)
+        self.assertIn("extracted-view", html)
+        self.assertIn("rawVisible", html)
         self.assertIn("raw-section-frame", html)
         self.assertIn("/raw-section/", html)
         self.assertIn("structure-tag", html)
@@ -48,6 +51,13 @@ class WebUiTests(unittest.TestCase):
         self.assertIn("renderStructurePanel", html)
         self.assertIn("structure-section", html)
         self.assertIn("renderStructureSection", html)
+        self.assertNotIn("Section snippets", html)
+
+    def test_detail_page_limits_structure_panel_to_supplemental_items(self):
+        html = web_ui.render_detail("wmt_2014_10k")
+
+        self.assertIn("isSupplemental ? renderStructurePanel(item) : ''", html)
+        self.assertIn("!(isSupplemental && rawSections.length)", html)
 
     def test_raw_section_preview_preserves_tables_and_archive_base(self):
         payload = web_ui.raw_section_preview("wmt_2014_10k", "15")
@@ -106,6 +116,18 @@ class WebUiTests(unittest.TestCase):
         self.assertIn("Three-Year Summary", supplemental["raw_structure"]["sections"][0]["label"])
         self.assertNotIn("href", supplemental["raw_structure"]["sections"][0])
 
+    def test_supplemental_partition_uses_page_number_toc_links(self):
+        payload = web_ui.extract_seed_filing("xom_2023_10k")
+        by_item = {item["item"]: item for item in payload["result"]["item_results"]}
+
+        supplemental = by_item["supplemental-16"]
+        labels = [section["label"] for section in supplemental["raw_structure"]["sections"]]
+        self.assertGreaterEqual(len(labels), 20)
+        self.assertEqual(labels[0], "Business Profile")
+        self.assertIn("Financial Information", labels)
+        self.assertIn("Business Results", labels)
+        self.assertGreater(supplemental["raw_structure"]["sections"][0]["table_count"], 0)
+
     def test_supplemental_raw_section_preview_preserves_own_raw_structure(self):
         payload = web_ui.raw_section_preview("jpm_2023_10k", "supplemental-15")
 
@@ -138,6 +160,8 @@ class WebUiTests(unittest.TestCase):
             if supplemental_items:
                 observed[filing_id] = supplemental_items
                 for item in supplemental_items:
+                    item_payload = next(result_item for result_item in result_dict["item_results"] if result_item["item"] == item)
+                    self.assertGreater(len(item_payload["raw_structure"]["sections"]), 0)
                     preview = web_ui.raw_section_preview(filing_id, item)
                     self.assertGreater(preview["raw_bytes"], 1000)
                     self.assertGreater(preview["table_count"] + preview["image_count"], 0)

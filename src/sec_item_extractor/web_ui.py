@@ -694,10 +694,11 @@ def render_detail(filing_id: str) -> str:
               ? item.recommended_actions.map(action => `<a href="#recovery-panel" class="action-chip ${{escapeHtml(action.severity)}}">${{escapeHtml(action.action_type)}}:${{escapeHtml(action.reason)}}</a>`).join('')
               : '<span class="empty-chip">none</span>';
             const text = item.text || '';
-            const startSnippet = edgeSnippet(text, 'start');
-            const endSnippet = edgeSnippet(text, 'end');
+            const isSupplemental = String(item.item || '').startsWith('supplemental-');
             const structureTags = renderStructureTags(item.raw_structure || {{}});
-            const structurePanel = renderStructurePanel(item);
+            const rawSections = Array.isArray(item.raw_structure?.sections) ? item.raw_structure.sections : [];
+            const structurePanel = isSupplemental ? renderStructurePanel(item) : '';
+            const showMainText = !(isSupplemental && rawSections.length);
             const rawTools = item.raw_section_available === false ? '' : `
               <div class="raw-section-tools">
                 <button class="secondary-button compact" data-raw-item="${{escapeHtml(item.item)}}">Show original filing structure</button>
@@ -717,27 +718,20 @@ def render_detail(filing_id: str) -> str:
                   <span class="pill ${{escapeHtml(item.confidence_level)}}">${{escapeHtml(item.confidence_level)}}</span>
                 </div>
               </header>
-              <dl id="${{evidenceId}}" class="evidence-grid">
-                <div><dt>Start</dt><dd>${{escapeHtml(item.start_evidence?.text || 'none')}}</dd></div>
-                <div><dt>End</dt><dd>${{escapeHtml(item.end_evidence?.text || 'none')}}</dd></div>
-                <div><dt>Warnings</dt><dd class="chip-row">${{warningLinks}}</dd></div>
-                <div><dt>Actions</dt><dd class="chip-row">${{actionLinks}}</dd></div>
-              </dl>
-              <details class="snippet-details" open>
-                <summary>Section snippets</summary>
-                <div class="snippet-grid">
-                  <pre></pre>
-                  <pre></pre>
-                </div>
-              </details>
-              ${{structurePanel}}
+              <div class="extracted-view">
+                <dl id="${{evidenceId}}" class="evidence-grid">
+                  <div><dt>Start</dt><dd>${{escapeHtml(item.start_evidence?.text || 'none')}}</dd></div>
+                  <div><dt>End</dt><dd>${{escapeHtml(item.end_evidence?.text || 'none')}}</dd></div>
+                  <div><dt>Warnings</dt><dd class="chip-row">${{warningLinks}}</dd></div>
+                  <div><dt>Actions</dt><dd class="chip-row">${{actionLinks}}</dd></div>
+                </dl>
+                ${{structurePanel}}
+                ${{showMainText ? '<pre class="item-text"></pre>' : ''}}
+              </div>
               ${{rawTools}}
-              <pre class="item-text"></pre>
             `;
-            const snippets = article.querySelectorAll('.snippet-grid pre');
-            snippets[0].textContent = startSnippet;
-            snippets[1].textContent = endSnippet;
-            article.querySelector('.item-text').textContent = item.text || '';
+            const itemText = article.querySelector('.item-text');
+            if (itemText) itemText.textContent = item.text || '';
             const rawButton = article.querySelector('[data-raw-item]');
             if (rawButton) rawButton.addEventListener('click', () => loadRawSection(item.item, article));
             items.appendChild(article);
@@ -910,6 +904,23 @@ def render_detail(filing_id: str) -> str:
           const button = article.querySelector('[data-raw-item]');
           const meta = article.querySelector('.raw-section-meta');
           const preview = article.querySelector('.raw-section-preview');
+          const extractedView = article.querySelector('.extracted-view');
+          if (article.dataset.rawVisible === 'true') {{
+            article.dataset.rawVisible = 'false';
+            if (extractedView) extractedView.hidden = false;
+            preview.hidden = true;
+            button.textContent = 'Show original filing structure';
+            meta.textContent = '';
+            return;
+          }}
+          article.dataset.rawVisible = 'true';
+          if (extractedView) extractedView.hidden = true;
+          preview.hidden = false;
+          button.textContent = 'Show extracted view';
+          if (preview.dataset.loaded === 'true') {{
+            meta.textContent = preview.dataset.meta || '';
+            return;
+          }}
           button.disabled = true;
           meta.textContent = 'Loading original HTML...';
           preview.innerHTML = '';
@@ -918,11 +929,13 @@ def render_detail(filing_id: str) -> str:
             const payload = await response.json();
             if (!response.ok) throw new Error(payload.message || payload.error || 'raw_section_failed');
             meta.textContent = `${{payload.table_count}} tables | ${{payload.image_count}} images | ${{Number(payload.raw_bytes).toLocaleString()}} bytes`;
+            preview.dataset.meta = meta.textContent;
             const iframe = document.createElement('iframe');
             iframe.className = 'raw-section-frame';
             iframe.setAttribute('sandbox', '');
             iframe.srcdoc = payload.srcdoc;
             preview.appendChild(iframe);
+            preview.dataset.loaded = 'true';
           }} catch (error) {{
             meta.textContent = `Original view failed: ${{error.message}}`;
           }} finally {{

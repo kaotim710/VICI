@@ -58,8 +58,11 @@ Raw previews are scoped to the selected item boundary.
 - Tables and images are preserved inside a sandboxed `srcdoc` iframe with the SEC archive directory
   as the base URL when available.
 - Items with tables/images receive UI tags so reviewers can inspect fidelity quickly.
-- Large item fragments expose a `Section structure` toggle built from bold headings, headings, or
-  text-derived exhibit labels.
+- Normal 10-K items should not show section snippets or section-structure toggles by default. Keep
+  the default item surface focused on evidence, warnings/actions, and extracted text.
+- `Show original filing structure` is a reversible view toggle. It switches between the extracted
+  item view and the scoped original filing HTML view, and can switch back without rerunning
+  extraction.
 - Exhibit section titles should include SEC archive hyperlinks when the original exhibit index row
   has links.
 
@@ -68,7 +71,7 @@ Raw previews are scoped to the selected item boundary.
 Internal TOCs inside normal items stay inside the item.
 
 - Examples: long Item 7, Item 8, or Item 14 sections with their own financial or management TOC.
-- These should be represented as toggleable structure sections in the original item.
+- These stay inside the item and can be inspected through `Show original filing structure`.
 - They should not be moved into a virtual supplemental item unless they are terminal filing content
   after Item 15 or Item 16.
 
@@ -89,8 +92,14 @@ Current detection rules:
 - Reject signature-only and exhibit-index-only `Table of Contents` blocks unless they are connected
   to financial-section evidence.
 - Build subsection toggles from anchor TOC links when possible.
+- Treat row-based TOCs as first-class evidence. If a TOC row has a left-side label and a right-side
+  linked page number, use the row label as the subsection title and the page link as the boundary.
+- If a terminal financial TOC has no usable links, infer subsection starts from TOC row labels and
+  later matching heading text in the raw chunk.
 - If anchor TOC links are unavailable, fall back to raw bold/headline outline extraction.
 - Suppress small unstructured chunks when no sections are found and raw media count is low.
+- In the UI, supplemental items with reconstructed subsections should render the child sections as
+  the primary review surface and avoid duplicating the full supplemental text chunk below them.
 
 Current seed coverage:
 
@@ -133,3 +142,8 @@ Any strategy change should include focused tests for the behavior being changed.
 
 - 2026-05-24: Created strategy record. Documented deterministic extraction, raw structure previews,
   internal TOC handling, and seed-wide supplemental partition rules.
+- 2026-05-24: Expanded supplemental subsection reconstruction to support row-based TOCs where page
+  numbers are links and labels are plain text, plus unlinked financial TOC rows with inferred
+  heading offsets.
+- 2026-05-24: Simplified normal item UI by removing section snippets and section-structure toggles;
+  made original filing structure a reversible view toggle instead of an appended one-way preview.

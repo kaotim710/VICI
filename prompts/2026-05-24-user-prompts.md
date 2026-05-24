@@ -403,3 +403,15 @@ supplemental chunk 這部分應該是在同一個頁面操作，而不是超hype
 ```text
 新增一個strategy的md file，將目前的策略規則寫入，之後在策略上有更改就read n write這個file
 ```
+
+## Supplemental TOC Subsection Request
+
+```text
+目前我看到的supplemental partition，仍是一段很大段的chunk，我的想法是跟處理item一樣，利用他的toc去分類並且做子項的展示
+```
+
+## Item UI Simplification And Raw Toggle Request
+
+```text
+一般item不需要有section snippets，section structure也不用。Show original filing structure應該是讓其在filing structure跟目前的格式做來回變換，而不是變不回來
+```

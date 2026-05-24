@@ -169,23 +169,60 @@ def _nearby_financial_heading_start(fragment: str, toc_offset: int) -> int | Non
 def _supplemental_toc_entries(chunk: str, limit: int) -> list[dict]:
     toc_entries = []
     seen = set()
-    for link_match in re.finditer(r"(?is)<a\b[^>]*href=[\"'](?P<href>[^\"']+)[\"'][^>]*>(?P<label>.*?)</a>", chunk[:250000]):
-        label = _html_text(link_match.group("label"))
+    for row_match in re.finditer(r"(?is)<tr\b.*?</tr>", chunk[:250000]):
+        row_html = row_match.group(0)
+        row_text = _html_text(row_html)
+        row_lower = row_text.lower()
+        if ("annual report" in row_lower or "form 10-k" in row_lower) and toc_entries:
+            break
+        for entry in _supplemental_toc_entries_from_row(row_html):
+            key = entry["label"].lower()
+            href_key = entry.get("href", "").lower()
+            if key in seen or (href_key and href_key in seen):
+                continue
+            seen.add(key)
+            if href_key:
+                seen.add(href_key)
+            toc_entries.append(entry)
+            if len(toc_entries) >= limit:
+                break
+        if len(toc_entries) >= limit:
+            break
+    return toc_entries
+
+
+def _supplemental_toc_entries_from_row(row_html: str) -> list[dict]:
+    row_text = _html_text(row_html)
+    entries: list[dict] = []
+    for link_match in re.finditer(r"(?is)<a\b[^>]*href=[\"'](?P<href>#[^\"']+)[\"'][^>]*>(?P<label>.*?)</a>", row_html):
+        linked_text = _html_text(link_match.group("label"))
+        label = linked_text
+        if re.fullmatch(r"\d+[A-Za-z]?", linked_text):
+            label = re.sub(rf"\s+{re.escape(linked_text)}\s*$", "", row_text).strip()
         if not _looks_like_supplemental_label(label):
             continue
-        key = label.lower()
-        if key in seen:
-            continue
-        seen.add(key)
-        toc_entries.append(
+        entries.append(
             {
                 "label": label[:180],
                 "href": unescape(link_match.group("href")),
             }
         )
-        if len(toc_entries) >= limit:
-            break
-    return toc_entries
+    if entries:
+        return entries
+    return _unlinked_supplemental_toc_entries(row_text)
+
+
+def _unlinked_supplemental_toc_entries(row_text: str) -> list[dict]:
+    if "annual report" in row_text.lower():
+        return []
+    entries = []
+    matches = list(re.finditer(r"(?<!\d)(?P<page>\d{1,3})\s+(?P<label>.*?)(?=\s+\d{1,3}\s+|$)", row_text))
+    for match in matches:
+        label = match.group("label").strip(" :")
+        if not _looks_like_supplemental_label(label):
+            continue
+        entries.append({"label": label[:180]})
+    return entries
 
 
 def raw_section_fragment(content: str, item_result) -> tuple[int, int, str]:
@@ -251,7 +288,7 @@ def _looks_like_outline_label(value: str) -> bool:
 
 
 def _looks_like_supplemental_label(value: str) -> bool:
-    if not 8 <= len(value) <= 220:
+    if not 4 <= len(value) <= 220:
         return False
     if re.fullmatch(r"[\d.,$%() -]+", value):
         return False
@@ -265,7 +302,7 @@ def _supplemental_sections_from_toc(chunk: str, toc_entries: list[dict]) -> list
     starts = []
     seen_offsets = set()
     for entry in toc_entries:
-        offset = _anchor_offset(chunk, entry["href"])
+        offset = _toc_entry_offset(chunk, entry)
         if offset is None or offset in seen_offsets:
             continue
         seen_offsets.add(offset)
@@ -289,15 +326,37 @@ def _supplemental_sections_from_toc(chunk: str, toc_entries: list[dict]) -> list
     return sections
 
 
+def _toc_entry_offset(chunk: str, entry: dict) -> int | None:
+    href = entry.get("href")
+    if href:
+        return _anchor_offset(chunk, href)
+    return _label_text_offset(chunk, entry["label"])
+
+
 def _anchor_offset(chunk: str, href: str) -> int | None:
     if not href.startswith("#"):
         return None
     anchor = re.escape(href[1:])
-    match = re.search(rf"(?is)\bid=[\"']{anchor}[\"']", chunk)
+    match = re.search(rf"(?is)\b(?:id|name)=[\"']{anchor}[\"']", chunk)
     if not match:
         return None
     tag_start = chunk.rfind("<", 0, match.start())
     return tag_start if tag_start >= 0 else match.start()
+
+
+def _label_text_offset(chunk: str, label: str) -> int | None:
+    tokens = re.findall(r"[A-Za-z0-9]+", label)
+    if not tokens:
+        return None
+    separator = r"(?:\s|&nbsp;|&#160;|<[^>]+>)+"
+    pattern = separator.join(re.escape(token) for token in tokens[:10])
+    search_start = min(100000, max(len(chunk) // 20, 0))
+    match = re.search(pattern, chunk[search_start:], flags=re.IGNORECASE)
+    if not match:
+        return None
+    start = search_start + match.start()
+    tag_start = chunk.rfind("<", 0, start)
+    return tag_start if tag_start >= 0 else start
 
 
 def _truncate(value: str, limit: int) -> str:
