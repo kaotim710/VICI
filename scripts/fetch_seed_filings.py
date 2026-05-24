@@ -24,21 +24,27 @@ def main() -> int:
     manifest = json.loads(MANIFEST_PATH.read_text(encoding="utf-8"))
     RAW_DIR.mkdir(parents=True, exist_ok=True)
     client = SECClient(user_agent=user_agent)
+    filings_by_cik = {}
 
     for filing in manifest["filings"]:
         destination = RAW_DIR / f"{filing['filing_id']}.html"
         if destination.exists():
-            print(f"skip existing {destination.relative_to(ROOT)}")
+            print(f"skip existing {destination.relative_to(ROOT)}", flush=True)
             continue
 
-        match = _find_10k_for_year(client.iter_submission_filings(filing["cik"]), filing["fiscal_year"])
+        cik = filing["cik"]
+        if cik not in filings_by_cik:
+            print(f"fetch submissions for CIK {cik}", flush=True)
+            filings_by_cik[cik] = client.iter_submission_filings(cik)
+
+        match = _find_10k_for_year(filings_by_cik[cik], filing["fiscal_year"])
         if not match:
             print(f"missing {filing['filing_id']}: no 10-K with reportDate in fiscal year", file=sys.stderr)
             continue
 
         body = client.download_filing(filing["cik"], match.accession_number, match.primary_document)
         destination.write_bytes(body)
-        print(f"fetched {filing['filing_id']} -> {destination.relative_to(ROOT)}")
+        print(f"fetched {filing['filing_id']} -> {destination.relative_to(ROOT)}", flush=True)
 
     return 0
 

@@ -163,3 +163,9 @@ Core Design Philosophy
 ```text
 另外我想在prompts/中記錄我的prompt token消耗
 ```
+
+## Seed Filing Download Request
+
+```text
+好，接下來先下載20份的10-k來當test filing
+```
