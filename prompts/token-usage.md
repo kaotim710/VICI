@@ -32,3 +32,4 @@ estimated_prompt_tokens =
 | 2026-05-24 | candidate_pair_resolver_request | `prompts/2026-05-24-user-prompts.md` |  | 7 | Requested implementing the candidate-pair idea and running tests. |
 | 2026-05-24 | warning_count_followup_request | `prompts/2026-05-24-user-prompts.md` |  | 13 | Asked whether warnings decreased and requested continuing with follow-up work if so. |
 | 2026-05-24 | gold_boundary_implementation_request | `prompts/2026-05-24-user-prompts.md` |  | 5 | Requested implementing the proposed gold boundary evaluation milestone. |
+| 2026-05-24 | recovery_runner_implementation_request | `prompts/2026-05-24-user-prompts.md` |  | 2 | Approved implementing deterministic recovery action runner. |

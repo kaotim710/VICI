@@ -64,6 +64,18 @@ Export a warning-focused audit report:
 python3 scripts/export_warning_audit_md.py
 ```
 
+Run deterministic recovery actions for warnings:
+
+```bash
+python3 scripts/run_recovery_actions.py
+```
+
+For internal Item 7 TOC cases, pass an explicit subsection choice:
+
+```bash
+python3 scripts/run_recovery_actions.py --select "bac_2023_10k:7=Executive Summary"
+```
+
 Evaluate lightweight gold boundary expectations:
 
 ```bash
