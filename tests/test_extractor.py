@@ -55,6 +55,11 @@ class ExtractorTests(unittest.TestCase):
         self.assertEqual(by_item["1"].start_evidence.item, "1")
         self.assertIsNotNone(by_item["1"].start_evidence.raw_offset)
         self.assertIsNotNone(by_item["1"].start_evidence.block_index)
+        self.assertEqual(by_item["1"].confidence_components[0].name, "legal_boundary_pair")
+        self.assertAlmostEqual(
+            round(sum(component.earned for component in by_item["1"].confidence_components), 2),
+            by_item["1"].confidence_score,
+        )
         self.assertEqual(by_item["1"].candidate_attempts[0].decision, "selected")
         self.assertIn("START_HEADING_FOUND", by_item["1"].candidate_attempts[0].validation_reasons)
         self.assertEqual(by_item["7"].end_evidence.item, "7A")

@@ -63,6 +63,15 @@ class CandidateAttempt:
 
 
 @dataclass(frozen=True)
+class ConfidenceComponent:
+    name: str
+    weight: float
+    earned: float
+    passed: bool
+    reason: str
+
+
+@dataclass(frozen=True)
 class ItemResult:
     item: str
     status: str
@@ -71,6 +80,7 @@ class ItemResult:
     end_offset: int | None = None
     confidence_level: str = "low"
     confidence_score: float = 0.0
+    confidence_components: list[ConfidenceComponent] = field(default_factory=list)
     start_evidence: Evidence | None = None
     end_evidence: Evidence | None = None
     candidate_attempts: list[CandidateAttempt] = field(default_factory=list)

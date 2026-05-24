@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from .candidates import TARGET_ITEMS, find_heading_candidates, is_expected_title, legal_next_items
 from .cleaning import parse_document
-from .models import CandidateAttempt, Evidence, ExtractionResult, HeadingCandidate, ItemResult
+from .models import CandidateAttempt, ConfidenceComponent, Evidence, ExtractionResult, HeadingCandidate, ItemResult
 
 PARSER_VERSION = "deterministic_text_v1"
 
@@ -102,31 +102,108 @@ def _build_success_result(
     section_text = text[start.start : end.start].strip()
     reasons = ["START_HEADING_FOUND", "LEGAL_END_HEADING_FOUND"]
     warnings: list[str] = []
-    score = 0.55
+    confidence_components = [
+        ConfidenceComponent(
+            name="legal_boundary_pair",
+            weight=0.55,
+            earned=0.55,
+            passed=True,
+            reason="Start heading and legal end heading were found.",
+        )
+    ]
 
     if not start.is_toc_like:
-        score += 0.15
+        confidence_components.append(
+            ConfidenceComponent(
+                name="start_not_toc_like",
+                weight=0.15,
+                earned=0.15,
+                passed=True,
+                reason="Start heading has no TOC-like signals.",
+            )
+        )
         reasons.append("START_NOT_TOC_LIKE")
     else:
+        confidence_components.append(
+            ConfidenceComponent(
+                name="start_not_toc_like",
+                weight=0.15,
+                earned=0.0,
+                passed=False,
+                reason="Start heading has TOC-like signals.",
+            )
+        )
         warnings.append("Start heading has TOC-like signals.")
 
     if not end.is_toc_like:
-        score += 0.10
+        confidence_components.append(
+            ConfidenceComponent(
+                name="end_not_toc_like",
+                weight=0.10,
+                earned=0.10,
+                passed=True,
+                reason="End heading has no TOC-like signals.",
+            )
+        )
         reasons.append("END_NOT_TOC_LIKE")
     else:
+        confidence_components.append(
+            ConfidenceComponent(
+                name="end_not_toc_like",
+                weight=0.10,
+                earned=0.0,
+                passed=False,
+                reason="End heading has TOC-like signals.",
+            )
+        )
         warnings.append("End heading has TOC-like signals.")
 
     if is_expected_title(start.item, start.normalized_text):
-        score += 0.10
+        confidence_components.append(
+            ConfidenceComponent(
+                name="start_expected_title",
+                weight=0.10,
+                earned=0.10,
+                passed=True,
+                reason="Start heading contains the expected canonical title.",
+            )
+        )
     else:
+        confidence_components.append(
+            ConfidenceComponent(
+                name="start_expected_title",
+                weight=0.10,
+                earned=0.0,
+                passed=False,
+                reason="Start heading does not contain the expected canonical title.",
+            )
+        )
         warnings.append("Start heading does not contain the expected canonical title.")
 
     if 1000 <= len(section_text) <= 250000:
-        score += 0.10
+        confidence_components.append(
+            ConfidenceComponent(
+                name="section_length_reasonable",
+                weight=0.10,
+                earned=0.10,
+                passed=True,
+                reason="Section length is within the first-pass expected range.",
+            )
+        )
         reasons.append("SECTION_LENGTH_REASONABLE")
     else:
+        confidence_components.append(
+            ConfidenceComponent(
+                name="section_length_reasonable",
+                weight=0.10,
+                earned=0.0,
+                passed=False,
+                reason="Section length is outside the first-pass expected range.",
+            )
+        )
         warnings.append("Section length is outside the expected first-pass range.")
 
+    score = sum(component.earned for component in confidence_components)
     confidence_level = "high" if score >= 0.85 else "medium" if score >= 0.60 else "low"
     return ItemResult(
         item=start.item,
@@ -136,6 +213,7 @@ def _build_success_result(
         end_offset=end.start,
         confidence_level=confidence_level,
         confidence_score=round(min(score, 1.0), 2),
+        confidence_components=confidence_components,
         start_evidence=_evidence("start_heading", start),
         end_evidence=_evidence("end_heading", end),
         candidate_attempts=attempts,

@@ -27,3 +27,4 @@ estimated_prompt_tokens =
 | 2026-05-24 | continue_milestones_request | `prompts/2026-05-24-user-prompts.md` |  | 7 | Requested continuing with subsequent milestones. |
 | 2026-05-24 | seed_extraction_markdown_request | `prompts/2026-05-24-user-prompts.md` |  | 15 | Requested testing extraction on seed filings and displaying results as Markdown. |
 | 2026-05-24 | seed_extraction_snippet_request | `prompts/2026-05-24-user-prompts.md` |  | 22 | Requested adding ending snippets alongside beginning snippets in the Markdown report. |
+| 2026-05-24 | next_step_request | `prompts/2026-05-24-user-prompts.md` |  | 5 | Requested proceeding to the next step. |

@@ -88,3 +88,10 @@ when available. `html_to_text()` remains available for the deterministic extract
 Candidate retrieval now attaches block/raw metadata to heading candidates and records selected or
 rejected candidate attempts in each item result. This keeps boundary decisions inspectable without
 introducing embeddings or LLM calls.
+
+## Milestone 4: Confidence Summary
+
+Item results now include `confidence_components`, which break the final score into deterministic,
+explainable signals: legal boundary pair, TOC filtering, expected title match, and section length.
+`scripts/evaluate_seed.py` also emits aggregate status, confidence-level, and warning counts across
+the seed filings.
