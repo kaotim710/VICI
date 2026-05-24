@@ -52,6 +52,12 @@ Evaluate whatever seed filings are present locally:
 python3 scripts/evaluate_seed.py
 ```
 
+Export a Markdown extraction report for the seed filings:
+
+```bash
+python3 scripts/export_seed_extractions_md.py
+```
+
 Inspect normalized narrative blocks for a filing:
 
 ```bash

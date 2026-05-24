@@ -181,3 +181,9 @@ ok，進行下一個milestone
 ```text
 好，繼續實作後續的milestone
 ```
+
+## Seed Extraction Markdown Request
+
+```text
+目前先測試對test filing 做extracting，並且以md的形式展示
+```
