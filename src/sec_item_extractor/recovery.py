@@ -4,6 +4,7 @@ import re
 from dataclasses import asdict, dataclass, field
 
 from .cleaning import parse_document
+from .contracts import RECOVERY_ACTION_CONTRACT_VERSION
 from .models import ExtractionResult, ItemResult, RecommendedAction
 
 
@@ -22,6 +23,10 @@ class RecoveryResult:
     options: list[str] = field(default_factory=list)
     selected_option: str | None = None
     evidence: list[str] = field(default_factory=list)
+    severity: str = "review"
+    requires_user_input: bool = False
+    next_step: str = ""
+    contract_version: str = RECOVERY_ACTION_CONTRACT_VERSION
 
     def to_dict(self) -> dict:
         return asdict(self)
@@ -65,6 +70,9 @@ def _run_action(
             message="External/reference document recovery is intentionally deferred until source resolution is implemented.",
             before_length=len(item.text or ""),
             options=action.options,
+            severity=action.severity,
+            requires_user_input=action.requires_user_input,
+            next_step=action.next_step,
         )
     return RecoveryResult(
         filing_id=filing_id,
@@ -75,6 +83,9 @@ def _run_action(
         message="No deterministic recovery runner is registered for this action.",
         before_length=len(item.text or ""),
         options=action.options,
+        severity=action.severity,
+        requires_user_input=action.requires_user_input,
+        next_step=action.next_step,
     )
 
 
@@ -92,6 +103,9 @@ def _recover_page_reference(
             status="blocked",
             message="No page range was found in the cross-reference text.",
             before_length=len(section_text),
+            severity=action.severity,
+            requires_user_input=action.requires_user_input,
+            next_step=action.next_step,
         )
 
     page_spans = _page_spans(document_text)
@@ -107,6 +121,9 @@ def _recover_page_reference(
             before_length=len(section_text),
             page_range=page_range,
             evidence=[f"parsed pages {page_range[0]}-{page_range[1]}", f"page locators found: {len(page_spans)}"],
+            severity=action.severity,
+            requires_user_input=action.requires_user_input,
+            next_step=action.next_step,
         )
 
     return RecoveryResult(
@@ -121,6 +138,9 @@ def _recover_page_reference(
         extracted_text=extracted,
         page_range=page_range,
         evidence=[f"parsed pages {page_range[0]}-{page_range[1]}", f"page locators found: {len(page_spans)}"],
+        severity=action.severity,
+        requires_user_input=action.requires_user_input,
+        next_step=action.next_step,
     )
 
 
@@ -141,6 +161,9 @@ def _recover_internal_toc(
             message="Choose one internal heading option to extract a subsection.",
             before_length=len(section_text),
             options=action.options,
+            severity=action.severity,
+            requires_user_input=action.requires_user_input,
+            next_step=action.next_step,
         )
 
     subsection = _extract_internal_subsection(section_text, action.options, selected_option)
@@ -155,6 +178,9 @@ def _recover_internal_toc(
             before_length=len(section_text),
             options=action.options,
             selected_option=selected_option,
+            severity=action.severity,
+            requires_user_input=action.requires_user_input,
+            next_step=action.next_step,
         )
 
     return RecoveryResult(
@@ -169,6 +195,9 @@ def _recover_internal_toc(
         extracted_text=subsection,
         options=action.options,
         selected_option=selected_option,
+        severity=action.severity,
+        requires_user_input=action.requires_user_input,
+        next_step=action.next_step,
     )
 
 

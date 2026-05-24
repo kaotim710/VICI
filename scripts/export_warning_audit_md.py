@@ -12,6 +12,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 
 from export_seed_extractions_md import _compact, _edge_snippets
 from sec_item_extractor import extract_items
+from sec_item_extractor.contracts import warning_category, warning_category_counts
 
 
 MANIFEST_PATH = ROOT / "fixtures" / "gold" / "seed_filings.json"
@@ -33,6 +34,7 @@ def build_report(manifest: dict) -> str:
     warning_items = []
     rejected_pair_items = []
     warning_counts = Counter()
+    all_warnings = []
     missing = []
 
     for filing in manifest["filings"]:
@@ -45,6 +47,7 @@ def build_report(manifest: dict) -> str:
         for item in result.item_results:
             if item.warnings:
                 warning_counts.update(item.warnings)
+                all_warnings.extend(item.warnings)
                 warning_items.append((filing, result, item))
             if any(attempt.decision == "rejected" for attempt in item.candidate_attempts):
                 rejected_pair_items.append((filing, result, item))
@@ -66,6 +69,12 @@ def build_report(manifest: dict) -> str:
         "| --- | ---: |",
         *[f"| `{warning}` | {count} |" for warning, count in sorted(warning_counts.items())],
         "",
+        "## Warning Category Counts",
+        "",
+        "| Category | Count |",
+        "| --- | ---: |",
+        *[f"| `{category}` | {count} |" for category, count in warning_category_counts(all_warnings).items()],
+        "",
         "## Audit Items",
         "",
     ]
@@ -82,6 +91,7 @@ def build_report(manifest: dict) -> str:
 
 def _audit_item(filing: dict, result, item) -> list[str]:
     warnings = ", ".join(f"`{warning}`" for warning in item.warnings)
+    categories = ", ".join(f"`{warning_category(warning)}`" for warning in item.warnings)
     start_snippet, end_snippet = _edge_snippets(item.text or "", SNIPPET_CHARS)
     lines = [
         f"### {filing['filing_id']} Item {item.item}",
@@ -92,6 +102,7 @@ def _audit_item(filing: dict, result, item) -> list[str]:
         f"- Confidence: `{item.confidence_level}` `{item.confidence_score:.2f}`",
         f"- Text length: `{len(item.text or '')}`",
         f"- Warnings: {warnings}",
+        f"- Warning categories: {categories}",
     ]
     if item.start_evidence:
         lines.append(f"- Start evidence: `{_compact(item.start_evidence.text, 160)}`")

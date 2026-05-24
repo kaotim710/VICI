@@ -1,0 +1,42 @@
+{
+  "description": "Incremental expansion plan for production-grade SEC 10-K item extraction evaluation.",
+  "target_shape": {
+    "industries": 5,
+    "companies_per_industry": 5,
+    "time_points_per_company": 5,
+    "target_filings": 125
+  },
+  "current_seed": {
+    "industries": 5,
+    "companies_per_industry": 2,
+    "time_points_per_company": 2,
+    "filings": 20,
+    "items": ["1", "1A", "7"]
+  },
+  "phases": [
+    {
+      "name": "seed_boundary_lock",
+      "goal": "Keep the 20 downloaded filings as a stable regression baseline.",
+      "items": ["1", "1A", "7"],
+      "exit_criteria": ["zero failed seed items", "zero failed gold boundary checks"]
+    },
+    {
+      "name": "core_item_expansion",
+      "goal": "Add verified boundaries for nearby and high-value sections.",
+      "items": ["7A", "8", "15"],
+      "exit_criteria": ["warnings categorized", "all recovery actions have contract metadata"]
+    },
+    {
+      "name": "industry_breadth",
+      "goal": "Expand each represented industry from two companies to five companies.",
+      "items": ["1", "1A", "7", "7A", "8", "15"],
+      "exit_criteria": ["no uncategorized failures", "manual review queue remains inspectable"]
+    },
+    {
+      "name": "time_depth",
+      "goal": "Expand each selected company to five time points across roughly twenty years.",
+      "items": ["1", "1A", "7", "7A", "8", "15"],
+      "exit_criteria": ["boundary regression gate passes", "warning rate trend is tracked"]
+    }
+  ]
+}

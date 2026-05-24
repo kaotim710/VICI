@@ -29,6 +29,7 @@ class WarningAuditReportTests(unittest.TestCase):
         lines = _audit_item({"filing_id": "sample", "ticker": "ABC", "fiscal_year": 2023}, Result(), Item())
 
         self.assertIn("- No selected candidate attempt recorded.", lines)
+        self.assertIn("- Warning categories: `uncategorized_warning`", lines)
 
     def test_rejected_pair_item_lists_rejected_attempts(self):
         class Evidence:

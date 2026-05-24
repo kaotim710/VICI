@@ -74,6 +74,8 @@ def render_markdown(results: list[tuple[dict, RecoveryResult]], missing: list[st
         f"Recovery actions: {len(results)}",
         f"Missing filings: {len(missing)}",
         "",
+        f"Contract version: `{RecoveryResult.__dataclass_fields__['contract_version'].default}`",
+        "",
         "## Status Counts",
         "",
         "| Status | Count |",
@@ -88,8 +90,8 @@ def render_markdown(results: list[tuple[dict, RecoveryResult]], missing: list[st
         "",
         "## Actions",
         "",
-        "| Filing | Item | Action | Reason | Status | Before | After | Page Range | Selection |",
-        "| --- | --- | --- | --- | --- | ---: | ---: | --- | --- |",
+        "| Filing | Item | Action | Reason | Severity | User Input | Status | Before | After | Page Range | Selection |",
+        "| --- | --- | --- | --- | --- | --- | --- | ---: | ---: | --- | --- |",
     ]
     for filing, recovery in results:
         lines.append(_summary_row(filing, recovery))
@@ -122,6 +124,8 @@ def _summary_row(filing: dict, recovery: RecoveryResult) -> str:
         recovery.item,
         f"`{recovery.action_type}`",
         f"`{recovery.reason}`",
+        f"`{recovery.severity}`",
+        "yes" if recovery.requires_user_input else "no",
         f"`{recovery.status}`",
         str(recovery.before_length),
         after,
@@ -138,6 +142,10 @@ def _detail_section(filing: dict, recovery: RecoveryResult) -> list[str]:
         f"- Ticker: `{filing['ticker']}`",
         f"- Fiscal year: `{filing['fiscal_year']}`",
         f"- Status: `{recovery.status}`",
+        f"- Severity: `{recovery.severity}`",
+        f"- Requires user input: `{recovery.requires_user_input}`",
+        f"- Next step: `{recovery.next_step or 'none'}`",
+        f"- Contract version: `{recovery.contract_version}`",
         f"- Message: {recovery.message}",
         f"- Before length: `{recovery.before_length}`",
     ]

@@ -5,6 +5,7 @@ from dataclasses import dataclass
 
 from .candidates import ITEM_ORDER, find_heading_candidates, infer_toc_profile, is_expected_title, legal_next_items, toc_next_items
 from .cleaning import parse_document
+from .contracts import recovery_action_contract
 from .models import (
     CandidateAttempt,
     ConfidenceComponent,
@@ -479,7 +480,7 @@ def _recommended_actions(
 
     if "Section appears to be a cross-reference rather than full narrative text." in warnings:
         actions.append(
-            RecommendedAction(
+            _recommended_action(
                 action_type="needs_user_confirmation",
                 reason="same_filing_page_reference",
                 description="Confirm whether to follow the referenced page range and attempt secondary extraction.",
@@ -489,7 +490,7 @@ def _recommended_actions(
 
     if section_length > 250000 and "Start heading does not contain the expected canonical title." in warnings:
         actions.append(
-            RecommendedAction(
+            _recommended_action(
                 action_type="needs_user_selection",
                 reason="internal_item_toc_detected",
                 description="Review likely internal Item 7 headings and choose the subsection to extract.",
@@ -499,7 +500,7 @@ def _recommended_actions(
 
     if "Start heading has TOC-like signals." in warnings:
         actions.append(
-            RecommendedAction(
+            _recommended_action(
                 action_type="inspect_only",
                 reason="start_toc_like_signal",
                 description="Inspect start evidence; extraction is retained because the selected span is not a rejected TOC pair.",
@@ -513,7 +514,7 @@ def _recommended_actions(
         and "Section length is outside the expected first-pass range." in warnings
     ):
         actions.append(
-            RecommendedAction(
+            _recommended_action(
                 action_type="needs_external_source",
                 reason="external_or_other_document_reference",
                 description="Short section likely requires a referenced annual report, exhibit, proxy, or other source document.",
@@ -522,6 +523,19 @@ def _recommended_actions(
         )
 
     return actions
+
+
+def _recommended_action(action_type: str, reason: str, description: str, options: list[str] | None = None) -> RecommendedAction:
+    contract = recovery_action_contract(action_type, reason)
+    return RecommendedAction(
+        action_type=action_type,
+        reason=reason,
+        description=description,
+        options=options or [],
+        severity=contract["severity"],
+        requires_user_input=contract["requires_user_input"],
+        next_step=contract["next_step"],
+    )
 
 
 def _internal_heading_options(section_text: str, limit: int = 12) -> list[str]:

@@ -18,6 +18,15 @@ Missing filings: 0
 | `Start heading does not contain the expected canonical title.` | 4 |
 | `Start heading has TOC-like signals.` | 20 |
 
+## Warning Category Counts
+
+| Category | Count |
+| --- | ---: |
+| `length_policy_review` | 47 |
+| `reference_recovery` | 2 |
+| `title_policy_review` | 4 |
+| `toc_signal_review` | 22 |
+
 ## Audit Items
 
 ### aapl_2014_10k Item 15
@@ -28,6 +37,7 @@ Missing filings: 0
 - Confidence: `high` `0.90`
 - Text length: `302976`
 - Warnings: `Section length is outside the expected first-pass range.`
+- Warning categories: `length_policy_review`
 - Start evidence: `Part IV Item 15. Exhibits, Financial Statement Schedules`
 - Start evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH, NEAR_TABLE_OF_CONTENTS_LABEL`
 - End evidence: `SIGNATURES`
@@ -64,6 +74,7 @@ End snippet:
 - Confidence: `high` `0.90`
 - Text length: `52`
 - Warnings: `Section length is outside the expected first-pass range.`
+- Warning categories: `length_policy_review`
 - Start evidence: `Item 6. [Reserved]`
 - Start evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH`
 - End evidence: `Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations`
@@ -100,6 +111,7 @@ End snippet:
 - Confidence: `medium` `0.75`
 - Text length: `180958`
 - Warnings: `Start heading has TOC-like signals.`, `Section length is outside the expected first-pass range.`
+- Warning categories: `toc_signal_review`, `length_policy_review`
 - Start evidence: `Item 9C. Disclosure Regarding Foreign Jurisdictions that Prevent Inspections`
 - Start evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH, TOC_DENSE_ITEM_CLUSTER, NEAR_TABLE_OF_CONTENTS_LABEL`
 - End evidence: `PART III Item 10. Directors, Executive Officers and Corporate Governance`
@@ -140,6 +152,7 @@ End snippet:
 - Confidence: `high` `0.90`
 - Text length: `23`
 - Warnings: `Section length is outside the expected first-pass range.`
+- Warning categories: `length_policy_review`
 - Start evidence: `Item 6. [Reserved]`
 - Start evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH, TOC_DENSE_ITEM_CLUSTER`
 - End evidence: `Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations`
@@ -176,6 +189,7 @@ End snippet:
 - Confidence: `high` `0.90`
 - Text length: `45`
 - Warnings: `Start heading does not contain the expected canonical title.`
+- Warning categories: `title_policy_review`
 - Start evidence: `ITEM 1B: UNRESOLVED SEC STAFF COMMENTS`
 - Start evidence reasons: `REGEX_ITEM_HEADING`
 - End evidence: `ITEM 2: PROPERTIES`
@@ -212,6 +226,7 @@ End snippet:
 - Confidence: `high` `0.90`
 - Text length: `99`
 - Warnings: `Section length is outside the expected first-pass range.`
+- Warning categories: `length_policy_review`
 - Start evidence: `ITEM 3: LEGAL PROCEEDINGS`
 - Start evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH`
 - End evidence: `ITEM 4: MINE SAFETY DISCLOSURES`
@@ -248,6 +263,7 @@ End snippet:
 - Confidence: `high` `0.90`
 - Text length: `395`
 - Warnings: `Section length is outside the expected first-pass range.`, `Section appears to be a cross-reference rather than full narrative text.`
+- Warning categories: `length_policy_review`, `reference_recovery`
 - Start evidence: `ITEM 7: MANAGEMENT’S DISCUSSION AND ANALYSIS OF FINANCIAL CONDITION AND RESULTS OF OPERATIONS`
 - Start evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH, TOC_DENSE_ITEM_CLUSTER`
 - End evidence: `ITEM 7A: QUANTITATIVE AND QUALITATIVE DISCLOSURES ABOUT MARKET RISK`
@@ -290,6 +306,7 @@ End snippet:
 - Confidence: `high` `0.90`
 - Text length: `253`
 - Warnings: `Section length is outside the expected first-pass range.`
+- Warning categories: `length_policy_review`
 - Start evidence: `ITEM 7A: QUANTITATIVE AND QUALITATIVE DISCLOSURES ABOUT MARKET RISK`
 - Start evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH`
 - End evidence: `Part II ITEM 8: FINANCIAL STATEMENTS AND SUPPLEMENTARY DATA`
@@ -331,6 +348,7 @@ End snippet:
 - Confidence: `high` `0.90`
 - Text length: `551`
 - Warnings: `Section length is outside the expected first-pass range.`
+- Warning categories: `length_policy_review`
 - Start evidence: `Part II ITEM 8: FINANCIAL STATEMENTS AND SUPPLEMENTARY DATA`
 - Start evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH`
 - End evidence: `ITEM 9: CHANGES IN AND DISAGREEMENTS WITH ACCOUNTANTS ON ACCOUNTING AND FINANCIAL DISCLOSURE`
@@ -372,6 +390,7 @@ End snippet:
 - Confidence: `high` `0.90`
 - Text length: `1274373`
 - Warnings: `Section length is outside the expected first-pass range.`
+- Warning categories: `length_policy_review`
 - Start evidence: `Part IV Item 15 Exhibits, financial statement schedules`
 - Start evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH`
 - End evidence: `SIGNATURES`
@@ -408,6 +427,7 @@ End snippet:
 - Confidence: `high` `0.90`
 - Text length: `21`
 - Warnings: `Section length is outside the expected first-pass range.`
+- Warning categories: `length_policy_review`
 - Start evidence: `Item 6. Reserved`
 - Start evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH, TOC_DENSE_ITEM_CLUSTER`
 - End evidence: `Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations.`
@@ -444,6 +464,7 @@ End snippet:
 - Confidence: `high` `0.90`
 - Text length: `396`
 - Warnings: `Section length is outside the expected first-pass range.`, `Section appears to be a cross-reference rather than full narrative text.`
+- Warning categories: `length_policy_review`, `reference_recovery`
 - Start evidence: `Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations.`
 - Start evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH, TOC_DENSE_ITEM_CLUSTER`
 - End evidence: `Item 7A. Quantitative and Qualitative Disclosures About Market Risk.`
@@ -486,6 +507,7 @@ End snippet:
 - Confidence: `high` `0.90`
 - Text length: `272`
 - Warnings: `Section length is outside the expected first-pass range.`
+- Warning categories: `length_policy_review`
 - Start evidence: `Item 7A. Quantitative and Qualitative Disclosures About Market Risk.`
 - Start evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH`
 - End evidence: `Item 8. Financial Statements and Supplementary Data.`
@@ -527,6 +549,7 @@ End snippet:
 - Confidence: `high` `0.90`
 - Text length: `370`
 - Warnings: `Section length is outside the expected first-pass range.`
+- Warning categories: `length_policy_review`
 - Start evidence: `Item 8. Financial Statements and Supplementary Data.`
 - Start evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH`
 - End evidence: `Item 9. Changes in and Disagreements With Accountants on Accounting and Financial Disclosure.`
@@ -568,6 +591,7 @@ End snippet:
 - Confidence: `high` `0.90`
 - Text length: `1246677`
 - Warnings: `Section length is outside the expected first-pass range.`
+- Warning categories: `length_policy_review`
 - Start evidence: `Part IV Item 15. Exhibits, Financial Statement Schedules.`
 - Start evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH`
 - End evidence: `SIGNATURES`
@@ -604,6 +628,7 @@ End snippet:
 - Confidence: `medium` `0.80`
 - Text length: `578441`
 - Warnings: `Start heading does not contain the expected canonical title.`, `Section length is outside the expected first-pass range.`
+- Warning categories: `title_policy_review`, `length_policy_review`
 - Start evidence: `Item 7. Bank of America Corporation and Subsidiaries`
 - Start evidence reasons: `REGEX_ITEM_HEADING`
 - End evidence: `Item 7A. Quantitative and Qualitative Disclosures About Market Risk`
@@ -645,6 +670,7 @@ End snippet:
 - Confidence: `high` `0.90`
 - Text length: `218`
 - Warnings: `Section length is outside the expected first-pass range.`
+- Warning categories: `length_policy_review`
 - Start evidence: `Item 7A. Quantitative and Qualitative Disclosures About Market Risk`
 - Start evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH`
 - End evidence: `Item 8. Financial Statements and Supplementary Data`
@@ -686,6 +712,7 @@ End snippet:
 - Confidence: `high` `0.90`
 - Text length: `569098`
 - Warnings: `Section length is outside the expected first-pass range.`
+- Warning categories: `length_policy_review`
 - Start evidence: `Item 8. Financial Statements and Supplementary Data`
 - Start evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH`
 - End evidence: `Item 9. Changes in and Disagreements with Accountants on Accounting and Financial Disclosure`
@@ -722,6 +749,7 @@ End snippet:
 - Confidence: `high` `0.90`
 - Text length: `1286930`
 - Warnings: `Section length is outside the expected first-pass range.`
+- Warning categories: `length_policy_review`
 - Start evidence: `Part IV Item 15. Exhibits, Financial Statement Schedules`
 - Start evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH, NEAR_TABLE_OF_CONTENTS_LABEL`
 - End evidence: `SIGNATURES`
@@ -758,6 +786,7 @@ End snippet:
 - Confidence: `high` `0.90`
 - Text length: `38`
 - Warnings: `Section length is outside the expected first-pass range.`
+- Warning categories: `length_policy_review`
 - Start evidence: `Item 6. [Reserved]`
 - Start evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH`
 - End evidence: `Item 7. Bank of America Corporation and Subsidiaries`
@@ -794,6 +823,7 @@ End snippet:
 - Confidence: `medium` `0.80`
 - Text length: `308102`
 - Warnings: `Start heading does not contain the expected canonical title.`, `Section length is outside the expected first-pass range.`
+- Warning categories: `title_policy_review`, `length_policy_review`
 - Start evidence: `Item 7. Bank of America Corporation and Subsidiaries`
 - Start evidence reasons: `REGEX_ITEM_HEADING`
 - End evidence: `Item 7A. Quantitative and Qualitative Disclosures about Market Risk`
@@ -835,6 +865,7 @@ End snippet:
 - Confidence: `high` `0.90`
 - Text length: `218`
 - Warnings: `Section length is outside the expected first-pass range.`
+- Warning categories: `length_policy_review`
 - Start evidence: `Item 7A. Quantitative and Qualitative Disclosures about Market Risk`
 - Start evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH`
 - End evidence: `Item 8. Financial Statements and Supplementary Data`
@@ -876,6 +907,7 @@ End snippet:
 - Confidence: `high` `0.90`
 - Text length: `903069`
 - Warnings: `Section length is outside the expected first-pass range.`
+- Warning categories: `length_policy_review`
 - Start evidence: `Item 16. Form 10-K Summary`
 - Start evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH, NEAR_TABLE_OF_CONTENTS_LABEL`
 - End evidence: `SIGNATURES`
@@ -912,6 +944,7 @@ End snippet:
 - Confidence: `high` `0.85`
 - Text length: `133299`
 - Warnings: `Start heading has TOC-like signals.`
+- Warning categories: `toc_signal_review`
 - Start evidence: `Item 2. Properties`
 - Start evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH, TOC_DENSE_ITEM_CLUSTER, NEAR_TABLE_OF_CONTENTS_LABEL`
 - End evidence: `ITEM 3. LEGAL PROCEEDINGS`
@@ -952,6 +985,7 @@ End snippet:
 - Confidence: `high` `0.85`
 - Text length: `219335`
 - Warnings: `Start heading has TOC-like signals.`
+- Warning categories: `toc_signal_review`
 - Start evidence: `Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations`
 - Start evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH, TOC_DENSE_ITEM_CLUSTER, NEAR_TABLE_OF_CONTENTS_LABEL`
 - End evidence: `ITEM 7A. QUANTITATIVE AND QUALITATIVE DISCLOSURES ABOUT MARKET RISK`
@@ -992,6 +1026,7 @@ End snippet:
 - Confidence: `high` `0.85`
 - Text length: `122323`
 - Warnings: `Start heading has TOC-like signals.`
+- Warning categories: `toc_signal_review`
 - Start evidence: `Item 2. Properties`
 - Start evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH, TOC_DENSE_ITEM_CLUSTER, NEAR_TABLE_OF_CONTENTS_LABEL`
 - End evidence: `ITEM 4.MINE SAFETY DISCLOSURES`
@@ -1032,6 +1067,7 @@ End snippet:
 - Confidence: `high` `0.85`
 - Text length: `122298`
 - Warnings: `Start heading has TOC-like signals.`
+- Warning categories: `toc_signal_review`
 - Start evidence: `Item 3. Legal Proceedings`
 - Start evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH, TOC_DENSE_ITEM_CLUSTER, NEAR_TABLE_OF_CONTENTS_LABEL`
 - End evidence: `ITEM 4.MINE SAFETY DISCLOSURES`
@@ -1072,6 +1108,7 @@ End snippet:
 - Confidence: `high` `0.85`
 - Text length: `165798`
 - Warnings: `Start heading has TOC-like signals.`
+- Warning categories: `toc_signal_review`
 - Start evidence: `Item 6. Reserved`
 - Start evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH, TOC_DENSE_ITEM_CLUSTER, NEAR_TABLE_OF_CONTENTS_LABEL`
 - End evidence: `ITEM 7A. QUANTITATIVE AND QUALITATIVE DISCLOSURES ABOUT MARKET RISK`
@@ -1112,6 +1149,7 @@ End snippet:
 - Confidence: `high` `0.85`
 - Text length: `165775`
 - Warnings: `Start heading has TOC-like signals.`
+- Warning categories: `toc_signal_review`
 - Start evidence: `Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations`
 - Start evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH, TOC_DENSE_ITEM_CLUSTER, NEAR_TABLE_OF_CONTENTS_LABEL`
 - End evidence: `ITEM 7A. QUANTITATIVE AND QUALITATIVE DISCLOSURES ABOUT MARKET RISK`
@@ -1152,6 +1190,7 @@ End snippet:
 - Confidence: `high` `0.90`
 - Text length: `546`
 - Warnings: `Section length is outside the expected first-pass range.`
+- Warning categories: `length_policy_review`
 - Start evidence: `Item 1A. RISK FACTORS`
 - Start evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH`
 - End evidence: `Item 1B. UNRESOLVED STAFF COMMENTS`
@@ -1193,6 +1232,7 @@ End snippet:
 - Confidence: `medium` `0.75`
 - Text length: `386`
 - Warnings: `Start heading has TOC-like signals.`, `Section length is outside the expected first-pass range.`
+- Warning categories: `toc_signal_review`, `length_policy_review`
 - Start evidence: `Item 7. MANAGEMENT’S DISCUSSION AND ANALYSIS OF FINANCIAL CONDITION AND RESULTS OF OPERATIONS`
 - Start evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH, TOC_DENSE_ITEM_CLUSTER, NEAR_TABLE_OF_CONTENTS_LABEL`
 - End evidence: `Item 7A. QUANTITATIVE AND QUALITATIVE DISCLOSURES ABOUT MARKET RISK`
@@ -1235,6 +1275,7 @@ End snippet:
 - Confidence: `high` `0.90`
 - Text length: `531`
 - Warnings: `Section length is outside the expected first-pass range.`
+- Warning categories: `length_policy_review`
 - Start evidence: `Item 7A. QUANTITATIVE AND QUALITATIVE DISCLOSURES ABOUT MARKET RISK`
 - Start evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH, NEAR_TABLE_OF_CONTENTS_LABEL`
 - End evidence: `Item 8. FINANCIAL STATEMENTS AND SUPPLEMENTARY DATA`
@@ -1276,6 +1317,7 @@ End snippet:
 - Confidence: `high` `0.90`
 - Text length: `360`
 - Warnings: `Section length is outside the expected first-pass range.`
+- Warning categories: `length_policy_review`
 - Start evidence: `Item 8. FINANCIAL STATEMENTS AND SUPPLEMENTARY DATA`
 - Start evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH`
 - End evidence: `Item 9. CHANGES IN AND DISAGREEMENTS WITH ACCOUNTANTS ON ACCOUNTING AND FINANCIAL DISCLOSURE`
@@ -1317,6 +1359,7 @@ End snippet:
 - Confidence: `high` `0.90`
 - Text length: `40`
 - Warnings: `Section length is outside the expected first-pass range.`
+- Warning categories: `length_policy_review`
 - Start evidence: `Item 6. Reserved`
 - Start evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH`
 - End evidence: `Item 7. Management’s discussion and analysis of results of operations and financial condition`
@@ -1353,6 +1396,7 @@ End snippet:
 - Confidence: `high` `0.90`
 - Text length: `486`
 - Warnings: `Section length is outside the expected first-pass range.`
+- Warning categories: `length_policy_review`
 - Start evidence: `Item 7A. Quantitative and qualitative disclosures about market risk`
 - Start evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH`
 - End evidence: `Item 8. Financial statements and supplementary data`
@@ -1394,6 +1438,7 @@ End snippet:
 - Confidence: `high` `0.90`
 - Text length: `265`
 - Warnings: `Section length is outside the expected first-pass range.`
+- Warning categories: `length_policy_review`
 - Start evidence: `Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations`
 - Start evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH`
 - End evidence: `Item 7A. Quantitative and Qualitative Disclosures About Market Risk`
@@ -1435,6 +1480,7 @@ End snippet:
 - Confidence: `high` `0.90`
 - Text length: `510`
 - Warnings: `Section length is outside the expected first-pass range.`
+- Warning categories: `length_policy_review`
 - Start evidence: `Item 7A. Quantitative and Qualitative Disclosures About Market Risk`
 - Start evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH, TOC_DENSE_ITEM_CLUSTER`
 - End evidence: `Item 8. Financial Statements and Supplementary Data`
@@ -1476,6 +1522,7 @@ End snippet:
 - Confidence: `high` `0.90`
 - Text length: `780`
 - Warnings: `Section length is outside the expected first-pass range.`
+- Warning categories: `length_policy_review`
 - Start evidence: `Item 8. Financial Statements and Supplementary Data`
 - Start evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH`
 - End evidence: `Item 9. Changes in and Disagreements With Accountants on Accounting and Financial Disclosure`
@@ -1517,6 +1564,7 @@ End snippet:
 - Confidence: `high` `0.90`
 - Text length: `265`
 - Warnings: `Section length is outside the expected first-pass range.`
+- Warning categories: `length_policy_review`
 - Start evidence: `ITEM 7. MANAGEMENT'S DISCUSSION AND ANALYSIS OF FINANCIAL CONDITION AND RESULTS OF OPERATIONS`
 - Start evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH, TOC_DENSE_ITEM_CLUSTER`
 - End evidence: `ITEM 7A. QUANTITATIVE AND QUALITATIVE DISCLOSURES ABOUT MARKET RISK`
@@ -1558,6 +1606,7 @@ End snippet:
 - Confidence: `high` `0.90`
 - Text length: `411`
 - Warnings: `Section length is outside the expected first-pass range.`
+- Warning categories: `length_policy_review`
 - Start evidence: `ITEM 7A. QUANTITATIVE AND QUALITATIVE DISCLOSURES ABOUT MARKET RISK`
 - Start evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH, TOC_DENSE_ITEM_CLUSTER`
 - End evidence: `ITEM 8. FINANCIAL STATEMENTS AND SUPPLEMENTARY DATA`
@@ -1599,6 +1648,7 @@ End snippet:
 - Confidence: `high` `0.90`
 - Text length: `737`
 - Warnings: `Section length is outside the expected first-pass range.`
+- Warning categories: `length_policy_review`
 - Start evidence: `ITEM 8. FINANCIAL STATEMENTS AND SUPPLEMENTARY DATA`
 - Start evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH`
 - End evidence: `ITEM 9. CHANGES IN AND DISAGREEMENTS WITH ACCOUNTANTS ON ACCOUNTING AND FINANCIAL DISCLOSURE`
@@ -1640,6 +1690,7 @@ End snippet:
 - Confidence: `high` `0.90`
 - Text length: `278`
 - Warnings: `Section length is outside the expected first-pass range.`
+- Warning categories: `length_policy_review`
 - Start evidence: `Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations`
 - Start evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH, TOC_DENSE_ITEM_CLUSTER`
 - End evidence: `Item 7A. Quantitative and Qualitative Disclosures About Market Risk`
@@ -1681,6 +1732,7 @@ End snippet:
 - Confidence: `high` `0.90`
 - Text length: `451`
 - Warnings: `Section length is outside the expected first-pass range.`
+- Warning categories: `length_policy_review`
 - Start evidence: `Item 7A. Quantitative and Qualitative Disclosures About Market Risk`
 - Start evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH`
 - End evidence: `Item 8. Financial Statements and Supplementary Data`
@@ -1722,6 +1774,7 @@ End snippet:
 - Confidence: `high` `0.90`
 - Text length: `187`
 - Warnings: `Section length is outside the expected first-pass range.`
+- Warning categories: `length_policy_review`
 - Start evidence: `Item 8. Financial Statements and Supplementary Data`
 - Start evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH`
 - End evidence: `Item 9. Changes in and Disagreements With Accountants on Accounting and Financial Disclosure`
@@ -1763,6 +1816,7 @@ End snippet:
 - Confidence: `high` `0.85`
 - Text length: `262`
 - Warnings: `Start heading has TOC-like signals.`
+- Warning categories: `toc_signal_review`
 - Start evidence: `Item 6. [Reserved]`
 - Start evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH, TOC_DENSE_ITEM_CLUSTER, NEAR_TABLE_OF_CONTENTS_LABEL`
 - End evidence: `Item 7A. Quantitative and Qualitative Disclosures About Market Risk`
@@ -1803,6 +1857,7 @@ End snippet:
 - Confidence: `medium` `0.75`
 - Text length: `242`
 - Warnings: `Start heading has TOC-like signals.`, `Section length is outside the expected first-pass range.`
+- Warning categories: `toc_signal_review`, `length_policy_review`
 - Start evidence: `Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations`
 - Start evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH, TOC_DENSE_ITEM_CLUSTER, NEAR_TABLE_OF_CONTENTS_LABEL`
 - End evidence: `Item 7A. Quantitative and Qualitative Disclosures About Market Risk`
@@ -1845,6 +1900,7 @@ End snippet:
 - Confidence: `high` `0.90`
 - Text length: `354`
 - Warnings: `Section length is outside the expected first-pass range.`
+- Warning categories: `length_policy_review`
 - Start evidence: `Item 7A. Quantitative and Qualitative Disclosures About Market Risk`
 - Start evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH, NEAR_TABLE_OF_CONTENTS_LABEL`
 - End evidence: `Item 8. Financial Statements and Supplementary Data`
@@ -1886,6 +1942,7 @@ End snippet:
 - Confidence: `high` `0.90`
 - Text length: `158`
 - Warnings: `Section length is outside the expected first-pass range.`
+- Warning categories: `length_policy_review`
 - Start evidence: `Item 8. Financial Statements and Supplementary Data`
 - Start evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH, NEAR_TABLE_OF_CONTENTS_LABEL`
 - End evidence: `Item 9. Changes in and Disagreements With Accountants on Accounting and Financial Disclosure`
@@ -1927,6 +1984,7 @@ End snippet:
 - Confidence: `high` `0.90`
 - Text length: `313143`
 - Warnings: `Section length is outside the expected first-pass range.`
+- Warning categories: `length_policy_review`
 - Start evidence: `Item 14. Principal Accountant Fees and Services`
 - Start evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH`
 - End evidence: `PART IV Item 15. Exhibit and Financial Statement Schedules`
@@ -1963,6 +2021,7 @@ End snippet:
 - Confidence: `high` `0.90`
 - Text length: `413`
 - Warnings: `Section length is outside the expected first-pass range.`
+- Warning categories: `length_policy_review`
 - Start evidence: `ITEM 7. MANAGEMENT'S DISCUSSION AND ANALYSIS OF FINANCIAL CONDITION AND RESULTS OF OPERATIONS`
 - Start evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH`
 - End evidence: `ITEM 7A. QUANTITATIVE AND QUALITATIVE DISCLOSURES ABOUT MARKET RISK`
@@ -2004,6 +2063,7 @@ End snippet:
 - Confidence: `high` `0.90`
 - Text length: `423`
 - Warnings: `Section length is outside the expected first-pass range.`
+- Warning categories: `length_policy_review`
 - Start evidence: `ITEM 7A. QUANTITATIVE AND QUALITATIVE DISCLOSURES ABOUT MARKET RISK`
 - Start evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH`
 - End evidence: `ITEM 8. FINANCIAL STATEMENTS AND SUPPLEMENTARY DATA`
@@ -2045,6 +2105,7 @@ End snippet:
 - Confidence: `high` `0.90`
 - Text length: `606`
 - Warnings: `Section length is outside the expected first-pass range.`
+- Warning categories: `length_policy_review`
 - Start evidence: `ITEM 8. FINANCIAL STATEMENTS AND SUPPLEMENTARY DATA`
 - Start evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH`
 - End evidence: `ITEM 9. CHANGES IN AND DISAGREEMENTS WITH ACCOUNTANTS ON ACCOUNTING AND FINANCIAL DISCLOSURE`
@@ -2086,6 +2147,7 @@ End snippet:
 - Confidence: `high` `0.90`
 - Text length: `21`
 - Warnings: `Section length is outside the expected first-pass range.`
+- Warning categories: `length_policy_review`
 - Start evidence: `ITEM 6. RESERVED`
 - Start evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH`
 - End evidence: `ITEM 7. MANAGEMENT'S DISCUSSION AND ANALYSIS OF FINANCIAL CONDITION AND RESULTS OF OPERATIONS`
@@ -2122,6 +2184,7 @@ End snippet:
 - Confidence: `high` `0.85`
 - Text length: `1253`
 - Warnings: `Start heading has TOC-like signals.`
+- Warning categories: `toc_signal_review`
 - Start evidence: `Item 2. Properties`
 - Start evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH, TOC_DENSE_ITEM_CLUSTER, NEAR_TABLE_OF_CONTENTS_LABEL`
 - End evidence: `Item 4. Mine Safety Disclosures`
@@ -2162,6 +2225,7 @@ End snippet:
 - Confidence: `high` `0.85`
 - Text length: `152`
 - Warnings: `Start heading has TOC-like signals.`
+- Warning categories: `toc_signal_review`
 - Start evidence: `Item 3. Legal Proceedings`
 - Start evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH, TOC_DENSE_ITEM_CLUSTER, NEAR_TABLE_OF_CONTENTS_LABEL`
 - End evidence: `Item 4. Mine Safety Disclosures`
@@ -2202,6 +2266,7 @@ End snippet:
 - Confidence: `high` `0.90`
 - Text length: `2423`
 - Warnings: `Start heading does not contain the expected canonical title.`
+- Warning categories: `title_policy_review`
 - Start evidence: `Item 6. Selected Consolidated Financial Data`
 - Start evidence reasons: `REGEX_ITEM_HEADING, NEAR_TABLE_OF_CONTENTS_LABEL`
 - End evidence: `Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations`
@@ -2238,6 +2303,7 @@ End snippet:
 - Confidence: `high` `0.90`
 - Text length: `7010`
 - Warnings: `End heading has TOC-like signals.`
+- Warning categories: `toc_signal_review`
 - Start evidence: `Item 9A. Controls and Procedures`
 - Start evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH, NEAR_TABLE_OF_CONTENTS_LABEL`
 - End evidence: `Item 9B. Other Information`
@@ -2274,6 +2340,7 @@ End snippet:
 - Confidence: `medium` `0.75`
 - Text length: `34`
 - Warnings: `Start heading has TOC-like signals.`, `End heading has TOC-like signals.`
+- Warning categories: `toc_signal_review`, `toc_signal_review`
 - Start evidence: `Item 9B. Other Information`
 - Start evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH, TOC_DENSE_ITEM_CLUSTER, NEAR_TABLE_OF_CONTENTS_LABEL`
 - End evidence: `PART III Item 10. Directors, Executive Officers, and Corporate Governance`
@@ -2314,6 +2381,7 @@ End snippet:
 - Confidence: `high` `0.85`
 - Text length: `1545`
 - Warnings: `Start heading has TOC-like signals.`
+- Warning categories: `toc_signal_review`
 - Start evidence: `PART III Item 10. Directors, Executive Officers, and Corporate Governance`
 - Start evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH, TOC_DENSE_ITEM_CLUSTER, NEAR_TABLE_OF_CONTENTS_LABEL`
 - End evidence: `Item 13. Certain Relationships and Related Transactions, and Director Independence`
@@ -2354,6 +2422,7 @@ End snippet:
 - Confidence: `high` `0.85`
 - Text length: `484`
 - Warnings: `Start heading has TOC-like signals.`
+- Warning categories: `toc_signal_review`
 - Start evidence: `Item 11. Executive Compensation`
 - Start evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH, TOC_DENSE_ITEM_CLUSTER, NEAR_TABLE_OF_CONTENTS_LABEL`
 - End evidence: `Item 13. Certain Relationships and Related Transactions, and Director Independence`
@@ -2394,6 +2463,7 @@ End snippet:
 - Confidence: `high` `0.85`
 - Text length: `277`
 - Warnings: `Start heading has TOC-like signals.`
+- Warning categories: `toc_signal_review`
 - Start evidence: `Item 12. Security Ownership of Certain Beneficial Owners and Management and Related Shareholder Matters`
 - Start evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH, TOC_DENSE_ITEM_CLUSTER, NEAR_TABLE_OF_CONTENTS_LABEL`
 - End evidence: `Item 13. Certain Relationships and Related Transactions, and Director Independence`
@@ -2434,6 +2504,7 @@ End snippet:
 - Confidence: `high` `0.85`
 - Text length: `79315`
 - Warnings: `Start heading has TOC-like signals.`
+- Warning categories: `toc_signal_review`
 - Start evidence: `Item 2. Properties`
 - Start evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH, TOC_DENSE_ITEM_CLUSTER, NEAR_TABLE_OF_CONTENTS_LABEL`
 - End evidence: `Item 4. Mine Safety Disclosures`
@@ -2474,6 +2545,7 @@ End snippet:
 - Confidence: `high` `0.85`
 - Text length: `79290`
 - Warnings: `Start heading has TOC-like signals.`
+- Warning categories: `toc_signal_review`
 - Start evidence: `Item 3. Legal Proceedings`
 - Start evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH, TOC_DENSE_ITEM_CLUSTER, NEAR_TABLE_OF_CONTENTS_LABEL`
 - End evidence: `Item 4. Mine Safety Disclosures`
@@ -2514,6 +2586,7 @@ End snippet:
 - Confidence: `high` `0.90`
 - Text length: `40`
 - Warnings: `Section length is outside the expected first-pass range.`
+- Warning categories: `length_policy_review`
 - Start evidence: `Item 6. Reserved`
 - Start evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH, NEAR_TABLE_OF_CONTENTS_LABEL`
 - End evidence: `Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations`
@@ -2550,6 +2623,7 @@ End snippet:
 - Confidence: `medium` `0.75`
 - Text length: `268364`
 - Warnings: `Start heading has TOC-like signals.`, `Section length is outside the expected first-pass range.`
+- Warning categories: `toc_signal_review`, `length_policy_review`
 - Start evidence: `Item 9C. Disclosure Regarding Foreign Jurisdictions that Prevent Inspections`
 - Start evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH, TOC_DENSE_ITEM_CLUSTER, NEAR_TABLE_OF_CONTENTS_LABEL`
 - End evidence: `PART III Item 10. Directors, Executive Officers, and Corporate Governance`
@@ -2590,6 +2664,7 @@ End snippet:
 - Confidence: `high` `0.85`
 - Text length: `256`
 - Warnings: `Start heading has TOC-like signals.`
+- Warning categories: `toc_signal_review`
 - Start evidence: `Item 13. Certain Relationships and Related Transactions, and Director Independence`
 - Start evidence reasons: `REGEX_ITEM_HEADING, EXPECTED_TITLE_MATCH, TOC_DENSE_ITEM_CLUSTER, NEAR_TABLE_OF_CONTENTS_LABEL`
 - End evidence: `Item 14. Principal Accountant Fees and Services`

@@ -1,0 +1,66 @@
+{
+  "generated": "2026-05-24",
+  "evaluated_filings": 20,
+  "missing_filings": [],
+  "item_attempts": 460,
+  "filing_status_counts": {
+    "success": 20
+  },
+  "item_status_counts": {
+    "success": 426,
+    "not_present": 34
+  },
+  "confidence_level_counts": {
+    "high": 447,
+    "medium": 13
+  },
+  "warning_counts": {
+    "Section length is outside the expected first-pass range.": 47,
+    "Start heading has TOC-like signals.": 20,
+    "Start heading does not contain the expected canonical title.": 4,
+    "Section appears to be a cross-reference rather than full narrative text.": 2,
+    "End heading has TOC-like signals.": 2
+  },
+  "warning_category_counts": {
+    "length_policy_review": 47,
+    "reference_recovery": 2,
+    "title_policy_review": 4,
+    "toc_signal_review": 22
+  },
+  "evaluation_gate": {
+    "contract_version": "evaluation_contract_v1",
+    "passed": true,
+    "checks": [
+      {
+        "name": "seed_filings_evaluated",
+        "passed": true,
+        "actual": 20,
+        "expected": ">= 20"
+      },
+      {
+        "name": "missing_filings",
+        "passed": true,
+        "actual": 0,
+        "expected": "<= 0"
+      },
+      {
+        "name": "failed_items",
+        "passed": true,
+        "actual": 0,
+        "expected": "<= 0"
+      },
+      {
+        "name": "failed_gold_checks",
+        "passed": true,
+        "actual": 0,
+        "expected": "<= 0"
+      }
+    ]
+  },
+  "gold_boundary": {
+    "filings": 5,
+    "items": 15,
+    "passed_checks": 45,
+    "failed_checks": 0
+  }
+}

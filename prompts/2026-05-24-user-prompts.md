@@ -259,3 +259,9 @@ testing 方面開始去對全item抽取，而不是只會單一幾個item
 ```text
 好，根據milestone進行下一步，13 failed的部分後續處理
 ```
+
+## Reliability Milestone Request
+
+```text
+可以，先把1-5做好
+```

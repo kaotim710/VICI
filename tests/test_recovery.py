@@ -34,6 +34,9 @@ class RecoveryTests(unittest.TestCase):
         self.assertEqual(results[0].reason, "same_filing_page_reference")
         self.assertEqual(results[0].page_range, (2, 3))
         self.assertEqual(results[0].status, "needs_review")
+        self.assertEqual(results[0].severity, "review")
+        self.assertTrue(results[0].requires_user_input)
+        self.assertEqual(results[0].next_step, "confirm_referenced_page_extraction")
         self.assertIn("Referenced MD&A starts here", results[0].extracted_text)
         self.assertIn("Referenced MD&A continues here", results[0].extracted_text)
 
@@ -72,6 +75,8 @@ class RecoveryTests(unittest.TestCase):
 
         self.assertEqual(results[0].reason, "external_or_other_document_reference")
         self.assertEqual(results[0].status, "deferred")
+        self.assertEqual(results[0].severity, "blocked")
+        self.assertEqual(results[0].next_step, "provide_or_fetch_reference_document")
         self.assertIsNone(results[0].extracted_text)
 
 

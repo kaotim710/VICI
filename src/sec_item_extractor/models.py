@@ -96,6 +96,10 @@ class RecommendedAction:
     reason: str
     description: str
     options: list[str] = field(default_factory=list)
+    severity: str = "review"
+    requires_user_input: bool = False
+    next_step: str = ""
+    contract_version: str = "recovery_action_v1"
 
 
 @dataclass(frozen=True)

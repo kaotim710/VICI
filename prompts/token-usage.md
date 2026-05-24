@@ -38,3 +38,4 @@ estimated_prompt_tokens =
 | 2026-05-24 | continue_toc_implementation_request | `prompts/2026-05-24-user-prompts.md` |  | 6 | Approved continuing implementation of the TOC-assisted extraction layer. |
 | 2026-05-24 | mvp_run_request | `prompts/2026-05-24-user-prompts.md` |  | 25 | Requested proceeding by milestone, deferring the 13 failed cases, and running an MVP first. |
 | 2026-05-24 | failed_item_recovery_request | `prompts/2026-05-24-user-prompts.md` |  | 18 | Requested continuing the milestone plan by handling the 13 failed seed extraction items. |
+| 2026-05-24 | reliability_milestone_request | `prompts/2026-05-24-user-prompts.md` |  | 9 | Requested implementing milestone items 1-5 before API or deployment work. |
