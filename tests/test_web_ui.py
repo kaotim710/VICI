@@ -40,6 +40,8 @@ class WebUiTests(unittest.TestCase):
         self.assertIn("Show original filing structure", html)
         self.assertIn("raw-section-frame", html)
         self.assertIn("/raw-section/", html)
+        self.assertIn("structure-tag", html)
+        self.assertIn("renderStructureTags", html)
 
     def test_raw_section_preview_preserves_tables_and_archive_base(self):
         payload = web_ui.raw_section_preview("wmt_2014_10k", "15")
@@ -69,6 +71,13 @@ class WebUiTests(unittest.TestCase):
         self.assertEqual(payload["summary"]["status"], "success")
         self.assertEqual(payload["result"]["status"], "success")
         self.assertGreater(payload["source_bytes"], 0)
+
+    def test_extract_endpoint_tags_items_with_raw_tables_and_images(self):
+        payload = web_ui.extract_seed_filing("wmt_2023_10k")
+        by_item = {item["item"]: item for item in payload["result"]["item_results"]}
+
+        self.assertGreater(by_item["5"]["raw_structure"]["table_count"], 0)
+        self.assertGreater(by_item["5"]["raw_structure"]["image_count"], 0)
 
     def test_raw_metadata_does_not_run_extraction(self):
         with patch("sec_item_extractor.web_ui.extract_items") as extract_items:

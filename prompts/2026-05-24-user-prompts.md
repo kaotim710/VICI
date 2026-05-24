@@ -321,3 +321,9 @@ pg_2025_10k Item 7A: 本身僅一句sentence
 ```text
 我剛檢查發現表格還是沒有很好的顯示，在網站上還原成原本檔案的結構，圖片部分先試作
 ```
+
+## Raw Structure Tag Request
+
+```text
+有抽取到 table 和圖片的item可以加上tag
+```

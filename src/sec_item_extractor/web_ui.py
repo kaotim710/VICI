@@ -78,6 +78,7 @@ def extract_seed_filing(filing_id: str) -> dict:
     result = extract_items(content, target_items=manifest["items"], filing_id=filing_id)
     elapsed_ms = round((time.perf_counter() - started) * 1000)
     result_dict = result.to_dict()
+    _attach_raw_structure(result_dict, content, result.item_results)
     return {
         "filing": filings[filing_id],
         "elapsed_ms": elapsed_ms,
@@ -95,7 +96,7 @@ def extract_seed_filing(filing_id: str) -> dict:
             "item_count": len(result.item_results),
         },
         "toc_entries": result_dict["toc_entries"],
-        "items": [_item_contract(item) for item in result.item_results],
+        "items": [_item_contract(item, content) for item in result.item_results],
         "result": result_dict,
     }
 
@@ -149,16 +150,7 @@ def raw_section_preview(filing_id: str, item: str) -> dict:
     if item_result.status != "success" or not item_result.start_evidence:
         raise ValueError(f"raw section is unavailable for Item {item}")
 
-    raw_start = item_result.start_evidence.raw_offset
-    if raw_start is None:
-        raise ValueError(f"raw section has no raw start offset for Item {item}")
-    raw_end = item_result.end_evidence.raw_offset if item_result.end_evidence else None
-    start = _raw_container_start(content, raw_start)
-    end = _raw_container_start(content, raw_end) if raw_end is not None else len(content)
-    if end <= start:
-        end = len(content)
-
-    fragment = content[start:end]
+    start, end, fragment = _raw_section_fragment(content, item_result)
     base_url = _archive_base_url(filing_id)
     return {
         "filing": filings[filing_id],
@@ -173,7 +165,7 @@ def raw_section_preview(filing_id: str, item: str) -> dict:
     }
 
 
-def _item_contract(item) -> dict:
+def _item_contract(item, raw_content: str | None = None) -> dict:
     return {
         "item": item.item,
         "status": item.status,
@@ -186,6 +178,7 @@ def _item_contract(item) -> dict:
         },
         "text": item.text or "",
         "text_length": len(item.text or ""),
+        "raw_structure": _raw_structure_counts(raw_content, item) if raw_content is not None else {"table_count": 0, "image_count": 0},
     }
 
 
@@ -231,6 +224,36 @@ def _archive_base_url(filing_id: str) -> str | None:
     cik_no_padding = str(int("".join(character for character in str(cik) if character.isdigit())))
     accession_no_dashes = str(accession).replace("-", "")
     return f"https://www.sec.gov/Archives/edgar/data/{cik_no_padding}/{accession_no_dashes}/"
+
+
+def _attach_raw_structure(result_dict: dict, content: str, item_results: list) -> None:
+    for item_payload, item_result in zip(result_dict.get("item_results", []), item_results):
+        item_payload["raw_structure"] = _raw_structure_counts(content, item_result)
+
+
+def _raw_structure_counts(content: str, item_result) -> dict:
+    if item_result.status != "success":
+        return {"table_count": 0, "image_count": 0}
+    try:
+        _, _, fragment = _raw_section_fragment(content, item_result)
+    except ValueError:
+        return {"table_count": 0, "image_count": 0}
+    return {
+        "table_count": len(re.findall(r"<table\b", fragment, flags=re.IGNORECASE)),
+        "image_count": len(re.findall(r"<img\b", fragment, flags=re.IGNORECASE)),
+    }
+
+
+def _raw_section_fragment(content: str, item_result) -> tuple[int, int, str]:
+    raw_start = item_result.start_evidence.raw_offset if item_result.start_evidence else None
+    if raw_start is None:
+        raise ValueError(f"raw section has no raw start offset for Item {item_result.item}")
+    raw_end = item_result.end_evidence.raw_offset if item_result.end_evidence else None
+    start = _raw_container_start(content, raw_start)
+    end = _raw_container_start(content, raw_end) if raw_end is not None else len(content)
+    if end <= start:
+        end = len(content)
+    return start, end, content[start:end]
 
 
 def _raw_container_start(content: str, raw_offset: int) -> int:
@@ -537,13 +560,17 @@ def render_detail(filing_id: str) -> str:
             const text = item.text || '';
             const startSnippet = edgeSnippet(text, 'start');
             const endSnippet = edgeSnippet(text, 'end');
+            const structureTags = renderStructureTags(item.raw_structure || {{}});
             article.innerHTML = `
               <header class="item-header">
                 <div>
                   <h2>Item ${{escapeHtml(item.item)}}</h2>
                   <p class="muted">${{escapeHtml(item.status)}} | ${{escapeHtml(item.confidence_level)}} ${{Number(item.confidence_score).toFixed(2)}} | ${{(item.text || '').length.toLocaleString()}} chars</p>
                 </div>
-                <span class="pill ${{escapeHtml(item.confidence_level)}}">${{escapeHtml(item.confidence_level)}}</span>
+                <div class="item-badges">
+                  ${{structureTags}}
+                  <span class="pill ${{escapeHtml(item.confidence_level)}}">${{escapeHtml(item.confidence_level)}}</span>
+                </div>
               </header>
               <dl id="${{evidenceId}}" class="evidence-grid">
                 <div><dt>Start</dt><dd>${{escapeHtml(item.start_evidence?.text || 'none')}}</dd></div>
@@ -615,6 +642,15 @@ def render_detail(filing_id: str) -> str:
             `;
             container.appendChild(row);
           }}
+        }}
+
+        function renderStructureTags(rawStructure) {{
+          const tags = [];
+          const tableCount = Number(rawStructure.table_count || 0);
+          const imageCount = Number(rawStructure.image_count || 0);
+          if (tableCount > 0) tags.push(`<span class="structure-tag table">tables ${{tableCount}}</span>`);
+          if (imageCount > 0) tags.push(`<span class="structure-tag image">images ${{imageCount}}</span>`);
+          return tags.join('');
         }}
 
         async function runRecovery() {{
@@ -938,6 +974,7 @@ h1, h2, p { margin: 0; }
 }
 .item-header { display: flex; justify-content: space-between; gap: 16px; align-items: start; }
 .item-header h2 { font-size: 20px; }
+.item-badges { display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
 .pill {
   border-radius: 999px;
   padding: 4px 9px;
@@ -948,6 +985,16 @@ h1, h2, p { margin: 0; }
 .pill.high { color: #137333; background: #edf7ee; border-color: #b8dfbd; }
 .pill.medium { color: #8a5a00; background: #fff6dd; border-color: #efd48b; }
 .pill.low { color: #a13b2b; background: #fff0ec; border-color: #efc1b7; }
+.structure-tag {
+  border-radius: 999px;
+  padding: 4px 9px;
+  font-size: 12px;
+  border: 1px solid #c9d1da;
+  background: #f6f7f9;
+  color: #44515f;
+}
+.structure-tag.table { color: #155e75; border-color: #a5d8e6; background: #ecfeff; }
+.structure-tag.image { color: #7c3d12; border-color: #f2c59b; background: #fff7ed; }
 .evidence-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
