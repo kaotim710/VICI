@@ -283,3 +283,9 @@ testing 方面開始去對全item抽取，而不是只會單一幾個item
 ```text
 1-3直接做，4的話把未使用的部分清掉，5先不做。
 ```
+
+## Held-Out Validation Filing Request
+
+```text
+好，接下來testing部分找另外5間公司前一年度和十年前的filing來做validatation
+```

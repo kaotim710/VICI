@@ -42,3 +42,4 @@ estimated_prompt_tokens =
 | 2026-05-24 | retry_policy_contract_request | `prompts/2026-05-24-user-prompts.md` |  | 18 | Requested adding RetryPolicy and confirming outstanding working tree changes first. |
 | 2026-05-24 | frontend_test_filing_ui_request | `prompts/2026-05-24-user-prompts.md` |  | 85 | Requested a simple frontend to select current test filings and run extraction only after the user opens a filing. |
 | 2026-05-24 | frontend_recovery_ui_request | `prompts/2026-05-24-user-prompts.md` |  | 18 | Requested implementing planning items 1-3, cleaning unused parts for item 4, and deferring item 5. |
+| 2026-05-24 | held_out_validation_filing_request | `prompts/2026-05-24-user-prompts.md` |  | 28 | Requested adding validation testing with five additional companies using prior-year and ten-years-ago filings. |

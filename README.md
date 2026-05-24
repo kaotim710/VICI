@@ -82,6 +82,13 @@ Evaluate lightweight gold boundary expectations:
 python3 scripts/evaluate_gold_boundaries.py
 ```
 
+Fetch and evaluate the held-out validation filings:
+
+```bash
+SEC_USER_AGENT="Your Name your.email@example.com" python3 scripts/fetch_validation_filings.py
+python3 scripts/evaluate_validation.py
+```
+
 Inspect normalized narrative blocks for a filing:
 
 ```bash

@@ -19,6 +19,15 @@ class DownloadInventoryTests(unittest.TestCase):
 
         self.assertEqual(total, inventory["total_bytes"])
 
+    def test_validation_download_inventory_has_ten_files(self):
+        inventory = json.loads((ROOT / "fixtures" / "gold" / "downloaded_validation_filings.json").read_text())
+        total = sum(item["bytes"] for item in inventory["files"])
+
+        self.assertEqual(inventory["total_files"], 10)
+        self.assertEqual(len(inventory["files"]), 10)
+        self.assertEqual(inventory["missing"], [])
+        self.assertEqual(total, inventory["total_bytes"])
+
 
 if __name__ == "__main__":
     unittest.main()

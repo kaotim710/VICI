@@ -1,0 +1,22 @@
+{
+  "description": "Held-out validation set: five additional companies, each with prior-year and ten-years-ago 10-K filings.",
+  "selection_strategy": {
+    "companies": ["NVDA", "GOOGL", "META", "LLY", "PG"],
+    "time_points": [2015, 2025],
+    "total_filings": 10,
+    "relationship_to_seed": "Held out from the seed regression corpus."
+  },
+  "items": ["1", "1A", "1B", "1C", "2", "3", "4", "5", "6", "7", "7A", "8", "9", "9A", "9B", "9C", "10", "11", "12", "13", "14", "15", "16"],
+  "filings": [
+    {"filing_id": "nvda_2015_10k", "ticker": "NVDA", "cik": "0001045810", "industry": "Technology", "fiscal_year": 2015, "form": "10-K"},
+    {"filing_id": "nvda_2025_10k", "ticker": "NVDA", "cik": "0001045810", "industry": "Technology", "fiscal_year": 2025, "form": "10-K"},
+    {"filing_id": "googl_2015_10k", "ticker": "GOOGL", "cik": "0001652044", "industry": "Communication Services", "fiscal_year": 2015, "form": "10-K"},
+    {"filing_id": "googl_2025_10k", "ticker": "GOOGL", "cik": "0001652044", "industry": "Communication Services", "fiscal_year": 2025, "form": "10-K"},
+    {"filing_id": "meta_2015_10k", "ticker": "META", "cik": "0001326801", "industry": "Communication Services", "fiscal_year": 2015, "form": "10-K"},
+    {"filing_id": "meta_2025_10k", "ticker": "META", "cik": "0001326801", "industry": "Communication Services", "fiscal_year": 2025, "form": "10-K"},
+    {"filing_id": "lly_2015_10k", "ticker": "LLY", "cik": "0000059478", "industry": "Healthcare", "fiscal_year": 2015, "form": "10-K"},
+    {"filing_id": "lly_2025_10k", "ticker": "LLY", "cik": "0000059478", "industry": "Healthcare", "fiscal_year": 2025, "form": "10-K"},
+    {"filing_id": "pg_2015_10k", "ticker": "PG", "cik": "0000080424", "industry": "Consumer Staples", "fiscal_year": 2015, "form": "10-K"},
+    {"filing_id": "pg_2025_10k", "ticker": "PG", "cik": "0000080424", "industry": "Consumer Staples", "fiscal_year": 2025, "form": "10-K"}
+  ]
+}
