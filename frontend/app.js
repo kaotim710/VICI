@@ -30,7 +30,7 @@
     return {
       error: response.status === 413 ? "upload_too_large" : "non_json_response",
       message: response.status === 413
-        ? "Upload is too large for this deployment. Vercel Functions accept request bodies up to 4.5 MB."
+        ? "This filing is larger than the direct upload suggestion. Try again from the upload page so VICI can identify the filing and open the SEC source."
         : raw.slice(0, 240),
       raw: raw.slice(0, 240),
     };
@@ -59,11 +59,7 @@
   function uploadLimitMessage(file) {
     const limit = uploadLimitBytes();
     if (!file || file.size <= limit) return "";
-    return `${file.name} is ${formatBytes(file.size)}, which exceeds this deployment's ${formatBytes(limit)} upload limit. VICI will read the first ${formatBytes(uploadIdentifyBytes())} to identify ticker/year, then run live SEC extraction.`;
-  }
-
-  function isVercelDeployment() {
-    return window.location.hostname.endsWith(".vercel.app");
+    return `${file.name} is ready for SEC source resolution. VICI will identify the filing details and open the official SEC filing.`;
   }
 
   function cssId(value) {
@@ -288,7 +284,7 @@
       setError("");
       setPayload(null);
       setFileWarning(uploadLimitMessage(file));
-      setStatus("Large upload detected. Reading filing header to identify ticker/year...");
+      setStatus("Identifying filing details and opening the SEC source...");
       try {
         const sampleBytes = uploadIdentifyBytes();
         const sample = file.slice(0, sampleBytes, file.type || "text/html");
@@ -343,11 +339,6 @@
     }
 
     const sidebar = h("form", { className: "upload-form", onSubmit: submitUpload },
-      isVercelDeployment() ? h("div", { className: "upload-route-note" },
-        h("strong", null, "Recommended on Vercel"),
-        h("p", null, "For large public filings, upload uses a small header sample to identify ticker/year, then switches to live SEC extraction."),
-        h("a", { className: "secondary-button compact", href: "/" }, "Use ticker/year search")
-      ) : null,
       h("label", null, "Filing file", h("input", {
         name: "filing",
         type: "file",
@@ -355,7 +346,7 @@
         required: true,
         onChange: (event) => setFileWarning(uploadLimitMessage(event.target.files && event.target.files[0])),
       })),
-      h("p", { className: fileWarning ? "error-text" : "muted" }, fileWarning || `Upload limit on this deployment: ${formatBytes(uploadLimitBytes())}`),
+      h("p", { className: "muted" }, fileWarning || "Direct upload suggestion: 4.5 MB or smaller."),
       h("button", { className: "primary-button", type: "submit", disabled: busy }, busy ? h(LoadingDots, { label: "Parsing" }) : "Run upload extraction")
     );
 

@@ -145,14 +145,17 @@ class WebUiTests(unittest.TestCase):
         self.assertNotIn('<input name="year"', html)
         self.assertNotIn('<input name="form"', html)
 
-    def test_upload_page_explains_vercel_upload_limit_and_non_json_errors(self):
+    def test_upload_page_explains_direct_upload_suggestion_and_non_json_errors(self):
         app = FRONTEND_APP.read_text(encoding="utf-8")
 
         self.assertIn("VERCEL_UPLOAD_LIMIT_BYTES", app)
         self.assertIn("4.5 MB", app)
+        self.assertIn("Direct upload suggestion", app)
         self.assertIn("parseApiPayload", app)
         self.assertIn("non_json_response", app)
-        self.assertIn("Large upload detected", app)
+        self.assertIn("Identifying filing details", app)
+        self.assertNotIn("Recommended on Vercel", app)
+        self.assertNotIn("upload-route-note", app)
         self.assertIn("Uploaded filing metadata identified", web_ui.identify_uploaded_filing(
             b"""
             <html><body>
