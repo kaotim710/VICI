@@ -98,10 +98,11 @@ def raw_filing_metadata(filing_id: str) -> dict:
     }
 
 
-def sec_intake_plan(ticker: str = "", cik: str = "", fiscal_year: int | str | None = None) -> dict:
+def sec_intake_plan(
+    ticker: str = "", cik: str = "", fiscal_year: int | str | None = None, identifier: str = ""
+) -> dict:
     year = _parse_fiscal_year(fiscal_year)
-    ticker = ticker.strip().upper()
-    cik = cik.strip()
+    ticker, cik = _resolve_sec_identifier(ticker=ticker, cik=cik, identifier=identifier)
     if not ticker and not cik:
         raise ValueError("ticker or cik is required")
 
@@ -158,10 +159,11 @@ def sec_intake_plan(ticker: str = "", cik: str = "", fiscal_year: int | str | No
     }
 
 
-def extract_sec_filing(ticker: str = "", cik: str = "", fiscal_year: int | str | None = None) -> dict:
+def extract_sec_filing(
+    ticker: str = "", cik: str = "", fiscal_year: int | str | None = None, identifier: str = ""
+) -> dict:
     year = _parse_fiscal_year(fiscal_year)
-    ticker = ticker.strip().upper()
-    cik = cik.strip()
+    ticker, cik = _resolve_sec_identifier(ticker=ticker, cik=cik, identifier=identifier)
     if not ticker and not cik:
         raise ValueError("ticker or cik is required")
 
@@ -598,6 +600,25 @@ def _parse_optional_fiscal_year(value: int | str | None) -> int | None:
     if value is None or str(value).strip() == "":
         return None
     return _parse_fiscal_year(value)
+
+
+def _resolve_sec_identifier(ticker: str = "", cik: str = "", identifier: str = "") -> tuple[str, str]:
+    ticker = (ticker or "").strip().upper()
+    cik = (cik or "").strip()
+    identifier = (identifier or "").strip().upper()
+    if identifier:
+        if ticker or cik:
+            raise ValueError("provide either identifier or ticker/cik, not both")
+        if re.fullmatch(r"\d{1,10}", identifier):
+            return "", identifier
+        if re.fullmatch(r"[A-Z][A-Z0-9.-]{0,9}", identifier):
+            return identifier, ""
+        raise ValueError("identifier must be a ticker symbol or 1-10 digit CIK")
+    if ticker and not re.fullmatch(r"[A-Z][A-Z0-9.-]{0,9}", ticker):
+        raise ValueError("ticker must be 1-10 letters, digits, dots, or dashes and start with a letter")
+    if cik and not re.fullmatch(r"\d{1,10}", cik):
+        raise ValueError("cik must be 1-10 digits")
+    return ticker, cik
 
 
 def infer_upload_metadata(content: str, filename: str) -> dict:
@@ -1182,7 +1203,7 @@ class WebUiHandler(BaseHTTPRequestHandler):
             query = parse_qs(parsed.query)
             self._send_html(
                 render_live_detail(
-                    ticker=_first_query_value(query, "ticker"),
+                    ticker=_first_query_value(query, "ticker") or _first_query_value(query, "cik") or _first_query_value(query, "identifier"),
                     fiscal_year=_first_query_value(query, "year"),
                 )
             )
@@ -1208,6 +1229,7 @@ class WebUiHandler(BaseHTTPRequestHandler):
             self._handle_sec_intake_plan(
                 ticker=_first_query_value(query, "ticker"),
                 cik=_first_query_value(query, "cik"),
+                identifier=_first_query_value(query, "identifier"),
                 fiscal_year=_first_query_value(query, "year"),
             )
             return
@@ -1216,6 +1238,7 @@ class WebUiHandler(BaseHTTPRequestHandler):
             self._handle_sec_extract(
                 ticker=_first_query_value(query, "ticker"),
                 cik=_first_query_value(query, "cik"),
+                identifier=_first_query_value(query, "identifier"),
                 fiscal_year=_first_query_value(query, "year"),
             )
             return
@@ -1260,17 +1283,17 @@ class WebUiHandler(BaseHTTPRequestHandler):
         except FileNotFoundError:
             self._send_json({"error": "missing_raw_filing", "filing_id": filing_id}, status=HTTPStatus.NOT_FOUND)
 
-    def _handle_sec_intake_plan(self, ticker: str, cik: str, fiscal_year: str) -> None:
+    def _handle_sec_intake_plan(self, ticker: str, cik: str, fiscal_year: str, identifier: str = "") -> None:
         try:
-            payload = sec_intake_plan(ticker=ticker, cik=cik, fiscal_year=fiscal_year)
+            payload = sec_intake_plan(ticker=ticker, cik=cik, fiscal_year=fiscal_year, identifier=identifier)
             status = HTTPStatus.OK if payload["status"] != "blocked" else HTTPStatus.PRECONDITION_REQUIRED
             self._send_json(payload, status=status)
         except ValueError as error:
             self._send_json({"error": "bad_sec_query", "message": str(error)}, status=HTTPStatus.BAD_REQUEST)
 
-    def _handle_sec_extract(self, ticker: str, cik: str, fiscal_year: str) -> None:
+    def _handle_sec_extract(self, ticker: str, cik: str, fiscal_year: str, identifier: str = "") -> None:
         try:
-            payload = extract_sec_filing(ticker=ticker, cik=cik, fiscal_year=fiscal_year)
+            payload = extract_sec_filing(ticker=ticker, cik=cik, fiscal_year=fiscal_year, identifier=identifier)
             if payload["status"] == "blocked":
                 status = HTTPStatus.PRECONDITION_REQUIRED
             elif payload["status"] == "not_found":

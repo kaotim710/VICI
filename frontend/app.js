@@ -75,17 +75,32 @@
 
   function storedSearchDefaults() {
     const params = new URLSearchParams(window.location.search);
+    const storedIdentifier = window.sessionStorage.getItem("vici:lastIdentifier");
     const storedTicker = window.sessionStorage.getItem("vici:lastTicker");
     const storedYear = window.sessionStorage.getItem("vici:lastFiscalYear");
     return {
-      ticker: (params.get("ticker") || storedTicker || "AAPL").toUpperCase(),
+      identifier: (params.get("identifier") || params.get("ticker") || params.get("cik") || storedIdentifier || storedTicker || "AAPL").toUpperCase(),
       year: params.get("year") || storedYear || "2023",
     };
   }
 
-  function rememberSearch(ticker, year) {
-    window.sessionStorage.setItem("vici:lastTicker", ticker);
+  function rememberSearch(identifier, year) {
+    window.sessionStorage.setItem("vici:lastIdentifier", identifier);
+    if (/^[A-Z][A-Z0-9.-]{0,9}$/.test(identifier)) {
+      window.sessionStorage.setItem("vici:lastTicker", identifier);
+    }
     window.sessionStorage.setItem("vici:lastFiscalYear", year);
+  }
+
+  function normalizeSecIdentifier(value) {
+    return String(value || "").trim().toUpperCase();
+  }
+
+  function secIdentifierKind(value) {
+    const identifier = normalizeSecIdentifier(value);
+    if (/^\d{1,10}$/.test(identifier)) return "cik";
+    if (/^[A-Z][A-Z0-9.-]{0,9}$/.test(identifier)) return "ticker";
+    return "";
   }
 
   function App() {
@@ -101,35 +116,43 @@
 
   function HomePage() {
     const defaults = useMemo(storedSearchDefaults, []);
-    const [ticker, setTicker] = useState(defaults.ticker);
+    const [identifier, setIdentifier] = useState(defaults.identifier);
     const [year, setYear] = useState(defaults.year);
     const [filingStatus, setFilingStatus] = useState(null);
     const [busy, setBusy] = useState(false);
 
-    function updateTicker(value) {
-      const nextTicker = value.toUpperCase();
-      setTicker(nextTicker);
-      rememberSearch(nextTicker, year);
+    function updateIdentifier(value) {
+      const nextIdentifier = normalizeSecIdentifier(value);
+      setIdentifier(nextIdentifier);
+      rememberSearch(nextIdentifier, year);
     }
 
     function updateYear(value) {
       setYear(value);
-      rememberSearch(ticker, value);
+      rememberSearch(identifier, value);
+    }
+
+    function secQueryParams() {
+      const value = normalizeSecIdentifier(identifier);
+      const kind = secIdentifierKind(value);
+      if (!kind) throw new Error("Enter a ticker symbol or a 1-10 digit CIK.");
+      return new URLSearchParams({ identifier: value, year });
     }
 
     async function checkPlan(event) {
       event.preventDefault();
-      rememberSearch(ticker, year);
+      rememberSearch(identifier, year);
       setBusy(true);
       setFilingStatus({ state: "checking", message: "Checking SEC filing availability..." });
       try {
-        const params = new URLSearchParams({ ticker, year });
+        const params = secQueryParams();
         const payload = await apiJson(`/api/sec/intake-plan?${params.toString()}`);
         const filing = payload.filing || {};
+        const label = payload.company && (payload.company.ticker || payload.company.cik) || normalizeSecIdentifier(identifier);
         setFilingStatus({
           state: payload.status === "ready" ? "ready" : "error",
           message: payload.status === "ready"
-            ? `Filing found: ${filing.accession_number || ticker} (${filing.primary_document || "10-K"})`
+            ? `Filing found: ${filing.accession_number || label} (${filing.primary_document || "10-K"})`
             : payload.message || "Filing was not found.",
         });
       } catch (error) {
@@ -141,9 +164,13 @@
 
     function runLiveExtraction(event) {
       event.preventDefault();
-      rememberSearch(ticker, year);
-      const params = new URLSearchParams({ ticker, year });
-      window.location.href = `/sec-live?${params.toString()}`;
+      rememberSearch(identifier, year);
+      try {
+        const params = secQueryParams();
+        window.location.href = `/sec-live?${params.toString()}`;
+      } catch (error) {
+        setFilingStatus({ state: "error", message: error.message });
+      }
     }
 
     return h("main", { className: "home-shell" },
@@ -157,7 +184,7 @@
       h("section", { className: "search-section" },
         h("form", { className: "search-panel", onSubmit: runLiveExtraction },
           h("div", { className: "search-fields" },
-            h("label", null, "Ticker", h("input", { value: ticker, onChange: (event) => updateTicker(event.target.value), autoComplete: "off" })),
+            h("label", null, "Ticker or CIK", h("input", { value: identifier, onChange: (event) => updateIdentifier(event.target.value), autoComplete: "off", inputMode: "text" })),
             h("label", null, "Fiscal year", h("select", { value: year, onChange: (event) => updateYear(event.target.value) },
               yearOptions().map((option) => h("option", { key: option, value: String(option) }, option))
             ))
@@ -384,12 +411,14 @@
     const params = useMemo(() => new URLSearchParams(window.location.search), []);
     const ticker = params.get("ticker") || "";
     const cik = params.get("cik") || "";
+    const identifier = params.get("identifier") || "";
     const year = params.get("year") || "";
 
     useEffect(() => {
       const query = new URLSearchParams({ year });
-      if (ticker) query.set("ticker", ticker);
-      if (cik) query.set("cik", cik);
+      if (identifier) query.set("identifier", identifier);
+      else if (ticker) query.set("ticker", ticker);
+      else if (cik) query.set("cik", cik);
       apiJson(`/api/sec/extract?${query.toString()}`)
         .then((result) => {
           setPayload(result);
@@ -399,10 +428,10 @@
           setError(loadError.message);
           setStatus(`Live extraction failed: ${loadError.message}`);
         });
-    }, [ticker, cik, year]);
+    }, [ticker, cik, identifier, year]);
 
     return h(WorkspaceShell, {
-      title: payload ? `${payload.filing.ticker || payload.filing.cik} ${payload.filing.fiscal_year}` : `${ticker || cik} ${year}`.trim() || "Live SEC filing",
+      title: payload ? `${payload.filing.ticker || payload.filing.cik} ${payload.filing.fiscal_year}` : `${ticker || cik || identifier} ${year}`.trim() || "Live SEC filing",
       subtitle: payload ? `${payload.filing.form} | ${payload.filing.accession_number} | ${Number(payload.source_bytes || 0).toLocaleString()} bytes | ${payload.elapsed_ms} ms` : "Direct SEC fetch, no raw persistence.",
       backHref: "/",
       backLabel: "Back to search",

@@ -71,14 +71,44 @@ class WebUiTests(unittest.TestCase):
         self.assertIn("/api/sec/extract", app)
         self.assertIn("Run live extraction", app)
         self.assertIn("/sec-live?", app)
+        self.assertIn("Ticker or CIK", app)
+        self.assertIn("secIdentifierKind", app)
+        self.assertIn("/^\\d{1,10}$/", app)
+        self.assertIn("/^[A-Z][A-Z0-9.-]{0,9}$/", app)
+        self.assertIn("new URLSearchParams({ identifier: value, year })", app)
         self.assertIn("h(\"select\"", app)
         self.assertIn("storedSearchDefaults", app)
+        self.assertIn("vici:lastIdentifier", app)
         self.assertIn("vici:lastTicker", app)
         self.assertIn("vici:lastFiscalYear", app)
-        self.assertIn("rememberSearch(ticker, year)", app)
+        self.assertIn("rememberSearch(identifier, year)", app)
         self.assertNotIn("setPlan(JSON.stringify", app)
         self.assertNotIn('<input name="year" value="2023"', app)
         self.assertEqual(plan["storage_policy"]["default_mode"], "direct_fetch_then_extract")
+
+    def test_sec_intake_identifier_regex_accepts_ticker_or_cik(self):
+        self.assertEqual(web_ui._resolve_sec_identifier(identifier="AAPL"), ("AAPL", ""))
+        self.assertEqual(web_ui._resolve_sec_identifier(identifier="brk.b"), ("BRK.B", ""))
+        self.assertEqual(web_ui._resolve_sec_identifier(identifier="0000320193"), ("", "0000320193"))
+        self.assertEqual(web_ui._resolve_sec_identifier(ticker="MSFT"), ("MSFT", ""))
+        self.assertEqual(web_ui._resolve_sec_identifier(cik="320193"), ("", "320193"))
+
+        with self.assertRaisesRegex(ValueError, "identifier must be a ticker symbol or 1-10 digit CIK"):
+            web_ui._resolve_sec_identifier(identifier="AAPL!")
+        with self.assertRaisesRegex(ValueError, "identifier must be a ticker symbol or 1-10 digit CIK"):
+            web_ui._resolve_sec_identifier(identifier="12345678901")
+        with self.assertRaisesRegex(ValueError, "provide either identifier or ticker/cik"):
+            web_ui._resolve_sec_identifier(identifier="AAPL", ticker="MSFT")
+
+    def test_sec_intake_plan_parses_identifier_before_sec_requests(self):
+        with patch.dict("os.environ", {}, clear=True):
+            ticker_payload = web_ui.sec_intake_plan(identifier="MSFT", fiscal_year=2023)
+            cik_payload = web_ui.sec_intake_plan(identifier="0000320193", fiscal_year=2023)
+
+        self.assertEqual(ticker_payload["query"]["ticker"], "MSFT")
+        self.assertIsNone(ticker_payload["query"]["cik"])
+        self.assertIsNone(cik_payload["query"]["ticker"])
+        self.assertEqual(cik_payload["query"]["cik"], "0000320193")
 
     def test_testing_page_exposes_smoke_and_seed_data(self):
         html = web_ui.render_testing()
