@@ -30,6 +30,7 @@ from .models import (
 )
 
 PARSER_VERSION = "deterministic_text_v1"
+MIN_FULL_FILING_SUCCESS_RATIO = 0.5
 
 
 @dataclass(frozen=True)
@@ -53,17 +54,21 @@ def extract_items(content: str, target_items: list[str] | None = None, filing_id
         _extract_one_item(text, document.blocks, candidates, item, toc_profile.items, cross_reference_entries, page_starts)
         for item in targets
     ]
+    warnings = list(document.warnings)
+    if not candidates:
+        warnings.append("NO_ITEM_HEADINGS_FOUND")
     resolved = sum(1 for result in item_results if result.status in {"success", "not_present"})
     successful = sum(1 for result in item_results if result.status == "success")
-    if resolved == len(item_results):
+    insufficient_coverage = _has_insufficient_full_filing_coverage(targets, successful)
+    if insufficient_coverage:
+        warnings.append(f"INSUFFICIENT_ITEM_COVERAGE: extracted {successful}/{len(targets)} requested items.")
+        status = "failed"
+    elif resolved == len(item_results):
         status = "success"
     elif successful:
         status = "partial"
     else:
         status = "failed"
-    warnings = list(document.warnings)
-    if not candidates:
-        warnings.append("NO_ITEM_HEADINGS_FOUND")
     return ExtractionResult(
         filing_id=filing_id,
         status=status,
@@ -76,6 +81,13 @@ def extract_items(content: str, target_items: list[str] | None = None, filing_id
         toc_confidence=toc_profile.confidence,
         toc_entries=toc_profile.entries,
     )
+
+
+def _has_insufficient_full_filing_coverage(targets: list[str], successful: int) -> bool:
+    if set(targets) != set(ITEM_ORDER):
+        return False
+    minimum_successful = int(len(ITEM_ORDER) * MIN_FULL_FILING_SUCCESS_RATIO + 0.999)
+    return successful < minimum_successful
 
 
 def _extract_one_item(

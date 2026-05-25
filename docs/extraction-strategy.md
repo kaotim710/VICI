@@ -58,6 +58,19 @@ Boundary selection uses the nearest valid next item according to legal 10-K item
 - For terminal sections, allow end-of-document or final-item boundaries only after rejecting stronger
   next-item evidence.
 
+## Filing-Level Integrity Gate
+
+Full-filing extraction must fail honestly when the input is empty, malformed, or missing most of the
+standard 10-K item set.
+
+- Empty or whitespace-only content produces no item headings and must return filing status `failed`.
+- When extraction targets the complete supported 10-K item list, fewer than half of the items
+  extracted as `success` is treated as insufficient item coverage.
+- Insufficient item coverage adds a filing-level `INSUFFICIENT_ITEM_COVERAGE` warning and returns
+  filing status `failed`, even if a few individual items extracted successfully.
+- This gate does not apply to explicit single-item or small target-item requests, because those are
+  allowed to ask for only one section.
+
 ## Length Policy
 
 Length warnings are review signals, not automatic failures.
@@ -223,6 +236,12 @@ Any strategy change should include focused tests for the behavior being changed.
   availability, and recovery action counts.
 - Held-out validation reports must include a gate that fails on missing filings, failed items, or
   warnings so warning regressions do not hide in aggregate success counts.
+- The 48-filing production eval set is a broader robustness layer, not a replacement for seed or
+  held-out validation. It should be run against the deployed API and reviewed by warning category,
+  structural cause, and latency.
+- Evaluation without public ground truth should combine manually reviewed boundary cases, structural
+  invariants, differential report comparisons, and reviewer feedback converted into deterministic
+  tests.
 - Full test suite should pass with `python3 -m unittest discover -s tests`.
 
 ## Change Log
@@ -257,6 +276,9 @@ Any strategy change should include focused tests for the behavior being changed.
   lower-priority evidence.
 - 2026-05-25: Added cross-reference composite items so multi-page index references can be returned as
   inspectable page spans, and incorporated-reference-only items are explicit note results.
+- 2026-05-25: Added production-readiness review guidance covering robustness under filing format
+  variation, validation without public ground truth, edge cases, cost discipline, performance,
+  scaling, and correctness checks.
 - 2026-05-25: Added oversized upload identification fallback: hosted uploads send only a bounded
   leading sample, infer ticker or CIK plus fiscal year, then redirect to live SEC extraction without
   running extraction on the partial upload.

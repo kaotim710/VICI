@@ -212,6 +212,23 @@ class WebUiTests(unittest.TestCase):
             <h1>Item 1. Business</h1><p>Business text.</p>
             <h1>Item 1A. Risk Factors</h1><p>Risk text.</p>
             <h1>Item 2. Properties</h1><p>Property text.</p>
+            <h1>Item 3. Legal Proceedings</h1><p>Legal text.</p>
+            <h1>Item 4. Mine Safety Disclosures</h1><p>Mine safety text.</p>
+            <h1>Item 5. Market for Registrant's Common Equity</h1><p>Market text.</p>
+            <h1>Item 6. Selected Financial Data</h1><p>Reserved.</p>
+            <h1>Item 7. Management's Discussion and Analysis</h1><p>MD&A text.</p>
+            <h1>Item 7A. Quantitative and Qualitative Disclosures About Market Risk</h1><p>Market risk text.</p>
+            <h1>Item 8. Financial Statements and Supplementary Data</h1><p>Financial statements text.</p>
+            <h1>Item 9. Changes in and Disagreements With Accountants</h1><p>None.</p>
+            <h1>Item 9A. Controls and Procedures</h1><p>Controls text.</p>
+            <h1>Item 9B. Other Information</h1><p>None.</p>
+            <h1>Item 10. Directors, Executive Officers and Corporate Governance</h1><p>Directors text.</p>
+            <h1>Item 11. Executive Compensation</h1><p>Compensation text.</p>
+            <h1>Item 12. Security Ownership</h1><p>Ownership text.</p>
+            <h1>Item 13. Certain Relationships and Related Transactions</h1><p>Transactions text.</p>
+            <h1>Item 14. Principal Accountant Fees and Services</h1><p>Fees text.</p>
+            <h1>Item 15. Exhibits, Financial Statement Schedules</h1><p>Exhibit text.</p>
+            <h1>Item 16. Form 10-K Summary</h1><p>None.</p>
             </body></html>
             """,
             filename="../sample-10k.html",
@@ -370,6 +387,40 @@ class WebUiTests(unittest.TestCase):
                 Risk text.
                 Item 2. Properties
                 Property text.
+                Item 3. Legal Proceedings
+                Legal text.
+                Item 4. Mine Safety Disclosures
+                Mine safety text.
+                Item 5. Market for Registrant's Common Equity
+                Market text.
+                Item 6. Selected Financial Data
+                Reserved.
+                Item 7. Management's Discussion and Analysis
+                MD&A text.
+                Item 7A. Quantitative and Qualitative Disclosures About Market Risk
+                Market risk text.
+                Item 8. Financial Statements and Supplementary Data
+                Financial statements text.
+                Item 9. Changes in and Disagreements With Accountants
+                None.
+                Item 9A. Controls and Procedures
+                Controls text.
+                Item 9B. Other Information
+                None.
+                Item 10. Directors, Executive Officers and Corporate Governance
+                Directors text.
+                Item 11. Executive Compensation
+                Compensation text.
+                Item 12. Security Ownership
+                Ownership text.
+                Item 13. Certain Relationships and Related Transactions
+                Transactions text.
+                Item 14. Principal Accountant Fees and Services
+                Fees text.
+                Item 15. Exhibits, Financial Statement Schedules
+                Exhibit text.
+                Item 16. Form 10-K Summary
+                None.
                 """
                 return FilingDownload(
                     cik="0000320193",
@@ -418,6 +469,40 @@ class WebUiTests(unittest.TestCase):
                 Risk text.
                 Item 2. Properties
                 Property text.
+                Item 3. Legal Proceedings
+                Legal text.
+                Item 4. Mine Safety Disclosures
+                Mine safety text.
+                Item 5. Market for Registrant's Common Equity
+                Market text.
+                Item 6. Selected Financial Data
+                Reserved.
+                Item 7. Management's Discussion and Analysis
+                MD&A text.
+                Item 7A. Quantitative and Qualitative Disclosures About Market Risk
+                Market risk text.
+                Item 8. Financial Statements and Supplementary Data
+                Financial statements text.
+                Item 9. Changes in and Disagreements With Accountants
+                None.
+                Item 9A. Controls and Procedures
+                Controls text.
+                Item 9B. Other Information
+                None.
+                Item 10. Directors, Executive Officers and Corporate Governance
+                Directors text.
+                Item 11. Executive Compensation
+                Compensation text.
+                Item 12. Security Ownership
+                Ownership text.
+                Item 13. Certain Relationships and Related Transactions
+                Transactions text.
+                Item 14. Principal Accountant Fees and Services
+                Fees text.
+                Item 15. Exhibits, Financial Statement Schedules
+                Exhibit text.
+                Item 16. Form 10-K Summary
+                None.
                 """
                 return FilingDownload(
                     cik="0000831001",

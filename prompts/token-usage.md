@@ -102,3 +102,4 @@ estimated_prompt_tokens =
 | 2026-05-25 | risk_optimization_request | `prompts/2026-05-25-user-prompts.md` |  | 9 | Requested optimizing current content based on identified project risks. |
 | 2026-05-25 | ticker_or_cik_intake_request | `prompts/2026-05-25-user-prompts.md` |  | 19 | Requested allowing intake to accept ticker or CIK and adding regex tests. |
 | 2026-05-25 | prompt_logging_resume_request | `prompts/2026-05-25-user-prompts.md` |  | 5 | Requested writing the next prompts into the prompt log. |
+| 2026-05-25 | eval_set_construction_request | `prompts/2026-05-25-user-prompts.md` |  | 90 | Requested building a 48-filing eval set across three market-cap-based sector buckets and preparing deployed-site testing. |

@@ -303,3 +303,9 @@ intake這邊應該要可以輸入ticker或是cik，都要做regex測試
 ```text
 接下來的prompt 寫入
 ```
+
+## Eval Set Construction Request
+
+```text
+開始建造eval set：以市值來分類，抓三個主要產業(Technology, Financials, Industrials / Energy)，各八間公司，其中六間行業最大跟兩間中小，共24間公司。2020-2025隨機一份filing，2020之前的隨機一份filing，共48個檔案。之後利用目前部署好的網站來跑測試
+```

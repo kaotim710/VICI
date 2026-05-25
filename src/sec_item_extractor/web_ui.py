@@ -240,8 +240,11 @@ def extract_sec_filing(
         },
         "elapsed_ms": elapsed_ms,
         "source_bytes": len(download.body),
-        "status": "success",
-        "message": "10-K downloaded from SEC and extracted in memory without raw persistence.",
+        "status": _payload_status_from_extraction(result.status),
+        "message": _payload_message_from_extraction(
+            result.status,
+            "10-K downloaded from SEC and extracted in memory without raw persistence.",
+        ),
         "storage_policy": _direct_fetch_storage_policy(),
         "pipeline": {
             "ran": True,
@@ -306,8 +309,11 @@ def extract_uploaded_filing(file_bytes: bytes, filename: str) -> dict:
         "elapsed_ms": elapsed_ms,
         "source_bytes": len(file_bytes),
         "source_sha256": digest,
-        "status": "success",
-        "message": "Uploaded filing extracted in memory without raw persistence.",
+        "status": _payload_status_from_extraction(result.status),
+        "message": _payload_message_from_extraction(
+            result.status,
+            "Uploaded filing extracted in memory without raw persistence.",
+        ),
         "storage_policy": _direct_fetch_storage_policy(),
         "pipeline": {
             "ran": True,
@@ -326,6 +332,22 @@ def extract_uploaded_filing(file_bytes: bytes, filename: str) -> dict:
         },
         "result": result_dict,
     }
+
+
+def _payload_status_from_extraction(extraction_status: str) -> str:
+    if extraction_status == "failed":
+        return "failed"
+    if extraction_status == "partial":
+        return "partial"
+    return "success"
+
+
+def _payload_message_from_extraction(extraction_status: str, success_message: str) -> str:
+    if extraction_status == "failed":
+        return "Extraction failed integrity checks; the filing may be empty, malformed, or missing most 10-K items."
+    if extraction_status == "partial":
+        return "Extraction completed with partial item coverage. Review warnings and item statuses."
+    return success_message
 
 
 def identify_uploaded_filing(

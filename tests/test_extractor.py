@@ -74,7 +74,35 @@ class ExtractorTests(unittest.TestCase):
         result = extract_items(SAMPLE_10K, filing_id="sample")
 
         self.assertEqual([item.item for item in result.item_results], ITEM_ORDER)
-        self.assertEqual(result.status, "partial")
+        self.assertEqual(result.status, "failed")
+        self.assertIn("INSUFFICIENT_ITEM_COVERAGE", " ".join(result.warnings))
+
+    def test_empty_filing_fails_honestly(self):
+        result = extract_items("   \n\t", filing_id="blank")
+
+        self.assertEqual(result.status, "failed")
+        self.assertIn("NO_ITEM_HEADINGS_FOUND", result.warnings)
+        self.assertIn("INSUFFICIENT_ITEM_COVERAGE", " ".join(result.warnings))
+        self.assertTrue(all(item.status == "failed" for item in result.item_results))
+
+    def test_full_filing_missing_most_items_fails_honestly(self):
+        filing = """
+        Item 1. Business
+        Business narrative.
+        Item 1A. Risk Factors
+        Risk narrative.
+        Item 2. Properties
+        Property narrative.
+        Item 3. Legal Proceedings
+        Legal narrative.
+        """
+
+        result = extract_items(filing, filing_id="thin")
+        by_item = {item.item: item for item in result.item_results}
+
+        self.assertEqual(result.status, "failed")
+        self.assertEqual(by_item["1"].status, "success")
+        self.assertIn("INSUFFICIENT_ITEM_COVERAGE", " ".join(result.warnings))
 
     def test_hidden_ixbrl_like_content_is_suppressed(self):
         text = html_to_text(SAMPLE_10K)
