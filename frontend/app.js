@@ -3,6 +3,8 @@
   const { useEffect, useMemo, useState } = React;
   const VERCEL_UPLOAD_LIMIT_BYTES = 4.5 * 1024 * 1024;
   const LOCAL_UPLOAD_LIMIT_BYTES = 25 * 1024 * 1024;
+  const UPLOAD_IDENTIFY_MAX_BYTES = 2.5 * 1024 * 1024;
+  const UPLOAD_IDENTIFY_HEADROOM_BYTES = 384 * 1024;
 
   function apiJson(url, options) {
     return fetch(url, { cache: "no-store", ...(options || {}) }).then(async (response) => {
@@ -38,6 +40,10 @@
     return window.location.hostname.endsWith(".vercel.app") ? VERCEL_UPLOAD_LIMIT_BYTES : LOCAL_UPLOAD_LIMIT_BYTES;
   }
 
+  function uploadIdentifyBytes() {
+    return Math.max(256 * 1024, Math.min(UPLOAD_IDENTIFY_MAX_BYTES, uploadLimitBytes() - UPLOAD_IDENTIFY_HEADROOM_BYTES));
+  }
+
   function formatBytes(bytes) {
     if (!Number.isFinite(bytes)) return "unknown size";
     const units = ["bytes", "KB", "MB", "GB"];
@@ -53,7 +59,11 @@
   function uploadLimitMessage(file) {
     const limit = uploadLimitBytes();
     if (!file || file.size <= limit) return "";
-    return `${file.name} is ${formatBytes(file.size)}, which exceeds this deployment's ${formatBytes(limit)} upload limit. Use live SEC ticker/year extraction for large public filings, or run the Docker/local server for large file uploads.`;
+    return `${file.name} is ${formatBytes(file.size)}, which exceeds this deployment's ${formatBytes(limit)} upload limit. VICI will read the first ${formatBytes(uploadIdentifyBytes())} to identify ticker/year, then run live SEC extraction.`;
+  }
+
+  function isVercelDeployment() {
+    return window.location.hostname.endsWith(".vercel.app");
   }
 
   function cssId(value) {
@@ -273,16 +283,46 @@
     const [busy, setBusy] = useState(false);
     const [fileWarning, setFileWarning] = useState("");
 
+    async function identifyOversizedUpload(file) {
+      setBusy(true);
+      setError("");
+      setPayload(null);
+      setFileWarning(uploadLimitMessage(file));
+      setStatus("Large upload detected. Reading filing header to identify ticker/year...");
+      try {
+        const sampleBytes = uploadIdentifyBytes();
+        const sample = file.slice(0, sampleBytes, file.type || "text/html");
+        const form = new FormData();
+        form.append("filing", sample, file.name);
+        form.append("original_size", String(file.size));
+        form.append("partial_upload", "1");
+        const result = await apiJson("/api/uploads/identify", { method: "POST", body: form });
+        const ticker = result.filing && result.filing.ticker;
+        const cik = result.filing && result.filing.cik;
+        const year = result.filing && result.filing.fiscal_year;
+        const identifier = ticker || cik;
+        if (result.status === "ready" && result.next_action && result.next_action.url && identifier && year) {
+          if (ticker) rememberSearch(ticker, String(year));
+          setStatus(`Identified ${identifier} ${year}. Fetching the official SEC filing now...`);
+          window.location.href = result.next_action.url;
+          return;
+        }
+        throw new Error(result.message || "Could not identify ticker/year from the uploaded filing sample.");
+      } catch (identifyError) {
+        setError(identifyError.message);
+        setStatus(`Upload identification failed: ${identifyError.message}`);
+      } finally {
+        setBusy(false);
+      }
+    }
+
     async function submitUpload(event) {
       event.preventDefault();
       const form = new FormData(event.currentTarget);
       const selectedFile = form.get("filing");
       const limitWarning = uploadLimitMessage(selectedFile);
       if (limitWarning) {
-        setError(limitWarning);
-        setFileWarning(limitWarning);
-        setPayload(null);
-        setStatus(`Upload extraction blocked: ${limitWarning}`);
+        await identifyOversizedUpload(selectedFile);
         return;
       }
       setBusy(true);
@@ -303,6 +343,11 @@
     }
 
     const sidebar = h("form", { className: "upload-form", onSubmit: submitUpload },
+      isVercelDeployment() ? h("div", { className: "upload-route-note" },
+        h("strong", null, "Recommended on Vercel"),
+        h("p", null, "For large public filings, upload uses a small header sample to identify ticker/year, then switches to live SEC extraction."),
+        h("a", { className: "secondary-button compact", href: "/" }, "Use ticker/year search")
+      ) : null,
       h("label", null, "Filing file", h("input", {
         name: "filing",
         type: "file",
@@ -333,6 +378,7 @@
     return h("section", { className: "metadata-strip" },
       h("span", null, payload.filing.primary_document),
       h("span", null, `Ticker ${payload.filing.ticker || "unknown"} (${metadata.ticker_source || "not_found"})`),
+      h("span", null, `CIK ${payload.filing.cik || "unknown"} (${metadata.cik_source || "not_found"})`),
       h("span", null, `Fiscal year ${payload.filing.fiscal_year || "unknown"} (${metadata.fiscal_year_source || "not_found"})`),
       h("span", null, `Form ${payload.filing.form || "unknown"} (${metadata.form_source || "not_found"})`),
       h("span", null, `Registrant ${metadata.registrant_name || "unknown"}`),
@@ -346,10 +392,13 @@
     const [error, setError] = useState("");
     const params = useMemo(() => new URLSearchParams(window.location.search), []);
     const ticker = params.get("ticker") || "";
+    const cik = params.get("cik") || "";
     const year = params.get("year") || "";
 
     useEffect(() => {
-      const query = new URLSearchParams({ ticker, year });
+      const query = new URLSearchParams({ year });
+      if (ticker) query.set("ticker", ticker);
+      if (cik) query.set("cik", cik);
       apiJson(`/api/sec/extract?${query.toString()}`)
         .then((result) => {
           setPayload(result);
@@ -359,10 +408,10 @@
           setError(loadError.message);
           setStatus(`Live extraction failed: ${loadError.message}`);
         });
-    }, [ticker, year]);
+    }, [ticker, cik, year]);
 
     return h(WorkspaceShell, {
-      title: payload ? `${payload.filing.ticker} ${payload.filing.fiscal_year}` : `${ticker} ${year}`.trim() || "Live SEC filing",
+      title: payload ? `${payload.filing.ticker || payload.filing.cik} ${payload.filing.fiscal_year}` : `${ticker || cik} ${year}`.trim() || "Live SEC filing",
       subtitle: payload ? `${payload.filing.form} | ${payload.filing.accession_number} | ${Number(payload.source_bytes || 0).toLocaleString()} bytes | ${payload.elapsed_ms} ms` : "Direct SEC fetch, no raw persistence.",
       backHref: "/",
       backLabel: "Back to search",

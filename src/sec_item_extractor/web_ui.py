@@ -275,7 +275,7 @@ def extract_uploaded_filing(file_bytes: bytes, filename: str) -> dict:
             "filing_id": filing_id,
             "ticker": inferred["ticker"],
             "title": inferred["registrant_name"] or safe_filename,
-            "cik": None,
+            "cik": inferred["cik"],
             "fiscal_year": inferred["fiscal_year"],
             "form": inferred["form"],
             "accession_number": None,
@@ -308,6 +308,73 @@ def extract_uploaded_filing(file_bytes: bytes, filename: str) -> dict:
         },
         "result": result_dict,
     }
+
+
+def identify_uploaded_filing(
+    file_bytes: bytes,
+    filename: str,
+    *,
+    original_size: int | None = None,
+    partial_upload: bool = False,
+) -> dict:
+    if not file_bytes:
+        raise ValueError("uploaded filing file is required")
+    if len(file_bytes) > MAX_UPLOAD_BYTES:
+        raise ValueError(f"uploaded filing identification exceeds {MAX_UPLOAD_BYTES} byte limit")
+
+    safe_filename = _safe_filename(filename or "uploaded-filing.html")
+    content = file_bytes.decode("utf-8", errors="replace")
+    if not content.strip():
+        raise ValueError("uploaded filing file is empty")
+
+    inferred = infer_upload_metadata(content, safe_filename)
+    digest = hashlib.sha256(file_bytes).hexdigest()
+    form = inferred["form"]
+    is_10k = form is None or form.startswith("10-K")
+    identifier_key = "ticker" if inferred["ticker"] else "cik"
+    identifier = inferred["ticker"] or inferred["cik"]
+    ready = bool(identifier and inferred["fiscal_year"] and is_10k)
+    params = f"{identifier_key}={identifier}&year={inferred['fiscal_year']}" if identifier and inferred["fiscal_year"] else ""
+    payload = {
+        "query": {"ticker": inferred["ticker"], "fiscal_year": inferred["fiscal_year"]},
+        "filing": {
+            "filing_id": f"identified_{_slug(safe_filename)}_{digest[:12]}",
+            "ticker": inferred["ticker"],
+            "title": inferred["registrant_name"] or safe_filename,
+            "cik": inferred["cik"],
+            "fiscal_year": inferred["fiscal_year"],
+            "form": inferred["form"],
+            "accession_number": None,
+            "filing_date": None,
+            "report_date": None,
+            "primary_document": safe_filename,
+            "download_url": None,
+        },
+        "inferred_metadata": inferred,
+        "source_bytes": len(file_bytes),
+        "original_size": original_size,
+        "partial_upload": partial_upload,
+        "source_sha256": digest,
+        "status": "ready" if ready else "needs_user_input",
+        "message": (
+            "Uploaded filing metadata identified. Continue with live SEC extraction."
+            if ready
+            else "Could not identify enough 10-K metadata from the uploaded file sample."
+        ),
+        "storage_policy": _direct_fetch_storage_policy(),
+        "pipeline": {
+            "ran": False,
+            "cache": "disabled",
+            "trigger": "uploaded_filing_identify",
+        },
+        "next_action": {
+            "type": "live_sec_extract",
+            "url": f"/sec-live?{params}",
+        }
+        if ready
+        else None,
+    }
+    return payload
 
 
 def _attach_sec_item_format(result_dict: dict) -> None:
@@ -477,12 +544,15 @@ def _parse_optional_fiscal_year(value: int | str | None) -> int | None:
 
 def infer_upload_metadata(content: str, filename: str) -> dict:
     ticker, ticker_source = _infer_upload_ticker(content, filename)
+    cik, cik_source = _infer_upload_cik(content)
     fiscal_year, fiscal_year_source = _infer_upload_fiscal_year(content, filename)
     form, form_source = _infer_upload_form(content, filename)
     registrant_name, registrant_source = _infer_dei_text(content, "EntityRegistrantName")
     return {
         "ticker": ticker,
         "ticker_source": ticker_source,
+        "cik": cik,
+        "cik_source": cik_source,
         "fiscal_year": fiscal_year,
         "fiscal_year_source": fiscal_year_source,
         "form": form,
@@ -507,6 +577,15 @@ def _infer_upload_ticker(content: str, filename: str) -> tuple[str | None, str]:
     filename_match = re.match(r"(?P<ticker>[a-zA-Z]{1,6})[_-]\d{4}[_-]10k\b", filename)
     if filename_match:
         return filename_match.group("ticker").upper(), "filename"
+    return None, "not_found"
+
+
+def _infer_upload_cik(content: str) -> tuple[str | None, str]:
+    value, source = _infer_dei_text(content, "EntityCentralIndexKey")
+    if value:
+        digits = re.sub(r"\D+", "", value)
+        if 1 <= len(digits) <= 10:
+            return format_cik(digits), source
     return None, "not_found"
 
 
@@ -1100,6 +1179,9 @@ class WebUiHandler(BaseHTTPRequestHandler):
     def do_POST(self) -> None:
         parsed = urlparse(self.path)
         path = parsed.path.rstrip("/") or "/"
+        if path == "/api/uploads/identify":
+            self._handle_upload_identify()
+            return
         if path == "/api/uploads/extract":
             self._handle_upload_extract()
             return
@@ -1140,6 +1222,39 @@ class WebUiHandler(BaseHTTPRequestHandler):
             self._send_json(payload, status=status)
         except ValueError as error:
             self._send_json({"error": "bad_sec_query", "message": str(error)}, status=HTTPStatus.BAD_REQUEST)
+
+    def _handle_upload_identify(self) -> None:
+        try:
+            content_length = int(self.headers.get("Content-Length", "0") or "0")
+        except ValueError:
+            self._send_json({"error": "bad_upload", "message": "invalid content length"}, status=HTTPStatus.BAD_REQUEST)
+            return
+        if content_length <= 0:
+            self._send_json({"error": "bad_upload", "message": "uploaded filing file is required"}, status=HTTPStatus.BAD_REQUEST)
+            return
+        if content_length > MAX_UPLOAD_BYTES + 20000:
+            self._send_json(
+                {"error": "upload_too_large", "message": f"upload identification exceeds {MAX_UPLOAD_BYTES} byte limit"},
+                status=HTTPStatus.REQUEST_ENTITY_TOO_LARGE,
+            )
+            return
+
+        body = self.rfile.read(content_length)
+        try:
+            fields, files = _parse_multipart_form(self.headers.get("Content-Type", ""), body)
+            upload = files.get("filing") or files.get("file")
+            if upload is None:
+                raise ValueError("file field named filing is required")
+            original_size = _parse_optional_int(fields.get("original_size"))
+            payload = identify_uploaded_filing(
+                upload["content"],
+                upload["filename"],
+                original_size=original_size,
+                partial_upload=fields.get("partial_upload") == "1",
+            )
+            self._send_json(payload)
+        except ValueError as error:
+            self._send_json({"error": "bad_upload", "message": str(error)}, status=HTTPStatus.BAD_REQUEST)
 
     def _handle_upload_extract(self) -> None:
         try:
@@ -1247,6 +1362,16 @@ class WebUiHandler(BaseHTTPRequestHandler):
 def _first_query_value(query: dict[str, list[str]], key: str) -> str:
     values = query.get(key, [])
     return values[0] if values else ""
+
+
+def _parse_optional_int(value: str | None) -> int | None:
+    if value is None or str(value).strip() == "":
+        return None
+    try:
+        parsed = int(str(value).strip())
+    except ValueError:
+        return None
+    return parsed if parsed >= 0 else None
 
 
 def health_check() -> dict:

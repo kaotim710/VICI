@@ -105,6 +105,7 @@ class WebUiTests(unittest.TestCase):
         self.assertIn("Live SEC Extraction", html)
         self.assertIn("/api/sec/extract", app)
         self.assertIn("LiveSecPage", app)
+        self.assertIn('params.get("cik")', app)
         self.assertIn("Extracted TOC", app)
         self.assertIn("Raw extraction JSON", app)
         self.assertIn("Show original filing structure", app)
@@ -121,6 +122,10 @@ class WebUiTests(unittest.TestCase):
         self.assertIn("Run upload extraction", app)
         self.assertIn("type: \"file\"", app)
         self.assertIn("/api/uploads/extract", app)
+        self.assertIn("/api/uploads/identify", app)
+        self.assertIn("identifyOversizedUpload", app)
+        self.assertIn("file.slice", app)
+        self.assertIn("const identifier = ticker || cik", app)
         self.assertIn("Back to search", app)
         self.assertIn("No extraction has run yet.", app)
         self.assertIn("Show original filing structure", app)
@@ -138,7 +143,19 @@ class WebUiTests(unittest.TestCase):
         self.assertIn("4.5 MB", app)
         self.assertIn("parseApiPayload", app)
         self.assertIn("non_json_response", app)
-        self.assertIn("Upload extraction blocked", app)
+        self.assertIn("Large upload detected", app)
+        self.assertIn("Uploaded filing metadata identified", web_ui.identify_uploaded_filing(
+            b"""
+            <html><body>
+            <ix:nonNumeric name="dei:DocumentFiscalYearFocus">2025</ix:nonNumeric>
+            <ix:nonNumeric name="dei:DocumentType">10-K</ix:nonNumeric>
+            <ix:nonNumeric name="dei:TradingSymbol">TST</ix:nonNumeric>
+            </body></html>
+            """,
+            filename="test.htm",
+            original_size=9_000_000,
+            partial_upload=True,
+        )["message"])
 
     def test_upload_extract_runs_in_memory_and_includes_raw_preview(self):
         payload = web_ui.extract_uploaded_filing(
@@ -174,6 +191,50 @@ class WebUiTests(unittest.TestCase):
         self.assertTrue(sec_format["title_matches_expected"])
         self.assertEqual(sec_format["status"], "canonical_match")
         self.assertIn("sec_format_review_count", payload["summary"])
+
+    def test_upload_identify_uses_sample_without_running_extraction(self):
+        payload = web_ui.identify_uploaded_filing(
+            b"""
+            <html><body>
+            <ix:nonNumeric name="dei:DocumentFiscalYearFocus">2025</ix:nonNumeric>
+            <ix:nonNumeric name="dei:DocumentType">10-K</ix:nonNumeric>
+            <ix:nonNumeric name="dei:TradingSymbol">INTC</ix:nonNumeric>
+            <ix:nonNumeric name="dei:EntityRegistrantName">Intel Corporation</ix:nonNumeric>
+            </body></html>
+            """,
+            filename="../intc.htm",
+            original_size=7_500_000,
+            partial_upload=True,
+        )
+
+        self.assertEqual(payload["status"], "ready")
+        self.assertFalse(payload["pipeline"]["ran"])
+        self.assertEqual(payload["pipeline"]["trigger"], "uploaded_filing_identify")
+        self.assertEqual(payload["filing"]["ticker"], "INTC")
+        self.assertEqual(payload["filing"]["fiscal_year"], 2025)
+        self.assertEqual(payload["original_size"], 7_500_000)
+        self.assertTrue(payload["partial_upload"])
+        self.assertEqual(payload["next_action"]["type"], "live_sec_extract")
+        self.assertEqual(payload["next_action"]["url"], "/sec-live?ticker=INTC&year=2025")
+
+    def test_upload_identify_can_route_by_cik_when_ticker_is_missing(self):
+        payload = web_ui.identify_uploaded_filing(
+            b"""
+            <html><body>
+            <ix:nonNumeric name="dei:EntityCentralIndexKey">831001</ix:nonNumeric>
+            <ix:nonNumeric name="dei:DocumentFiscalYearFocus">2025</ix:nonNumeric>
+            <ix:nonNumeric name="dei:DocumentType">10-K</ix:nonNumeric>
+            </body></html>
+            """,
+            filename="citi.htm",
+            original_size=12_000_000,
+            partial_upload=True,
+        )
+
+        self.assertEqual(payload["status"], "ready")
+        self.assertIsNone(payload["filing"]["ticker"])
+        self.assertEqual(payload["filing"]["cik"], "0000831001")
+        self.assertEqual(payload["next_action"]["url"], "/sec-live?cik=0000831001&year=2025")
 
     def test_upload_metadata_falls_back_to_filename(self):
         payload = web_ui.extract_uploaded_filing(
