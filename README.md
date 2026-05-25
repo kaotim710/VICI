@@ -1,29 +1,29 @@
-# VICI SEC 10-K Item Extraction Pipeline
+# SEC 10-K Item Extraction Pipeline
 
-VICI 是一個 production-style 的 SEC 10-K item extraction pipeline。它以 deterministic
+這個專案是一個 production-style 的 SEC 10-K item extraction pipeline。它以 deterministic
 parsing 為主，搭配可檢查的 evidence、明確的 uncertainty、以及 reviewer-friendly 的原始
 filing 結構預覽，目標是在真實 SEC filing 格式變異下，仍能穩定抽取 10-K 的各個 Item。
 
-目前支援的核心目標包含 Item 1、Item 1A、Item 7、Item 8、Item 15，以及標準 10-K item
-set 中其他 section。系統設計重點不是只追求「看起來有抽到文字」，而是讓每個 boundary
-decision 都能被檢查、驗證與回溯。
+核心目標是抽取完整 10-K item set，而不是只抽取少數重點 section。系統設計重點不是只追求
+「看起來有抽到文字」，而是讓每個 boundary decision 都能被檢查、驗證與回溯；如果檔案全空、
+格式錯誤，或完整 filing 缺少大多數 item，系統應誠實回傳 `failed`。
 
 ## 核心策略
 
-VICI 採用 deterministic-first 策略：
+本專案的策略可以統合成四層：
 
-- 從多種 deterministic signal 找 candidate：regex heading、alias、DOM/raw heading
-  evidence、TOC row、Form 10-K cross-reference index。
-- 透過 legal item order、validated next-item evidence、TOC ordering、cross-reference
-  page span，以及 bounded terminal fallback 重建 item boundary。
-- warning 是 review signal，不是自動 failure。很短的 `Not applicable` section，或很長的
-  exhibit/table/financial-statement section，都可能是合法內容。
-- 對 table、image、exhibit、supplemental section 保留 scoped original filing HTML，方便
-  reviewer 檢查原始結構與還原度。
-- 每個 item payload 會輸出 evidence offset、candidate attempts、confidence components、
-  SEC item format metadata、warnings、recovery actions，以及 per-item `strategy_trace`。
-- 預設 extraction path 不使用 LLM 或 embedding。它們只保留給未來 bounded ambiguity
-  recovery 使用，而且必須在 deterministic signal 用盡後才可啟動。
+- `Deterministic retrieval`：從 regex heading、alias、DOM/raw heading、TOC row、Form 10-K
+  cross-reference index 等訊號找 candidate。
+- `Boundary validation`：用 legal item order、next-item evidence、TOC ordering、page span、
+  terminal fallback 重建並驗證 section boundary。
+- `Inspectable uncertainty`：輸出 evidence、candidate attempts、confidence components、
+  warnings、recommended actions、SEC format metadata、`strategy_trace`，讓 reviewer 能理解為何
+  這樣切。
+- `Raw fidelity and honest failure`：table/image/exhibit/supplemental section 以 scoped original
+  filing HTML 檢查；空檔、薄檔、缺少大多數 item 的完整 filing 直接標為 `failed`。
+
+預設 extraction path 不使用 LLM 或 embedding。它們只保留給未來 bounded ambiguity recovery，
+且只能處理低信心、語意模糊的局部 evidence packet，不會成為主解析器。
 
 主要策略文件：
 
@@ -152,6 +152,31 @@ Eval runner 會在 `reports/` 下輸出 aggregate JSON 與 Markdown report。
 - `Deployment-aware intake`：hosted upload path 會避免大型 raw upload；如果可判斷 ticker/CIK
   與 fiscal year，就改走 SEC direct fetch。
 
+## 成本、效能與擴充性
+
+### 成本紀律
+
+- 預設 extraction 不使用 LLM 或 embedding，因此 runtime model cost 為零。
+- SEC API 不需要 API key，但必須提供 `User-Agent`，並遵守 rate limit。
+- `prompts/token-usage.md` 只記錄開發過程中的 user prompt token 估算，不是 billing record。
+  目前 ledger 共有 86 筆 prompt，估算 prompt tokens 合計約 3,902，其中 actual prompt tokens
+  欄位尚未填入。
+- 若未來加入 LLM verifier，只能針對 low-confidence ambiguity 傳送 bounded evidence packet，
+  不可把整份 10-K 丟給模型。
+
+### 效能
+
+- Live SEC extraction 是 on-demand：使用者指定 ticker/CIK + fiscal year 後才抓取與解析 filing。
+- Raw filing 預設不持久化；table/image/exhibit preview 只保留 scoped fragment，避免渲染整份 filing。
+- Batch eval 應透過 `scripts/run_deployed_eval_set.py` 執行，並用 `--sleep` 控制節奏，不應透過前端連續點擊。
+- Vercel serverless path 適合 demo 與 validation；大型 filing 或長時間 batch workload 可能遇到 timeout 或 request body 限制。
+
+### 擴充性
+
+- 新 filing 問題應先加入 reviewed issue case 或 eval manifest，再改 parser rule。
+- 公司/年度特定格式可以作為 strategy memory，但要建立在主策略之上，不能取代 deterministic evidence。
+- 若導入 embedding/LLM，應只作為 recovery/verifier，並在 report 中統計觸發次數、接受率與成本。
+
 ## AI 協助的部分
 
 AI 在此專案中協助 development 與 review，但不是 runtime autonomous agent。
@@ -171,25 +196,7 @@ parsing 與可檢查 evidence。
 
 ## 部署
 
-### Zeabur
-
-Repo 內含 `Dockerfile`，可用於 Zeabur 或其他 Docker-style hosting。
-
-建議環境變數：
-
-```bash
-HOST=0.0.0.0
-PORT=8000
-SEC_USER_AGENT="Your Name your.email@example.com"
-MAX_UPLOAD_BYTES=26214400
-```
-
-健康檢查 path 使用 `/api/health`。如果沒有設定 `SEC_USER_AGENT`，live SEC intake 會被阻擋，
-但 upload parsing 仍可使用。
-
-### Vercel
-
-Repo 也包含 Vercel adapter：
+目前部署主線是 Vercel。Repo 內含 Vercel adapter：
 
 - `api/index.py` 將既有 Python `WebUiHandler` 暴露為 Vercel Python Function。
 - `vercel.json` 將所有 route rewrite 到該 function，因此 `/`、`/upload`、`/sec-live`、
@@ -203,7 +210,14 @@ MAX_UPLOAD_BYTES=26214400
 ```
 
 Vercel 不會直接跑 Dockerfile，而是以 Python Function 形式執行，所以比較適合 demo 與
-validation。若要處理長時間 extraction workload 或大型 filing，Docker deployment 仍較適合。
+validation。
+
+Vercel 有 request body / upload size 限制。大型公開 SEC filing 不應依賴完整檔案 upload；目前策略是：
+
+- 小型 HTML/TXT filing 可直接 upload 並在 memory 中解析。
+- 大型 filing 先以 bounded leading sample 判斷 ticker/CIK/year。
+- 如果可識別為公開 SEC filing，轉到 live SEC direct fetch，再從 SEC archive 下載完整 filing。
+- 如果 sample 無法判斷 ticker/CIK/year，系統應要求 user 改用 ticker/year 或 CIK/year search。
 
 ## Evaluation 與資料集
 
@@ -224,15 +238,34 @@ validation。若要處理長時間 extraction workload 或大型 filing，Docker
 
 Boundary label 格式參考 [fixtures/gold/boundaries.example.json](fixtures/gold/boundaries.example.json)。
 
-目前人工 review 後表現較穩定、可作為 sanity reference 的 filing 包含：
+目前人工 review 後表現較穩定、可作為 sanity reference 的 seed filings 包含：
 
-- `aapl_2023_10k`：Item 1、Item 1A、Item 7 boundary 在 gold test 中作為主要科技公司案例。
-- `msft_2023_10k`：Item 1、Item 1A、Item 7 boundary 在 gold test 中作為另一個大型科技公司案例。
-- `wmt_2014_10k`：Item 15 exhibit/table raw structure 還原作為 gold test 案例。
-- `wmt_2023_10k`：Item 5 的 table/image raw structure fidelity 作為 gold test 案例。
+- Apple：AAPL 2014、AAPL 2023
+- Microsoft：MSFT 2014、MSFT 2023
+- JPMorgan Chase：JPM 2014、JPM 2023
+- Bank of America：BAC 2014、BAC 2023
+- UnitedHealth Group：UNH 2014、UNH 2023
+- Johnson & Johnson：JNJ 2014、JNJ 2023
+- Exxon Mobil：XOM 2014、XOM 2023
+- Chevron：CVX 2014、CVX 2023
+- Walmart：WMT 2014、WMT 2023
+- Amazon：AMZN 2014、AMZN 2023
 
-這些案例不代表系統已經解決所有 filing 格式，而是目前 review 過、抽取表現不錯、適合用來防止
-regression 的基準樣本。
+其中 gold test 目前明確覆蓋 AAPL 2023、MSFT 2023、WMT 2014、WMT 2023 等 boundary 或
+raw structure fidelity expectation。這些案例不代表系統已經解決所有 filing 格式，而是目前
+review 過、抽取表現較穩定、適合用來防止 regression 的基準樣本。
+
+目前已知拆分仍不理想或需要繼續改善的案例：
+
+- JPM 2023：Item 1C、Item 8 等 section 有一句話引用到後方頁面；Item 15 後方還有獨立 TOC、
+  table、圖表與 supplemental content。這類 same-filing reference 與 supplemental section
+  已有初步 recovery/partition，但仍需要更穩定的 page-range composite handling。
+- JNJ 2023：Item 8 內部 financial statement TOC 需要像 supplemental section 一樣做子項切分；
+  目前可呈現 internal TOC，但仍需要更多 fidelity check。
+- INTC 2025：Form 10-K Cross-Reference Index 對多個 item 給出頁碼或共用 reference。Item 2、
+  Item 3、Item 5、Item 7、Item 7A、Item 9A、Item 9B，以及 Part III 的 Item 10-14，都可能因
+  cross-reference range、bold heading、或 TOC row 混淆而切得不夠精準。這是後續需要 bounded
+  LLM verifier 或 company-specific strategy memory 輔助的代表案例。
 
 下載 seed filings 到 ignored local fixtures：
 
