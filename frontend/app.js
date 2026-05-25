@@ -67,6 +67,21 @@
     return years;
   }
 
+  function storedSearchDefaults() {
+    const params = new URLSearchParams(window.location.search);
+    const storedTicker = window.sessionStorage.getItem("vici:lastTicker");
+    const storedYear = window.sessionStorage.getItem("vici:lastFiscalYear");
+    return {
+      ticker: (params.get("ticker") || storedTicker || "AAPL").toUpperCase(),
+      year: params.get("year") || storedYear || "2023",
+    };
+  }
+
+  function rememberSearch(ticker, year) {
+    window.sessionStorage.setItem("vici:lastTicker", ticker);
+    window.sessionStorage.setItem("vici:lastFiscalYear", year);
+  }
+
   function App() {
     const path = window.location.pathname;
     if (path === "/testing") return h(TestingPage);
@@ -79,13 +94,26 @@
   }
 
   function HomePage() {
-    const [ticker, setTicker] = useState("AAPL");
-    const [year, setYear] = useState("2023");
+    const defaults = useMemo(storedSearchDefaults, []);
+    const [ticker, setTicker] = useState(defaults.ticker);
+    const [year, setYear] = useState(defaults.year);
     const [filingStatus, setFilingStatus] = useState(null);
     const [busy, setBusy] = useState(false);
 
+    function updateTicker(value) {
+      const nextTicker = value.toUpperCase();
+      setTicker(nextTicker);
+      rememberSearch(nextTicker, year);
+    }
+
+    function updateYear(value) {
+      setYear(value);
+      rememberSearch(ticker, value);
+    }
+
     async function checkPlan(event) {
       event.preventDefault();
+      rememberSearch(ticker, year);
       setBusy(true);
       setFilingStatus({ state: "checking", message: "Checking SEC filing availability..." });
       try {
@@ -107,6 +135,7 @@
 
     function runLiveExtraction(event) {
       event.preventDefault();
+      rememberSearch(ticker, year);
       const params = new URLSearchParams({ ticker, year });
       window.location.href = `/sec-live?${params.toString()}`;
     }
@@ -122,8 +151,8 @@
       h("section", { className: "search-section" },
         h("form", { className: "search-panel", onSubmit: runLiveExtraction },
           h("div", { className: "search-fields" },
-            h("label", null, "Ticker", h("input", { value: ticker, onChange: (event) => setTicker(event.target.value.toUpperCase()), autoComplete: "off" })),
-            h("label", null, "Fiscal year", h("select", { value: year, onChange: (event) => setYear(event.target.value) },
+            h("label", null, "Ticker", h("input", { value: ticker, onChange: (event) => updateTicker(event.target.value), autoComplete: "off" })),
+            h("label", null, "Fiscal year", h("select", { value: year, onChange: (event) => updateYear(event.target.value) },
               yearOptions().map((option) => h("option", { key: option, value: String(option) }, option))
             ))
           ),
