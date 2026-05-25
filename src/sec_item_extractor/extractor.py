@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import re
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 
 from .candidates import (
     ITEM_ORDER,
@@ -26,6 +26,7 @@ from .models import (
     ItemResult,
     RecommendedAction,
     NarrativeBlock,
+    StrategyDecision,
 )
 
 PARSER_VERSION = "deterministic_text_v1"
@@ -88,7 +89,24 @@ def _extract_one_item(
 ) -> ItemResult:
     cross_reference_result = _cross_reference_composite_result(text, blocks, item, cross_reference_entries, page_starts)
     if cross_reference_result:
-        return cross_reference_result
+        return _with_strategy_trace(
+            cross_reference_result,
+            [
+                _strategy_decision(
+                    "cross_reference_index",
+                    "selected",
+                    "Form 10-K cross-reference index supplied item evidence.",
+                    [f"strategy={cross_reference_result.strategy_used}", f"pages_or_spans={len(cross_reference_result.spans)}"],
+                    cross_reference_result.strategy_used,
+                ),
+                _strategy_decision(
+                    "confidence_scoring",
+                    "completed",
+                    f"Confidence {cross_reference_result.confidence_level} {cross_reference_result.confidence_score:.2f}.",
+                    _confidence_trace_signals(cross_reference_result),
+                ),
+            ],
+        )
 
     start_candidates = [candidate for candidate in candidates if candidate.item == item]
     if not start_candidates:
@@ -100,6 +118,21 @@ def _extract_one_item(
                 confidence_level="high",
                 confidence_score=1.0,
                 strategy_used="toc_presence_filter_v1",
+                strategy_trace=[
+                    _strategy_decision(
+                        "candidate_retrieval",
+                        "miss",
+                        "No start heading candidate found for item.",
+                        [f"total_candidates={len(candidates)}", "toc_profile_available=true"],
+                    ),
+                    _strategy_decision(
+                        "presence_filter",
+                        "selected",
+                        "Item is not declared in the detected TOC item list.",
+                        [f"toc_items={','.join(toc_items)}"],
+                        "toc_presence_filter_v1",
+                    ),
+                ],
             )
         if _item_absent_from_observed_sequence(item, candidates):
             return ItemResult(
@@ -109,12 +142,35 @@ def _extract_one_item(
                 confidence_level="medium",
                 confidence_score=0.8,
                 strategy_used="observed_sequence_presence_filter_v1",
+                strategy_trace=[
+                    _strategy_decision(
+                        "candidate_retrieval",
+                        "miss",
+                        "No start heading candidate found for item.",
+                        [f"total_candidates={len(candidates)}", "observed_sequence_available=true"],
+                    ),
+                    _strategy_decision(
+                        "presence_filter",
+                        "selected",
+                        "Observed non-TOC item sequence skips this item.",
+                        ["legal item order remained coherent"],
+                        "observed_sequence_presence_filter_v1",
+                    ),
+                ],
             )
         return ItemResult(
             item=item,
             status="failed",
             validation_reasons=["START_HEADING_NOT_FOUND"],
             warnings=["No heading candidate found for requested item."],
+            strategy_trace=[
+                _strategy_decision(
+                    "candidate_retrieval",
+                    "failed",
+                    "No deterministic start candidate was found.",
+                    [f"total_candidates={len(candidates)}"],
+                ),
+            ],
         )
 
     ranked_starts = sorted(start_candidates, key=_start_rank)
@@ -122,7 +178,37 @@ def _extract_one_item(
     for pair in _candidate_pairs(text, candidates, ranked_starts, toc_items):
         if pair.end and not pair.rejection_reasons:
             attempts.append(_attempt_from_pair(item, "selected", pair))
-            return _build_success_result(text, pair.start, pair.end, attempts)
+            result = _build_success_result(text, pair.start, pair.end, attempts)
+            return _with_strategy_trace(
+                result,
+                [
+                    _strategy_decision(
+                        "candidate_retrieval",
+                        "completed",
+                        "Start heading candidates were retrieved deterministically.",
+                        [f"start_candidates={len(start_candidates)}", f"total_candidates={len(candidates)}"],
+                    ),
+                    _strategy_decision(
+                        "candidate_start_ranking",
+                        "completed",
+                        "Start candidates were ranked by TOC, cross-reference, title, and offset signals.",
+                        _rank_trace_signals(ranked_starts),
+                    ),
+                    _strategy_decision(
+                        "boundary_reconstruction",
+                        "selected",
+                        "Legal next-item boundary was selected.",
+                        pair.validation_reasons,
+                        result.strategy_used,
+                    ),
+                    _strategy_decision(
+                        "confidence_scoring",
+                        "completed",
+                        f"Confidence {result.confidence_level} {result.confidence_score:.2f}.",
+                        _confidence_trace_signals(result),
+                    ),
+                ],
+            )
         attempts.append(_attempt_from_pair(item, "rejected", pair))
 
     best = ranked_starts[0]
@@ -136,6 +222,26 @@ def _extract_one_item(
         confidence_level="low",
         confidence_score=0.2,
         candidate_attempts=attempts,
+        strategy_trace=[
+            _strategy_decision(
+                "candidate_retrieval",
+                "completed",
+                "Start heading candidates were retrieved deterministically.",
+                [f"start_candidates={len(start_candidates)}", f"total_candidates={len(candidates)}"],
+            ),
+            _strategy_decision(
+                "candidate_start_ranking",
+                "completed",
+                "Start candidates were ranked but no legal end boundary could be selected.",
+                _rank_trace_signals(ranked_starts),
+            ),
+            _strategy_decision(
+                "boundary_reconstruction",
+                "failed",
+                "No legal end boundary was found after bounded candidate attempts.",
+                [f"attempts={len(attempts)}"],
+            ),
+        ],
     )
 
 
@@ -592,6 +698,45 @@ def _build_success_result(
         warnings=warnings,
         recommended_actions=recommended_actions,
     )
+
+
+def _with_strategy_trace(result: ItemResult, trace: list[StrategyDecision]) -> ItemResult:
+    return replace(result, strategy_trace=trace)
+
+
+def _strategy_decision(
+    step: str,
+    status: str,
+    summary: str,
+    signals: list[str] | None = None,
+    selected_strategy: str | None = None,
+) -> StrategyDecision:
+    return StrategyDecision(
+        step=step,
+        status=status,
+        summary=summary,
+        signals=signals or [],
+        selected_strategy=selected_strategy,
+    )
+
+
+def _rank_trace_signals(ranked_starts: list[HeadingCandidate]) -> list[str]:
+    signals = [f"ranked_start_count={len(ranked_starts)}"]
+    for index, candidate in enumerate(ranked_starts[:3], start=1):
+        reasons = ",".join(candidate.reasons[:4]) if candidate.reasons else "none"
+        signals.append(f"{index}:{candidate.text[:80]} | reasons={reasons}")
+    return signals
+
+
+def _confidence_trace_signals(result: ItemResult) -> list[str]:
+    signals = [
+        f"warnings={len(result.warnings)}",
+        f"recommended_actions={len(result.recommended_actions)}",
+    ]
+    for component in result.confidence_components:
+        status = "pass" if component.passed else "fail"
+        signals.append(f"{component.name}:{status}:{component.earned:.2f}/{component.weight:.2f}")
+    return signals
 
 
 def _start_rank(candidate: HeadingCandidate) -> tuple[int, int, int, int, int, int, int, int]:

@@ -175,6 +175,20 @@ This check is informational. It should not discard text by itself because real f
 item number and title across adjacent cells, use older Item 6 conventions, or rely on a Form 10-K
 cross-reference index. Noncanonical status is a review signal, not an automatic extraction failure.
 
+## Strategy Trace And Reviewer Feedback
+
+Every item result should include a `strategy_trace` that explains the deterministic path used for
+that item.
+
+- Trace steps should record retrieval, candidate ranking, boundary reconstruction, confidence
+  scoring, and cross-reference fallback decisions when applicable.
+- Trace steps are diagnostic. They must not change extraction behavior by themselves.
+- UI should expose the trace behind a compact toggle so reviewers can inspect why a boundary was
+  selected without reading raw JSON.
+- Human review decisions should be stored as append-only records using the
+  `review_feedback_v1` contract. Reviewer feedback can accept, reject, correct boundaries, or mark
+  an item as requiring an external source, but it should not mutate prior extraction output.
+
 ## Upload Intake Fallback
 
 Uploaded filings are parsed in memory and are not persisted as raw storage by default.
@@ -248,3 +262,5 @@ Any strategy change should include focused tests for the behavior being changed.
   running extraction on the partial upload.
 - 2026-05-25: Added SEC company ticker directory reverse lookup so CIK-only uploaded samples can be
   enriched with ticker and company title before live SEC extraction when SEC access is configured.
+- 2026-05-25: Added per-item strategy trace and reviewer feedback contract so extraction behavior is
+  easier to audit before introducing company-specific strategy memory or LLM verification.

@@ -140,6 +140,8 @@ class WebUiTests(unittest.TestCase):
         self.assertIn("Show original filing structure", app)
         self.assertIn("SEC format", app)
         self.assertIn("SecFormatSummary", app)
+        self.assertIn("Strategy trace", app)
+        self.assertIn("StrategyTrace", app)
         self.assertIn("Ticker ${payload.filing.ticker", app)
         self.assertNotIn('<input name="ticker"', html)
         self.assertNotIn('<input name="year"', html)

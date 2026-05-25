@@ -124,6 +124,15 @@ class RecommendedAction:
 
 
 @dataclass(frozen=True)
+class StrategyDecision:
+    step: str
+    status: str
+    summary: str
+    signals: list[str] = field(default_factory=list)
+    selected_strategy: str | None = None
+
+
+@dataclass(frozen=True)
 class ItemResult:
     item: str
     status: str
@@ -141,6 +150,7 @@ class ItemResult:
     recommended_actions: list[RecommendedAction] = field(default_factory=list)
     strategy_used: str = "deterministic_text_v1"
     spans: list[ItemSpan] = field(default_factory=list)
+    strategy_trace: list[StrategyDecision] = field(default_factory=list)
 
     def to_dict(self) -> dict:
         return asdict(self)

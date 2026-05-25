@@ -520,6 +520,45 @@ dd { margin: 0; overflow-wrap: anywhere; }
   white-space: pre-wrap;
   font: 12px/1.5 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 }
+.strategy-trace {
+  margin: 12px 0;
+  border: 1px solid rgba(210,210,215,0.72);
+  border-radius: 12px;
+  background: rgba(245,245,247,0.72);
+  padding: 10px 12px;
+}
+.strategy-trace summary {
+  cursor: pointer;
+  color: #424245;
+  font-weight: 700;
+}
+.strategy-trace ol {
+  margin: 10px 0 0;
+  padding-left: 20px;
+  display: grid;
+  gap: 10px;
+}
+.strategy-trace p {
+  margin: 4px 0;
+  color: #424245;
+  font-size: 13px;
+}
+.strategy-trace ul {
+  margin: 6px 0 0;
+  padding-left: 18px;
+  color: var(--muted);
+  font-size: 12px;
+}
+.trace-heading {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: space-between;
+}
+.trace-heading span {
+  color: var(--muted);
+  font-size: 12px;
+}
 .raw-section-tools { margin-top: 12px; }
 .raw-section-meta { color: var(--muted); font-size: 13px; }
 .raw-section-preview { margin-top: 12px; }

@@ -64,6 +64,11 @@ class ExtractorTests(unittest.TestCase):
         self.assertEqual(by_item["1"].candidate_attempts[0].decision, "selected")
         self.assertIn("START_HEADING_FOUND", by_item["1"].candidate_attempts[0].validation_reasons)
         self.assertEqual(by_item["7"].end_evidence.item, "7A")
+        trace_steps = [step.step for step in by_item["1"].strategy_trace]
+        self.assertIn("candidate_start_ranking", trace_steps)
+        self.assertIn("boundary_reconstruction", trace_steps)
+        self.assertIn("confidence_scoring", trace_steps)
+        self.assertIn("strategy_trace", by_item["1"].to_dict())
 
     def test_default_target_items_cover_full_supported_10k_item_list(self):
         result = extract_items(SAMPLE_10K, filing_id="sample")

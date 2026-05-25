@@ -12,6 +12,7 @@ from evaluate_seed import evaluation_summary
 from sec_item_extractor.contracts import (
     evaluation_gate,
     recovery_action_contract,
+    review_feedback_contract,
     retry_policy_contract,
     validation_gate,
     warning_category,
@@ -71,6 +72,14 @@ class ContractTests(unittest.TestCase):
         self.assertFalse(policy["llm_enabled"])
         self.assertIn("candidate_start_ranking", [step["name"] for step in policy["steps"]])
         self.assertIn("recovery_action_runner", [step["name"] for step in policy["steps"]])
+
+    def test_review_feedback_contract_is_append_only_and_boundary_aware(self):
+        contract = review_feedback_contract()
+
+        self.assertEqual(contract["contract_version"], "review_feedback_v1")
+        self.assertEqual(contract["storage_policy"], "append_only_review_records")
+        self.assertIn("correct_boundary", contract["decisions"])
+        self.assertIn("corrected_start_offset", contract["optional_fields"])
 
     def test_validation_gate_fails_on_warnings(self):
         gate = validation_gate(

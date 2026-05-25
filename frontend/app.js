@@ -535,6 +535,7 @@
     const actions = item.recommended_actions || [];
     const rawStructure = item.raw_structure || {};
     const secFormat = item.sec_item_format || null;
+    const strategyTrace = item.strategy_trace || [];
     const rawAvailable = !!item.live_raw_section_available || (source === "seed" && item.raw_section_available !== false);
 
     async function toggleRaw() {
@@ -572,6 +573,7 @@
           h("div", null, h("dt", null, "Warnings"), h("dd", { className: "chip-row" }, warnings.length ? warnings.map((warning) => h("span", { className: "warning-chip", key: warning }, warning)) : h("span", { className: "empty-chip" }, "none"))),
           h("div", null, h("dt", null, "Actions"), h("dd", { className: "chip-row" }, actions.length ? actions.map((action, index) => h("span", { className: `action-chip ${action.severity}`, key: index }, `${action.action_type}:${action.reason}`)) : h("span", { className: "empty-chip" }, "none")))
         ),
+        strategyTrace.length ? h(StrategyTrace, { trace: strategyTrace }) : null,
         item.spans && item.spans.length ? h(CompositeSegments, { spans: item.spans }) : null,
         h("pre", { className: "item-text" }, item.text || "")
       ) : h(RawPreview, { rawPayload, rawError }),
@@ -579,6 +581,21 @@
         h("button", { className: "secondary-button compact", onClick: toggleRaw }, rawVisible ? "Show extracted view" : "Show original filing structure"),
         rawVisible && rawPayload ? h("span", { className: "raw-section-meta" }, `${rawPayload.table_count || 0} tables | ${rawPayload.image_count || 0} images | ${Number(rawPayload.raw_bytes || 0).toLocaleString()} bytes`) : null
       ) : null
+    );
+  }
+
+  function StrategyTrace({ trace }) {
+    return h("details", { className: "strategy-trace" },
+      h("summary", null, "Strategy trace"),
+      h("ol", null, trace.map((step, index) => h("li", { key: `${step.step}-${index}` },
+        h("div", { className: "trace-heading" },
+          h("strong", null, step.step || "strategy_step"),
+          h("span", null, step.status || "unknown")
+        ),
+        h("p", null, step.summary || ""),
+        step.selected_strategy ? h("p", { className: "muted" }, `strategy: ${step.selected_strategy}`) : null,
+        step.signals && step.signals.length ? h("ul", null, step.signals.map((signal, signalIndex) => h("li", { key: signalIndex }, signal))) : null
+      )))
     );
   }
 

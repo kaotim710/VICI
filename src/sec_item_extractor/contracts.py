@@ -7,6 +7,7 @@ from copy import deepcopy
 EVALUATION_CONTRACT_VERSION = "evaluation_contract_v1"
 RECOVERY_ACTION_CONTRACT_VERSION = "recovery_action_v1"
 RETRY_POLICY_CONTRACT_VERSION = "retry_policy_v1"
+REVIEW_FEEDBACK_CONTRACT_VERSION = "review_feedback_v1"
 
 WARNING_CATEGORIES = {
     "Section length is outside the expected first-pass range.": "length_policy_review",
@@ -143,6 +144,35 @@ RETRY_POLICY = {
     ],
 }
 
+REVIEW_FEEDBACK_SCHEMA = {
+    "contract_version": REVIEW_FEEDBACK_CONTRACT_VERSION,
+    "purpose": "Capture human review decisions without mutating extractor output.",
+    "required_fields": [
+        "filing_id",
+        "item",
+        "decision",
+        "reviewer",
+        "reviewed_at",
+    ],
+    "decisions": {
+        "accept": "Reviewer accepts current extracted boundary and content.",
+        "reject": "Reviewer rejects current extraction and records why.",
+        "correct_boundary": "Reviewer supplies corrected start/end evidence or offsets.",
+        "needs_external_source": "Reviewer confirms content must come from another filing, exhibit, or reference.",
+    },
+    "optional_fields": [
+        "reason",
+        "corrected_start_text",
+        "corrected_end_text",
+        "corrected_start_offset",
+        "corrected_end_offset",
+        "notes",
+        "source_url",
+        "strategy_hint",
+    ],
+    "storage_policy": "append_only_review_records",
+}
+
 
 def warning_category(warning: str) -> str:
     return WARNING_CATEGORIES.get(warning, "uncategorized_warning")
@@ -163,6 +193,10 @@ def recovery_action_contract(action_type: str, reason: str) -> dict:
 
 def retry_policy_contract() -> dict:
     return deepcopy(RETRY_POLICY)
+
+
+def review_feedback_contract() -> dict:
+    return deepcopy(REVIEW_FEEDBACK_SCHEMA)
 
 
 def evaluation_gate(seed_summary: dict, gold_summary: dict | None = None) -> dict:
