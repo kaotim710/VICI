@@ -717,6 +717,73 @@ class ExtractorTests(unittest.TestCase):
             )
         )
 
+    def test_cross_reference_index_reconstructs_composite_page_spans(self):
+        filing = """
+        <html><body>
+        <div>FORM 10-K CROSS-REFERENCE INDEX</div>
+        <table>
+          <tr><td>Item Number</td><td>Item</td><td>Page</td></tr>
+          <tr><td>Item 2.</td><td>Properties</td><td>Pages 3, 5</td></tr>
+          <tr><td>Item 3.</td><td>Legal Proceedings</td><td>Page 6</td></tr>
+        </table>
+        <div>2</div>
+        <div>Property page one.</div>
+        <p>Manufacturing facilities and property detail.</p>
+        <div>3</div>
+        <div>Sales and Marketing</div>
+        <p>This heading belongs after Item 2's first referenced page.</p>
+        <div>4</div>
+        <div>More property detail.</div>
+        <p>Additional property content from another referenced page.</p>
+        <div>5</div>
+        <div>Legal Proceedings</div>
+        <p>Legal body text.</p>
+        <div>6</div>
+        <div>Key Terms</div>
+        <p>Definitions should not be inside Item 3.</p>
+        </body></html>
+        """
+
+        result = extract_items(filing, target_items=["2", "3"])
+        by_item = {item.item: item for item in result.item_results}
+
+        self.assertEqual(by_item["2"].status, "success")
+        self.assertEqual(by_item["2"].strategy_used, "cross_reference_index_composite_v1")
+        self.assertEqual(len(by_item["2"].spans), 2)
+        self.assertIn("Property page one.", by_item["2"].text)
+        self.assertIn("More property detail.", by_item["2"].text)
+        self.assertNotIn("Legal body text.", by_item["2"].text)
+        self.assertEqual(by_item["3"].status, "success")
+        self.assertIn("Legal Proceedings", by_item["3"].text)
+        self.assertNotIn("Key Terms", by_item["3"].text)
+
+    def test_cross_reference_index_note_only_items_are_explicit(self):
+        filing = """
+        <html><body>
+        <div>FORM 10-K CROSS-REFERENCE INDEX</div>
+        <table>
+          <tr><td>Item Number</td><td>Item</td><td>Page</td></tr>
+          <tr><td>Item 10.</td><td>Directors, Executive Officers, and Corporate Governance</td><td>Page 52 (a)</td></tr>
+          <tr><td>Item 11.</td><td>Executive Compensation</td><td>(a)</td></tr>
+          <tr><td>Item 12.</td><td>Security Ownership</td><td>(a)</td></tr>
+        </table>
+        <div>(a) Incorporated by reference to the applicable section of the proxy statement.</div>
+        <div>51</div>
+        <div>Executive officers text.</div>
+        <div>52</div>
+        <div>Exhibit Index</div>
+        </body></html>
+        """
+
+        result = extract_items(filing, target_items=["11"])
+        item = result.item_results[0]
+
+        self.assertEqual(item.status, "success")
+        self.assertEqual(item.strategy_used, "cross_reference_index_note_v1")
+        self.assertIn("Executive Compensation", item.text)
+        self.assertIn("Incorporated by reference", item.text)
+        self.assertTrue(item.recommended_actions)
+
 
 if __name__ == "__main__":
     unittest.main()

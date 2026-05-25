@@ -3,7 +3,7 @@ from __future__ import annotations
 import re
 from collections.abc import Iterable
 
-from .models import HeadingCandidate, NarrativeBlock, TocEntry, TocProfile
+from .models import CrossReferenceEntry, HeadingCandidate, NarrativeBlock, TocEntry, TocProfile
 
 
 ITEM_ORDER = [
@@ -142,6 +142,39 @@ def find_heading_candidates(text: str, blocks: list[NarrativeBlock] | None = Non
         candidates.extend(_cross_reference_alias_candidates(blocks, candidates))
         candidates.sort(key=lambda candidate: (candidate.start, candidate.end, candidate.item))
     return candidates
+
+
+def infer_cross_reference_entries(blocks: list[NarrativeBlock]) -> list[CrossReferenceEntry]:
+    entries: list[CrossReferenceEntry] = []
+    footnotes = _cross_reference_footnotes(blocks)
+    for start_index, end_index in _cross_reference_ranges(blocks):
+        index = start_index + 1
+        while index < end_index:
+            item = _item_token(blocks[index].text)
+            if item is None:
+                index += 1
+                continue
+            region_end = _next_item_token_index(blocks, index + 1, end_index)
+            region = blocks[index + 1 : region_end]
+            title = _cross_reference_title(region)
+            pages = _cross_reference_pages(region)
+            note = _cross_reference_note(region, footnotes)
+            if title or pages or note:
+                entries.append(
+                    CrossReferenceEntry(
+                        item=item,
+                        title=title or SEC_ITEM_TITLES.get(item, ""),
+                        pages=pages,
+                        note=note,
+                        block_index=index,
+                    )
+                )
+            index = region_end
+    return entries
+
+
+def infer_page_start_offsets(blocks: list[NarrativeBlock]) -> dict[int, tuple[int, int]]:
+    return _page_start_offsets(blocks)
 
 
 def legal_next_items(item: str) -> set[str]:
@@ -384,7 +417,18 @@ def _cross_reference_ranges(blocks: list[NarrativeBlock]) -> list[tuple[int, int
         if "form 10-k cross-reference index" not in block.text.lower():
             continue
         end = min(len(blocks), index + 260)
+        seen_item = False
         for cursor in range(index + 1, end):
+            if _item_token(blocks[cursor].text):
+                seen_item = True
+            if (
+                seen_item
+                and cursor > index + 4
+                and blocks[cursor].tag != "td"
+                and re.fullmatch(r"\d{1,4}", " ".join(blocks[cursor].text.split()))
+            ):
+                end = cursor
+                break
             if _item_token(blocks[cursor].text) == "16":
                 end = min(len(blocks), cursor + 28)
                 break
@@ -394,6 +438,8 @@ def _cross_reference_ranges(blocks: list[NarrativeBlock]) -> list[tuple[int, int
 
 def _next_item_token_index(blocks: list[NarrativeBlock], start: int, end: int) -> int:
     for index in range(start, end):
+        if re.fullmatch(r"\d{1,4}", " ".join(blocks[index].text.split())):
+            continue
         if _item_token(blocks[index].text):
             return index
     return end
@@ -528,14 +574,47 @@ def _cross_reference_title(blocks: list[NarrativeBlock]) -> str:
 
 
 def _first_cross_reference_page(blocks: list[NarrativeBlock]) -> int | None:
-    for block in blocks[:10]:
+    pages = _cross_reference_pages(blocks)
+    return pages[0] if pages else None
+
+
+def _cross_reference_pages(blocks: list[NarrativeBlock]) -> list[int]:
+    pages: list[int] = []
+    for block in blocks[:18]:
         compact = " ".join(block.text.split()).strip()
         if not _looks_like_page_reference(compact):
             continue
-        match = re.search(r"\d{1,4}", compact)
-        if match:
-            return int(match.group(0))
+        for left, right in re.findall(r"(\d{1,4})(?:\s*[–-]\s*(\d{1,4}))?", compact):
+            start = int(left)
+            end = int(right) if right else start
+            if end < start or end - start > 80:
+                continue
+            pages.extend(range(start, end + 1))
+    seen = set()
+    for page in pages:
+        if page in seen:
+            continue
+        seen.add(page)
+    return sorted(seen)
+
+
+def _cross_reference_note(blocks: list[NarrativeBlock], footnotes: dict[str, str]) -> str | None:
+    for block in blocks[:8]:
+        compact = " ".join(block.text.split()).strip().lower()
+        if compact in footnotes:
+            return footnotes[compact]
     return None
+
+
+def _cross_reference_footnotes(blocks: list[NarrativeBlock]) -> dict[str, str]:
+    notes: dict[str, str] = {}
+    for start_index, end_index in _cross_reference_ranges(blocks):
+        for block in blocks[start_index:end_index]:
+            compact = " ".join(block.text.split()).strip()
+            match = re.match(r"^(\([a-z]\))\s+(.+)$", compact, flags=re.IGNORECASE)
+            if match:
+                notes[match.group(1).lower()] = compact
+    return notes
 
 
 def _looks_like_page_reference(value: str) -> bool:

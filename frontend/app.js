@@ -532,12 +532,31 @@
           h("div", null, h("dt", null, "Warnings"), h("dd", { className: "chip-row" }, warnings.length ? warnings.map((warning) => h("span", { className: "warning-chip", key: warning }, warning)) : h("span", { className: "empty-chip" }, "none"))),
           h("div", null, h("dt", null, "Actions"), h("dd", { className: "chip-row" }, actions.length ? actions.map((action, index) => h("span", { className: `action-chip ${action.severity}`, key: index }, `${action.action_type}:${action.reason}`)) : h("span", { className: "empty-chip" }, "none")))
         ),
+        item.spans && item.spans.length ? h(CompositeSegments, { spans: item.spans }) : null,
         h("pre", { className: "item-text" }, item.text || "")
       ) : h(RawPreview, { rawPayload, rawError }),
       rawAvailable ? h("div", { className: "raw-section-tools" },
         h("button", { className: "secondary-button compact", onClick: toggleRaw }, rawVisible ? "Show extracted view" : "Show original filing structure"),
         rawVisible && rawPayload ? h("span", { className: "raw-section-meta" }, `${rawPayload.table_count || 0} tables | ${rawPayload.image_count || 0} images | ${Number(rawPayload.raw_bytes || 0).toLocaleString()} bytes`) : null
       ) : null
+    );
+  }
+
+  function CompositeSegments({ spans }) {
+    return h("section", { className: "composite-segments" },
+      h("div", { className: "segments-heading" },
+        h("h3", null, "Composite segments"),
+        h("span", null, `${spans.length} page span${spans.length === 1 ? "" : "s"}`)
+      ),
+      h("div", { className: "segment-list" },
+        spans.map((span, index) => h("details", { key: `${span.start_offset}-${index}`, className: "segment-card" },
+          h("summary", null,
+            h("strong", null, span.label || `Segment ${index + 1}`),
+            h("span", null, `page ${span.page || "n/a"} | ${String(span.text || "").length.toLocaleString()} chars`)
+          ),
+          h("pre", null, span.text || "")
+        ))
+      )
     );
   }
 

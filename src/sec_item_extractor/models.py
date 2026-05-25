@@ -72,6 +72,27 @@ class Evidence:
 
 
 @dataclass(frozen=True)
+class CrossReferenceEntry:
+    item: str
+    title: str
+    pages: list[int] = field(default_factory=list)
+    note: str | None = None
+    block_index: int | None = None
+
+
+@dataclass(frozen=True)
+class ItemSpan:
+    label: str
+    text: str
+    start_offset: int
+    end_offset: int
+    page: int | None = None
+    start_evidence: Evidence | None = None
+    end_evidence: Evidence | None = None
+    validation_reasons: list[str] = field(default_factory=list)
+
+
+@dataclass(frozen=True)
 class CandidateAttempt:
     item: str
     decision: str
@@ -119,6 +140,7 @@ class ItemResult:
     warnings: list[str] = field(default_factory=list)
     recommended_actions: list[RecommendedAction] = field(default_factory=list)
     strategy_used: str = "deterministic_text_v1"
+    spans: list[ItemSpan] = field(default_factory=list)
 
     def to_dict(self) -> dict:
         return asdict(self)

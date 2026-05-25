@@ -3,17 +3,29 @@ from __future__ import annotations
 import re
 from dataclasses import dataclass
 
-from .candidates import ITEM_ORDER, find_heading_candidates, infer_toc_profile, is_expected_title, legal_next_items, toc_next_items
+from .candidates import (
+    ITEM_ORDER,
+    find_heading_candidates,
+    infer_cross_reference_entries,
+    infer_page_start_offsets,
+    infer_toc_profile,
+    is_expected_title,
+    legal_next_items,
+    toc_next_items,
+)
 from .cleaning import parse_document
 from .contracts import recovery_action_contract
 from .models import (
     CandidateAttempt,
     ConfidenceComponent,
+    CrossReferenceEntry,
     Evidence,
     ExtractionResult,
     HeadingCandidate,
+    ItemSpan,
     ItemResult,
     RecommendedAction,
+    NarrativeBlock,
 )
 
 PARSER_VERSION = "deterministic_text_v1"
@@ -34,7 +46,12 @@ def extract_items(content: str, target_items: list[str] | None = None, filing_id
     targets = [item.upper() for item in target_items] if target_items else list(ITEM_ORDER)
     candidates = find_heading_candidates(text, document.blocks)
     toc_profile = infer_toc_profile(candidates)
-    item_results = [_extract_one_item(text, candidates, item, toc_profile.items) for item in targets]
+    cross_reference_entries = infer_cross_reference_entries(document.blocks)
+    page_starts = infer_page_start_offsets(document.blocks)
+    item_results = [
+        _extract_one_item(text, document.blocks, candidates, item, toc_profile.items, cross_reference_entries, page_starts)
+        for item in targets
+    ]
     resolved = sum(1 for result in item_results if result.status in {"success", "not_present"})
     successful = sum(1 for result in item_results if result.status == "success")
     if resolved == len(item_results):
@@ -60,7 +77,19 @@ def extract_items(content: str, target_items: list[str] | None = None, filing_id
     )
 
 
-def _extract_one_item(text: str, candidates: list[HeadingCandidate], item: str, toc_items: list[str]) -> ItemResult:
+def _extract_one_item(
+    text: str,
+    blocks: list[NarrativeBlock],
+    candidates: list[HeadingCandidate],
+    item: str,
+    toc_items: list[str],
+    cross_reference_entries: list[CrossReferenceEntry],
+    page_starts: dict[int, tuple[int, int]],
+) -> ItemResult:
+    cross_reference_result = _cross_reference_composite_result(text, blocks, item, cross_reference_entries, page_starts)
+    if cross_reference_result:
+        return cross_reference_result
+
     start_candidates = [candidate for candidate in candidates if candidate.item == item]
     if not start_candidates:
         if toc_items and item not in toc_items:
@@ -108,6 +137,199 @@ def _extract_one_item(text: str, candidates: list[HeadingCandidate], item: str, 
         confidence_score=0.2,
         candidate_attempts=attempts,
     )
+
+
+def _cross_reference_composite_result(
+    text: str,
+    blocks: list[NarrativeBlock],
+    item: str,
+    entries: list[CrossReferenceEntry],
+    page_starts: dict[int, tuple[int, int]],
+) -> ItemResult | None:
+    entry = next((candidate for candidate in entries if candidate.item == item), None)
+    if entry is None:
+        return None
+    if item in {"1", "1A"}:
+        return None
+
+    if not entry.pages and entry.note:
+        section_text = f"{entry.title}\n\n{entry.note}".strip()
+        evidence = Evidence(
+            kind="cross_reference_index",
+            item=item,
+            offset=blocks[entry.block_index].clean_start if entry.block_index is not None else 0,
+            text=entry.title,
+            reasons=["CROSS_REFERENCE_INDEX_NOTE"],
+            block_index=entry.block_index,
+            block_tag=blocks[entry.block_index].tag if entry.block_index is not None else None,
+        )
+        return ItemResult(
+            item=item,
+            status="success",
+            text=section_text,
+            start_offset=evidence.offset,
+            end_offset=evidence.offset + len(section_text),
+            confidence_level="medium",
+            confidence_score=0.7,
+            start_evidence=evidence,
+            validation_reasons=["CROSS_REFERENCE_NOTE_ONLY_ITEM"],
+            warnings=["Item is incorporated or cross-referenced rather than fully contained in this filing."],
+            recommended_actions=[
+                _recommended_action(
+                    action_type="needs_external_source",
+                    reason="external_or_other_document_reference",
+                    description="Cross-reference index points this item to an incorporated reference.",
+                    options=["fetch_referenced_document", "accept_cross_reference_text"],
+                )
+            ],
+            strategy_used="cross_reference_index_note_v1",
+        )
+
+    if not entry.pages:
+        return None
+
+    spans = _cross_reference_page_spans(text, blocks, item, entry, page_starts)
+    if not spans:
+        return None
+
+    if len(spans) == 1 and item in {"1", "1A"}:
+        return None
+
+    section_text = "\n\n".join(span.text for span in spans if span.text.strip()).strip()
+    if not section_text:
+        return None
+    start_evidence = spans[0].start_evidence
+    end_evidence = spans[-1].end_evidence
+    components = [
+        ConfidenceComponent(
+            name="cross_reference_index_pages",
+            weight=0.70,
+            earned=0.70,
+            passed=True,
+            reason="Form 10-K cross-reference index supplied page-level evidence.",
+        ),
+        ConfidenceComponent(
+            name="page_boundaries_resolved",
+            weight=0.20,
+            earned=0.20,
+            passed=True,
+            reason="Referenced pages were mapped to filing page boundaries.",
+        ),
+    ]
+    score = sum(component.earned for component in components)
+    warnings = []
+    if len(spans) > 1:
+        warnings.append("Item reconstructed from multiple non-contiguous cross-reference pages.")
+    return ItemResult(
+        item=item,
+        status="success",
+        text=section_text,
+        start_offset=spans[0].start_offset,
+        end_offset=spans[-1].end_offset,
+        confidence_level="high" if score >= 0.85 else "medium",
+        confidence_score=round(score, 2),
+        confidence_components=components,
+        start_evidence=start_evidence,
+        end_evidence=end_evidence,
+        validation_reasons=["CROSS_REFERENCE_INDEX_COMPOSITE_ITEM"],
+        warnings=warnings,
+        recommended_actions=[
+            _recommended_action(
+                action_type="inspect_only",
+                reason="section_reference_detected",
+                description="Review cross-reference-derived page spans before accepting the composite item.",
+                options=["inspect_composite_spans", "accept_current_section"],
+            )
+        ]
+        if len(spans) > 1
+        else [],
+        strategy_used="cross_reference_index_composite_v1",
+        spans=spans,
+    )
+
+
+def _cross_reference_page_spans(
+    text: str,
+    blocks: list[NarrativeBlock],
+    item: str,
+    entry: CrossReferenceEntry,
+    page_starts: dict[int, tuple[int, int]],
+) -> list[ItemSpan]:
+    spans: list[ItemSpan] = []
+    for page in entry.pages:
+        if page not in page_starts:
+            continue
+        start, start_block_index = page_starts[page]
+        end, end_block_index = _page_end_offset(text, blocks, page, page_starts)
+        if end <= start:
+            continue
+        span_text = text[start:end].strip()
+        if not span_text:
+            continue
+        start_evidence = Evidence(
+            kind="cross_reference_page_start",
+            item=item,
+            offset=start,
+            text=f"Page {page}",
+            reasons=["CROSS_REFERENCE_INDEX_PAGE"],
+            raw_offset=blocks[start_block_index].raw_start,
+            block_index=start_block_index,
+            block_tag=blocks[start_block_index].tag,
+        )
+        end_evidence = Evidence(
+            kind="cross_reference_page_end",
+            item=item,
+            offset=end,
+            text=f"Page {page + 1}" if page + 1 in page_starts else "END_OF_DOCUMENT",
+            reasons=["CROSS_REFERENCE_INDEX_PAGE_BOUNDARY"],
+            raw_offset=blocks[end_block_index].raw_start if end_block_index is not None else None,
+            block_index=end_block_index,
+            block_tag=blocks[end_block_index].tag if end_block_index is not None else None,
+        )
+        spans.append(
+            ItemSpan(
+                label=f"{entry.title or f'Item {item}'} - page {page}",
+                text=span_text,
+                start_offset=start,
+                end_offset=end,
+                page=page,
+                start_evidence=start_evidence,
+                end_evidence=end_evidence,
+                validation_reasons=["CROSS_REFERENCE_PAGE_SPAN"],
+            )
+        )
+    return _merge_contiguous_spans(spans)
+
+
+def _page_end_offset(
+    text: str, blocks: list[NarrativeBlock], page: int, page_starts: dict[int, tuple[int, int]]
+) -> tuple[int, int | None]:
+    for next_page in range(page + 1, page + 12):
+        if next_page in page_starts:
+            return page_starts[next_page][0], page_starts[next_page][1]
+    return len(text), None
+
+
+def _merge_contiguous_spans(spans: list[ItemSpan]) -> list[ItemSpan]:
+    if not spans:
+        return []
+    merged = [spans[0]]
+    for span in spans[1:]:
+        previous = merged[-1]
+        if previous.page is not None and span.page == previous.page + 1 and previous.end_offset == span.start_offset:
+            merged[-1] = ItemSpan(
+                label=f"{previous.label} to page {span.page}",
+                text=f"{previous.text}\n\n{span.text}".strip(),
+                start_offset=previous.start_offset,
+                end_offset=span.end_offset,
+                page=previous.page,
+                start_evidence=previous.start_evidence,
+                end_evidence=span.end_evidence,
+                validation_reasons=["CROSS_REFERENCE_PAGE_RANGE_SPAN"],
+            )
+        else:
+            merged.append(span)
+    return merged
 
 
 def _candidate_pairs(

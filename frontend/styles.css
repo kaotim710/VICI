@@ -474,6 +474,52 @@ dd { margin: 0; overflow-wrap: anywhere; }
   white-space: pre-wrap;
   font: 13px/1.5 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 }
+.composite-segments {
+  margin: 0 0 14px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: rgba(255,255,255,0.72);
+  padding: 12px;
+}
+.segments-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.segments-heading h3 {
+  margin: 0;
+  font-size: 14px;
+}
+.segments-heading span,
+.segment-card summary span {
+  color: var(--muted);
+  font-size: 12px;
+}
+.segment-list {
+  display: grid;
+  gap: 8px;
+}
+.segment-card {
+  border: 1px solid rgba(210,210,215,0.74);
+  border-radius: 12px;
+  background: rgba(245,245,247,0.72);
+  padding: 9px 10px;
+}
+.segment-card summary {
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+}
+.segment-card pre {
+  max-height: 260px;
+  overflow: auto;
+  white-space: pre-wrap;
+  font: 12px/1.5 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
 .raw-section-tools { margin-top: 12px; }
 .raw-section-meta { color: var(--muted); font-size: 13px; }
 .raw-section-preview { margin-top: 12px; }

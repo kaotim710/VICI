@@ -110,6 +110,8 @@ class WebUiTests(unittest.TestCase):
         self.assertIn("Show original filing structure", app)
         self.assertIn("Back to testing", app)
         self.assertIn("ItemCard", app)
+        self.assertIn("CompositeSegments", app)
+        self.assertIn("Composite segments", app)
 
     def test_upload_page_accepts_filing_without_raw_cache_default(self):
         html = web_ui.render_upload_detail()

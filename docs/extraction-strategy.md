@@ -38,6 +38,14 @@ aliases, prefer the body alias over the first page of the page range. Current de
 are intentionally narrow: `Our Business` for Item 1 and `Risk Factors` for Item 1A. TOC rows and
 running page headers with the same text are filtered out before they can become starts.
 
+When a cross-reference index lists explicit page references for an item, the parser may reconstruct a
+composite item from the referenced pages instead of forcing a single continuous Item-to-Item span.
+This is especially important for non-standard filings where Item 2, Item 7, Item 9A, Item 9B, or
+Part III items are distributed across the annual report narrative. Composite results must expose
+their page spans separately so reviewers can inspect which pages were included. Items that are
+footnote-only incorporated references should be returned as explicit cross-reference text with a
+recovery action, not silently replaced by a nearby TOC row.
+
 ## Boundary Reconstruction
 
 Boundary selection uses the nearest valid next item according to legal 10-K item ordering.
@@ -214,3 +222,5 @@ Any strategy change should include focused tests for the behavior being changed.
 - 2026-05-25: Refined cross-reference fallback ranking so narrow body aliases such as `Our Business`
   and `Risk Factors` can override broad first-page references while cross-reference index rows remain
   lower-priority evidence.
+- 2026-05-25: Added cross-reference composite items so multi-page index references can be returned as
+  inspectable page spans, and incorporated-reference-only items are explicit note results.
