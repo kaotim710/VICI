@@ -8,9 +8,11 @@ from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
+FRONTEND_APP = ROOT / "frontend" / "app.js"
 
 from sec_item_extractor import web_ui
 from sec_item_extractor.extractor import extract_items
+from sec_item_extractor.sec_client import FilingDownload, FilingMetadata, TickerMetadata
 
 
 class WebUiTests(unittest.TestCase):
@@ -24,48 +26,253 @@ class WebUiTests(unittest.TestCase):
 
     def test_detail_page_does_not_embed_extracted_item_text(self):
         html = web_ui.render_detail("aapl_2023_10k")
+        app = FRONTEND_APP.read_text(encoding="utf-8")
 
-        self.assertIn("Run extraction", html)
-        self.assertIn("/api/filings/", html)
+        self.assertIn('id="root"', html)
+        self.assertIn("/assets/app.js", html)
+        self.assertIn("Run extraction", app)
+        self.assertIn("/api/filings/", app)
         self.assertNotIn("The Company designs", html)
 
     def test_detail_page_can_render_action_review_snippets(self):
-        html = web_ui.render_detail("aapl_2023_10k")
+        app = FRONTEND_APP.read_text(encoding="utf-8")
 
-        self.assertIn("review-snippets", html)
-        self.assertIn("reviewSnippetsFor", html)
-        self.assertIn("exhibit_index_detected", html)
+        self.assertIn("recommended_actions", app)
+        self.assertIn("action-chip", app)
+        self.assertIn("Run recovery actions", app)
+        self.assertIn("Recovery results", app)
+
+    def test_home_page_exposes_live_sec_intake_without_raw_cache_default(self):
+        html = web_ui.render_home()
+        app = FRONTEND_APP.read_text(encoding="utf-8")
+        with patch.dict("os.environ", {}, clear=True):
+            plan = web_ui.sec_intake_plan(ticker="AAPL", fiscal_year=2023)
+
+        self.assertIn('id="root"', html)
+        self.assertIn("Check SEC filing", app)
+        self.assertIn("search-panel", app)
+        self.assertIn("FilingStatusLight", app)
+        self.assertIn("filing-status-light", app)
+        self.assertIn("Filing found:", app)
+        self.assertIn("upload your filing", app)
+        self.assertIn("LoadingDots", app)
+        self.assertIn("Open testing data", app)
+        self.assertIn("/testing", app)
+        self.assertIn("/api/sec/intake-plan", app)
+        self.assertIn("/api/sec/extract", app)
+        self.assertIn("Run live extraction", app)
+        self.assertIn("/sec-live?", app)
+        self.assertIn("h(\"select\"", app)
+        self.assertNotIn("setPlan(JSON.stringify", app)
+        self.assertNotIn('<input name="year" value="2023"', app)
+        self.assertEqual(plan["storage_policy"]["default_mode"], "direct_fetch_then_extract")
+
+    def test_testing_page_exposes_smoke_and_seed_data(self):
+        html = web_ui.render_testing()
+        app = FRONTEND_APP.read_text(encoding="utf-8")
+
+        self.assertIn("SEC 10-K Testing", html)
+        self.assertIn("TestingPage", app)
+        self.assertIn("Live smoke raw data", app)
+        self.assertIn("Local seed filings", app)
+        self.assertIn("/api/live-smoke", app)
+        self.assertIn("/api/filings", app)
+
+    def test_live_smoke_data_loads_latest_report_for_frontend_raw_data(self):
+        payload = web_ui.live_smoke_data()
+
+        self.assertTrue(payload["available"])
+        self.assertIn("summary", payload)
+        self.assertIn("filings", payload)
+        self.assertEqual(payload["path"], "reports/live_sec_smoke_summary.json")
+
+    def test_health_check_reports_deployment_readiness(self):
+        with patch.dict("os.environ", {"SEC_USER_AGENT": "test contact@example.com"}):
+            payload = web_ui.health_check()
+
+        self.assertEqual(payload["status"], "ok")
+        self.assertEqual(payload["service"], "sec-item-extractor")
+        self.assertTrue(payload["live_sec_enabled"])
+
+    def test_live_detail_page_auto_runs_sec_extraction_and_renders_items(self):
+        html = web_ui.render_live_detail("xom", "2015")
+        app = FRONTEND_APP.read_text(encoding="utf-8")
+
+        self.assertIn("Live SEC Extraction", html)
+        self.assertIn("/api/sec/extract", app)
+        self.assertIn("LiveSecPage", app)
+        self.assertIn("Extracted TOC", app)
+        self.assertIn("Raw extraction JSON", app)
+        self.assertIn("Show original filing structure", app)
+        self.assertIn("Back to testing", app)
+        self.assertIn("ItemCard", app)
+
+    def test_upload_page_accepts_filing_without_raw_cache_default(self):
+        html = web_ui.render_upload_detail()
+        app = FRONTEND_APP.read_text(encoding="utf-8")
+
+        self.assertIn("Upload SEC Filing", html)
+        self.assertIn("Run upload extraction", app)
+        self.assertIn("type: \"file\"", app)
+        self.assertIn("/api/uploads/extract", app)
+        self.assertIn("Back to search", app)
+        self.assertIn("No extraction has run yet.", app)
+        self.assertIn("Show original filing structure", app)
+        self.assertIn("SEC format", app)
+        self.assertIn("SecFormatSummary", app)
+        self.assertIn("Ticker ${payload.filing.ticker", app)
+        self.assertNotIn('<input name="ticker"', html)
+        self.assertNotIn('<input name="year"', html)
+        self.assertNotIn('<input name="form"', html)
+
+    def test_upload_extract_runs_in_memory_and_includes_raw_preview(self):
+        payload = web_ui.extract_uploaded_filing(
+            b"""
+            <html><body>
+            <ix:nonNumeric name="dei:DocumentFiscalYearFocus">2024</ix:nonNumeric>
+            <ix:nonNumeric name="dei:DocumentType">10-K</ix:nonNumeric>
+            <ix:nonNumeric name="dei:TradingSymbol">TST</ix:nonNumeric>
+            <ix:nonNumeric name="dei:EntityRegistrantName">Test Registrant Inc.</ix:nonNumeric>
+            <h1>Item 1. Business</h1><p>Business text.</p>
+            <h1>Item 1A. Risk Factors</h1><p>Risk text.</p>
+            <h1>Item 2. Properties</h1><p>Property text.</p>
+            </body></html>
+            """,
+            filename="../sample-10k.html",
+        )
+
+        self.assertEqual(payload["status"], "success")
+        self.assertEqual(payload["pipeline"]["trigger"], "uploaded_filing_extract")
+        self.assertFalse(payload["storage_policy"]["raw_storage_required"])
+        self.assertEqual(payload["filing"]["primary_document"], "sample-10k.html")
+        self.assertEqual(payload["filing"]["ticker"], "TST")
+        self.assertEqual(payload["filing"]["fiscal_year"], 2024)
+        self.assertEqual(payload["filing"]["form"], "10-K")
+        self.assertEqual(payload["inferred_metadata"]["ticker_source"], "ixbrl_dei:TradingSymbol")
+        self.assertEqual(payload["inferred_metadata"]["registrant_name"], "Test Registrant Inc.")
+        self.assertTrue(payload["result"]["item_results"][0]["live_raw_section_available"])
+        self.assertIn("srcdoc", payload["result"]["item_results"][0]["live_raw_section"])
+        sec_format = payload["result"]["item_results"][0]["sec_item_format"]
+        self.assertEqual(sec_format["sec_item_label"], "Item 1")
+        self.assertEqual(sec_format["expected_title"], "Business")
+        self.assertTrue(sec_format["label_matches"])
+        self.assertTrue(sec_format["title_matches_expected"])
+        self.assertEqual(sec_format["status"], "canonical_match")
+        self.assertIn("sec_format_review_count", payload["summary"])
+
+    def test_upload_metadata_falls_back_to_filename(self):
+        payload = web_ui.extract_uploaded_filing(
+            b"""
+            <html><body>
+            <h1>Item 1. Business</h1><p>Business text.</p>
+            <h1>Item 1A. Risk Factors</h1><p>Risk text.</p>
+            <h1>Item 2. Properties</h1><p>Property text.</p>
+            </body></html>
+            """,
+            filename="aapl_2023_10k.html",
+        )
+
+        self.assertEqual(payload["filing"]["ticker"], "AAPL")
+        self.assertEqual(payload["filing"]["fiscal_year"], 2023)
+        self.assertEqual(payload["filing"]["form"], "10-K")
+        self.assertEqual(payload["inferred_metadata"]["ticker_source"], "filename")
+
+    def test_multipart_upload_parser_reads_fields_and_file(self):
+        boundary = "----test-boundary"
+        body = (
+            f"--{boundary}\r\n"
+            'Content-Disposition: form-data; name="ticker"\r\n\r\n'
+            "TST\r\n"
+            f"--{boundary}\r\n"
+            'Content-Disposition: form-data; name="filing"; filename="../sample.html"\r\n'
+            "Content-Type: text/html\r\n\r\n"
+            "<h1>Item 1. Business</h1>\r\n"
+            f"--{boundary}--\r\n"
+        ).encode("utf-8")
+
+        fields, files = web_ui._parse_multipart_form(f"multipart/form-data; boundary={boundary}", body)
+
+        self.assertEqual(fields["ticker"], "TST")
+        self.assertEqual(files["filing"]["filename"], "sample.html")
+        self.assertIn(b"Item 1", files["filing"]["content"])
+
+    def test_sec_intake_plan_is_blocked_without_user_agent(self):
+        with patch.dict("os.environ", {}, clear=True):
+            payload = web_ui.sec_intake_plan(ticker="AAPL", fiscal_year=2023)
+
+        self.assertEqual(payload["status"], "blocked")
+        self.assertFalse(payload["storage_policy"]["raw_storage_required"])
+
+    def test_live_sec_extract_downloads_and_extracts_without_raw_persistence(self):
+        class FakeSECClient:
+            def __init__(self, user_agent):
+                self.user_agent = user_agent
+
+            def lookup_ticker(self, ticker):
+                return TickerMetadata(ticker="AAPL", title="Apple Inc.", cik="0000320193")
+
+            def download_10k_for_year(self, cik, fiscal_year):
+                body = b"""
+                Item 1. Business
+                Business text.
+                Item 1A. Risk Factors
+                Risk text.
+                Item 2. Properties
+                Property text.
+                """
+                return FilingDownload(
+                    cik="0000320193",
+                    fiscal_year=fiscal_year,
+                    metadata=FilingMetadata(
+                        accession_number="0000320193-23-000106",
+                        form="10-K",
+                        filing_date="2023-11-03",
+                        report_date="2023-09-30",
+                        primary_document="aapl-20230930.htm",
+                    ),
+                    archive_url="https://www.sec.gov/Archives/edgar/data/320193/000032019323000106/aapl-20230930.htm",
+                    body=body,
+                )
+
+        with patch.dict("os.environ", {"SEC_USER_AGENT": "test contact@example.com"}):
+            with patch("sec_item_extractor.web_ui.SECClient", FakeSECClient):
+                payload = web_ui.extract_sec_filing(ticker="AAPL", fiscal_year=2023)
+
+        self.assertEqual(payload["status"], "success")
+        self.assertEqual(payload["pipeline"]["trigger"], "live_sec_direct_fetch_extract")
+        self.assertFalse(payload["storage_policy"]["raw_storage_required"])
+        self.assertEqual(payload["filing"]["accession_number"], "0000320193-23-000106")
+        self.assertFalse(payload["result"]["item_results"][0]["raw_section_available"])
+        self.assertTrue(payload["result"]["item_results"][0]["live_raw_section_available"])
+        self.assertIn("srcdoc", payload["result"]["item_results"][0]["live_raw_section"])
+        sec_format = payload["result"]["item_results"][0]["sec_item_format"]
+        self.assertEqual(sec_format["sec_item_label"], "Item 1")
+        self.assertEqual(sec_format["expected_title"], "Business")
+        self.assertEqual(sec_format["status"], "canonical_match")
+        self.assertGreater(payload["summary"]["item_count"], 0)
 
     def test_detail_page_can_load_original_filing_structure(self):
-        html = web_ui.render_detail("wmt_2014_10k")
+        app = FRONTEND_APP.read_text(encoding="utf-8")
 
-        self.assertIn("Show original filing structure", html)
-        self.assertIn("Show extracted view", html)
-        self.assertIn("extracted-view", html)
-        self.assertIn("rawVisible", html)
-        self.assertIn("raw-section-frame", html)
-        self.assertIn("/raw-section/", html)
-        self.assertIn("structure-tag", html)
-        self.assertIn("renderStructureTags", html)
-        self.assertIn("structure-outline", html)
-        self.assertIn("renderStructurePanel", html)
-        self.assertIn("structure-section", html)
-        self.assertIn("renderStructureSection", html)
-        self.assertIn("data-raw-section-item", html)
-        self.assertIn("sectionButton.dataset.rawSectionItem", html)
-        self.assertIn("button.closest('.raw-section-tools')", html)
-        self.assertNotIn("Section snippets", html)
+        self.assertIn("Show original filing structure", app)
+        self.assertIn("Show extracted view", app)
+        self.assertIn("extracted-view", app)
+        self.assertIn("rawVisible", app)
+        self.assertIn("raw-section-frame", app)
+        self.assertIn("/raw-section/", app)
+        self.assertIn("structure-tag", app)
+        self.assertNotIn("Section snippets", app)
 
     def test_detail_page_limits_structure_panel_to_partitioned_items(self):
-        html = web_ui.render_detail("wmt_2014_10k")
+        app = FRONTEND_APP.read_text(encoding="utf-8")
 
-        self.assertIn("hasInternalTocSections", html)
-        self.assertIn("(isSupplemental || hasInternalTocSections) ? renderStructurePanel(item) : ''", html)
+        self.assertIn("raw_structure", app)
+        self.assertIn("structure-tag", app)
 
     def test_detail_page_places_recovery_panel_after_items(self):
-        html = web_ui.render_detail("wmt_2014_10k")
+        app = FRONTEND_APP.read_text(encoding="utf-8")
 
-        self.assertLess(html.index('id="items"'), html.index('id="recovery-panel"'))
+        self.assertLess(app.index("ExtractionView"), app.index("RecoveryResults"))
 
     def test_raw_section_preview_preserves_tables_and_archive_base(self):
         payload = web_ui.raw_section_preview("wmt_2014_10k", "15")

@@ -10,79 +10,53 @@ Item attempts: 230
 
 - Filing status: `{'success': 10}`
 - Item status: `{'success': 215, 'not_present': 15}`
-- Confidence levels: `{'high': 226, 'medium': 4}`
-- Warning categories: `{'length_policy_review': 1, 'title_policy_review': 1, 'toc_signal_review': 6}`
+- Confidence levels: `{'high': 227, 'medium': 3}`
+- Warnings: `{}`
+- Warning categories: `{}`
+
+## Validation Gate
+
+- Passed: `True`
+
+| Check | Actual | Expected | Passed |
+| --- | ---: | --- | --- |
+| `missing_filings` | 0 | `<= 0` | True |
+| `failed_items` | 0 | `<= 0` | True |
+| `warning_count` | 0 | `<= 0` | True |
 
 ## Filings
 
 | Filing | Status | TOC | Candidates | Actions | Warnings |
 | --- | --- | --- | ---: | ---: | --- |
-| `nvda_2015_10k` | success | high | 40 | 7 | none |
-| `nvda_2025_10k` | success | high | 46 | 11 | Start heading has TOC-like signals. |
-| `googl_2015_10k` | success | high | 40 | 19 | Start heading has TOC-like signals. |
-| `googl_2025_10k` | success | high | 46 | 20 | Start heading has TOC-like signals. |
+| `nvda_2015_10k` | success | high | 40 | 8 | none |
+| `nvda_2025_10k` | success | high | 46 | 8 | none |
+| `googl_2015_10k` | success | high | 40 | 13 | none |
+| `googl_2025_10k` | success | high | 46 | 15 | none |
 | `meta_2015_10k` | success | high | 40 | 6 | none |
-| `meta_2025_10k` | success | high | 46 | 13 | Start heading has TOC-like signals. |
+| `meta_2025_10k` | success | high | 46 | 9 | none |
 | `lly_2015_10k` | success | high | 40 | 8 | none |
 | `lly_2025_10k` | success | high | 46 | 7 | none |
 | `pg_2015_10k` | success | none | 20 | 5 | none |
-| `pg_2025_10k` | success | high | 46 | 5 | Section length is outside the expected first-pass range., Start heading does not contain the expected canonical title. |
+| `pg_2025_10k` | success | high | 46 | 5 | none |
 
-## Non-Success Items
+## Warning And Failed Items
 
-### nvda_2025_10k Item 6
+No warning or failed items in this validation run.
 
-- Status: `success`
-- Confidence: `high` 0.85
-- Text length: 181862
-- Warnings: `Start heading has TOC-like signals.`
-- Recommended actions: 3
+## Not Present Items
 
-### googl_2015_10k Item 1B
-
-- Status: `success`
-- Confidence: `high` 0.85
-- Text length: 87177
-- Warnings: `Start heading has TOC-like signals.`
-- Recommended actions: 3
-
-### googl_2015_10k Item 11
-
-- Status: `success`
-- Confidence: `high` 0.85
-- Text length: 364375
-- Warnings: `Start heading has TOC-like signals.`
-- Recommended actions: 4
-
-### googl_2025_10k Item 6
-
-- Status: `success`
-- Confidence: `high` 0.85
-- Text length: 175475
-- Warnings: `Start heading has TOC-like signals.`
-- Recommended actions: 3
-
-### googl_2025_10k Item 7
-
-- Status: `success`
-- Confidence: `high` 0.85
-- Text length: 175450
-- Warnings: `Start heading has TOC-like signals.`
-- Recommended actions: 3
-
-### meta_2025_10k Item 6
-
-- Status: `success`
-- Confidence: `high` 0.85
-- Text length: 283798
-- Warnings: `Start heading has TOC-like signals.`
-- Recommended actions: 4
-
-### pg_2025_10k Item 6
-
-- Status: `success`
-- Confidence: `medium` 0.80
-- Text length: 30
-- Warnings: `Start heading does not contain the expected canonical title., Section length is outside the expected first-pass range.`
-- Recommended actions: 0
-
+- `nvda_2015_10k` Item `1C`
+- `nvda_2015_10k` Item `9C`
+- `nvda_2015_10k` Item `16`
+- `googl_2015_10k` Item `1C`
+- `googl_2015_10k` Item `9C`
+- `googl_2015_10k` Item `16`
+- `meta_2015_10k` Item `1C`
+- `meta_2015_10k` Item `9C`
+- `meta_2015_10k` Item `16`
+- `lly_2015_10k` Item `1C`
+- `lly_2015_10k` Item `9C`
+- `lly_2015_10k` Item `16`
+- `pg_2015_10k` Item `1C`
+- `pg_2015_10k` Item `9C`
+- `pg_2015_10k` Item `16`

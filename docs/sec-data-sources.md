@@ -22,4 +22,9 @@ Implementation notes:
 - Full-text search is reserved for later ticker/query discovery.
 - Company Facts is reserved for cross-validation, not primary section extraction.
 - Raw filing files are ignored by git and stored under `fixtures/filings/raw/` for local evaluation.
-
+- Live intake supports a direct-fetch mode: ticker or CIK plus fiscal year resolves 10-K metadata and
+  can download the primary document without persisting raw storage by default.
+- Persisted raw files remain an optional evaluation artifact, not a requirement for live extraction.
+- Local UI endpoints:
+  - `/api/sec/intake-plan?ticker=AAPL&year=2023` resolves metadata only.
+  - `/api/sec/extract?ticker=AAPL&year=2023` downloads the filing and runs in-memory extraction.

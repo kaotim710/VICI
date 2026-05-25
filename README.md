@@ -29,6 +29,49 @@ python3 -m unittest discover -s tests
 PYTHONPATH=src python3 -m sec_item_extractor path/to/10k.html --items 1 1A 7
 ```
 
+## Web UI
+
+Run the local review UI:
+
+```bash
+SEC_USER_AGENT="Your Name your.email@example.com" python3 scripts/run_web_ui.py --host 127.0.0.1 --port 8000
+```
+
+The UI supports three intake paths:
+
+- seed filings from local fixtures
+- live SEC ticker/year extraction without raw persistence
+- uploaded HTML/TXT filings extracted in memory without raw persistence
+
+The frontend is a React single-page app served from `frontend/`; the Python server keeps
+the extraction APIs and serves the React shell for `/`, `/upload`, `/sec-live`, and
+`/filings/...`.
+
+Live SEC requests require `SEC_USER_AGENT`. Uploaded filings do not require SEC credentials.
+`MAX_UPLOAD_BYTES` controls the upload limit and defaults to 25 MB.
+
+## Zeabur Deployment
+
+This repo includes a `Dockerfile` for Zeabur. Configure these environment variables:
+
+```bash
+HOST=0.0.0.0
+PORT=8000
+SEC_USER_AGENT="Your Name your.email@example.com"
+MAX_UPLOAD_BYTES=26214400
+```
+
+Zeabur may provide `PORT` automatically; the web server reads it from the environment.
+Without `SEC_USER_AGENT`, live SEC ticker/year intake is blocked, but file upload parsing still works.
+Use `/api/health` as the service health check path.
+
+Recommended Zeabur setup:
+
+1. Create a service from the public GitHub repo.
+2. Use the repository root as the root directory.
+3. Let Zeabur deploy with the root `Dockerfile`.
+4. Set `SEC_USER_AGENT` to a descriptive contact string before using live SEC intake.
+
 ## Seed Dataset
 
 The first test corpus is planned in [fixtures/gold/seed_filings.json](fixtures/gold/seed_filings.json):

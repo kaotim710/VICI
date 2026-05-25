@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import re
+from collections.abc import Iterable
 
 from .models import HeadingCandidate, NarrativeBlock, TocEntry, TocProfile
 
@@ -35,6 +36,7 @@ NEXT_ITEM_GRAPH = {
     "1": {"1A", "1B", "1C", "2"},
     "1A": {"1B", "1C", "2"},
     "7": {"7A", "8"},
+    "8": {"9", "9A", "9B", "9C", "10", "15", "16"},
 }
 
 HEADING_RE = re.compile(
@@ -45,6 +47,32 @@ HEADING_RE = re.compile(
     r"\s*(?:[.\-–—:])?\s*"
     r"(?P<title>[^\n]{0,160})"
 )
+
+SEC_ITEM_TITLES = {
+    "1": "Business",
+    "1A": "Risk Factors",
+    "1B": "Unresolved Staff Comments",
+    "1C": "Cybersecurity",
+    "2": "Properties",
+    "3": "Legal Proceedings",
+    "4": "Mine Safety Disclosures",
+    "5": "Market for Registrant's Common Equity, Related Stockholder Matters and Issuer Purchases of Equity Securities",
+    "6": "Selected Financial Data",
+    "7": "Management's Discussion and Analysis of Financial Condition and Results of Operations",
+    "7A": "Quantitative and Qualitative Disclosures About Market Risk",
+    "8": "Financial Statements and Supplementary Data",
+    "9": "Changes in and Disagreements with Accountants on Accounting and Financial Disclosure",
+    "9A": "Controls and Procedures",
+    "9B": "Other Information",
+    "9C": "Disclosure Regarding Foreign Jurisdictions that Prevent Inspections",
+    "10": "Directors, Executive Officers and Corporate Governance",
+    "11": "Executive Compensation",
+    "12": "Security Ownership of Certain Beneficial Owners and Management and Related Stockholder Matters",
+    "13": "Certain Relationships and Related Transactions, and Director Independence",
+    "14": "Principal Accountant Fees and Services",
+    "15": "Exhibits, Financial Statement Schedules",
+    "16": "Form 10-K Summary",
+}
 
 EXPECTED_TITLES = {
     "1": ("business",),
@@ -108,6 +136,10 @@ def find_heading_candidates(text: str, blocks: list[NarrativeBlock] | None = Non
                 block_tag=block.tag if block else None,
             )
         )
+    if blocks and _has_cross_reference_index(text):
+        candidates.extend(_cross_reference_page_candidates(blocks, candidates))
+        candidates.extend(_cross_reference_alias_candidates(blocks, candidates))
+        candidates.sort(key=lambda candidate: (candidate.start, candidate.end, candidate.item))
     return candidates
 
 
@@ -232,6 +264,8 @@ def _heading_reasons(
         reasons.append("TOC_DENSE_ITEM_CLUSTER")
     if "table of contents" in text[max(0, start - 1500) : start].lower():
         reasons.append("NEAR_TABLE_OF_CONTENTS_LABEL")
+    if "form 10-k cross-reference index" in text[max(0, start - 3000) : start].lower():
+        reasons.append("NEAR_CROSS_REFERENCE_INDEX_LABEL")
     if start < min(25000, max(5000, int(len(text) * 0.04))):
         reasons.append("EARLY_DOCUMENT_REGION")
     if "see item" in lower or "refer to item" in lower:
@@ -286,11 +320,229 @@ def _is_toc_like(reasons: list[str]) -> bool:
         return True
     if "TOC_FOLLOWED_BY_PAGE_NUMBER" in reason_set and "EARLY_DOCUMENT_REGION" in reason_set:
         return True
+    if "TOC_DENSE_ITEM_CLUSTER" in reason_set and "NEAR_CROSS_REFERENCE_INDEX_LABEL" in reason_set:
+        return True
     return (
         "TOC_DENSE_ITEM_CLUSTER" in reason_set
         and "NEAR_TABLE_OF_CONTENTS_LABEL" in reason_set
         and "EARLY_DOCUMENT_REGION" in reason_set
     )
+
+
+def _has_cross_reference_index(text: str) -> bool:
+    return "form 10-k cross-reference index" in text.lower()
+
+
+def _cross_reference_page_candidates(
+    blocks: list[NarrativeBlock], existing_candidates: Iterable[HeadingCandidate]
+) -> list[HeadingCandidate]:
+    existing_keys = {(candidate.item, candidate.start) for candidate in existing_candidates}
+    page_starts = _page_start_offsets(blocks)
+    candidates: list[HeadingCandidate] = []
+    for start_index, end_index in _cross_reference_ranges(blocks):
+        index = start_index + 1
+        while index < end_index:
+            item = _item_token(blocks[index].text)
+            if item is None:
+                index += 1
+                continue
+            region_end = _next_item_token_index(blocks, index + 1, end_index)
+            title = _cross_reference_title(blocks[index + 1 : region_end])
+            page = _first_cross_reference_page(blocks[index + 1 : region_end])
+            if title and page and page in page_starts:
+                start, block_index = page_starts[page]
+                key = (item, start)
+                if key not in existing_keys:
+                    text = f"Item {item}. {title}"
+                    reasons = ["CROSS_REFERENCE_PAGE_FALLBACK"]
+                    if is_expected_title(item, text):
+                        reasons.append("EXPECTED_TITLE_MATCH")
+                    candidates.append(
+                        HeadingCandidate(
+                            item=item,
+                            start=start,
+                            end=start + len(text),
+                            text=text,
+                            normalized_text=_normalize_heading(text),
+                            is_toc_like=False,
+                            reasons=reasons,
+                            raw_start=blocks[block_index].raw_start,
+                            raw_end=blocks[block_index].raw_end,
+                            block_index=block_index,
+                            block_tag=blocks[block_index].tag,
+                        )
+                    )
+                    existing_keys.add(key)
+            index = region_end
+    return candidates
+
+
+def _cross_reference_ranges(blocks: list[NarrativeBlock]) -> list[tuple[int, int]]:
+    ranges = []
+    for index, block in enumerate(blocks):
+        if "form 10-k cross-reference index" not in block.text.lower():
+            continue
+        end = min(len(blocks), index + 260)
+        for cursor in range(index + 1, end):
+            if _item_token(blocks[cursor].text) == "16":
+                end = min(len(blocks), cursor + 28)
+                break
+        ranges.append((index, end))
+    return ranges
+
+
+def _next_item_token_index(blocks: list[NarrativeBlock], start: int, end: int) -> int:
+    for index in range(start, end):
+        if _item_token(blocks[index].text):
+            return index
+    return end
+
+
+def _item_token(value: str) -> str | None:
+    compact = " ".join(value.split()).strip()
+    match = re.fullmatch(
+        r"(?:part\s+[ivx]+\s*)?(?:item\s*(?P<prefixed>1a|1b|1c|10|11|12|13|14|15|16|1|2|3|4|5|6|7a|7|8|9a|9b|9c|9)\.?:?|(?P<bare>1a|1b|1c|10|11|12|13|14|15|16|1|2|3|4|5|6|7a|7|8|9a|9b|9c|9)\.)",
+        compact,
+        flags=re.IGNORECASE,
+    )
+    if not match:
+        return None
+    return (match.group("prefixed") or match.group("bare")).upper()
+
+
+def _cross_reference_alias_candidates(
+    blocks: list[NarrativeBlock], existing_candidates: Iterable[HeadingCandidate]
+) -> list[HeadingCandidate]:
+    existing = {(candidate.item, candidate.start) for candidate in existing_candidates}
+    aliases = {
+        "15": {"exhibit index"},
+    }
+    candidates: list[HeadingCandidate] = []
+    for index, block in enumerate(blocks):
+        normalized = " ".join(block.text.lower().split()).strip(" :")
+        for item, labels in aliases.items():
+            if normalized not in labels:
+                continue
+            key = (item, block.clean_start)
+            if key in existing:
+                continue
+            text = f"Item {item}. {block.text.strip()}"
+            is_toc_like = _alias_is_toc_like(blocks, index)
+            if is_toc_like:
+                continue
+            candidates.append(
+                HeadingCandidate(
+                    item=item,
+                    start=block.clean_start,
+                    end=block.clean_start + len(block.text),
+                    text=text,
+                    normalized_text=_normalize_heading(text),
+                    is_toc_like=is_toc_like,
+                    reasons=["CROSS_REFERENCE_ALIAS_FALLBACK", "EXPECTED_TITLE_MATCH"],
+                    raw_start=block.raw_start,
+                    raw_end=block.raw_end,
+                    block_index=index,
+                    block_tag=block.tag,
+                )
+            )
+            existing.add(key)
+            break
+    return candidates
+
+
+def _alias_is_toc_like(blocks: list[NarrativeBlock], index: int) -> bool:
+    window = " ".join(block.text.lower() for block in blocks[max(0, index - 12) : min(len(blocks), index + 12)])
+    prior_context = " ".join(block.text.lower() for block in blocks[max(0, index - 220) : index])
+    if "cross-reference index" in window or "form 10-k cross-reference index" in prior_context:
+        return True
+    if "table of contents" not in window:
+        return False
+    page_refs = sum(1 for block in blocks[index + 1 : min(len(blocks), index + 8)] if _looks_like_page_reference(block.text))
+    return page_refs >= 2
+
+
+def _cross_reference_title(blocks: list[NarrativeBlock]) -> str:
+    parts = []
+    for block in blocks[:6]:
+        compact = " ".join(block.text.split()).strip()
+        if not compact or _is_part_label(compact) or _looks_like_page_reference(compact):
+            continue
+        if len(compact) > 180:
+            break
+        parts.append(compact)
+        if is_expected_title("", compact) or len(parts) >= 2:
+            break
+    return " ".join(parts).strip(" :")
+
+
+def _first_cross_reference_page(blocks: list[NarrativeBlock]) -> int | None:
+    for block in blocks[:10]:
+        compact = " ".join(block.text.split()).strip()
+        if not _looks_like_page_reference(compact):
+            continue
+        match = re.search(r"\d{1,4}", compact)
+        if match:
+            return int(match.group(0))
+    return None
+
+
+def _looks_like_page_reference(value: str) -> bool:
+    compact = value.strip()
+    if compact.lower() in {"none", "not applicable", "(a)"}:
+        return True
+    if re.search(r"(?i)\bpages?\b", compact):
+        return bool(re.search(r"\d{1,4}", compact))
+    return bool(re.fullmatch(r"\d{1,4}(?:\s*[–-]\s*\d{1,4})?(?:,\s*\d{1,4}(?:\s*[–-]\s*\d{1,4})?)*,?", compact))
+
+
+def _is_part_label(value: str) -> bool:
+    return bool(re.fullmatch(r"part\s+[ivx]+", value.strip(), flags=re.IGNORECASE))
+
+
+def _page_start_offsets(blocks: list[NarrativeBlock]) -> dict[int, tuple[int, int]]:
+    starts: dict[int, tuple[int, int]] = {}
+    max_page = 500
+    for page in range(2, max_page + 1):
+        footer_index = _best_page_footer_index(blocks, page - 1)
+        if footer_index is None or footer_index + 1 >= len(blocks):
+            continue
+        starts[page] = (blocks[footer_index + 1].clean_start, footer_index + 1)
+    return starts
+
+
+def _best_page_footer_index(blocks: list[NarrativeBlock], page: int) -> int | None:
+    page_text = str(page)
+    best: tuple[int, int] | None = None
+    for index, block in enumerate(blocks[:-1]):
+        if block.text.strip() != page_text:
+            continue
+        score = _page_footer_score(blocks, index)
+        if score <= 0:
+            continue
+        if best is None or score > best[0]:
+            best = (score, index)
+    return best[1] if best else None
+
+
+def _page_footer_score(blocks: list[NarrativeBlock], index: int) -> int:
+    block = blocks[index]
+    if block.tag == "td":
+        return -1
+    window = blocks[max(0, index - 8) : min(len(blocks), index + 9)]
+    numeric_neighbors = sum(1 for current in window if re.fullmatch(r"\d{1,4}", current.text.strip()))
+    previous_text = " ".join(current.text.lower() for current in blocks[max(0, index - 8) : index])
+    next_block = blocks[index + 1] if index + 1 < len(blocks) else None
+    score = 4
+    if block.tag == "div":
+        score += 3
+    if next_block and not re.fullmatch(r"\d{1,4}", next_block.text.strip()):
+        score += 2
+    if any(len(current.text.split()) >= 8 for current in blocks[max(0, index - 4) : index]):
+        score += 2
+    if "table of contents" in previous_text:
+        score -= 2
+    score -= numeric_neighbors
+    return score
 
 
 def _block_for_offset(

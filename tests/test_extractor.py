@@ -516,6 +516,19 @@ class ExtractorTests(unittest.TestCase):
         self.assertEqual(item.status, "success")
         self.assertNotIn("Section length is outside the expected first-pass range.", item.warnings)
 
+    def test_intentionally_omitted_item_is_accepted_without_length_or_title_warning(self):
+        filing = """
+        Item 6. Intentionally Omitted.
+        Item 7. Management's Discussion and Analysis
+        Discussion text.
+        """
+
+        result = extract_items(filing, target_items=["6"])
+        item = result.item_results[0]
+
+        self.assertEqual(item.status, "success")
+        self.assertEqual(item.warnings, [])
+
     def test_body_placeholder_heading_is_preferred_over_front_toc_entry(self):
         filing = """
         Table of Contents
@@ -540,6 +553,30 @@ class ExtractorTests(unittest.TestCase):
 
         self.assertEqual(item.status, "success")
         self.assertTrue(item.text.startswith("Item 6. Reserved"))
+        self.assertNotIn("Start heading has TOC-like signals.", item.warnings)
+
+    def test_short_body_duplicate_is_not_rejected_because_front_toc_exists(self):
+        filing = """
+        Table of Contents
+        Item 1A. Risk Factors 15
+        Item 1B. Unresolved Staff Comments 16
+        Item 2. Properties 17
+
+        ITEM 1A. RISK FACTORS
+        Risk text.
+
+        ITEM 1B. UNRESOLVED STAFF COMMENTS There are no unresolved staff comments.
+
+        ITEM 2. PROPERTIES
+        Property text.
+        """
+
+        result = extract_items(filing, target_items=["1B"])
+        item = result.item_results[0]
+
+        self.assertEqual(item.status, "success")
+        self.assertTrue(item.text.startswith("ITEM 1B. UNRESOLVED STAFF COMMENTS"))
+        self.assertNotIn("Table of Contents", item.text)
         self.assertNotIn("Start heading has TOC-like signals.", item.warnings)
 
     def test_short_same_filing_page_reference_emits_recovery_action(self):
@@ -571,6 +608,68 @@ class ExtractorTests(unittest.TestCase):
 
         self.assertNotIn("Section length is outside the expected first-pass range.", item.warnings)
         self.assertIn("SECTION_LENGTH_LONG_ACCEPTED_AS_STRUCTURED_SECTION", item.validation_reasons)
+
+    def test_cross_reference_index_page_fallback_handles_split_item_cells(self):
+        filing = """
+        <html><body>
+        <div>FORM 10-K CROSS-REFERENCE INDEX</div>
+        <table>
+          <tr><td>Item Number</td><td>Page</td></tr>
+          <tr><td>1.</td><td>Business</td><td>3-4</td></tr>
+          <tr><td>1A.</td><td>Risk Factors</td><td>5</td></tr>
+          <tr><td>1C.</td><td>Cybersecurity</td><td>6</td></tr>
+        </table>
+        <div>2</div>
+        <div>OVERVIEW</div>
+        <p>Business body text with enough detail to be treated as narrative content.</p>
+        <div>4</div>
+        <div>RISK FACTORS</div>
+        <p>Risk body text with enough detail to be treated as narrative content.</p>
+        <div>5</div>
+        <div>CYBERSECURITY</div>
+        <p>Cybersecurity text.</p>
+        </body></html>
+        """
+
+        result = extract_items(filing, target_items=["1", "1A"])
+        by_item = {item.item: item for item in result.item_results}
+
+        self.assertEqual(by_item["1"].status, "success")
+        self.assertTrue(by_item["1"].text.startswith("OVERVIEW"))
+        self.assertNotIn("FORM 10-K CROSS-REFERENCE INDEX", by_item["1"].text)
+        self.assertIn("CROSS_REFERENCE_PAGE_FALLBACK", by_item["1"].start_evidence.reasons)
+        self.assertEqual(by_item["1A"].status, "success")
+        self.assertTrue(by_item["1A"].text.startswith("RISK FACTORS"))
+
+    def test_cross_reference_index_rows_are_not_silent_item_extractions(self):
+        filing = """
+        <html><body>
+        <div>1</div>
+        <div>Overview</div>
+        <p>Business body text with enough detail to be treated as narrative content.</p>
+        <div>2</div>
+        <div>Risk Factors</div>
+        <p>Risk body text with enough detail to be treated as narrative content.</p>
+        <div>FORM 10-K CROSS-REFERENCE INDEX</div>
+        <table>
+          <tr><td>Item Number</td><td>Item</td></tr>
+          <tr><td>Item 1.</td><td>Business:</td><td>Pages 2</td></tr>
+          <tr><td>Item 1A.</td><td>Risk Factors</td><td>Pages 3</td></tr>
+          <tr><td>Item 1C.</td><td>Cybersecurity</td><td>Pages 4</td></tr>
+        </table>
+        <div>3</div>
+        <div>Cybersecurity</div>
+        <p>Cybersecurity text.</p>
+        </body></html>
+        """
+
+        result = extract_items(filing, target_items=["1"])
+        item = result.item_results[0]
+
+        self.assertEqual(item.status, "success")
+        self.assertTrue(item.text.startswith("Overview"))
+        self.assertNotIn("Item 1. Business", item.text)
+        self.assertIn("CROSS_REFERENCE_PAGE_FALLBACK", item.start_evidence.reasons)
 
 
 if __name__ == "__main__":

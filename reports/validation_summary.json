@@ -13,19 +13,11 @@
       "not_present": 15
     },
     "confidence_level_counts": {
-      "high": 226,
-      "medium": 4
+      "high": 227,
+      "medium": 3
     },
-    "warning_counts": {
-      "Start heading has TOC-like signals.": 6,
-      "Start heading does not contain the expected canonical title.": 1,
-      "Section length is outside the expected first-pass range.": 1
-    },
-    "warning_category_counts": {
-      "length_policy_review": 1,
-      "title_policy_review": 1,
-      "toc_signal_review": 6
-    },
+    "warning_counts": {},
+    "warning_category_counts": {},
     "retry_policy": {
       "contract_version": "retry_policy_v1",
       "mode": "bounded_deterministic",
@@ -134,6 +126,30 @@
       ]
     }
   },
+  "evaluation_gate": {
+    "contract_version": "evaluation_contract_v1",
+    "passed": true,
+    "checks": [
+      {
+        "name": "missing_filings",
+        "passed": true,
+        "actual": 0,
+        "expected": "<= 0"
+      },
+      {
+        "name": "failed_items",
+        "passed": true,
+        "actual": 0,
+        "expected": "<= 0"
+      },
+      {
+        "name": "warning_count",
+        "passed": true,
+        "actual": 0,
+        "expected": "<= 0"
+      }
+    ]
+  },
   "missing": [],
   "results": [
     {
@@ -144,7 +160,7 @@
       "candidate_count": 40,
       "toc_confidence": "high",
       "warnings": [],
-      "recommended_action_count": 7,
+      "recommended_action_count": 8,
       "items": {
         "1": {
           "status": "success",
@@ -366,9 +382,16 @@
           "status": "success",
           "confidence_level": "high",
           "confidence_score": 1.0,
-          "text_length": 62,
+          "text_length": 136224,
           "warnings": [],
           "recommended_actions": [
+            {
+              "action_type": "inspect_only",
+              "reason": "section_reference_detected",
+              "severity": "info",
+              "requires_user_input": false,
+              "next_step": "inspect_references"
+            },
             {
               "action_type": "inspect_only",
               "reason": "exhibit_index_detected",
@@ -395,10 +418,8 @@
       "status": "success",
       "candidate_count": 46,
       "toc_confidence": "high",
-      "warnings": [
-        "Start heading has TOC-like signals."
-      ],
-      "recommended_action_count": 11,
+      "warnings": [],
+      "recommended_action_count": 8,
       "items": {
         "1": {
           "status": "success",
@@ -476,7 +497,7 @@
           "status": "success",
           "confidence_level": "high",
           "confidence_score": 1.0,
-          "text_length": 5661,
+          "text_length": 5618,
           "warnings": [],
           "recommended_actions": [
             {
@@ -491,34 +512,10 @@
         "6": {
           "status": "success",
           "confidence_level": "high",
-          "confidence_score": 0.85,
-          "text_length": 181862,
-          "warnings": [
-            "Start heading has TOC-like signals."
-          ],
-          "recommended_actions": [
-            {
-              "action_type": "inspect_only",
-              "reason": "start_toc_like_signal",
-              "severity": "info",
-              "requires_user_input": false,
-              "next_step": "inspect_evidence_only"
-            },
-            {
-              "action_type": "inspect_only",
-              "reason": "section_reference_detected",
-              "severity": "info",
-              "requires_user_input": false,
-              "next_step": "inspect_references"
-            },
-            {
-              "action_type": "inspect_only",
-              "reason": "exhibit_index_detected",
-              "severity": "info",
-              "requires_user_input": false,
-              "next_step": "inspect_exhibit_index"
-            }
-          ]
+          "confidence_score": 1.0,
+          "text_length": 41,
+          "warnings": [],
+          "recommended_actions": []
         },
         "7": {
           "status": "success",
@@ -680,10 +677,8 @@
       "status": "success",
       "candidate_count": 40,
       "toc_confidence": "high",
-      "warnings": [
-        "Start heading has TOC-like signals."
-      ],
-      "recommended_action_count": 19,
+      "warnings": [],
+      "recommended_action_count": 13,
       "items": {
         "1": {
           "status": "success",
@@ -712,34 +707,10 @@
         "1B": {
           "status": "success",
           "confidence_level": "high",
-          "confidence_score": 0.85,
-          "text_length": 87177,
-          "warnings": [
-            "Start heading has TOC-like signals."
-          ],
-          "recommended_actions": [
-            {
-              "action_type": "inspect_only",
-              "reason": "start_toc_like_signal",
-              "severity": "info",
-              "requires_user_input": false,
-              "next_step": "inspect_evidence_only"
-            },
-            {
-              "action_type": "inspect_only",
-              "reason": "section_reference_detected",
-              "severity": "info",
-              "requires_user_input": false,
-              "next_step": "inspect_references"
-            },
-            {
-              "action_type": "inspect_only",
-              "reason": "exhibit_index_detected",
-              "severity": "info",
-              "requires_user_input": false,
-              "next_step": "inspect_exhibit_index"
-            }
-          ]
+          "confidence_score": 1.0,
+          "text_length": 97,
+          "warnings": [],
+          "recommended_actions": []
         },
         "1C": {
           "status": "not_present",
@@ -889,7 +860,7 @@
           "status": "success",
           "confidence_level": "high",
           "confidence_score": 1.0,
-          "text_length": 1073,
+          "text_length": 684,
           "warnings": [],
           "recommended_actions": [
             {
@@ -904,39 +875,16 @@
         "11": {
           "status": "success",
           "confidence_level": "high",
-          "confidence_score": 0.85,
-          "text_length": 364375,
-          "warnings": [
-            "Start heading has TOC-like signals."
-          ],
+          "confidence_score": 1.0,
+          "text_length": 387,
+          "warnings": [],
           "recommended_actions": [
-            {
-              "action_type": "needs_user_selection",
-              "reason": "internal_item_toc_detected",
-              "severity": "review",
-              "requires_user_input": true,
-              "next_step": "select_internal_heading"
-            },
-            {
-              "action_type": "inspect_only",
-              "reason": "start_toc_like_signal",
-              "severity": "info",
-              "requires_user_input": false,
-              "next_step": "inspect_evidence_only"
-            },
             {
               "action_type": "inspect_only",
               "reason": "section_reference_detected",
               "severity": "info",
               "requires_user_input": false,
               "next_step": "inspect_references"
-            },
-            {
-              "action_type": "inspect_only",
-              "reason": "exhibit_index_detected",
-              "severity": "info",
-              "requires_user_input": false,
-              "next_step": "inspect_exhibit_index"
             }
           ]
         },
@@ -992,7 +940,7 @@
           "status": "success",
           "confidence_level": "high",
           "confidence_score": 1.0,
-          "text_length": 367163,
+          "text_length": 2026,
           "warnings": [],
           "recommended_actions": [
             {
@@ -1028,10 +976,8 @@
       "status": "success",
       "candidate_count": 46,
       "toc_confidence": "high",
-      "warnings": [
-        "Start heading has TOC-like signals."
-      ],
-      "recommended_action_count": 20,
+      "warnings": [],
+      "recommended_action_count": 15,
       "items": {
         "1": {
           "status": "success",
@@ -1117,7 +1063,7 @@
           "status": "success",
           "confidence_level": "high",
           "confidence_score": 1.0,
-          "text_length": 58199,
+          "text_length": 5164,
           "warnings": [],
           "recommended_actions": [
             {
@@ -1132,64 +1078,24 @@
         "6": {
           "status": "success",
           "confidence_level": "high",
-          "confidence_score": 0.85,
-          "text_length": 175475,
-          "warnings": [
-            "Start heading has TOC-like signals."
-          ],
-          "recommended_actions": [
-            {
-              "action_type": "inspect_only",
-              "reason": "start_toc_like_signal",
-              "severity": "info",
-              "requires_user_input": false,
-              "next_step": "inspect_evidence_only"
-            },
-            {
-              "action_type": "inspect_only",
-              "reason": "section_reference_detected",
-              "severity": "info",
-              "requires_user_input": false,
-              "next_step": "inspect_references"
-            },
-            {
-              "action_type": "inspect_only",
-              "reason": "exhibit_index_detected",
-              "severity": "info",
-              "requires_user_input": false,
-              "next_step": "inspect_exhibit_index"
-            }
-          ]
+          "confidence_score": 1.0,
+          "text_length": 56,
+          "warnings": [],
+          "recommended_actions": []
         },
         "7": {
           "status": "success",
           "confidence_level": "high",
-          "confidence_score": 0.85,
-          "text_length": 175450,
-          "warnings": [
-            "Start heading has TOC-like signals."
-          ],
+          "confidence_score": 1.0,
+          "text_length": 52975,
+          "warnings": [],
           "recommended_actions": [
-            {
-              "action_type": "inspect_only",
-              "reason": "start_toc_like_signal",
-              "severity": "info",
-              "requires_user_input": false,
-              "next_step": "inspect_evidence_only"
-            },
             {
               "action_type": "inspect_only",
               "reason": "section_reference_detected",
               "severity": "info",
               "requires_user_input": false,
               "next_step": "inspect_references"
-            },
-            {
-              "action_type": "inspect_only",
-              "reason": "exhibit_index_detected",
-              "severity": "info",
-              "requires_user_input": false,
-              "next_step": "inspect_exhibit_index"
             }
           ]
         },
@@ -1372,7 +1278,7 @@
           "status": "success",
           "confidence_level": "high",
           "confidence_score": 1.0,
-          "text_length": 31,
+          "text_length": 71,
           "warnings": [],
           "recommended_actions": []
         }
@@ -1628,10 +1534,8 @@
       "status": "success",
       "candidate_count": 46,
       "toc_confidence": "high",
-      "warnings": [
-        "Start heading has TOC-like signals."
-      ],
-      "recommended_action_count": 13,
+      "warnings": [],
+      "recommended_action_count": 9,
       "items": {
         "1": {
           "status": "success",
@@ -1717,7 +1621,7 @@
           "status": "success",
           "confidence_level": "high",
           "confidence_score": 1.0,
-          "text_length": 3304,
+          "text_length": 3262,
           "warnings": [],
           "recommended_actions": [
             {
@@ -1732,41 +1636,10 @@
         "6": {
           "status": "success",
           "confidence_level": "high",
-          "confidence_score": 0.85,
-          "text_length": 283798,
-          "warnings": [
-            "Start heading has TOC-like signals."
-          ],
-          "recommended_actions": [
-            {
-              "action_type": "needs_user_selection",
-              "reason": "internal_item_toc_detected",
-              "severity": "review",
-              "requires_user_input": true,
-              "next_step": "select_internal_heading"
-            },
-            {
-              "action_type": "inspect_only",
-              "reason": "start_toc_like_signal",
-              "severity": "info",
-              "requires_user_input": false,
-              "next_step": "inspect_evidence_only"
-            },
-            {
-              "action_type": "inspect_only",
-              "reason": "section_reference_detected",
-              "severity": "info",
-              "requires_user_input": false,
-              "next_step": "inspect_references"
-            },
-            {
-              "action_type": "inspect_only",
-              "reason": "exhibit_index_detected",
-              "severity": "info",
-              "requires_user_input": false,
-              "next_step": "inspect_exhibit_index"
-            }
-          ]
+          "confidence_score": 1.0,
+          "text_length": 40,
+          "warnings": [],
+          "recommended_actions": []
         },
         "7": {
           "status": "success",
@@ -2676,10 +2549,7 @@
       "status": "success",
       "candidate_count": 46,
       "toc_confidence": "high",
-      "warnings": [
-        "Section length is outside the expected first-pass range.",
-        "Start heading does not contain the expected canonical title."
-      ],
+      "warnings": [],
       "recommended_action_count": 5,
       "items": {
         "1": {
@@ -2764,13 +2634,10 @@
         },
         "6": {
           "status": "success",
-          "confidence_level": "medium",
-          "confidence_score": 0.8,
+          "confidence_level": "high",
+          "confidence_score": 1.0,
           "text_length": 30,
-          "warnings": [
-            "Start heading does not contain the expected canonical title.",
-            "Section length is outside the expected first-pass range."
-          ],
+          "warnings": [],
           "recommended_actions": []
         },
         "7": {

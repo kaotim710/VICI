@@ -58,6 +58,12 @@ BASELINE_THRESHOLDS = {
     "max_failed_gold_checks": 0,
 }
 
+VALIDATION_THRESHOLDS = {
+    "max_missing_filings": 0,
+    "max_failed_items": 0,
+    "max_warnings": 0,
+}
+
 RETRY_POLICY = {
     "contract_version": RETRY_POLICY_CONTRACT_VERSION,
     "mode": "bounded_deterministic",
@@ -192,6 +198,38 @@ def evaluation_gate(seed_summary: dict, gold_summary: dict | None = None) -> dic
             }
         )
 
+    return {
+        "contract_version": EVALUATION_CONTRACT_VERSION,
+        "passed": all(check["passed"] for check in checks),
+        "checks": checks,
+    }
+
+
+def validation_gate(validation_summary: dict) -> dict:
+    item_counts = validation_summary.get("item_status_counts", {})
+    warning_counts = validation_summary.get("warning_counts", {})
+    missing = validation_summary.get("missing_filings", [])
+    total_warnings = sum(warning_counts.values())
+    checks = [
+        {
+            "name": "missing_filings",
+            "passed": len(missing) <= VALIDATION_THRESHOLDS["max_missing_filings"],
+            "actual": len(missing),
+            "expected": f"<= {VALIDATION_THRESHOLDS['max_missing_filings']}",
+        },
+        {
+            "name": "failed_items",
+            "passed": item_counts.get("failed", 0) <= VALIDATION_THRESHOLDS["max_failed_items"],
+            "actual": item_counts.get("failed", 0),
+            "expected": f"<= {VALIDATION_THRESHOLDS['max_failed_items']}",
+        },
+        {
+            "name": "warning_count",
+            "passed": total_warnings <= VALIDATION_THRESHOLDS["max_warnings"],
+            "actual": total_warnings,
+            "expected": f"<= {VALIDATION_THRESHOLDS['max_warnings']}",
+        },
+    ]
     return {
         "contract_version": EVALUATION_CONTRACT_VERSION,
         "passed": all(check["passed"] for check in checks),

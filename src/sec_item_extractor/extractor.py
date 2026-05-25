@@ -114,11 +114,12 @@ def _candidate_pairs(
     text: str, candidates: list[HeadingCandidate], starts: list[HeadingCandidate], toc_items: list[str]
 ) -> list[CandidatePair]:
     pairs = []
-    for index, start in enumerate(starts):
+    for start in starts:
         end, end_reasons = _find_end_candidate(text, candidates, start, toc_items)
         section_text = text[start.start : end.start].strip() if end else ""
         validation_reasons = _start_validation_reasons(start) + end_reasons
-        rejection_reasons = _pair_rejection_reasons(start, end, section_text, has_later_start=index + 1 < len(starts))
+        has_later_start = any(candidate.start > start.start for candidate in starts)
+        rejection_reasons = _pair_rejection_reasons(start, end, section_text, has_later_start=has_later_start)
         pairs.append(
             CandidatePair(
                 start=start,
@@ -527,6 +528,7 @@ def _is_placeholder_line(line: str) -> bool:
     return normalized in {
         "none",
         "reserved",
+        "intentionally omitted",
         "not applicable",
         "not applicable bank of america",
     } or normalized.endswith(" not applicable") or (normalized.startswith("reserved") and len(normalized.split()) <= 6)

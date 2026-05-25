@@ -13,7 +13,8 @@ This project currently uses bounded deterministic retry, not autonomous agent or
 
 1. Rank all start candidates for the requested item.
 2. Try each ranked candidate pair once.
-3. Reject short ordered TOC-like spans and continue to the next candidate.
+3. Reject short ordered TOC-like spans and continue to the next candidate, but only when the
+   duplicate body start is later in document order.
 4. Use TOC next-item order when available.
 5. Fall back to the legal item transition graph.
 6. Use terminal boundaries for `Item 16`, `Item 15` without `Item 16`, or the final TOC item.

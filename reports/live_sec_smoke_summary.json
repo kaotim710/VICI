@@ -1,0 +1,220 @@
+{
+  "summary": {
+    "generated": "2026-05-25",
+    "source": "live SEC direct fetch via local /api/sec/extract",
+    "selection_note": "Random seed 20260525 selected JNJ 2015, but SEC report-date lookup had no 10-K match, so JNJ was reselected to 2016 within the requested 2015-2020 window.",
+    "random_seed": 20260525,
+    "year_range": "2015-2020",
+    "cases": [
+      {
+        "ticker": "XOM",
+        "year": 2015
+      },
+      {
+        "ticker": "JNJ",
+        "year": 2016
+      },
+      {
+        "ticker": "JPM",
+        "year": 2017
+      },
+      {
+        "ticker": "BAC",
+        "year": 2019
+      },
+      {
+        "ticker": "UNH",
+        "year": 2015
+      },
+      {
+        "ticker": "CVX",
+        "year": 2020
+      }
+    ],
+    "filings_tested": 6,
+    "errors": [],
+    "status_counts": {
+      "success": 6
+    },
+    "filing_status_counts": {
+      "success": 6
+    },
+    "warning_total": 0,
+    "failed_total": 0,
+    "recommended_action_total": 77
+  },
+  "filings": [
+    {
+      "ticker": "XOM",
+      "year": 2015,
+      "http_status": 200,
+      "status": "success",
+      "filing_status": "success",
+      "accession_number": "0000034088-16-000065",
+      "filing_date": "2016-02-24",
+      "report_date": "2015-12-31",
+      "source_bytes": 7694659,
+      "elapsed_ms": 2803,
+      "candidate_count": 40,
+      "toc_confidence": "high",
+      "item_count": 24,
+      "warning_count": 0,
+      "recommended_action_count": 6,
+      "failed_items": [],
+      "warning_items": [],
+      "not_present_items": [
+        "1C",
+        "9C",
+        "16"
+      ],
+      "action_counts": {
+        "inspect_only:exhibit_index_detected": 2,
+        "inspect_only:section_reference_detected": 2,
+        "needs_external_source:external_or_other_document_reference": 2
+      }
+    },
+    {
+      "ticker": "JNJ",
+      "year": 2016,
+      "http_status": 200,
+      "status": "success",
+      "filing_status": "success",
+      "accession_number": "0000200406-16-000071",
+      "filing_date": "2016-02-24",
+      "report_date": "2016-01-03",
+      "source_bytes": 3359357,
+      "elapsed_ms": 2308,
+      "candidate_count": 20,
+      "toc_confidence": "none",
+      "item_count": 23,
+      "warning_count": 0,
+      "recommended_action_count": 19,
+      "failed_items": [],
+      "warning_items": [],
+      "not_present_items": [
+        "1C",
+        "9C",
+        "16"
+      ],
+      "action_counts": {
+        "inspect_only:exhibit_index_detected": 4,
+        "inspect_only:section_reference_detected": 14,
+        "needs_external_source:external_or_other_document_reference": 1
+      }
+    },
+    {
+      "ticker": "JPM",
+      "year": 2017,
+      "http_status": 200,
+      "status": "success",
+      "filing_status": "success",
+      "accession_number": "0000019617-18-000057",
+      "filing_date": "2018-02-27",
+      "report_date": "2017-12-31",
+      "source_bytes": 15477792,
+      "elapsed_ms": 30458,
+      "candidate_count": 41,
+      "toc_confidence": "high",
+      "item_count": 24,
+      "warning_count": 0,
+      "recommended_action_count": 13,
+      "failed_items": [],
+      "warning_items": [],
+      "not_present_items": [
+        "1C",
+        "9C",
+        "16"
+      ],
+      "action_counts": {
+        "inspect_only:exhibit_index_detected": 3,
+        "inspect_only:section_reference_detected": 8,
+        "needs_user_confirmation:same_filing_page_reference": 2
+      }
+    },
+    {
+      "ticker": "BAC",
+      "year": 2019,
+      "http_status": 200,
+      "status": "success",
+      "filing_status": "success",
+      "accession_number": "0000070858-20-000011",
+      "filing_date": "2020-02-19",
+      "report_date": "2019-12-31",
+      "source_bytes": 19800395,
+      "elapsed_ms": 11461,
+      "candidate_count": 42,
+      "toc_confidence": "high",
+      "item_count": 23,
+      "warning_count": 0,
+      "recommended_action_count": 15,
+      "failed_items": [],
+      "warning_items": [],
+      "not_present_items": [
+        "1C",
+        "9C"
+      ],
+      "action_counts": {
+        "inspect_only:exhibit_index_detected": 1,
+        "inspect_only:section_reference_detected": 13,
+        "needs_user_selection:internal_item_toc_detected": 1
+      }
+    },
+    {
+      "ticker": "UNH",
+      "year": 2015,
+      "http_status": 200,
+      "status": "success",
+      "filing_status": "success",
+      "accession_number": "0000731766-16-000058",
+      "filing_date": "2016-02-09",
+      "report_date": "2015-12-31",
+      "source_bytes": 3472495,
+      "elapsed_ms": 2179,
+      "candidate_count": 40,
+      "toc_confidence": "high",
+      "item_count": 23,
+      "warning_count": 0,
+      "recommended_action_count": 13,
+      "failed_items": [],
+      "warning_items": [],
+      "not_present_items": [
+        "1C",
+        "9C",
+        "16"
+      ],
+      "action_counts": {
+        "inspect_only:exhibit_index_detected": 1,
+        "inspect_only:section_reference_detected": 12
+      }
+    },
+    {
+      "ticker": "CVX",
+      "year": 2020,
+      "http_status": 200,
+      "status": "success",
+      "filing_status": "success",
+      "accession_number": "0000093410-21-000009",
+      "filing_date": "2021-02-25",
+      "report_date": "2020-12-31",
+      "source_bytes": 6836700,
+      "elapsed_ms": 2391,
+      "candidate_count": 21,
+      "toc_confidence": "none",
+      "item_count": 23,
+      "warning_count": 0,
+      "recommended_action_count": 11,
+      "failed_items": [],
+      "warning_items": [],
+      "not_present_items": [
+        "1C",
+        "9C"
+      ],
+      "action_counts": {
+        "inspect_only:exhibit_index_detected": 4,
+        "inspect_only:section_reference_detected": 6,
+        "needs_user_selection:internal_item_toc_detected": 1
+      }
+    }
+  ],
+  "problem_items": []
+}

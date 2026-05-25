@@ -63,3 +63,22 @@ estimated_prompt_tokens =
 | 2026-05-25 | supplemental_subsection_raw_preview_request | `prompts/2026-05-25-user-prompts.md` |  | 15 | Requested per-title original filing structure previews for supplemental subsections. |
 | 2026-05-25 | filing_review_followup_request | `prompts/2026-05-25-user-prompts.md` |  | 523 | Reviewed filing-specific boundary, front-TOC, internal-TOC, and reference recovery issues across BAC, JPM, UNH, JNJ, XOM, CVX, and AMZN. |
 | 2026-05-25 | reviewed_issue_regression_test_request | `prompts/2026-05-25-user-prompts.md` |  | 16 | Requested converting the reviewed filing issues into tests for future validation filings. |
+| 2026-05-25 | validation_strategy_confirmation_request | `prompts/2026-05-25-user-prompts.md` |  | 18 | Asked whether the validation run used the newly updated extraction strategy. |
+| 2026-05-25 | fallback_strategy_planning_request | `prompts/2026-05-25-user-prompts.md` |  | 13 | Asked for the current fallback strategy and next step. |
+| 2026-05-25 | validation_milestone_run_request | `prompts/2026-05-25-user-prompts.md` |  | 5 | Requested running the next milestone. |
+| 2026-05-25 | three_milestone_implementation_request | `prompts/2026-05-25-user-prompts.md` |  | 12 | Approved implementing the three planned milestones: recovery productization, validation gate, and live SEC intake prelude. |
+| 2026-05-25 | live_sec_api_test_request | `prompts/2026-05-25-user-prompts.md` |  | 9 | Requested testing whether current SEC API calls can fetch data. |
+| 2026-05-25 | live_sec_extraction_next_step_request | `prompts/2026-05-25-user-prompts.md` |  | 5 | Requested proceeding to the next step after SEC API fetch verification. |
+| 2026-05-25 | live_sec_multi_filing_smoke_test_request | `prompts/2026-05-25-user-prompts.md` |  | 36 | Requested live SEC smoke testing across XOM, JNJ, JPM, and related filings with randomly selected 2015-2020 years, then reporting warnings. |
+| 2026-05-25 | live_result_frontend_parsing_page_request | `prompts/2026-05-25-user-prompts.md` |  | 27 | Requested showing the live SEC smoke result as frontend raw data and rendering a parsing page after ticker/year search. |
+| 2026-05-25 | live_raw_structure_restore_request | `prompts/2026-05-25-user-prompts.md` |  | 14 | Reported that the live parsing page no longer showed the Show original filing structure button. |
+| 2026-05-25 | upload_intake_and_zeabur_prep_request | `prompts/2026-05-25-user-prompts.md` |  | 21 | Requested implementing file upload intake, testing it, and preparing the app for Zeabur deployment. |
+| 2026-05-25 | fiscal_year_dropdown_request | `prompts/2026-05-25-user-prompts.md` |  | 11 | Requested showing the API call fiscal year as a dropdown selector. |
+| 2026-05-25 | upload_metadata_inference_request | `prompts/2026-05-25-user-prompts.md` |  | 27 | Requested removing upload ticker/year/form inputs and showing those values inferred from the uploaded filing. |
+| 2026-05-25 | react_apple_frontend_refactor_request | `prompts/2026-05-25-user-prompts.md` |  | 22 | Requested refactoring the whole frontend as React pages with Apple-style design and keeping Zeabur deployment ready. |
+| 2026-05-25 | loading_animation_centered_search_request | `prompts/2026-05-25-user-prompts.md` |  | 25 | Requested animated loading states and a centered search bar followed by an or upload your filing prompt. |
+| 2026-05-25 | testing_subpage_request | `prompts/2026-05-25-user-prompts.md` |  | 18 | Requested moving live smoke raw data and local seed filings into a separate testing subpage. |
+| 2026-05-25 | react_frontend_completion_request | `prompts/2026-05-25-user-prompts.md` |  | 13 | Requested completing the remaining React frontend refactor gaps. |
+| 2026-05-25 | upload_regression_review_request | `prompts/2026-05-25-user-prompts.md` |  | 37 | Requested self-checking uploaded INTC and Citi filings where INTC selected TOC rows and Citi extracted no items. |
+| 2026-05-25 | sec_item_format_validation_request | `prompts/2026-05-25-user-prompts.md` |  | 20 | Requested confirming upload and API-call filings expose SEC fixed item title and format checks for every item. |
+| 2026-05-25 | zeabur_deployment_request | `prompts/2026-05-25-user-prompts.md` |  | 8 | Requested deploying the app to Zeabur. |

@@ -26,6 +26,13 @@ TOC-like candidates are rejected when they look like index entries rather than r
 Examples include short ordered spans, page-number-like headings, and headings followed by page
 ranges inside early table-of-contents regions.
 
+Some issuers use a Form 10-K cross-reference index instead of traditional `Item N` body headings.
+In that case, the index itself is not a section boundary. The parser should deterministically
+reconstruct virtual item starts from the cross-reference row's first referenced page and the filing's
+printed page markers. Split table cells such as `1.` / `Business` / `4-36` are valid retrieval
+evidence. The selected start evidence must be marked with `CROSS_REFERENCE_PAGE_FALLBACK` so the UI
+and reports remain inspectable.
+
 ## Boundary Reconstruction
 
 Boundary selection uses the nearest valid next item according to legal 10-K item ordering.
@@ -77,6 +84,9 @@ Internal TOCs inside normal items stay inside the item.
 - Front-matter TOC entries must not drive item extraction when a later body heading exists. Dense
   item clusters are TOC-like only when they are in the early document region or have explicit
   page-number signals.
+- Short body sections must not be rejected as TOC spans merely because an earlier front-matter TOC
+  duplicate appears later in ranked-candidate order. "Later start" means later in document offset,
+  not later in retry rank.
 - They should not be moved into a virtual supplemental item unless they are terminal filing content
   after Item 15 or Item 16.
 
@@ -137,6 +147,21 @@ Recovery remains explicit:
 - external exhibits or incorporated documents are deferred unless a dedicated exhibit retrieval
   strategy is implemented.
 
+## SEC Item Format Contract
+
+Every extracted item payload should expose deterministic SEC format metadata for inspection:
+
+- canonical SEC label, such as `Item 7A`.
+- expected SEC title, such as `Quantitative and Qualitative Disclosures About Market Risk`.
+- extracted start heading and the first-line heading context used for the check.
+- booleans for item-label match and expected-title match.
+- a status of `canonical_match`, `fallback_canonical_match`, `label_only`, `noncanonical_heading`,
+  `missing`, or `virtual_partition`.
+
+This check is informational. It should not discard text by itself because real filings may split the
+item number and title across adjacent cells, use older Item 6 conventions, or rely on a Form 10-K
+cross-reference index. Noncanonical status is a review signal, not an automatic extraction failure.
+
 ## Testing Expectations
 
 Any strategy change should include focused tests for the behavior being changed.
@@ -150,6 +175,8 @@ Any strategy change should include focused tests for the behavior being changed.
 - Regression reports should combine seed and validation filings into one review surface with status,
   confidence, warning categories, raw media counts, supplemental section counts, raw preview
   availability, and recovery action counts.
+- Held-out validation reports must include a gate that fails on missing filings, failed items, or
+  warnings so warning regressions do not hide in aggregate success counts.
 - Full test suite should pass with `python3 -m unittest discover -s tests`.
 
 ## Change Log
@@ -167,3 +194,15 @@ Any strategy change should include focused tests for the behavior being changed.
   raw offsets on each reconstructed subsection.
 - 2026-05-25: Added internal TOC partitioning for large normal items and tightened front-matter TOC
   candidate ranking so body headings win over table-of-contents entries.
+- 2026-05-25: Tightened short-span rejection so body headings are accepted when the only duplicate
+  item heading is an earlier front-matter TOC entry.
+- 2026-05-25: Added a held-out validation gate and live SEC direct-intake skeleton while keeping raw
+  persistence optional.
+- 2026-05-25: Added live SEC direct-fetch extraction endpoint that downloads a resolved 10-K and
+  runs extraction in memory without enabling raw-section previews or raw persistence by default.
+- 2026-05-25: Added deterministic Form 10-K cross-reference index fallback for filings that split
+  item numbers, titles, and page ranges across table cells or place the cross-reference index after
+  the financial/exhibit section. Cross-reference rows are treated as retrieval evidence, not body
+  item starts.
+- 2026-05-25: Added per-item SEC format metadata so upload, seed, and live SEC extraction outputs
+  explicitly show the expected canonical item title and whether the extracted start context matches it.

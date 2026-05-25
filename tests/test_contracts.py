@@ -9,7 +9,13 @@ sys.path.insert(0, str(ROOT / "src"))
 sys.path.insert(0, str(ROOT / "scripts"))
 
 from evaluate_seed import evaluation_summary
-from sec_item_extractor.contracts import evaluation_gate, recovery_action_contract, retry_policy_contract, warning_category
+from sec_item_extractor.contracts import (
+    evaluation_gate,
+    recovery_action_contract,
+    retry_policy_contract,
+    validation_gate,
+    warning_category,
+)
 
 
 class ContractTests(unittest.TestCase):
@@ -65,6 +71,18 @@ class ContractTests(unittest.TestCase):
         self.assertFalse(policy["llm_enabled"])
         self.assertIn("candidate_start_ranking", [step["name"] for step in policy["steps"]])
         self.assertIn("recovery_action_runner", [step["name"] for step in policy["steps"]])
+
+    def test_validation_gate_fails_on_warnings(self):
+        gate = validation_gate(
+            {
+                "missing_filings": [],
+                "item_status_counts": {"success": 10},
+                "warning_counts": {"Start heading has TOC-like signals.": 1},
+            }
+        )
+
+        self.assertFalse(gate["passed"])
+        self.assertIn("warning_count", [check["name"] for check in gate["checks"]])
 
 
 class GoldDatasetPlanTests(unittest.TestCase):

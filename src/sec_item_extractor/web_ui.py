@@ -1,15 +1,21 @@
 from __future__ import annotations
 
 import argparse
+from email import policy
+from email.parser import BytesParser
 import hashlib
+from html import unescape
 import json
+import mimetypes
+import os
 import re
 import time
 from http import HTTPStatus
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
-from urllib.parse import unquote, urlparse
+from urllib.parse import parse_qs, unquote, urlparse
 
+from .candidates import ITEM_ORDER, SEC_ITEM_TITLES, is_expected_title
 from .extractor import extract_items
 from .raw_structure import (
     raw_fragment_exhibit_links,
@@ -24,12 +30,16 @@ from .raw_structure import (
     raw_structure_counts,
 )
 from .recovery import run_recovery_actions
+from .sec_client import SECClient, archive_url, format_cik
 
 
 ROOT = Path(__file__).resolve().parents[2]
 MANIFEST_PATH = ROOT / "fixtures" / "gold" / "seed_filings.json"
 INVENTORY_PATH = ROOT / "fixtures" / "gold" / "downloaded_seed_filings.json"
 RAW_DIR = ROOT / "fixtures" / "filings" / "raw"
+FRONTEND_DIR = ROOT / "frontend"
+LIVE_SMOKE_SUMMARY_PATH = ROOT / "reports" / "live_sec_smoke_summary.json"
+MAX_UPLOAD_BYTES = int(os.environ.get("MAX_UPLOAD_BYTES", str(25 * 1024 * 1024)))
 
 
 def filing_options() -> list[dict]:
@@ -49,6 +59,20 @@ def filing_options() -> list[dict]:
             }
         )
     return options
+
+
+def live_smoke_data() -> dict:
+    if not LIVE_SMOKE_SUMMARY_PATH.exists():
+        return {
+            "available": False,
+            "path": str(LIVE_SMOKE_SUMMARY_PATH.relative_to(ROOT)),
+            "summary": None,
+            "filings": [],
+        }
+    payload = json.loads(LIVE_SMOKE_SUMMARY_PATH.read_text(encoding="utf-8"))
+    payload["available"] = True
+    payload["path"] = str(LIVE_SMOKE_SUMMARY_PATH.relative_to(ROOT))
+    return payload
 
 
 def raw_filing_metadata(filing_id: str) -> dict:
@@ -74,6 +98,482 @@ def raw_filing_metadata(filing_id: str) -> dict:
     }
 
 
+def sec_intake_plan(ticker: str = "", cik: str = "", fiscal_year: int | str | None = None) -> dict:
+    year = _parse_fiscal_year(fiscal_year)
+    ticker = ticker.strip().upper()
+    cik = cik.strip()
+    if not ticker and not cik:
+        raise ValueError("ticker or cik is required")
+
+    payload = {
+        "query": {"ticker": ticker or None, "cik": cik or None, "fiscal_year": year},
+        "storage_policy": _direct_fetch_storage_policy(),
+        "rate_limit": {"requests_per_second": 10, "user_agent_required": True},
+        "status": "blocked",
+        "message": "SEC_USER_AGENT is required before live SEC requests can run.",
+    }
+    user_agent = os.environ.get("SEC_USER_AGENT", "").strip()
+    if not user_agent:
+        return payload
+
+    client = SECClient(user_agent=user_agent)
+    resolved_cik = format_cik(cik) if cik else None
+    resolved_ticker = None
+    company_title = None
+    if ticker:
+        match = client.lookup_ticker(ticker)
+        if match is None:
+            return payload | {"status": "not_found", "message": f"No SEC ticker directory match for {ticker}."}
+        resolved_cik = match.cik
+        resolved_ticker = match.ticker
+        company_title = match.title
+
+    filing = client.find_10k_for_year(resolved_cik, year)
+    if filing is None:
+        return payload | {
+            "status": "not_found",
+            "message": f"No 10-K found for CIK {resolved_cik} with report date in {year}.",
+            "company": {"ticker": resolved_ticker, "title": company_title, "cik": resolved_cik},
+        }
+
+    return payload | {
+        "status": "ready",
+        "message": "10-K metadata resolved. Filing can be fetched directly without writing raw storage.",
+        "company": {"ticker": resolved_ticker, "title": company_title, "cik": resolved_cik},
+        "filing": {
+            "accession_number": filing.accession_number,
+            "filing_date": filing.filing_date,
+            "report_date": filing.report_date,
+            "primary_document": filing.primary_document,
+            "download_url": archive_url(resolved_cik, filing.accession_number, filing.primary_document),
+        },
+    }
+
+
+def extract_sec_filing(ticker: str = "", cik: str = "", fiscal_year: int | str | None = None) -> dict:
+    year = _parse_fiscal_year(fiscal_year)
+    ticker = ticker.strip().upper()
+    cik = cik.strip()
+    if not ticker and not cik:
+        raise ValueError("ticker or cik is required")
+
+    user_agent = os.environ.get("SEC_USER_AGENT", "").strip()
+    if not user_agent:
+        return {
+            "query": {"ticker": ticker or None, "cik": cik or None, "fiscal_year": year},
+            "status": "blocked",
+            "message": "SEC_USER_AGENT is required before live SEC requests can run.",
+            "storage_policy": _direct_fetch_storage_policy(),
+        }
+
+    started = time.perf_counter()
+    client = SECClient(user_agent=user_agent)
+    resolved_cik = format_cik(cik) if cik else None
+    resolved_ticker = ticker or None
+    company_title = None
+    if ticker:
+        match = client.lookup_ticker(ticker)
+        if match is None:
+            return {
+                "query": {"ticker": ticker, "cik": None, "fiscal_year": year},
+                "status": "not_found",
+                "message": f"No SEC ticker directory match for {ticker}.",
+                "storage_policy": _direct_fetch_storage_policy(),
+            }
+        resolved_cik = match.cik
+        resolved_ticker = match.ticker
+        company_title = match.title
+
+    download = client.download_10k_for_year(resolved_cik, year)
+    if download is None:
+        return {
+            "query": {"ticker": resolved_ticker, "cik": resolved_cik, "fiscal_year": year},
+            "status": "not_found",
+            "message": f"No 10-K found for CIK {resolved_cik} with report date in {year}.",
+            "storage_policy": _direct_fetch_storage_policy(),
+        }
+
+    content = download.body.decode("utf-8", errors="replace")
+    filing_id = f"sec_{resolved_ticker or resolved_cik}_{year}_10k".lower()
+    result = extract_items(content, target_items=ITEM_ORDER, filing_id=filing_id)
+    elapsed_ms = round((time.perf_counter() - started) * 1000)
+    result_dict = result.to_dict()
+    _attach_raw_structure(result_dict, content, result.item_results, raw_section_available=False)
+    _append_supplemental_items(result_dict, raw_section_available=False)
+    _attach_live_raw_sections(result_dict, content, result.item_results, download.archive_url)
+    _attach_sec_item_format(result_dict)
+    warning_count = sum(len(item.get("warnings", [])) for item in result_dict.get("item_results", []))
+    action_count = sum(len(item.get("recommended_actions", [])) for item in result_dict.get("item_results", []))
+    sec_format_review_count = _sec_format_review_count(result_dict)
+    return {
+        "query": {"ticker": resolved_ticker, "cik": resolved_cik, "fiscal_year": year},
+        "filing": {
+            "filing_id": filing_id,
+            "ticker": resolved_ticker,
+            "title": company_title,
+            "cik": resolved_cik,
+            "fiscal_year": year,
+            "form": download.metadata.form,
+            "accession_number": download.metadata.accession_number,
+            "filing_date": download.metadata.filing_date,
+            "report_date": download.metadata.report_date,
+            "primary_document": download.metadata.primary_document,
+            "download_url": download.archive_url,
+        },
+        "elapsed_ms": elapsed_ms,
+        "source_bytes": len(download.body),
+        "status": "success",
+        "message": "10-K downloaded from SEC and extracted in memory without raw persistence.",
+        "storage_policy": _direct_fetch_storage_policy(),
+        "pipeline": {
+            "ran": True,
+            "cache": "disabled",
+            "trigger": "live_sec_direct_fetch_extract",
+            "parser_version": result.parser_version,
+        },
+        "summary": {
+            "status": result.status,
+            "candidate_count": result.candidate_count,
+            "toc_confidence": result.toc_confidence,
+            "item_count": len(result_dict.get("item_results", [])),
+            "warning_count": warning_count,
+            "recommended_action_count": action_count,
+            "sec_format_review_count": sec_format_review_count,
+        },
+        "result": result_dict,
+    }
+
+
+def extract_uploaded_filing(file_bytes: bytes, filename: str) -> dict:
+    if not file_bytes:
+        raise ValueError("uploaded filing file is required")
+    if len(file_bytes) > MAX_UPLOAD_BYTES:
+        raise ValueError(f"uploaded filing exceeds {MAX_UPLOAD_BYTES} byte limit")
+
+    safe_filename = _safe_filename(filename or "uploaded-filing.html")
+    content = file_bytes.decode("utf-8", errors="replace")
+    if not content.strip():
+        raise ValueError("uploaded filing file is empty")
+
+    started = time.perf_counter()
+    inferred = infer_upload_metadata(content, safe_filename)
+    digest = hashlib.sha256(file_bytes).hexdigest()
+    filing_id = f"upload_{_slug(safe_filename)}_{digest[:12]}"
+    result = extract_items(content, target_items=ITEM_ORDER, filing_id=filing_id)
+    elapsed_ms = round((time.perf_counter() - started) * 1000)
+    result_dict = result.to_dict()
+    _attach_raw_structure(result_dict, content, result.item_results, raw_section_available=False)
+    _append_supplemental_items(result_dict, raw_section_available=False)
+    _attach_live_raw_sections(result_dict, content, result.item_results, None)
+    _attach_sec_item_format(result_dict)
+    warning_count = sum(len(item.get("warnings", [])) for item in result_dict.get("item_results", []))
+    action_count = sum(len(item.get("recommended_actions", [])) for item in result_dict.get("item_results", []))
+    sec_format_review_count = _sec_format_review_count(result_dict)
+    return {
+        "query": {"ticker": inferred["ticker"], "fiscal_year": inferred["fiscal_year"]},
+        "filing": {
+            "filing_id": filing_id,
+            "ticker": inferred["ticker"],
+            "title": inferred["registrant_name"] or safe_filename,
+            "cik": None,
+            "fiscal_year": inferred["fiscal_year"],
+            "form": inferred["form"],
+            "accession_number": None,
+            "filing_date": None,
+            "report_date": None,
+            "primary_document": safe_filename,
+            "download_url": None,
+        },
+        "inferred_metadata": inferred,
+        "elapsed_ms": elapsed_ms,
+        "source_bytes": len(file_bytes),
+        "source_sha256": digest,
+        "status": "success",
+        "message": "Uploaded filing extracted in memory without raw persistence.",
+        "storage_policy": _direct_fetch_storage_policy(),
+        "pipeline": {
+            "ran": True,
+            "cache": "disabled",
+            "trigger": "uploaded_filing_extract",
+            "parser_version": result.parser_version,
+        },
+        "summary": {
+            "status": result.status,
+            "candidate_count": result.candidate_count,
+            "toc_confidence": result.toc_confidence,
+            "item_count": len(result_dict.get("item_results", [])),
+            "warning_count": warning_count,
+            "recommended_action_count": action_count,
+            "sec_format_review_count": sec_format_review_count,
+        },
+        "result": result_dict,
+    }
+
+
+def _attach_sec_item_format(result_dict: dict) -> None:
+    for item_payload in result_dict.get("item_results", []):
+        item_payload["sec_item_format"] = _sec_item_format_contract(item_payload)
+
+
+def _sec_format_review_count(result_dict: dict) -> int:
+    review_statuses = {"noncanonical_heading", "label_only", "missing"}
+    return sum(
+        1
+        for item in result_dict.get("item_results", [])
+        if item.get("sec_item_format", {}).get("status") in review_statuses
+    )
+
+
+def _sec_item_format_contract(item_payload) -> dict:
+    item_name = str(_payload_value(item_payload, "item", "")).upper()
+    if item_name.startswith("SUPPLEMENTAL-"):
+        source_item = item_name.removeprefix("SUPPLEMENTAL-")
+        return {
+            "applies_to_sec_item": False,
+            "item": item_name,
+            "sec_item_label": f"Supplemental after Item {source_item}",
+            "expected_title": None,
+            "start_heading": None,
+            "heading_context": None,
+            "label_matches": False,
+            "title_matches_expected": False,
+            "status": "virtual_partition",
+            "notes": ["Supplemental partitions are same-filing review chunks, not SEC Form 10-K item headings."],
+        }
+
+    expected_title = SEC_ITEM_TITLES.get(item_name)
+    start_evidence = _payload_value(item_payload, "start_evidence")
+    start_heading = _payload_value(start_evidence, "text") if start_evidence else None
+    heading_context = _heading_context(item_payload, start_heading)
+    label_matches = _sec_label_matches(item_name, heading_context)
+    title_matches = bool(expected_title and is_expected_title(item_name, heading_context))
+    reasons = _payload_value(start_evidence, "reasons", []) if start_evidence else []
+    status = _sec_format_status(item_payload, label_matches, title_matches, reasons, expected_title)
+    notes = _sec_format_notes(item_payload, status, label_matches, title_matches, reasons, expected_title)
+    return {
+        "applies_to_sec_item": expected_title is not None,
+        "item": item_name,
+        "sec_item_label": f"Item {item_name}" if expected_title else item_name,
+        "expected_title": expected_title,
+        "start_heading": start_heading,
+        "heading_context": heading_context or None,
+        "label_matches": label_matches,
+        "title_matches_expected": title_matches,
+        "status": status,
+        "source": _sec_format_source(reasons),
+        "notes": notes,
+    }
+
+
+def _sec_format_status(item_payload, label_matches: bool, title_matches: bool, reasons: list, expected_title: str | None) -> str:
+    if expected_title is None:
+        return "unsupported_item"
+    if _payload_value(item_payload, "status") != "success":
+        return "missing"
+    if title_matches and _is_cross_reference_fallback(reasons):
+        return "fallback_canonical_match"
+    if label_matches and title_matches:
+        return "canonical_match"
+    if label_matches:
+        return "label_only"
+    return "noncanonical_heading"
+
+
+def _sec_format_notes(
+    item_payload, status: str, label_matches: bool, title_matches: bool, reasons: list, expected_title: str | None
+) -> list[str]:
+    notes = []
+    if expected_title is None:
+        notes.append("No SEC canonical title is configured for this virtual or unsupported item.")
+    elif _payload_value(item_payload, "status") != "success":
+        notes.append("Item was not extracted, so the canonical heading could not be verified.")
+    else:
+        if not label_matches:
+            notes.append("Extracted start context does not show a clear Item label.")
+        if not title_matches:
+            notes.append("Extracted start context does not contain the expected SEC canonical title tokens.")
+        if _is_cross_reference_fallback(reasons):
+            notes.append("Start was recovered from a Form 10-K cross-reference index page mapping.")
+        if status == "canonical_match":
+            notes.append("Start context includes the SEC item label and expected canonical title.")
+    return notes
+
+
+def _sec_format_source(reasons: list) -> str:
+    if _is_cross_reference_fallback(reasons):
+        return "cross_reference_page_fallback"
+    if "REGEX_ITEM_HEADING" in reasons:
+        return "body_heading"
+    return "none"
+
+
+def _is_cross_reference_fallback(reasons: list) -> bool:
+    return any(str(reason).startswith("CROSS_REFERENCE_") for reason in reasons or [])
+
+
+def _heading_context(item_payload, start_heading: str | None) -> str:
+    text = _payload_value(item_payload, "text", "") or ""
+    first_text = "\n".join(str(text).splitlines()[:4])
+    return " ".join(part for part in [start_heading or "", first_text[:700]] if part).strip()
+
+
+def _sec_label_matches(item_name: str, heading_context: str) -> bool:
+    if not item_name or not heading_context:
+        return False
+    return bool(re.search(rf"(?i)\bitem\s+{re.escape(item_name)}(?![a-z0-9])", heading_context))
+
+
+def _payload_value(payload, key: str, default=None):
+    if isinstance(payload, dict):
+        return payload.get(key, default)
+    return getattr(payload, key, default)
+
+
+def _direct_fetch_storage_policy() -> dict:
+    return {
+        "raw_storage_required": False,
+        "default_mode": "direct_fetch_then_extract",
+        "persist_raw_option": "available_for_evaluation_artifacts",
+    }
+
+
+def _attach_live_raw_sections(result_dict: dict, content: str, item_results: list, base_url: str | None) -> None:
+    source_by_item = {item.item.upper(): item for item in item_results}
+    for item_payload in result_dict.get("item_results", []):
+        item_payload["live_raw_section_available"] = False
+        source = source_by_item.get(str(item_payload.get("item", "")).upper())
+        if source is None or source.status != "success":
+            continue
+        try:
+            start, end, fragment = raw_section_fragment(content, source)
+        except ValueError:
+            continue
+        structure = raw_fragment_structure(fragment)
+        item_payload["live_raw_section_available"] = True
+        item_payload["live_raw_section"] = {
+            "raw_start": start,
+            "raw_end": end,
+            "raw_bytes": len(fragment.encode("utf-8", errors="replace")),
+            "table_count": structure["table_count"],
+            "image_count": structure["image_count"],
+            "srcdoc": raw_section_srcdoc(fragment, base_url),
+        }
+
+
+def _parse_fiscal_year(value: int | str | None) -> int:
+    if value is None:
+        raise ValueError("fiscal_year is required")
+    raw = str(value).strip()
+    if not re.fullmatch(r"\d{4}", raw):
+        raise ValueError("fiscal_year must be a four-digit year")
+    return int(raw)
+
+
+def _parse_optional_fiscal_year(value: int | str | None) -> int | None:
+    if value is None or str(value).strip() == "":
+        return None
+    return _parse_fiscal_year(value)
+
+
+def infer_upload_metadata(content: str, filename: str) -> dict:
+    ticker, ticker_source = _infer_upload_ticker(content, filename)
+    fiscal_year, fiscal_year_source = _infer_upload_fiscal_year(content, filename)
+    form, form_source = _infer_upload_form(content, filename)
+    registrant_name, registrant_source = _infer_dei_text(content, "EntityRegistrantName")
+    return {
+        "ticker": ticker,
+        "ticker_source": ticker_source,
+        "fiscal_year": fiscal_year,
+        "fiscal_year_source": fiscal_year_source,
+        "form": form,
+        "form_source": form_source,
+        "registrant_name": registrant_name,
+        "registrant_name_source": registrant_source,
+    }
+
+
+def _infer_upload_ticker(content: str, filename: str) -> tuple[str | None, str]:
+    value, source = _infer_dei_text(content, "TradingSymbol")
+    if value:
+        symbol = re.split(r"[\s,/]+", value.strip().upper())[0]
+        if re.fullmatch(r"[A-Z][A-Z0-9.-]{0,9}", symbol):
+            return symbol, source
+
+    cover = _text_sample(content, 120000)
+    match = re.search(r"trading\s+symbol(?:\(s\))?\s+([A-Z][A-Z0-9.-]{0,9})\b", cover, flags=re.IGNORECASE)
+    if match:
+        return match.group(1).upper(), "cover_page"
+
+    filename_match = re.match(r"(?P<ticker>[a-zA-Z]{1,6})[_-]\d{4}[_-]10k\b", filename)
+    if filename_match:
+        return filename_match.group("ticker").upper(), "filename"
+    return None, "not_found"
+
+
+def _infer_upload_fiscal_year(content: str, filename: str) -> tuple[int | None, str]:
+    value, source = _infer_dei_text(content, "DocumentFiscalYearFocus")
+    if value and re.fullmatch(r"\d{4}", value.strip()):
+        return int(value), source
+
+    period_end, period_source = _infer_dei_text(content, "DocumentPeriodEndDate")
+    year_match = re.search(r"\b(19\d{2}|20\d{2})\b", period_end or "")
+    if year_match:
+        return int(year_match.group(1)), period_source
+
+    filename_match = re.search(r"(?<!\d)(19\d{2}|20\d{2})(?!\d)", filename)
+    if filename_match:
+        return int(filename_match.group(1)), "filename"
+    return None, "not_found"
+
+
+def _infer_upload_form(content: str, filename: str) -> tuple[str | None, str]:
+    value, source = _infer_dei_text(content, "DocumentType")
+    if value:
+        form = value.strip().upper()
+        if re.fullmatch(r"10-K(?:/A)?|10-Q(?:/A)?|20-F(?:/A)?|40-F(?:/A)?", form):
+            return form, source
+
+    sample = _text_sample(content, 60000)
+    match = re.search(r"\bFORM\s+(10-K(?:/A)?|10-Q(?:/A)?|20-F(?:/A)?|40-F(?:/A)?)\b", sample, flags=re.IGNORECASE)
+    if match:
+        return match.group(1).upper(), "cover_page"
+    if re.search(r"10[_-]?k", filename, flags=re.IGNORECASE):
+        return "10-K", "filename"
+    return None, "not_found"
+
+
+def _infer_dei_text(content: str, concept: str) -> tuple[str | None, str]:
+    pattern = (
+        rf"(?is)<ix:(?:nonNumeric|nonFraction)\b"
+        rf"(?=[^>]*\bname=[\"']dei:{re.escape(concept)}[\"'])[^>]*>(.*?)</ix:(?:nonNumeric|nonFraction)>"
+    )
+    match = re.search(pattern, content)
+    if not match:
+        return None, "not_found"
+    value = _html_text(match.group(1))
+    return (value or None), f"ixbrl_dei:{concept}"
+
+
+def _text_sample(content: str, limit: int) -> str:
+    return _html_text(content[:limit])
+
+
+def _html_text(value: str) -> str:
+    value = re.sub(r"(?is)<[^>]+>", " ", value)
+    value = unescape(value)
+    return " ".join(value.split())
+
+
+def _safe_filename(value: str) -> str:
+    name = Path(value).name.strip()
+    return name or "uploaded-filing.html"
+
+
+def _slug(value: str) -> str:
+    slug = re.sub(r"[^a-zA-Z0-9]+", "_", value.lower()).strip("_")
+    return slug[:60] or "filing"
+
+
 def extract_seed_filing(filing_id: str) -> dict:
     manifest = json.loads(MANIFEST_PATH.read_text(encoding="utf-8"))
     filings = {filing["filing_id"]: filing for filing in manifest["filings"]}
@@ -91,6 +591,7 @@ def extract_seed_filing(filing_id: str) -> dict:
     result_dict = result.to_dict()
     _attach_raw_structure(result_dict, content, result.item_results)
     _append_supplemental_items(result_dict)
+    _attach_sec_item_format(result_dict)
     item_count = len(result_dict.get("item_results", []))
     return {
         "filing": filings[filing_id],
@@ -278,6 +779,7 @@ def _item_contract(item, raw_content: str | None = None) -> dict:
         "text": item.text or "",
         "text_length": len(item.text or ""),
         "raw_structure": raw_structure,
+        "sec_item_format": _sec_item_format_contract(item.__dict__),
     }
 
 
@@ -325,22 +827,24 @@ def _archive_base_url(filing_id: str) -> str | None:
     return f"https://www.sec.gov/Archives/edgar/data/{cik_no_padding}/{accession_no_dashes}/"
 
 
-def _attach_raw_structure(result_dict: dict, content: str, item_results: list) -> None:
+def _attach_raw_structure(result_dict: dict, content: str, item_results: list, raw_section_available: bool = True) -> None:
     for item_payload, item_result in zip(result_dict.get("item_results", []), item_results):
         item_payload["raw_structure"] = _raw_structure_contract(content, item_result)
-        item_payload["raw_section_available"] = item_result.status == "success"
+        item_payload["raw_section_available"] = raw_section_available and item_result.status == "success"
 
 
-def _append_supplemental_items(result_dict: dict) -> None:
+def _append_supplemental_items(result_dict: dict, raw_section_available: bool = True) -> None:
     for item_payload in list(result_dict.get("item_results", [])):
         chunk = item_payload.get("raw_structure", {}).get("supplemental_chunk")
         if not chunk:
             continue
         item_payload["raw_structure"]["supplemental_chunk"] = None
-        result_dict["item_results"].append(_supplemental_item_payload(item_payload.get("item", ""), chunk))
+        result_dict["item_results"].append(
+            _supplemental_item_payload(item_payload.get("item", ""), chunk, raw_section_available=raw_section_available)
+        )
 
 
-def _supplemental_item_payload(source_item: str, chunk: dict) -> dict:
+def _supplemental_item_payload(source_item: str, chunk: dict, raw_section_available: bool = True) -> dict:
     return {
         "item": f"supplemental-{source_item.lower()}",
         "display_label": f"Supplemental after Item {source_item}",
@@ -359,7 +863,7 @@ def _supplemental_item_payload(source_item: str, chunk: dict) -> dict:
         "warnings": [],
         "recommended_actions": [],
         "strategy_used": "raw_supplemental_chunk_v1",
-        "raw_section_available": True,
+        "raw_section_available": raw_section_available,
         "raw_structure": {
             "table_count": chunk.get("table_count", 0),
             "image_count": chunk.get("image_count", 0),
@@ -491,6 +995,36 @@ def _looks_like_text_outline_label(value: str) -> bool:
     return uppercase_ratio > 0.55 or (value[:1].isupper() and not value.endswith("."))
 
 
+def _parse_multipart_form(content_type: str, body: bytes) -> tuple[dict[str, str], dict[str, dict]]:
+    if "multipart/form-data" not in content_type.lower():
+        raise ValueError("multipart/form-data is required")
+    message = BytesParser(policy=policy.default).parsebytes(
+        f"Content-Type: {content_type}\r\nMIME-Version: 1.0\r\n\r\n".encode("utf-8") + body
+    )
+    if not message.is_multipart():
+        raise ValueError("multipart body is malformed")
+
+    fields: dict[str, str] = {}
+    files: dict[str, dict] = {}
+    for part in message.iter_parts():
+        if part.get_content_disposition() != "form-data":
+            continue
+        name = part.get_param("name", header="content-disposition")
+        if not name:
+            continue
+        data = part.get_payload(decode=True) or b""
+        filename = part.get_filename()
+        if filename:
+            files[name] = {
+                "filename": _safe_filename(filename),
+                "content_type": part.get_content_type(),
+                "content": data,
+            }
+        else:
+            fields[name] = data.decode(part.get_content_charset() or "utf-8", errors="replace")
+    return fields, files
+
+
 class WebUiHandler(BaseHTTPRequestHandler):
     server_version = "SecItemExtractorWeb/0.1"
 
@@ -501,12 +1035,52 @@ class WebUiHandler(BaseHTTPRequestHandler):
         if path == "/":
             self._send_html(render_home())
             return
+        if path.startswith("/assets/"):
+            self._send_static(path.removeprefix("/assets/"))
+            return
+        if path == "/testing":
+            self._send_html(render_testing())
+            return
+        if path == "/sec-live":
+            query = parse_qs(parsed.query)
+            self._send_html(
+                render_live_detail(
+                    ticker=_first_query_value(query, "ticker"),
+                    fiscal_year=_first_query_value(query, "year"),
+                )
+            )
+            return
+        if path == "/upload":
+            self._send_html(render_upload_detail())
+            return
         if path.startswith("/filings/"):
             filing_id = unquote(path.removeprefix("/filings/"))
             self._send_html(render_detail(filing_id))
             return
         if path == "/api/filings":
             self._send_json({"filings": filing_options()})
+            return
+        if path == "/api/live-smoke":
+            self._send_json(live_smoke_data())
+            return
+        if path == "/api/health":
+            self._send_json(health_check())
+            return
+        if path == "/api/sec/intake-plan":
+            query = parse_qs(parsed.query)
+            self._handle_sec_intake_plan(
+                ticker=_first_query_value(query, "ticker"),
+                cik=_first_query_value(query, "cik"),
+                fiscal_year=_first_query_value(query, "year"),
+            )
+            return
+        if path == "/api/sec/extract":
+            query = parse_qs(parsed.query)
+            self._handle_sec_extract(
+                ticker=_first_query_value(query, "ticker"),
+                cik=_first_query_value(query, "cik"),
+                fiscal_year=_first_query_value(query, "year"),
+            )
             return
         if path.startswith("/api/filings/") and path.endswith("/raw-metadata"):
             filing_id = unquote(path.removeprefix("/api/filings/").removesuffix("/raw-metadata"))
@@ -526,6 +1100,9 @@ class WebUiHandler(BaseHTTPRequestHandler):
     def do_POST(self) -> None:
         parsed = urlparse(self.path)
         path = parsed.path.rstrip("/") or "/"
+        if path == "/api/uploads/extract":
+            self._handle_upload_extract()
+            return
         if path.startswith("/api/filings/") and path.endswith("/recover"):
             filing_id = unquote(path.removeprefix("/api/filings/").removesuffix("/recover"))
             self._handle_recover(filing_id)
@@ -542,6 +1119,57 @@ class WebUiHandler(BaseHTTPRequestHandler):
             self._send_json({"error": "unknown_filing", "filing_id": filing_id}, status=HTTPStatus.NOT_FOUND)
         except FileNotFoundError:
             self._send_json({"error": "missing_raw_filing", "filing_id": filing_id}, status=HTTPStatus.NOT_FOUND)
+
+    def _handle_sec_intake_plan(self, ticker: str, cik: str, fiscal_year: str) -> None:
+        try:
+            payload = sec_intake_plan(ticker=ticker, cik=cik, fiscal_year=fiscal_year)
+            status = HTTPStatus.OK if payload["status"] != "blocked" else HTTPStatus.PRECONDITION_REQUIRED
+            self._send_json(payload, status=status)
+        except ValueError as error:
+            self._send_json({"error": "bad_sec_query", "message": str(error)}, status=HTTPStatus.BAD_REQUEST)
+
+    def _handle_sec_extract(self, ticker: str, cik: str, fiscal_year: str) -> None:
+        try:
+            payload = extract_sec_filing(ticker=ticker, cik=cik, fiscal_year=fiscal_year)
+            if payload["status"] == "blocked":
+                status = HTTPStatus.PRECONDITION_REQUIRED
+            elif payload["status"] == "not_found":
+                status = HTTPStatus.NOT_FOUND
+            else:
+                status = HTTPStatus.OK
+            self._send_json(payload, status=status)
+        except ValueError as error:
+            self._send_json({"error": "bad_sec_query", "message": str(error)}, status=HTTPStatus.BAD_REQUEST)
+
+    def _handle_upload_extract(self) -> None:
+        try:
+            content_length = int(self.headers.get("Content-Length", "0") or "0")
+        except ValueError:
+            self._send_json({"error": "bad_upload", "message": "invalid content length"}, status=HTTPStatus.BAD_REQUEST)
+            return
+        if content_length <= 0:
+            self._send_json({"error": "bad_upload", "message": "uploaded filing file is required"}, status=HTTPStatus.BAD_REQUEST)
+            return
+        if content_length > MAX_UPLOAD_BYTES + 20000:
+            self._send_json(
+                {"error": "upload_too_large", "message": f"upload exceeds {MAX_UPLOAD_BYTES} byte limit"},
+                status=HTTPStatus.REQUEST_ENTITY_TOO_LARGE,
+            )
+            return
+
+        body = self.rfile.read(content_length)
+        try:
+            fields, files = _parse_multipart_form(self.headers.get("Content-Type", ""), body)
+            upload = files.get("filing") or files.get("file")
+            if upload is None:
+                raise ValueError("file field named filing is required")
+            payload = extract_uploaded_filing(
+                upload["content"],
+                upload["filename"],
+            )
+            self._send_json(payload)
+        except ValueError as error:
+            self._send_json({"error": "bad_upload", "message": str(error)}, status=HTTPStatus.BAD_REQUEST)
 
     def _handle_extract(self, filing_id: str) -> None:
         try:
@@ -595,6 +1223,19 @@ class WebUiHandler(BaseHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(encoded)
 
+    def _send_static(self, asset_name: str) -> None:
+        safe_name = Path(asset_name).name
+        path = FRONTEND_DIR / safe_name
+        if not path.exists() or not path.is_file():
+            self._send_json({"error": "asset_not_found"}, status=HTTPStatus.NOT_FOUND)
+            return
+        encoded = path.read_bytes()
+        content_type = mimetypes.guess_type(path.name)[0] or "application/octet-stream"
+        self.send_response(HTTPStatus.OK)
+        self._send_no_cache_headers(content_type, len(encoded))
+        self.end_headers()
+        self.wfile.write(encoded)
+
     def _send_no_cache_headers(self, content_type: str, content_length: int) -> None:
         self.send_header("Content-Type", content_type)
         self.send_header("Content-Length", str(content_length))
@@ -603,10 +1244,24 @@ class WebUiHandler(BaseHTTPRequestHandler):
         self.send_header("Expires", "0")
 
 
+def _first_query_value(query: dict[str, list[str]], key: str) -> str:
+    values = query.get(key, [])
+    return values[0] if values else ""
+
+
+def health_check() -> dict:
+    return {
+        "status": "ok",
+        "service": "sec-item-extractor",
+        "parser_version": "0.1.0",
+        "live_sec_enabled": bool(os.environ.get("SEC_USER_AGENT", "").strip()),
+    }
+
+
 def render_home() -> str:
-    return _page(
-        "SEC 10-K Filing Selector",
-        """
+    return _react_page("SEC 10-K Item Extractor")
+    year_options = _sec_year_options(default_year=2023)
+    body = """
         <main class="home-shell">
           <section class="selector-panel">
             <div class="toolbar">
@@ -614,15 +1269,52 @@ def render_home() -> str:
                 <h1>SEC 10-K Test Filings</h1>
                 <p class="muted">Choose a local seed filing. Extraction runs only after you open a filing.</p>
               </div>
-              <button id="refresh-filings" class="icon-button" title="Refresh filing list" aria-label="Refresh filing list">R</button>
+              <div class="toolbar-actions">
+                <a class="secondary-button compact" href="/upload">Upload filing</a>
+                <button id="refresh-filings" class="icon-button" title="Refresh filing list" aria-label="Refresh filing list">R</button>
+              </div>
             </div>
+            <form id="sec-intake-form" class="sec-intake-panel">
+              <div>
+                <h2>Live SEC intake</h2>
+                <p class="muted">Resolve ticker/year metadata without caching raw filings by default.</p>
+              </div>
+              <label>Ticker<input name="ticker" value="AAPL" autocomplete="off"></label>
+              <label>Fiscal year<select name="year">__YEAR_OPTIONS__</select></label>
+              <div class="sec-intake-buttons">
+                <button class="secondary-button compact" type="submit" data-sec-mode="plan">Check SEC filing</button>
+                <button class="secondary-button compact" type="submit" data-sec-mode="extract">Run live extraction</button>
+              </div>
+              <pre id="sec-intake-result"></pre>
+            </form>
+            <section id="live-smoke-data" class="live-smoke-panel">
+              <div>
+                <h2>Live smoke raw data</h2>
+                <p class="muted">Latest SEC direct-fetch smoke run, loaded from reports.</p>
+              </div>
+              <div id="live-smoke-summary" class="live-smoke-summary"></div>
+              <details>
+                <summary>Raw JSON</summary>
+                <pre id="live-smoke-json"></pre>
+              </details>
+            </section>
             <div id="filing-list" class="filing-grid" aria-live="polite"></div>
           </section>
         </main>
         <script>
         const list = document.getElementById("filing-list");
+        const secIntakeForm = document.getElementById("sec-intake-form");
+        const secIntakeResult = document.getElementById("sec-intake-result");
+        const liveSmokeSummary = document.getElementById("live-smoke-summary");
+        const liveSmokeJson = document.getElementById("live-smoke-json");
         document.getElementById("refresh-filings").addEventListener("click", loadFilings);
+        let secIntakeMode = 'plan';
+        for (const button of secIntakeForm.querySelectorAll('[data-sec-mode]')) {
+          button.addEventListener('click', () => { secIntakeMode = button.dataset.secMode; });
+        }
+        secIntakeForm.addEventListener("submit", checkSecIntake);
         loadFilings();
+        loadLiveSmokeData();
 
         async function loadFilings() {
           list.innerHTML = '<div class="loading">Loading filings...</div>';
@@ -641,12 +1333,460 @@ def render_home() -> str:
             list.appendChild(link);
           }
         }
+
+        async function checkSecIntake(event) {
+          event.preventDefault();
+          const params = new URLSearchParams(new FormData(secIntakeForm));
+          if (secIntakeMode === 'extract') {
+            window.location.href = `/sec-live?${params.toString()}`;
+            return;
+          }
+          const endpoint = secIntakeMode === 'extract' ? '/api/sec/extract' : '/api/sec/intake-plan';
+          secIntakeResult.textContent = secIntakeMode === 'extract'
+            ? 'Fetching SEC filing and running extraction...'
+            : 'Resolving SEC metadata...';
+          const response = await fetch(`${endpoint}?${params.toString()}`, {cache: 'no-store'});
+          const payload = await response.json();
+          secIntakeResult.textContent = secIntakeMode === 'extract'
+            ? JSON.stringify(liveExtractionSummary(payload), null, 2)
+            : JSON.stringify(payload, null, 2);
+        }
+
+        function liveExtractionSummary(payload) {
+          if (payload.status !== 'success') return payload;
+          return {
+            status: payload.status,
+            message: payload.message,
+            filing: payload.filing,
+            source_bytes: payload.source_bytes,
+            elapsed_ms: payload.elapsed_ms,
+            storage_policy: payload.storage_policy,
+            summary: payload.summary,
+            first_items: (payload.result?.item_results || []).slice(0, 8).map(item => ({
+              item: item.item,
+              status: item.status,
+              confidence: item.confidence_level,
+              text_length: (item.text || '').length,
+              warnings: item.warnings || [],
+              actions: (item.recommended_actions || []).length,
+            })),
+          };
+        }
+
+        async function loadLiveSmokeData() {
+          liveSmokeSummary.innerHTML = '<div class="loading slim">Loading live smoke report...</div>';
+          const response = await fetch('/api/live-smoke', {cache: 'no-store'});
+          const payload = await response.json();
+          liveSmokeJson.textContent = JSON.stringify(payload, null, 2);
+          if (!payload.available) {
+            liveSmokeSummary.innerHTML = '<p class="muted">No live smoke report has been generated yet.</p>';
+            return;
+          }
+          const summary = payload.summary || {};
+          const filings = payload.filings || [];
+          liveSmokeSummary.innerHTML = `
+            <div class="metadata-row">
+              <span>${escapeHtml(summary.filings_tested)} filings</span>
+              <span>${escapeHtml(summary.warning_total)} warnings</span>
+              <span>${escapeHtml(summary.failed_total)} failed</span>
+              <span>${escapeHtml(summary.recommended_action_total)} actions</span>
+            </div>
+            <div class="live-smoke-table">
+              ${filings.map(filing => `
+                <a href="/sec-live?ticker=${encodeURIComponent(filing.ticker)}&year=${encodeURIComponent(filing.year)}">
+                  <strong>${escapeHtml(filing.ticker)} ${escapeHtml(filing.year)}</strong>
+                  <span>${escapeHtml(filing.filing_status)} | warnings ${escapeHtml(filing.warning_count)} | actions ${escapeHtml(filing.recommended_action_count)}</span>
+                </a>
+              `).join('')}
+            </div>
+          `;
+        }
+        </script>
+        """.replace("__YEAR_OPTIONS__", year_options)
+    return _page("SEC 10-K Filing Selector", body)
+
+
+def _sec_year_options(default_year: int) -> str:
+    current_year = time.localtime().tm_year
+    return "".join(
+        f'<option value="{year}"{" selected" if year == default_year else ""}>{year}</option>'
+        for year in range(current_year, 1993, -1)
+    )
+
+
+def render_testing() -> str:
+    return _react_page("SEC 10-K Testing")
+
+
+def render_upload_detail() -> str:
+    return _react_page("Upload SEC Filing")
+    return _page(
+        "Upload SEC Filing",
+        """
+        <main class="workspace-shell">
+          <aside class="toc-panel">
+            <a class="back-link" href="/">Back to filings</a>
+            <h1 id="filing-title">Upload filing</h1>
+            <p id="run-meta" class="muted">Upload HTML/TXT and extract in memory.</p>
+            <form id="upload-form" class="upload-form">
+              <label>Filing file<input name="filing" type="file" accept=".html,.htm,.txt,text/html,text/plain" required></label>
+              <button class="primary-button" type="submit">Run upload extraction</button>
+            </form>
+            <h2 class="toc-heading">Extracted TOC</h2>
+            <nav id="toc-list" class="toc-list" aria-label="Uploaded item navigation"></nav>
+          </aside>
+          <section class="item-panel">
+            <div id="status-banner" class="status-banner">Choose a filing file to parse.</div>
+            <section id="metadata-panel" class="metadata-panel"></section>
+            <div id="items" class="items"></div>
+            <section class="live-raw-panel">
+              <details>
+                <summary>Upload extraction raw data</summary>
+                <pre id="upload-raw-json"></pre>
+              </details>
+            </section>
+          </section>
+        </main>
+        <script>
+        const uploadForm = document.getElementById('upload-form');
+        const tocList = document.getElementById('toc-list');
+        const items = document.getElementById('items');
+        const statusBanner = document.getElementById('status-banner');
+        const runMeta = document.getElementById('run-meta');
+        const metadataPanel = document.getElementById('metadata-panel');
+        const uploadRawJson = document.getElementById('upload-raw-json');
+
+        uploadForm.addEventListener('submit', runUploadExtraction);
+
+        async function runUploadExtraction(event) {
+          event.preventDefault();
+          const formData = new FormData(uploadForm);
+          statusBanner.textContent = 'Uploading filing and running extraction...';
+          statusBanner.classList.remove('error');
+          tocList.innerHTML = '';
+          metadataPanel.innerHTML = '';
+          items.innerHTML = '<div class="loading">Parsing uploaded filing and reconstructing item boundaries...</div>';
+          uploadRawJson.textContent = '';
+          try {
+            const response = await fetch('/api/uploads/extract', {
+              method: 'POST',
+              cache: 'no-store',
+              body: formData,
+            });
+            const payload = await response.json();
+            uploadRawJson.textContent = JSON.stringify(payload, null, 2);
+            if (!response.ok) throw new Error(payload.message || payload.error || 'upload_extract_failed');
+            renderUploadExtraction(payload);
+          } catch (error) {
+            statusBanner.textContent = `Upload extraction failed: ${error.message}`;
+            statusBanner.classList.add('error');
+            items.innerHTML = '';
+          }
+        }
+
+        function renderUploadExtraction(payload) {
+          const result = payload.result || {item_results: []};
+          const metadata = payload.inferred_metadata || {};
+          document.getElementById('filing-title').textContent = `${payload.filing.ticker || 'Unknown'} ${payload.filing.fiscal_year || ''}`.trim();
+          runMeta.textContent = `${payload.filing.form || 'Unknown form'} | ${payload.filing.primary_document} | ${Number(payload.source_bytes || 0).toLocaleString()} bytes | ${payload.elapsed_ms} ms`;
+          statusBanner.textContent = `${payload.summary.status} | ${payload.summary.item_count} items | TOC ${payload.summary.toc_confidence} | warnings ${payload.summary.warning_count}`;
+          metadataPanel.innerHTML = `
+            <div class="metadata-row">
+              <span>${escapeHtml(payload.filing.primary_document)}</span>
+              <span>Ticker ${escapeHtml(payload.filing.ticker || 'unknown')} (${escapeHtml(metadata.ticker_source || 'not_found')})</span>
+              <span>Fiscal year ${escapeHtml(payload.filing.fiscal_year || 'unknown')} (${escapeHtml(metadata.fiscal_year_source || 'not_found')})</span>
+              <span>Form ${escapeHtml(payload.filing.form || 'unknown')} (${escapeHtml(metadata.form_source || 'not_found')})</span>
+              <span>Registrant ${escapeHtml(metadata.registrant_name || 'unknown')}</span>
+              <span>${escapeHtml(payload.source_sha256.slice(0, 12))}</span>
+              <span>${escapeHtml(payload.message)}</span>
+            </div>
+          `;
+          renderUploadToc(result);
+          renderUploadItems(result.item_results || []);
+        }
+
+        function renderUploadToc(result) {
+          const titles = new Map((result.toc_entries || []).map(entry => [entry.item, entry.title || entry.text]));
+          tocList.innerHTML = '';
+          for (const item of result.item_results || []) {
+            const link = document.createElement('a');
+            link.href = `#item-${cssId(item.item)}`;
+            link.className = `toc-link ${item.status} ${item.confidence_level}`;
+            const label = item.display_label || `Item ${item.item}`;
+            link.innerHTML = `
+              <span>${escapeHtml(label)}</span>
+              <small>${escapeHtml(item.title || titles.get(item.item) || item.status)}</small>
+              <em>${escapeHtml(item.status)} | ${escapeHtml(item.confidence_level)} ${Number(item.confidence_score).toFixed(2)}</em>
+            `;
+            tocList.appendChild(link);
+          }
+        }
+
+        function renderUploadItems(itemResults) {
+          items.innerHTML = '';
+          for (const item of itemResults) {
+            const article = document.createElement('article');
+            article.className = 'item-card';
+            article.id = `item-${cssId(item.item)}`;
+            const warnings = (item.warnings || []).length
+              ? item.warnings.map(warning => `<span class="warning-chip">${escapeHtml(warning)}</span>`).join('')
+              : '<span class="empty-chip">none</span>';
+            const actions = (item.recommended_actions || []).length
+              ? item.recommended_actions.map(action => `<span class="action-chip ${escapeHtml(action.severity)}">${escapeHtml(action.action_type)}:${escapeHtml(action.reason)}</span>`).join('')
+              : '<span class="empty-chip">none</span>';
+            const rawStructure = item.raw_structure || {};
+            const tableCount = Number(rawStructure.table_count || 0);
+            const imageCount = Number(rawStructure.image_count || 0);
+            const structureTags = [
+              tableCount ? `<span class="structure-tag table">tables ${tableCount}</span>` : '',
+              imageCount ? `<span class="structure-tag image">images ${imageCount}</span>` : '',
+            ].join('');
+            const rawTools = item.live_raw_section_available ? `
+              <div class="raw-section-tools">
+                <button class="secondary-button compact" data-upload-raw-item="${escapeHtml(item.item)}">Show original filing structure</button>
+                <span class="raw-section-meta"></span>
+              </div>
+              <div class="raw-section-preview"></div>
+            ` : '';
+            article.innerHTML = `
+              <header class="item-header">
+                <div>
+                  <h2>${escapeHtml(item.display_label || `Item ${item.item}`)}</h2>
+                  <p class="muted">${escapeHtml(item.status)} | ${escapeHtml(item.confidence_level)} ${Number(item.confidence_score).toFixed(2)} | ${(item.text || '').length.toLocaleString()} chars</p>
+                </div>
+                <div class="item-badges">
+                  ${structureTags}
+                  <span class="pill ${escapeHtml(item.confidence_level)}">${escapeHtml(item.confidence_level)}</span>
+                </div>
+              </header>
+              <div class="extracted-view">
+                <dl class="evidence-grid">
+                  <div><dt>Start</dt><dd>${escapeHtml(item.start_evidence?.text || 'none')}</dd></div>
+                  <div><dt>End</dt><dd>${escapeHtml(item.end_evidence?.text || 'none')}</dd></div>
+                  <div><dt>Warnings</dt><dd class="chip-row">${warnings}</dd></div>
+                  <div><dt>Actions</dt><dd class="chip-row">${actions}</dd></div>
+                </dl>
+                <pre class="item-text"></pre>
+              </div>
+              ${rawTools}
+            `;
+            article.querySelector('.item-text').textContent = item.text || '';
+            const rawButton = article.querySelector('[data-upload-raw-item]');
+            if (rawButton) rawButton.addEventListener('click', () => toggleUploadRawSection(item, article, rawButton));
+            items.appendChild(article);
+          }
+        }
+
+        function toggleUploadRawSection(item, container, button) {
+          const toolRow = button.closest('.raw-section-tools');
+          const meta = toolRow.querySelector('.raw-section-meta');
+          const preview = toolRow.nextElementSibling;
+          const extractedView = container.querySelector('.extracted-view');
+          if (container.dataset.rawVisible === 'true') {
+            container.dataset.rawVisible = 'false';
+            extractedView.hidden = false;
+            preview.hidden = true;
+            button.textContent = 'Show original filing structure';
+            meta.textContent = '';
+            return;
+          }
+          const raw = item.live_raw_section || {};
+          container.dataset.rawVisible = 'true';
+          extractedView.hidden = true;
+          preview.hidden = false;
+          button.textContent = 'Show extracted view';
+          meta.textContent = `${Number(raw.table_count || 0)} tables | ${Number(raw.image_count || 0)} images | ${Number(raw.raw_bytes || 0).toLocaleString()} bytes`;
+          if (preview.dataset.loaded === 'true') return;
+          const iframe = document.createElement('iframe');
+          iframe.className = 'raw-section-frame';
+          iframe.setAttribute('sandbox', '');
+          iframe.srcdoc = raw.srcdoc || '<!doctype html><p>Original section unavailable.</p>';
+          preview.appendChild(iframe);
+          preview.dataset.loaded = 'true';
+        }
         </script>
         """,
     )
 
 
+def render_live_detail(ticker: str, fiscal_year: str) -> str:
+    return _react_page(f"{(ticker or '').strip().upper()} {fiscal_year} Live SEC Extraction")
+    safe_ticker = json.dumps((ticker or "").strip().upper())
+    safe_year = json.dumps((fiscal_year or "").strip())
+    template = """
+        <main class="workspace-shell">
+          <aside class="toc-panel">
+            <a class="back-link" href="/">Back to filings</a>
+            <h1 id="filing-title">Live SEC filing</h1>
+            <p id="run-meta" class="muted">Direct SEC fetch, no raw persistence.</p>
+            <h2 class="toc-heading">Extracted TOC</h2>
+            <nav id="toc-list" class="toc-list" aria-label="Extracted item navigation"></nav>
+          </aside>
+          <section class="item-panel">
+            <div id="status-banner" class="status-banner">Fetching SEC filing and running extraction...</div>
+            <section id="metadata-panel" class="metadata-panel"></section>
+            <div id="items" class="items"></div>
+            <section class="live-raw-panel">
+              <details open>
+                <summary>Raw extraction JSON</summary>
+                <pre id="live-raw-json"></pre>
+              </details>
+            </section>
+          </section>
+        </main>
+        <script>
+        const liveTicker = __LIVE_TICKER__;
+        const liveYear = __LIVE_YEAR__;
+        const tocList = document.getElementById('toc-list');
+        const items = document.getElementById('items');
+        const statusBanner = document.getElementById('status-banner');
+        const runMeta = document.getElementById('run-meta');
+        const metadataPanel = document.getElementById('metadata-panel');
+        const liveRawJson = document.getElementById('live-raw-json');
+
+        runLiveExtraction();
+
+        async function runLiveExtraction() {
+          const params = new URLSearchParams({ticker: liveTicker, year: liveYear});
+          items.innerHTML = '<div class="loading">Fetching SEC filing and reconstructing item boundaries...</div>';
+          try {
+            const response = await fetch(`/api/sec/extract?${params.toString()}`, {cache: 'no-store'});
+            const payload = await response.json();
+            liveRawJson.textContent = JSON.stringify(payload, null, 2);
+            if (!response.ok) throw new Error(payload.message || payload.error || 'live_extract_failed');
+            renderLiveExtraction(payload);
+          } catch (error) {
+            statusBanner.textContent = `Live extraction failed: ${error.message}`;
+            statusBanner.classList.add('error');
+            items.innerHTML = '';
+          }
+        }
+
+        function renderLiveExtraction(payload) {
+          const result = payload.result || {item_results: []};
+          document.getElementById('filing-title').textContent = `${payload.filing.ticker} ${payload.filing.fiscal_year}`;
+          runMeta.textContent = `${payload.filing.form} | ${payload.filing.accession_number} | ${Number(payload.source_bytes || 0).toLocaleString()} bytes | ${payload.elapsed_ms} ms`;
+          statusBanner.textContent = `${payload.summary.status} | ${payload.summary.item_count} items | TOC ${payload.summary.toc_confidence} | warnings ${payload.summary.warning_count}`;
+          metadataPanel.innerHTML = `
+            <div class="metadata-row">
+              <span>${escapeHtml(payload.filing.title || payload.filing.ticker)}</span>
+              <span>CIK ${escapeHtml(payload.filing.cik)}</span>
+              <span>report ${escapeHtml(payload.filing.report_date)}</span>
+              <a href="${escapeHtml(payload.filing.download_url)}" target="_blank" rel="noopener noreferrer">SEC source</a>
+            </div>
+          `;
+          renderLiveToc(result);
+          renderLiveItems(result.item_results || []);
+        }
+
+        function renderLiveToc(result) {
+          const titles = new Map((result.toc_entries || []).map(entry => [entry.item, entry.title || entry.text]));
+          tocList.innerHTML = '';
+          for (const item of result.item_results || []) {
+            const link = document.createElement('a');
+            link.href = `#item-${cssId(item.item)}`;
+            link.className = `toc-link ${item.status} ${item.confidence_level}`;
+            const label = item.display_label || `Item ${item.item}`;
+            link.innerHTML = `
+              <span>${escapeHtml(label)}</span>
+              <small>${escapeHtml(item.title || titles.get(item.item) || item.status)}</small>
+              <em>${escapeHtml(item.status)} | ${escapeHtml(item.confidence_level)} ${Number(item.confidence_score).toFixed(2)}</em>
+            `;
+            tocList.appendChild(link);
+          }
+        }
+
+        function renderLiveItems(itemResults) {
+          items.innerHTML = '';
+          for (const item of itemResults) {
+            const article = document.createElement('article');
+            article.className = 'item-card';
+            article.id = `item-${cssId(item.item)}`;
+            const warnings = (item.warnings || []).length
+              ? item.warnings.map(warning => `<span class="warning-chip">${escapeHtml(warning)}</span>`).join('')
+              : '<span class="empty-chip">none</span>';
+            const actions = (item.recommended_actions || []).length
+              ? item.recommended_actions.map(action => `<span class="action-chip ${escapeHtml(action.severity)}">${escapeHtml(action.action_type)}:${escapeHtml(action.reason)}</span>`).join('')
+              : '<span class="empty-chip">none</span>';
+            const rawStructure = item.raw_structure || {};
+            const tableCount = Number(rawStructure.table_count || 0);
+            const imageCount = Number(rawStructure.image_count || 0);
+            const structureTags = [
+              tableCount ? `<span class="structure-tag table">tables ${tableCount}</span>` : '',
+              imageCount ? `<span class="structure-tag image">images ${imageCount}</span>` : '',
+            ].join('');
+            const rawTools = item.live_raw_section_available ? `
+              <div class="raw-section-tools">
+                <button class="secondary-button compact" data-live-raw-item="${escapeHtml(item.item)}">Show original filing structure</button>
+                <span class="raw-section-meta"></span>
+              </div>
+              <div class="raw-section-preview"></div>
+            ` : '';
+            article.innerHTML = `
+              <header class="item-header">
+                <div>
+                  <h2>${escapeHtml(item.display_label || `Item ${item.item}`)}</h2>
+                  <p class="muted">${escapeHtml(item.status)} | ${escapeHtml(item.confidence_level)} ${Number(item.confidence_score).toFixed(2)} | ${(item.text || '').length.toLocaleString()} chars</p>
+                </div>
+                <div class="item-badges">
+                  ${structureTags}
+                  <span class="pill ${escapeHtml(item.confidence_level)}">${escapeHtml(item.confidence_level)}</span>
+                </div>
+              </header>
+              <div class="extracted-view">
+                <dl class="evidence-grid">
+                  <div><dt>Start</dt><dd>${escapeHtml(item.start_evidence?.text || 'none')}</dd></div>
+                  <div><dt>End</dt><dd>${escapeHtml(item.end_evidence?.text || 'none')}</dd></div>
+                  <div><dt>Warnings</dt><dd class="chip-row">${warnings}</dd></div>
+                  <div><dt>Actions</dt><dd class="chip-row">${actions}</dd></div>
+                </dl>
+                <pre class="item-text"></pre>
+              </div>
+              ${rawTools}
+            `;
+            article.querySelector('.item-text').textContent = item.text || '';
+            const rawButton = article.querySelector('[data-live-raw-item]');
+            if (rawButton) rawButton.addEventListener('click', () => toggleLiveRawSection(item, article, rawButton));
+            items.appendChild(article);
+          }
+        }
+
+        function toggleLiveRawSection(item, container, button) {
+          const toolRow = button.closest('.raw-section-tools');
+          const meta = toolRow.querySelector('.raw-section-meta');
+          const preview = toolRow.nextElementSibling;
+          const extractedView = container.querySelector('.extracted-view');
+          if (container.dataset.rawVisible === 'true') {
+            container.dataset.rawVisible = 'false';
+            extractedView.hidden = false;
+            preview.hidden = true;
+            button.textContent = 'Show original filing structure';
+            meta.textContent = '';
+            return;
+          }
+          const raw = item.live_raw_section || {};
+          container.dataset.rawVisible = 'true';
+          extractedView.hidden = true;
+          preview.hidden = false;
+          button.textContent = 'Show extracted view';
+          meta.textContent = `${Number(raw.table_count || 0)} tables | ${Number(raw.image_count || 0)} images | ${Number(raw.raw_bytes || 0).toLocaleString()} bytes`;
+          if (preview.dataset.loaded === 'true') return;
+          const iframe = document.createElement('iframe');
+          iframe.className = 'raw-section-frame';
+          iframe.setAttribute('sandbox', '');
+          iframe.srcdoc = raw.srcdoc || '<!doctype html><p>Original section unavailable.</p>';
+          preview.appendChild(iframe);
+          preview.dataset.loaded = 'true';
+        }
+        </script>
+        """
+    body = template.replace("__LIVE_TICKER__", safe_ticker).replace("__LIVE_YEAR__", safe_year)
+    title = f"{(ticker or '').strip().upper()} {fiscal_year} Live SEC Extraction"
+    return _page(title, body)
+
+
 def render_detail(filing_id: str) -> str:
+    return _react_page(f"{filing_id} Extraction")
     safe_filing_id = json.dumps(filing_id)
     return _page(
         f"{filing_id} Extraction",
@@ -843,6 +1983,7 @@ def render_detail(filing_id: str) -> str:
               ? `<label>Selection<select data-recovery-selection="${{escapeHtml(item.item)}}">${{action.options.map(option => `<option value="${{escapeHtml(option)}}">${{escapeHtml(option)}}</option>`).join('')}}</select></label>`
               : '';
             const reviewSnippets = renderReviewSnippets(item, action);
+            const exhibitLinks = action.reason === 'exhibit_index_detected' ? renderExhibitLinkList(item) : '';
             row.innerHTML = `
               <div>
                 <strong>Item ${{escapeHtml(item.item)}} | ${{escapeHtml(action.action_type)}}:${{escapeHtml(action.reason)}}</strong>
@@ -850,6 +1991,7 @@ def render_detail(filing_id: str) -> str:
                 <small>${{escapeHtml(action.severity)}} | user input ${{action.requires_user_input ? 'yes' : 'no'}} | ${{escapeHtml(action.next_step || 'none')}}</small>
               </div>
               ${{reviewSnippets}}
+              ${{exhibitLinks}}
               ${{selector}}
             `;
             container.appendChild(row);
@@ -969,11 +2111,22 @@ def render_detail(filing_id: str) -> str:
           for (const recovery of payload.recoveries) {{
             const card = document.createElement('article');
             card.className = `recovery-result ${{escapeHtml(recovery.status)}}`;
+            const pageRange = recovery.page_range ? `${{recovery.page_range[0]}}-${{recovery.page_range[1]}}` : 'none';
+            const selectedOption = recovery.selected_option || 'none';
+            const actionButtons = recovery.extracted_text ? `
+              <div class="review-decision-row">
+                <button class="secondary-button compact" type="button" disabled>Keep original</button>
+                <button class="secondary-button compact" type="button" disabled>Use reviewed candidate</button>
+                <span class="muted">Review decision persistence is intentionally deferred.</span>
+              </div>
+            ` : '';
             card.innerHTML = `
               <h3>Item ${{escapeHtml(recovery.item)}} | ${{escapeHtml(recovery.reason)}}</h3>
               <p>${{escapeHtml(recovery.status)}} | ${{escapeHtml(recovery.severity)}} | ${{escapeHtml(recovery.next_step || 'none')}}</p>
+              <p>Page range ${{escapeHtml(pageRange)}} | selection ${{escapeHtml(selectedOption)}} | before ${{Number(recovery.before_length || 0).toLocaleString()}} | after ${{recovery.after_length ? Number(recovery.after_length).toLocaleString() : 'none'}}</p>
               <p>${{escapeHtml(recovery.message)}}</p>
               <pre></pre>
+              ${{actionButtons}}
             `;
             card.querySelector('pre').textContent = recovery.extracted_text ? edgeSnippet(recovery.extracted_text, 'start') + '\\n\\n' + edgeSnippet(recovery.extracted_text, 'end') : '';
             resultBlock.appendChild(card);
@@ -1066,9 +2219,42 @@ def render_detail(filing_id: str) -> str:
           }}
           return snippets;
         }}
+
+        function renderExhibitLinkList(item) {{
+          const sections = Array.isArray(item.raw_structure?.sections) ? item.raw_structure.sections : [];
+          const links = sections.filter(section => section.href).slice(0, 12);
+          if (!links.length) return '';
+          return `
+            <details class="review-snippets exhibit-links" open>
+              <summary>Exhibit links</summary>
+              <ul>
+                ${{links.map(section => `<li><a href="${{escapeHtml(section.href)}}" target="_blank" rel="noopener noreferrer">${{escapeHtml(section.label || section.href)}}</a></li>`).join('')}}
+              </ul>
+            </details>
+          `;
+        }}
         </script>
         """,
     )
+
+
+def _react_page(title: str) -> str:
+    return f"""<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Cache-Control" content="no-store">
+  <title>{title}</title>
+  <link rel="stylesheet" href="/assets/styles.css">
+</head>
+<body>
+  <div id="root"></div>
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="/assets/app.js"></script>
+</body>
+</html>"""
 
 
 def _page(title: str, body: str) -> str:
@@ -1113,6 +2299,75 @@ h1, h2, p { margin: 0; }
 .selector-panel { display: grid; gap: 24px; }
 .toolbar { display: flex; justify-content: space-between; gap: 16px; align-items: center; }
 .toolbar h1 { font-size: 28px; line-height: 1.15; }
+.toolbar-actions { display: flex; gap: 8px; align-items: center; }
+.sec-intake-panel {
+  display: grid;
+  grid-template-columns: minmax(220px, 1fr) 150px 150px auto;
+  gap: 10px;
+  align-items: end;
+  padding: 14px;
+  border: 1px solid #d9dee5;
+  border-radius: 8px;
+  background: #ffffff;
+}
+.sec-intake-panel h2 { font-size: 18px; margin: 0 0 4px; }
+.sec-intake-panel label { display: grid; gap: 4px; color: #44515f; font-size: 13px; }
+.sec-intake-panel input,
+.sec-intake-panel select {
+  min-height: 36px;
+  border: 1px solid #c9d1da;
+  border-radius: 6px;
+  padding: 0 10px;
+  color: #19212a;
+  background: #ffffff;
+}
+.sec-intake-buttons { display: flex; gap: 8px; flex-wrap: wrap; }
+.sec-intake-panel pre {
+  grid-column: 1 / -1;
+  max-height: 220px;
+  overflow: auto;
+  margin: 0;
+  padding: 10px;
+  border-radius: 6px;
+  background: #f6f7f9;
+  white-space: pre-wrap;
+  font: 12px/1.5 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+.live-smoke-panel {
+  display: grid;
+  gap: 10px;
+  padding: 14px;
+  border: 1px solid #d9dee5;
+  border-radius: 8px;
+  background: #ffffff;
+}
+.live-smoke-panel h2 { font-size: 18px; margin: 0 0 4px; }
+.live-smoke-table {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 8px;
+}
+.live-smoke-table a {
+  display: grid;
+  gap: 4px;
+  padding: 10px;
+  border: 1px solid #d9dee5;
+  border-radius: 6px;
+  background: #fbfcfd;
+}
+.live-smoke-table a:hover { border-color: #1769aa; }
+.live-smoke-table span { color: #647080; font-size: 13px; }
+.live-smoke-panel pre,
+.live-raw-panel pre {
+  max-height: 320px;
+  overflow: auto;
+  margin: 10px 0 0;
+  padding: 10px;
+  border-radius: 6px;
+  background: #f6f7f9;
+  white-space: pre-wrap;
+  font: 12px/1.5 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
 .icon-button, .primary-button {
   border: 1px solid #c9d1da;
   background: #ffffff;
@@ -1137,6 +2392,29 @@ h1, h2, p { margin: 0; }
   width: auto;
   min-height: 34px;
   padding: 0 10px;
+}
+.upload-form {
+  display: grid;
+  gap: 10px;
+  margin: 16px 0;
+}
+.upload-form label {
+  display: grid;
+  gap: 4px;
+  color: #44515f;
+  font-size: 13px;
+}
+.upload-form input {
+  min-height: 36px;
+  width: 100%;
+  border: 1px solid #c9d1da;
+  border-radius: 6px;
+  padding: 0 10px;
+  color: #19212a;
+  background: #ffffff;
+}
+.upload-form input[type="file"] {
+  padding: 7px 8px;
 }
 .primary-button:disabled, .secondary-button:disabled { opacity: 0.55; cursor: wait; }
 .filing-grid {
@@ -1175,6 +2453,7 @@ h1, h2, p { margin: 0; }
 }
 .back-link { display: inline-block; margin-bottom: 18px; color: #1769aa; }
 .toc-panel h1 { font-size: 22px; margin-bottom: 6px; overflow-wrap: anywhere; }
+.toc-heading { font-size: 13px; margin: 18px 0 8px; color: #647080; text-transform: uppercase; }
 .sidebar-actions { display: grid; gap: 8px; margin: 16px 0; }
 .toc-list { display: grid; gap: 4px; }
 .toc-link {
@@ -1205,6 +2484,14 @@ h1, h2, p { margin: 0; }
 }
 .status-banner.error { border-color: #efc1b7; color: #a13b2b; background: #fff0ec; }
 .metadata-panel, .recovery-panel { margin-bottom: 12px; }
+.live-raw-panel { margin-top: 14px; }
+.live-raw-panel details {
+  border: 1px solid #d9dee5;
+  border-radius: 8px;
+  background: #ffffff;
+  padding: 10px 12px;
+}
+.live-raw-panel summary { cursor: pointer; color: #304255; }
 .metadata-row {
   display: flex;
   gap: 10px;
@@ -1261,6 +2548,9 @@ h1, h2, p { margin: 0; }
   white-space: pre-wrap;
   font: 12px/1.5 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 }
+.review-snippets ul { margin: 0; padding: 0 12px 10px 28px; }
+.review-snippets li { margin-bottom: 5px; overflow-wrap: anywhere; }
+.review-snippets a { color: #1769aa; text-decoration: underline; }
 .recovery-result h3 { margin: 0; font-size: 16px; }
 .recovery-result pre {
   max-height: 220px;
@@ -1271,6 +2561,7 @@ h1, h2, p { margin: 0; }
   background: #fbfcfd;
   white-space: pre-wrap;
 }
+.review-decision-row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
 .items { display: grid; gap: 14px; }
 .item-card {
   border: 1px solid #d9dee5;
@@ -1457,6 +2748,7 @@ dd { margin: 0; overflow-wrap: anywhere; }
 .loading.slim { padding: 10px; }
 @media (max-width: 820px) {
   .workspace-shell { grid-template-columns: 1fr; }
+  .sec-intake-panel { grid-template-columns: 1fr; }
   .toc-panel { position: relative; height: auto; border-right: 0; border-bottom: 1px solid #d9dee5; }
   .evidence-grid { grid-template-columns: 1fr; }
   .snippet-grid { grid-template-columns: 1fr; }
@@ -1466,8 +2758,8 @@ dd { margin: 0; overflow-wrap: anywhere; }
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="Run the local SEC 10-K extraction review UI.")
-    parser.add_argument("--host", default="127.0.0.1")
-    parser.add_argument("--port", type=int, default=8000)
+    parser.add_argument("--host", default=os.environ.get("HOST", "127.0.0.1"))
+    parser.add_argument("--port", type=int, default=int(os.environ.get("PORT", "8000")))
     args = parser.parse_args()
 
     server = ThreadingHTTPServer((args.host, args.port), WebUiHandler)

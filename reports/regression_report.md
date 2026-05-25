@@ -9,11 +9,11 @@ Item rows: 695
 ## Aggregate Counts
 
 - Status: `{'success': 646, 'not_present': 49}`
-- Confidence: `{'high': 682, 'medium': 13}`
-- Warning categories: `{'length_policy_review': 1, 'title_policy_review': 1, 'toc_signal_review': 2}`
+- Confidence: `{'high': 683, 'medium': 12}`
+- Warning categories: `{}`
 - Raw preview available items: `646`
 - Supplemental items: `5`
-- Recovery action counts: `{'inspect_only:exhibit_index_detected': 69, 'inspect_only:section_reference_detected': 247, 'inspect_only:start_toc_like_signal': 2, 'needs_external_source:external_or_other_document_reference': 8, 'needs_user_confirmation:same_filing_page_reference': 7, 'needs_user_selection:internal_item_toc_detected': 5}`
+- Recovery action counts: `{'inspect_only:exhibit_index_detected': 67, 'inspect_only:section_reference_detected': 245, 'needs_external_source:external_or_other_document_reference': 8, 'needs_user_confirmation:same_filing_page_reference': 7, 'needs_user_selection:internal_item_toc_detected': 5}`
 
 ## Supplemental Coverage
 
@@ -256,7 +256,6 @@ Item rows: 695
 | `validation:nvda_2025_10k` | `9C` | high 1.00 | none | inspect_only:section_reference_detected | 0 tables / 0 images |
 | `validation:nvda_2025_10k` | `15` | high 1.00 | none | inspect_only:section_reference_detected, inspect_only:exhibit_index_detected | 46 tables / 0 images |
 | `validation:googl_2015_10k` | `1` | high 1.00 | none | inspect_only:section_reference_detected | 18 tables / 0 images |
-| `validation:googl_2015_10k` | `1B` | high 0.85 | toc_signal_review | inspect_only:start_toc_like_signal, inspect_only:section_reference_detected, inspect_only:exhibit_index_detected | 107 tables / 0 images |
 | `validation:googl_2015_10k` | `3` | high 1.00 | none | inspect_only:section_reference_detected | 1 tables / 0 images |
 | `validation:googl_2015_10k` | `5` | high 1.00 | none | inspect_only:section_reference_detected | 11 tables / 1 images |
 | `validation:googl_2015_10k` | `6` | high 1.00 | none | inspect_only:section_reference_detected | 10 tables / 0 images |
@@ -272,7 +271,6 @@ Item rows: 695
 | `validation:googl_2025_10k` | `1C` | high 1.00 | none | inspect_only:section_reference_detected | 1 tables / 0 images |
 | `validation:googl_2025_10k` | `3` | high 1.00 | none | inspect_only:section_reference_detected | 0 tables / 0 images |
 | `validation:googl_2025_10k` | `5` | high 1.00 | none | inspect_only:section_reference_detected | 3 tables / 2 images |
-| `validation:googl_2025_10k` | `6` | high 0.85 | toc_signal_review | inspect_only:start_toc_like_signal, inspect_only:section_reference_detected, inspect_only:exhibit_index_detected | 27 tables / 2 images |
 | `validation:googl_2025_10k` | `7` | high 1.00 | none | inspect_only:section_reference_detected | 25 tables / 0 images |
 | `validation:googl_2025_10k` | `7A` | high 1.00 | none | inspect_only:section_reference_detected | 5 tables / 0 images |
 | `validation:googl_2025_10k` | `8` | high 1.00 | none | inspect_only:section_reference_detected | 97 tables / 0 images |
@@ -318,7 +316,6 @@ Item rows: 695
 | `validation:pg_2015_10k` | `15` | high 1.00 | none | inspect_only:exhibit_index_detected | 17 tables / 0 images |
 | `validation:pg_2025_10k` | `1` | high 1.00 | none | inspect_only:section_reference_detected | 0 tables / 0 images |
 | `validation:pg_2025_10k` | `3` | high 1.00 | none | inspect_only:section_reference_detected | 0 tables / 0 images |
-| `validation:pg_2025_10k` | `6` | medium 0.80 | title_policy_review, length_policy_review | none | 0 tables / 0 images |
 | `validation:pg_2025_10k` | `7` | high 1.00 | none | inspect_only:section_reference_detected | 18 tables / 0 images |
 | `validation:pg_2025_10k` | `8` | high 1.00 | none | inspect_only:section_reference_detected | 55 tables / 0 images |
 | `validation:pg_2025_10k` | `15` | high 1.00 | none | inspect_only:exhibit_index_detected | 3 tables / 0 images |
@@ -840,7 +837,7 @@ Item rows: 695
 | `validation:nvda_2025_10k` | `16` | success | high 1.00 | none | 2 | 0 | 0 | True |
 | `validation:googl_2015_10k` | `1` | success | high 1.00 | none | 18 | 0 | 0 | True |
 | `validation:googl_2015_10k` | `1A` | success | high 1.00 | none | 65 | 0 | 0 | True |
-| `validation:googl_2015_10k` | `1B` | success | high 0.85 | toc_signal_review | 107 | 0 | 0 | True |
+| `validation:googl_2015_10k` | `1B` | success | high 1.00 | none | 1 | 0 | 0 | True |
 | `validation:googl_2015_10k` | `1C` | not_present | high 1.00 | none | 0 | 0 | 0 | False |
 | `validation:googl_2015_10k` | `2` | success | high 1.00 | none | 2 | 0 | 0 | True |
 | `validation:googl_2015_10k` | `3` | success | high 1.00 | none | 1 | 0 | 0 | True |
@@ -869,7 +866,7 @@ Item rows: 695
 | `validation:googl_2025_10k` | `3` | success | high 1.00 | none | 0 | 0 | 0 | True |
 | `validation:googl_2025_10k` | `4` | success | high 1.00 | none | 1 | 0 | 0 | True |
 | `validation:googl_2025_10k` | `5` | success | high 1.00 | none | 3 | 2 | 0 | True |
-| `validation:googl_2025_10k` | `6` | success | high 0.85 | toc_signal_review | 27 | 2 | 0 | True |
+| `validation:googl_2025_10k` | `6` | success | high 1.00 | none | 1 | 0 | 0 | True |
 | `validation:googl_2025_10k` | `7` | success | high 1.00 | none | 25 | 0 | 0 | True |
 | `validation:googl_2025_10k` | `7A` | success | high 1.00 | none | 5 | 0 | 0 | True |
 | `validation:googl_2025_10k` | `8` | success | high 1.00 | none | 97 | 0 | 0 | True |
@@ -1007,7 +1004,7 @@ Item rows: 695
 | `validation:pg_2025_10k` | `3` | success | high 1.00 | none | 0 | 0 | 0 | True |
 | `validation:pg_2025_10k` | `4` | success | high 1.00 | none | 1 | 0 | 0 | True |
 | `validation:pg_2025_10k` | `5` | success | high 1.00 | none | 3 | 2 | 0 | True |
-| `validation:pg_2025_10k` | `6` | success | medium 0.80 | title_policy_review, length_policy_review | 0 | 0 | 0 | True |
+| `validation:pg_2025_10k` | `6` | success | high 1.00 | none | 0 | 0 | 0 | True |
 | `validation:pg_2025_10k` | `7` | success | high 1.00 | none | 18 | 0 | 0 | True |
 | `validation:pg_2025_10k` | `7A` | success | high 1.00 | none | 0 | 0 | 0 | True |
 | `validation:pg_2025_10k` | `8` | success | high 1.00 | none | 55 | 0 | 0 | True |
