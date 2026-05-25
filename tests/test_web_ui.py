@@ -22,6 +22,8 @@ class WebUiTests(unittest.TestCase):
 
         self.assertEqual(len(options), 20)
         self.assertTrue(all("filing_id" in option for option in options))
+        self.assertTrue(all(option["source_mode"] == "sec_direct_fetch" for option in options))
+        self.assertTrue(all(option["extract_url"].startswith("/sec-live?ticker=") for option in options))
         extract_items.assert_not_called()
 
     def test_detail_page_does_not_embed_extracted_item_text(self):
@@ -119,7 +121,12 @@ class WebUiTests(unittest.TestCase):
         self.assertIn("SEC 10-K Testing", html)
         self.assertIn("TestingPage", app)
         self.assertIn("Live smoke raw data", app)
-        self.assertIn("Local seed filings", app)
+        self.assertIn("Seed filings", app)
+        self.assertIn("Seed filings run through SEC direct fetch", app)
+        self.assertIn("filing.extract_url || `/sec-live?ticker=", app)
+        self.assertIn("SEC direct fetch", app)
+        self.assertNotIn("Local seed filings", app)
+        self.assertNotIn("missing raw filing", app)
         self.assertIn("/api/live-smoke", app)
         self.assertIn("/api/filings", app)
 

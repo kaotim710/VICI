@@ -235,7 +235,7 @@
       h("section", { className: "testing-header" },
         h("p", { className: "eyebrow" }, "Testing"),
         h("h1", null, "Validation raw data"),
-        h("p", { className: "hero-copy" }, "Review live smoke output and local seed filings without running extraction until a filing is selected.")
+        h("p", { className: "hero-copy" }, "Review live smoke output and seed filings. Seed filings run through SEC direct fetch when selected.")
       ),
       h("section", { className: "apple-card" },
         h("div", { className: "card-heading" },
@@ -246,14 +246,14 @@
       ),
       h("section", { className: "apple-card" },
         h("div", { className: "list-heading" },
-          h("div", null, h("h2", null, "Local seed filings"), h("p", null, "Extraction runs only after you open a filing.")),
+          h("div", null, h("h2", null, "Seed filings"), h("p", null, "Extraction runs through SEC direct fetch only after you open a filing.")),
           h("button", { className: "icon-button", onClick: loadFilings, title: "Refresh filing list" }, "R")
         ),
         filingError ? h("p", { className: "error-text" }, filingError) : h("div", { className: "filing-grid" },
-          filings.length ? filings.map((filing) => h("a", { className: "filing-card", href: `/filings/${encodeURIComponent(filing.filing_id)}`, key: filing.filing_id },
+          filings.length ? filings.map((filing) => h("a", { className: "filing-card", href: filing.extract_url || `/sec-live?ticker=${encodeURIComponent(filing.ticker)}&year=${encodeURIComponent(filing.fiscal_year)}`, key: filing.filing_id },
             h("strong", null, filing.ticker),
             h("span", null, `${filing.industry} | ${filing.fiscal_year} | ${filing.form}`),
-            h("em", { className: filing.available ? "ok" : "warn" }, filing.available ? "available" : "missing raw filing")
+            h("em", { className: "ok" }, "SEC direct fetch")
           )) : h(LoadingCard, { label: "Loading filings" })
         )
       )

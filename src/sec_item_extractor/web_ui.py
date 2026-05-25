@@ -54,7 +54,10 @@ def filing_options() -> list[dict]:
                 "fiscal_year": filing["fiscal_year"],
                 "industry": filing["industry"],
                 "form": filing["form"],
+                "source_mode": "sec_direct_fetch",
+                "extract_url": f"/sec-live?ticker={filing['ticker']}&year={filing['fiscal_year']}",
                 "available": path.exists(),
+                "local_raw_available": path.exists(),
                 "bytes": path.stat().st_size if path.exists() else None,
             }
         )
