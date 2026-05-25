@@ -383,7 +383,12 @@ input[type="file"] { padding: 8px 10px; }
   border-radius: 14px;
 }
 .toc-link:hover { background: rgba(245,245,247,0.92); border-color: var(--line); }
-.toc-link span { font-weight: 700; }
+.toc-link span {
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
 .toc-link small {
   color: var(--muted);
   overflow: hidden;

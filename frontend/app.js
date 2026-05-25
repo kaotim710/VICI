@@ -528,15 +528,31 @@
         sidebarControls,
         h("h2", { className: "toc-heading" }, "Extracted TOC"),
         items.length ? h("nav", { className: "toc-list", "aria-label": "Extracted item navigation" },
-          items.map((item) => h("a", { key: item.item, className: `toc-link ${item.status} ${item.confidence_level}`, href: `#item-${cssId(item.item)}` },
-            h("span", null, item.display_label || `Item ${item.item}`),
-            h("small", null, item.title || item.status),
-            h("em", null, `${item.status} | ${item.confidence_level} ${Number(item.confidence_score || 0).toFixed(2)}`)
-          ))
+          items.map((item) => {
+            const label = navItemLabel(item);
+            return h("a", { key: item.item, className: `toc-link ${item.status} ${item.confidence_level}`, href: `#item-${cssId(item.item)}`, title: label },
+            h("span", null, label),
+            h("small", null, `${item.status} | ${item.confidence_level} ${Number(item.confidence_score || 0).toFixed(2)}`)
+          );
+          })
         ) : h("p", { className: "empty-toc" }, "No extraction has run yet.")
       ),
       h("section", { className: "item-panel" }, children)
     );
+  }
+
+  function navItemTitle(item) {
+    const formatTitle = item.sec_item_format && item.sec_item_format.expected_title;
+    return item.title || formatTitle || item.status;
+  }
+
+  function navItemLabel(item) {
+    const label = item.display_label || `Item ${item.item}`;
+    const itemTitle = navItemTitle(item);
+    if (!itemTitle || itemTitle === item.status || label.toLowerCase().includes(String(itemTitle).toLowerCase())) {
+      return label;
+    }
+    return `${label} ${itemTitle}`;
   }
 
   function StatusBanner({ text, error }) {

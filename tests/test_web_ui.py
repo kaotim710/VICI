@@ -155,6 +155,8 @@ class WebUiTests(unittest.TestCase):
         self.assertIn("LiveSecPage", app)
         self.assertIn('params.get("cik")', app)
         self.assertIn("Extracted TOC", app)
+        self.assertIn("navItemLabel", app)
+        self.assertIn("navItemTitle", app)
         self.assertIn("Raw extraction JSON", app)
         self.assertIn("Show original filing structure", app)
         self.assertIn("Back to testing", app)
