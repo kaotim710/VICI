@@ -51,6 +51,20 @@ class SECClientTests(unittest.TestCase):
         self.assertEqual(match.cik, "0000320193")
         self.assertEqual(match.ticker, "AAPL")
 
+    def test_lookup_cik_uses_company_ticker_directory(self):
+        class FakeClient(SECClient):
+            def __init__(self):
+                pass
+
+            def get_company_tickers(self):
+                return {"0": {"ticker": "C", "title": "Citigroup Inc.", "cik_str": 831001}}
+
+        match = FakeClient().lookup_cik("0000831001")
+
+        self.assertEqual(match.cik, "0000831001")
+        self.assertEqual(match.ticker, "C")
+        self.assertEqual(match.title, "Citigroup Inc.")
+
     def test_download_10k_for_year_returns_direct_body_without_persisting_raw(self):
         class FakeClient(SECClient):
             def __init__(self):

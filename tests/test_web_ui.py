@@ -236,6 +236,37 @@ class WebUiTests(unittest.TestCase):
         self.assertEqual(payload["filing"]["cik"], "0000831001")
         self.assertEqual(payload["next_action"]["url"], "/sec-live?cik=0000831001&year=2025")
 
+    def test_upload_identify_can_enrich_cik_from_sec_company_ticker_directory(self):
+        class FakeSECClient:
+            def __init__(self, user_agent):
+                self.user_agent = user_agent
+
+            def lookup_cik(self, cik):
+                return TickerMetadata(ticker="C", title="Citigroup Inc.", cik="0000831001")
+
+        payload = web_ui.identify_uploaded_filing(
+            b"""
+            <html><body>
+            <ix:nonNumeric name="dei:EntityCentralIndexKey">831001</ix:nonNumeric>
+            <ix:nonNumeric name="dei:DocumentFiscalYearFocus">2025</ix:nonNumeric>
+            <ix:nonNumeric name="dei:DocumentType">10-K</ix:nonNumeric>
+            </body></html>
+            """,
+            filename="citi.htm",
+            original_size=12_000_000,
+            partial_upload=True,
+        )
+
+        with patch.dict("os.environ", {"SEC_USER_AGENT": "test contact@example.com"}):
+            with patch("sec_item_extractor.web_ui.SECClient", FakeSECClient):
+                enriched = web_ui.enrich_identified_upload_from_sec_directory(payload)
+
+        self.assertEqual(enriched["filing"]["ticker"], "C")
+        self.assertEqual(enriched["filing"]["title"], "Citigroup Inc.")
+        self.assertEqual(enriched["inferred_metadata"]["ticker_source"], "sec_company_tickers:cik")
+        self.assertEqual(enriched["directory_lookup"]["status"], "matched")
+        self.assertEqual(enriched["next_action"]["url"], "/sec-live?ticker=C&year=2025")
+
     def test_upload_metadata_falls_back_to_filename(self):
         payload = web_ui.extract_uploaded_filing(
             b"""
@@ -326,6 +357,47 @@ class WebUiTests(unittest.TestCase):
         self.assertEqual(sec_format["expected_title"], "Business")
         self.assertEqual(sec_format["status"], "canonical_match")
         self.assertGreater(payload["summary"]["item_count"], 0)
+
+    def test_live_sec_extract_resolves_ticker_when_query_uses_cik(self):
+        class FakeSECClient:
+            def __init__(self, user_agent):
+                self.user_agent = user_agent
+
+            def lookup_cik(self, cik):
+                return TickerMetadata(ticker="C", title="Citigroup Inc.", cik="0000831001")
+
+            def download_10k_for_year(self, cik, fiscal_year):
+                body = b"""
+                Item 1. Business
+                Business text.
+                Item 1A. Risk Factors
+                Risk text.
+                Item 2. Properties
+                Property text.
+                """
+                return FilingDownload(
+                    cik="0000831001",
+                    fiscal_year=fiscal_year,
+                    metadata=FilingMetadata(
+                        accession_number="0000831001-25-000001",
+                        form="10-K",
+                        filing_date="2026-02-20",
+                        report_date="2025-12-31",
+                        primary_document="c-20251231.htm",
+                    ),
+                    archive_url="https://www.sec.gov/Archives/edgar/data/831001/000083100125000001/c-20251231.htm",
+                    body=body,
+                )
+
+        with patch.dict("os.environ", {"SEC_USER_AGENT": "test contact@example.com"}):
+            with patch("sec_item_extractor.web_ui.SECClient", FakeSECClient):
+                payload = web_ui.extract_sec_filing(cik="831001", fiscal_year=2025)
+
+        self.assertEqual(payload["status"], "success")
+        self.assertEqual(payload["query"]["ticker"], "C")
+        self.assertEqual(payload["filing"]["ticker"], "C")
+        self.assertEqual(payload["filing"]["title"], "Citigroup Inc.")
+        self.assertEqual(payload["filing"]["cik"], "0000831001")
 
     def test_detail_page_can_load_original_filing_structure(self):
         app = FRONTEND_APP.read_text(encoding="utf-8")

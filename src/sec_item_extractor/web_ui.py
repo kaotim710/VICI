@@ -30,7 +30,7 @@ from .raw_structure import (
     raw_structure_counts,
 )
 from .recovery import run_recovery_actions
-from .sec_client import SECClient, archive_url, format_cik
+from .sec_client import SECClient, SEC_COMPANY_TICKERS_URL, archive_url, format_cik
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -127,6 +127,14 @@ def sec_intake_plan(ticker: str = "", cik: str = "", fiscal_year: int | str | No
         resolved_cik = match.cik
         resolved_ticker = match.ticker
         company_title = match.title
+    elif resolved_cik:
+        try:
+            match = client.lookup_cik(resolved_cik)
+        except Exception:
+            match = None
+        if match is not None:
+            resolved_ticker = match.ticker
+            company_title = match.title
 
     filing = client.find_10k_for_year(resolved_cik, year)
     if filing is None:
@@ -183,6 +191,14 @@ def extract_sec_filing(ticker: str = "", cik: str = "", fiscal_year: int | str |
         resolved_cik = match.cik
         resolved_ticker = match.ticker
         company_title = match.title
+    elif resolved_cik:
+        try:
+            match = client.lookup_cik(resolved_cik)
+        except Exception:
+            match = None
+        if match is not None:
+            resolved_ticker = match.ticker
+            company_title = match.title
 
     download = client.download_10k_for_year(resolved_cik, year)
     if download is None:
@@ -336,7 +352,7 @@ def identify_uploaded_filing(
     ready = bool(identifier and inferred["fiscal_year"] and is_10k)
     params = f"{identifier_key}={identifier}&year={inferred['fiscal_year']}" if identifier and inferred["fiscal_year"] else ""
     payload = {
-        "query": {"ticker": inferred["ticker"], "fiscal_year": inferred["fiscal_year"]},
+        "query": {"ticker": inferred["ticker"], "cik": inferred["cik"], "fiscal_year": inferred["fiscal_year"]},
         "filing": {
             "filing_id": f"identified_{_slug(safe_filename)}_{digest[:12]}",
             "ticker": inferred["ticker"],
@@ -367,6 +383,7 @@ def identify_uploaded_filing(
             "cache": "disabled",
             "trigger": "uploaded_filing_identify",
         },
+        "directory_lookup": {"attempted": False, "status": "not_needed" if inferred["ticker"] else "not_attempted"},
         "next_action": {
             "type": "live_sec_extract",
             "url": f"/sec-live?{params}",
@@ -374,6 +391,47 @@ def identify_uploaded_filing(
         if ready
         else None,
     }
+    return payload
+
+
+def enrich_identified_upload_from_sec_directory(payload: dict) -> dict:
+    filing = payload.get("filing", {})
+    if filing.get("ticker") or not filing.get("cik") or not filing.get("fiscal_year"):
+        return payload
+
+    user_agent = os.environ.get("SEC_USER_AGENT", "").strip()
+    if not user_agent:
+        payload["directory_lookup"] = {
+            "attempted": False,
+            "status": "blocked",
+            "message": "SEC_USER_AGENT is required before SEC company ticker lookup can run.",
+        }
+        return payload
+
+    payload["directory_lookup"] = {"attempted": True, "status": "running"}
+    try:
+        match = SECClient(user_agent=user_agent).lookup_cik(filing["cik"])
+    except Exception as error:  # optional enrichment; keep CIK route available if SEC lookup fails.
+        payload["directory_lookup"] = {"attempted": True, "status": "error", "message": str(error)}
+        return payload
+    if match is None:
+        payload["directory_lookup"] = {"attempted": True, "status": "not_found"}
+        return payload
+
+    filing["ticker"] = match.ticker
+    filing["title"] = match.title or filing.get("title")
+    filing["cik"] = match.cik
+    payload["query"]["ticker"] = match.ticker
+    payload["query"]["cik"] = match.cik
+    payload["inferred_metadata"]["ticker"] = match.ticker
+    payload["inferred_metadata"]["ticker_source"] = "sec_company_tickers:cik"
+    payload["directory_lookup"] = {
+        "attempted": True,
+        "status": "matched",
+        "source": SEC_COMPANY_TICKERS_URL,
+    }
+    if payload.get("next_action"):
+        payload["next_action"]["url"] = f"/sec-live?ticker={match.ticker}&year={filing['fiscal_year']}"
     return payload
 
 
@@ -1252,6 +1310,7 @@ class WebUiHandler(BaseHTTPRequestHandler):
                 original_size=original_size,
                 partial_upload=fields.get("partial_upload") == "1",
             )
+            payload = enrich_identified_upload_from_sec_directory(payload)
             self._send_json(payload)
         except ValueError as error:
             self._send_json({"error": "bad_upload", "message": str(error)}, status=HTTPStatus.BAD_REQUEST)

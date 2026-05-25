@@ -116,6 +116,22 @@ class SECClient:
             )
         return None
 
+    def lookup_cik(self, cik: str | int) -> TickerMetadata | None:
+        target = format_cik(cik)
+        for row in self.get_company_tickers().values():
+            try:
+                row_cik = format_cik(row.get("cik_str", ""))
+            except ValueError:
+                continue
+            if row_cik != target:
+                continue
+            return TickerMetadata(
+                ticker=str(row.get("ticker", "")).upper(),
+                title=str(row.get("title", "")),
+                cik=row_cik,
+            )
+        return None
+
     def full_text_search(self, query: str, forms: str = "10-K") -> dict:
         return self.fetch_json(full_text_search_url(query, forms=forms))
 

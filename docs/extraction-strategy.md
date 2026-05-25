@@ -188,6 +188,9 @@ Uploaded filings are parsed in memory and are not persisted as raw storage by de
 - Prefer ticker plus fiscal year when the uploaded sample exposes `dei:TradingSymbol`.
 - If ticker is missing but `dei:EntityCentralIndexKey` is present, route by CIK plus fiscal year
   instead of guessing a ticker from filename or company name.
+- When SEC access is configured, resolve CIK back to ticker and company title through
+  `https://www.sec.gov/files/company_tickers.json`; keep the CIK route as the fallback if that
+  lookup is unavailable.
 - If neither ticker nor CIK can be inferred from the sample, return `needs_user_input` and ask the
   user to use ticker/year search or a local server capable of accepting the full file.
 
@@ -243,3 +246,5 @@ Any strategy change should include focused tests for the behavior being changed.
 - 2026-05-25: Added oversized upload identification fallback: hosted uploads send only a bounded
   leading sample, infer ticker or CIK plus fiscal year, then redirect to live SEC extraction without
   running extraction on the partial upload.
+- 2026-05-25: Added SEC company ticker directory reverse lookup so CIK-only uploaded samples can be
+  enriched with ticker and company title before live SEC extraction when SEC access is configured.
