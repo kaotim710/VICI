@@ -175,6 +175,22 @@ This check is informational. It should not discard text by itself because real f
 item number and title across adjacent cells, use older Item 6 conventions, or rely on a Form 10-K
 cross-reference index. Noncanonical status is a review signal, not an automatic extraction failure.
 
+## Upload Intake Fallback
+
+Uploaded filings are parsed in memory and are not persisted as raw storage by default.
+
+- Small uploads can run the extraction pipeline directly through `/api/uploads/extract`.
+- Oversized uploads on hosted environments should not attempt to send the full filing body.
+- For oversized public SEC filings, upload only a bounded leading sample, infer filing metadata, and
+  then continue through live SEC direct-fetch extraction.
+- Metadata identification must not run item extraction. Its pipeline trigger is
+  `uploaded_filing_identify`, with `pipeline.ran=false`.
+- Prefer ticker plus fiscal year when the uploaded sample exposes `dei:TradingSymbol`.
+- If ticker is missing but `dei:EntityCentralIndexKey` is present, route by CIK plus fiscal year
+  instead of guessing a ticker from filename or company name.
+- If neither ticker nor CIK can be inferred from the sample, return `needs_user_input` and ask the
+  user to use ticker/year search or a local server capable of accepting the full file.
+
 ## Testing Expectations
 
 Any strategy change should include focused tests for the behavior being changed.
@@ -224,3 +240,6 @@ Any strategy change should include focused tests for the behavior being changed.
   lower-priority evidence.
 - 2026-05-25: Added cross-reference composite items so multi-page index references can be returned as
   inspectable page spans, and incorporated-reference-only items are explicit note results.
+- 2026-05-25: Added oversized upload identification fallback: hosted uploads send only a bounded
+  leading sample, infer ticker or CIK plus fiscal year, then redirect to live SEC extraction without
+  running extraction on the partial upload.
