@@ -176,3 +176,130 @@ live smoke raw data的部分可以和local seed filing放在另外一個sub page
 ```text
 改用vercel部署呢？
 ```
+
+## Vercel Connected Request
+
+```text
+我已連上線
+```
+
+## Vercel Project Identity Request
+
+```text
+VICI SEC Item Extractor Tim Kao [email redacted]
+```
+
+## Vercel GitHub Auto Deploy Question
+
+```text
+好，目前確認已部署，如果我在本地做更改push到github，vercel的頁面也會隨之改變嗎
+```
+
+## Prompt Logging Pause Request
+
+```text
+好，目前先暫停把prompt push 到文件中
+```
+
+## INTC Cross Reference Index Request
+
+```text
+intc 2025在 在toc尾部有Form 10-K Cross-Reference Index，這邊有對應的頁數，應該先查閱這部分後，才去切？
+intc 2025 item 1 應該從 "our business"開始切
+intc 2025 item 1A 應該從 "risk factor"開始切
+```
+
+## Citi Upload Error Request
+
+```text
+目前無法上傳這個citi檔案：
+error: Upload extraction failed: Unexpected token 'R', "Request En"... is not valid JSON
+Unexpected token 'R', "Request En"... is not valid JSON
+```
+
+## Search State Persistence Request
+
+```text
+當搜完ticker進到頁面後，user再按回上一頁，ticker跟fiscal year選項應該是要保留原本user的輸入值
+```
+
+## Continue Current Work Request
+
+```text
+繼續你目前的動作
+```
+
+## INTC Item Cross Reference Review Request
+
+```text
+intc 2025 item 2 應該只切到 sales and marketing 之前，並且根據前面的toc，Form 10-K Cross-Reference Index這個項目的頁碼數是11跟32，因此32的property也應該放進來
+intc 2025 item 3 應該只切到key terms之前
+intc 2025 item 5 應該只切到53頁的內容
+intc 2025 item 7 也引用了多數頁面，應該將其整合
+intc 2025 item 7A 應該切到risk factor 之前
+intc 2025 item 9A 應該切到exhibit 之前
+intc 2025 item 9B 沒有正確切到，Form 10-K Cross-Reference Index 寫了page 54
+intc 2025 item  item 10, 11, 12, 13, 14 在Form 10-K Cross-Reference Index都是寫同一個reference，但目前11,12,13,14只抓了toc
+
+我認為是不是可以當信心指數過低或是複雜情況時，call llm api來判斷之後的粗體標題不是和當前有關。並且根據不同公司，記下不同的策略，以便之後調取同個公司，不同年度的10-k時，可以快速地的切分，當然這個前提是有一個主策略在
+```
+
+## Vercel Upload Limit Strategy Question
+
+```text
+目前vercel上傳檔案超過限制的部分你怎麼處理
+```
+
+## Oversized Upload Implementation Request
+
+```text
+好，你先做吧
+```
+
+## Oversized Upload Recheck Request
+
+```text
+目前vercel上傳檔案超過限制的部分你怎麼處理
+```
+
+## SEC Ticker Directory Source Request
+
+```text
+https://www.sec.gov/files/company_tickers.json 這裡有ticker 對應cik和公司名稱的對照表
+```
+
+## Citi Upload Still Blocked Request
+
+```text
+我實測了, citi這個檔案還是會被擋下來並且出現一樣的error
+```
+
+## Upload Guidance Copy Request
+
+```text
+"Recommended on Vercel For large public filings, upload uses a small header sample to identify ticker/year, then switches to live SEC extraction. " 這部分可以不用顯示，upload limit也改完suggest 4.5 mb，不要讓user認為有效能不足的問題
+```
+
+## Project Assessment Request
+
+```text
+對於目前的專案你有什麼看法
+```
+
+## Risk Optimization Request
+
+```text
+好，先根據風險去優化目前的內容
+```
+
+## Ticker Or CIK Intake Request
+
+```text
+intake這邊應該要可以輸入ticker或是cik，都要做regex測試
+```
+
+## Prompt Logging Resume Request
+
+```text
+接下來的prompt 寫入
+```

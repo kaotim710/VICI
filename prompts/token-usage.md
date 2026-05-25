@@ -83,3 +83,22 @@ estimated_prompt_tokens =
 | 2026-05-25 | sec_item_format_validation_request | `prompts/2026-05-25-user-prompts.md` |  | 20 | Requested confirming upload and API-call filings expose SEC fixed item title and format checks for every item. |
 | 2026-05-25 | zeabur_deployment_request | `prompts/2026-05-25-user-prompts.md` |  | 8 | Requested deploying the app to Zeabur. |
 | 2026-05-25 | vercel_deployment_alternative_request | `prompts/2026-05-25-user-prompts.md` |  | 9 | Asked whether Vercel can be used instead of Zeabur. |
+| 2026-05-25 | vercel_connected_request | `prompts/2026-05-25-user-prompts.md` |  | 4 | Reported that the Vercel GitHub connection was complete. |
+| 2026-05-25 | vercel_project_identity_request | `prompts/2026-05-25-user-prompts.md` |  | 12 | Provided Vercel project identity details; email redacted in prompt log. |
+| 2026-05-25 | vercel_github_auto_deploy_question | `prompts/2026-05-25-user-prompts.md` |  | 28 | Asked whether pushed GitHub changes update the Vercel page automatically. |
+| 2026-05-25 | prompt_logging_pause_request | `prompts/2026-05-25-user-prompts.md` |  | 11 | Requested temporarily pausing prompt document pushes. |
+| 2026-05-25 | intc_cross_reference_index_request | `prompts/2026-05-25-user-prompts.md` |  | 58 | Requested using INTC 2025 Form 10-K Cross-Reference Index and fixing Item 1/1A starts. |
+| 2026-05-25 | citi_upload_error_request | `prompts/2026-05-25-user-prompts.md` |  | 34 | Reported Citi upload failure with non-JSON Request Entity Too Large style error. |
+| 2026-05-25 | search_state_persistence_request | `prompts/2026-05-25-user-prompts.md` |  | 29 | Requested preserving ticker and fiscal year after returning from a search result page. |
+| 2026-05-25 | continue_current_work_request | `prompts/2026-05-25-user-prompts.md` |  | 5 | Requested continuing the current work. |
+| 2026-05-25 | intc_item_cross_reference_review_request | `prompts/2026-05-25-user-prompts.md` |  | 238 | Reviewed multiple INTC 2025 item boundary/cross-reference issues and proposed LLM/company strategy memory for complex cases. |
+| 2026-05-25 | vercel_upload_limit_strategy_question | `prompts/2026-05-25-user-prompts.md` |  | 13 | Asked how Vercel oversized uploads are currently handled. |
+| 2026-05-25 | oversized_upload_implementation_request | `prompts/2026-05-25-user-prompts.md` |  | 5 | Approved implementing the selected oversized upload path. |
+| 2026-05-25 | oversized_upload_recheck_request | `prompts/2026-05-25-user-prompts.md` |  | 13 | Re-asked how oversized uploads are handled on Vercel. |
+| 2026-05-25 | sec_ticker_directory_source_request | `prompts/2026-05-25-user-prompts.md` |  | 20 | Provided SEC company ticker directory URL for ticker/CIK/company lookup. |
+| 2026-05-25 | citi_upload_still_blocked_request | `prompts/2026-05-25-user-prompts.md` |  | 15 | Reported Citi upload still being blocked with the same error. |
+| 2026-05-25 | upload_guidance_copy_request | `prompts/2026-05-25-user-prompts.md` |  | 50 | Requested removing the Vercel recommendation copy and changing upload limit wording to a 4.5 MB suggestion. |
+| 2026-05-25 | project_assessment_request | `prompts/2026-05-25-user-prompts.md` |  | 8 | Asked for an opinion on the current project. |
+| 2026-05-25 | risk_optimization_request | `prompts/2026-05-25-user-prompts.md` |  | 9 | Requested optimizing current content based on identified project risks. |
+| 2026-05-25 | ticker_or_cik_intake_request | `prompts/2026-05-25-user-prompts.md` |  | 19 | Requested allowing intake to accept ticker or CIK and adding regex tests. |
+| 2026-05-25 | prompt_logging_resume_request | `prompts/2026-05-25-user-prompts.md` |  | 5 | Requested writing the next prompts into the prompt log. |
