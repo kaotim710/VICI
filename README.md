@@ -72,6 +72,25 @@ Recommended Zeabur setup:
 3. Let Zeabur deploy with the root `Dockerfile`.
 4. Set `SEC_USER_AGENT` to a descriptive contact string before using live SEC intake.
 
+## Vercel Deployment
+
+This repo also includes a Vercel adapter:
+
+- `api/index.py` exposes the existing Python `WebUiHandler` as a Vercel Python Function.
+- `vercel.json` rewrites all routes to that function, so `/`, `/upload`, `/sec-live`, `/assets/...`,
+  and `/api/...` keep the same behavior.
+
+Configure these Vercel environment variables:
+
+```bash
+SEC_USER_AGENT="Your Name your.email@example.com"
+MAX_UPLOAD_BYTES=26214400
+```
+
+Vercel does not run the Dockerfile directly. It runs the app as a Python Function, so it is best for
+demo and validation use. Very large filings may hit serverless timeout or upload-size limits; Docker
+deployment remains the better production path for long-running extraction workloads.
+
 ## Seed Dataset
 
 The first test corpus is planned in [fixtures/gold/seed_filings.json](fixtures/gold/seed_filings.json):

@@ -170,3 +170,9 @@ live smoke raw data的部分可以和local seed filing放在另外一個sub page
 ```text
 好，我們部署至zeabur
 ```
+
+## Vercel Deployment Alternative Request
+
+```text
+改用vercel部署呢？
+```

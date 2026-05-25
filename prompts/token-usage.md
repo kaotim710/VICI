@@ -82,3 +82,4 @@ estimated_prompt_tokens =
 | 2026-05-25 | upload_regression_review_request | `prompts/2026-05-25-user-prompts.md` |  | 37 | Requested self-checking uploaded INTC and Citi filings where INTC selected TOC rows and Citi extracted no items. |
 | 2026-05-25 | sec_item_format_validation_request | `prompts/2026-05-25-user-prompts.md` |  | 20 | Requested confirming upload and API-call filings expose SEC fixed item title and format checks for every item. |
 | 2026-05-25 | zeabur_deployment_request | `prompts/2026-05-25-user-prompts.md` |  | 8 | Requested deploying the app to Zeabur. |
+| 2026-05-25 | vercel_deployment_alternative_request | `prompts/2026-05-25-user-prompts.md` |  | 9 | Asked whether Vercel can be used instead of Zeabur. |
