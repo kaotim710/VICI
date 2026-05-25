@@ -5,6 +5,7 @@
   const LOCAL_UPLOAD_LIMIT_BYTES = 25 * 1024 * 1024;
   const UPLOAD_IDENTIFY_MAX_BYTES = 2.5 * 1024 * 1024;
   const UPLOAD_IDENTIFY_HEADROOM_BYTES = 384 * 1024;
+  const MAX_FISCAL_YEAR = 2025;
 
   function apiJson(url, options) {
     return fetch(url, { cache: "no-store", ...(options || {}) }).then(async (response) => {
@@ -67,9 +68,8 @@
   }
 
   function yearOptions() {
-    const current = new Date().getFullYear();
     const years = [];
-    for (let year = current; year >= 1994; year -= 1) years.push(year);
+    for (let year = MAX_FISCAL_YEAR; year >= 1994; year -= 1) years.push(year);
     return years;
   }
 
@@ -80,7 +80,7 @@
     const storedYear = window.sessionStorage.getItem("vici:lastFiscalYear");
     return {
       identifier: (params.get("identifier") || params.get("ticker") || params.get("cik") || storedIdentifier || storedTicker || "AAPL").toUpperCase(),
-      year: params.get("year") || storedYear || "2023",
+      year: params.get("year") || storedYear || String(MAX_FISCAL_YEAR),
     };
   }
 

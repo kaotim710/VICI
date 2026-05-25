@@ -9,3 +9,9 @@ fixtures/filings/raw/*.html
 fixtures/filings/raw/*.txt
 fixtures/filings/raw/*.json
 artifacts/
+
+# Generated evaluation output. Keep source manifests/tests tracked instead.
+reports/*.json
+reports/*.md
+!reports/README.md
+!reports/live_sec_smoke_summary.json

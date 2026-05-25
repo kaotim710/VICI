@@ -77,6 +77,8 @@ class WebUiTests(unittest.TestCase):
         self.assertIn("/^[A-Z][A-Z0-9.-]{0,9}$/", app)
         self.assertIn("new URLSearchParams({ identifier: value, year })", app)
         self.assertIn("h(\"select\"", app)
+        self.assertIn("const MAX_FISCAL_YEAR = 2025", app)
+        self.assertIn("year: params.get(\"year\") || storedYear || String(MAX_FISCAL_YEAR)", app)
         self.assertIn("storedSearchDefaults", app)
         self.assertIn("vici:lastIdentifier", app)
         self.assertIn("vici:lastTicker", app)
