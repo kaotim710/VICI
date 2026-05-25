@@ -125,6 +125,15 @@ class WebUiTests(unittest.TestCase):
         self.assertNotIn('<input name="year"', html)
         self.assertNotIn('<input name="form"', html)
 
+    def test_upload_page_explains_vercel_upload_limit_and_non_json_errors(self):
+        app = FRONTEND_APP.read_text(encoding="utf-8")
+
+        self.assertIn("VERCEL_UPLOAD_LIMIT_BYTES", app)
+        self.assertIn("4.5 MB", app)
+        self.assertIn("parseApiPayload", app)
+        self.assertIn("non_json_response", app)
+        self.assertIn("Upload extraction blocked", app)
+
     def test_upload_extract_runs_in_memory_and_includes_raw_preview(self):
         payload = web_ui.extract_uploaded_filing(
             b"""

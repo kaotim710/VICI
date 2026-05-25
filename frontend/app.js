@@ -1,15 +1,59 @@
 (function () {
   const h = React.createElement;
   const { useEffect, useMemo, useState } = React;
+  const VERCEL_UPLOAD_LIMIT_BYTES = 4.5 * 1024 * 1024;
+  const LOCAL_UPLOAD_LIMIT_BYTES = 25 * 1024 * 1024;
 
   function apiJson(url, options) {
     return fetch(url, { cache: "no-store", ...(options || {}) }).then(async (response) => {
-      const payload = await response.json();
+      const payload = await parseApiPayload(response);
       if (!response.ok) {
-        throw new Error(payload.message || payload.error || "request_failed");
+        throw new Error(payload.message || payload.error || payload.raw || "request_failed");
       }
       return payload;
     });
+  }
+
+  async function parseApiPayload(response) {
+    const contentType = response.headers.get("content-type") || "";
+    const raw = await response.text();
+    if (!raw) return {};
+    if (contentType.includes("application/json")) {
+      try {
+        return JSON.parse(raw);
+      } catch (error) {
+        return { error: "invalid_json", message: `Invalid JSON response: ${error.message}`, raw: raw.slice(0, 240) };
+      }
+    }
+    return {
+      error: response.status === 413 ? "upload_too_large" : "non_json_response",
+      message: response.status === 413
+        ? "Upload is too large for this deployment. Vercel Functions accept request bodies up to 4.5 MB."
+        : raw.slice(0, 240),
+      raw: raw.slice(0, 240),
+    };
+  }
+
+  function uploadLimitBytes() {
+    return window.location.hostname.endsWith(".vercel.app") ? VERCEL_UPLOAD_LIMIT_BYTES : LOCAL_UPLOAD_LIMIT_BYTES;
+  }
+
+  function formatBytes(bytes) {
+    if (!Number.isFinite(bytes)) return "unknown size";
+    const units = ["bytes", "KB", "MB", "GB"];
+    let size = bytes;
+    let unitIndex = 0;
+    while (size >= 1024 && unitIndex < units.length - 1) {
+      size /= 1024;
+      unitIndex += 1;
+    }
+    return `${size.toFixed(unitIndex === 0 ? 0 : 1)} ${units[unitIndex]}`;
+  }
+
+  function uploadLimitMessage(file) {
+    const limit = uploadLimitBytes();
+    if (!file || file.size <= limit) return "";
+    return `${file.name} is ${formatBytes(file.size)}, which exceeds this deployment's ${formatBytes(limit)} upload limit. Use live SEC ticker/year extraction for large public filings, or run the Docker/local server for large file uploads.`;
   }
 
   function cssId(value) {
@@ -198,15 +242,26 @@
     const [status, setStatus] = useState("Choose a filing file to parse.");
     const [error, setError] = useState("");
     const [busy, setBusy] = useState(false);
+    const [fileWarning, setFileWarning] = useState("");
 
     async function submitUpload(event) {
       event.preventDefault();
+      const form = new FormData(event.currentTarget);
+      const selectedFile = form.get("filing");
+      const limitWarning = uploadLimitMessage(selectedFile);
+      if (limitWarning) {
+        setError(limitWarning);
+        setFileWarning(limitWarning);
+        setPayload(null);
+        setStatus(`Upload extraction blocked: ${limitWarning}`);
+        return;
+      }
       setBusy(true);
       setError("");
+      setFileWarning("");
       setPayload(null);
       setStatus("Uploading filing and running extraction...");
       try {
-        const form = new FormData(event.currentTarget);
         const result = await apiJson("/api/uploads/extract", { method: "POST", body: form });
         setPayload(result);
         setStatus(`${result.summary.status} | ${result.summary.item_count} items | TOC ${result.summary.toc_confidence} | warnings ${result.summary.warning_count}`);
@@ -219,7 +274,14 @@
     }
 
     const sidebar = h("form", { className: "upload-form", onSubmit: submitUpload },
-      h("label", null, "Filing file", h("input", { name: "filing", type: "file", accept: ".html,.htm,.txt,text/html,text/plain", required: true })),
+      h("label", null, "Filing file", h("input", {
+        name: "filing",
+        type: "file",
+        accept: ".html,.htm,.txt,text/html,text/plain",
+        required: true,
+        onChange: (event) => setFileWarning(uploadLimitMessage(event.target.files && event.target.files[0])),
+      })),
+      h("p", { className: fileWarning ? "error-text" : "muted" }, fileWarning || `Upload limit on this deployment: ${formatBytes(uploadLimitBytes())}`),
       h("button", { className: "primary-button", type: "submit", disabled: busy }, busy ? h(LoadingDots, { label: "Parsing" }) : "Run upload extraction")
     );
 

@@ -33,6 +33,11 @@ printed page markers. Split table cells such as `1.` / `Business` / `4-36` are v
 evidence. The selected start evidence must be marked with `CROSS_REFERENCE_PAGE_FALLBACK` so the UI
 and reports remain inspectable.
 
+When a cross-reference index points to broad page ranges but the filing also exposes body section
+aliases, prefer the body alias over the first page of the page range. Current deterministic aliases
+are intentionally narrow: `Our Business` for Item 1 and `Risk Factors` for Item 1A. TOC rows and
+running page headers with the same text are filtered out before they can become starts.
+
 ## Boundary Reconstruction
 
 Boundary selection uses the nearest valid next item according to legal 10-K item ordering.
@@ -206,3 +211,6 @@ Any strategy change should include focused tests for the behavior being changed.
   item starts.
 - 2026-05-25: Added per-item SEC format metadata so upload, seed, and live SEC extraction outputs
   explicitly show the expected canonical item title and whether the extracted start context matches it.
+- 2026-05-25: Refined cross-reference fallback ranking so narrow body aliases such as `Our Business`
+  and `Risk Factors` can override broad first-page references while cross-reference index rows remain
+  lower-priority evidence.

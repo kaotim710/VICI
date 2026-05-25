@@ -372,8 +372,9 @@ def _build_success_result(
     )
 
 
-def _start_rank(candidate: HeadingCandidate) -> tuple[int, int, int, int, int, int, int]:
+def _start_rank(candidate: HeadingCandidate) -> tuple[int, int, int, int, int, int, int, int]:
     toc_penalty = 1 if candidate.is_toc_like else 0
+    source_penalty = _start_source_penalty(candidate)
     dense_penalty = 1 if "TOC_DENSE_ITEM_CLUSTER" in candidate.reasons else 0
     near_toc_penalty = 1 if "NEAR_TABLE_OF_CONTENTS_LABEL" in candidate.reasons else 0
     followed_page_penalty = 1 if "TOC_FOLLOWED_BY_PAGE_NUMBER" in candidate.reasons else 0
@@ -381,6 +382,7 @@ def _start_rank(candidate: HeadingCandidate) -> tuple[int, int, int, int, int, i
     title_penalty = 0 if is_expected_title(candidate.item, candidate.normalized_text) else 1
     return (
         toc_penalty,
+        source_penalty,
         followed_page_penalty,
         early_penalty,
         dense_penalty,
@@ -388,6 +390,16 @@ def _start_rank(candidate: HeadingCandidate) -> tuple[int, int, int, int, int, i
         title_penalty,
         candidate.start,
     )
+
+
+def _start_source_penalty(candidate: HeadingCandidate) -> int:
+    if "CROSS_REFERENCE_BODY_ALIAS_FALLBACK" in candidate.reasons:
+        return 0
+    if "NEAR_CROSS_REFERENCE_INDEX_LABEL" in candidate.reasons and "REGEX_ITEM_HEADING" in candidate.reasons:
+        return 2
+    if "CROSS_REFERENCE_PAGE_FALLBACK" in candidate.reasons:
+        return 1
+    return 0
 
 
 def _evidence(kind: str, candidate: HeadingCandidate) -> Evidence:

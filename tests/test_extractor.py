@@ -671,6 +671,52 @@ class ExtractorTests(unittest.TestCase):
         self.assertNotIn("Item 1. Business", item.text)
         self.assertIn("CROSS_REFERENCE_PAGE_FALLBACK", item.start_evidence.reasons)
 
+    def test_cross_reference_body_alias_can_override_first_page_reference(self):
+        filing = """
+        <html><body>
+        <div>Table of Contents</div>
+        <table>
+          <tr><td>Our Business</td><td>6</td></tr>
+          <tr><td>Risk Factors</td><td>37</td></tr>
+        </table>
+        <div>2</div>
+        <div>Overview</div>
+        <p>Introductory overview text that precedes the business section.</p>
+        <div>5</div>
+        <div>Our Business</div>
+        <p>Business body text with enough detail to be treated as narrative content.</p>
+        <div>36</div>
+        <div>Risk Factors</div>
+        <p>Risk body text with enough detail to be treated as narrative content.</p>
+        <div>FORM 10-K CROSS-REFERENCE INDEX</div>
+        <table>
+          <tr><td>Item Number</td><td>Item</td><td>Page</td></tr>
+          <tr><td>Item 1.</td><td>Business:</td><td>Pages 3-5, 18</td></tr>
+          <tr><td></td><td>Description of business</td><td>Pages 3-24, 33</td></tr>
+          <tr><td>Item 1A.</td><td>Risk Factors</td><td>Pages 37-51</td></tr>
+          <tr><td>Item 1C.</td><td>Cybersecurity</td><td>Page 54</td></tr>
+        </table>
+        <div>53</div>
+        <div>Cybersecurity</div>
+        <p>Cybersecurity text.</p>
+        </body></html>
+        """
+
+        result = extract_items(filing, target_items=["1", "1A"])
+        by_item = {item.item: item for item in result.item_results}
+
+        self.assertEqual(by_item["1"].status, "success")
+        self.assertTrue(by_item["1"].text.startswith("Our Business"))
+        self.assertNotIn("Overview", by_item["1"].text)
+        self.assertIn("CROSS_REFERENCE_BODY_ALIAS_FALLBACK", by_item["1"].start_evidence.reasons)
+        self.assertEqual(by_item["1A"].status, "success")
+        self.assertTrue(by_item["1A"].text.startswith("Risk Factors"))
+        self.assertTrue(
+            {"CROSS_REFERENCE_BODY_ALIAS_FALLBACK", "CROSS_REFERENCE_PAGE_FALLBACK"}.intersection(
+                by_item["1A"].start_evidence.reasons
+            )
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -138,6 +138,7 @@ def find_heading_candidates(text: str, blocks: list[NarrativeBlock] | None = Non
         )
     if blocks and _has_cross_reference_index(text):
         candidates.extend(_cross_reference_page_candidates(blocks, candidates))
+        candidates.extend(_cross_reference_body_alias_candidates(blocks, candidates))
         candidates.extend(_cross_reference_alias_candidates(blocks, candidates))
         candidates.sort(key=lambda candidate: (candidate.start, candidate.end, candidate.item))
     return candidates
@@ -448,6 +449,57 @@ def _cross_reference_alias_candidates(
             existing.add(key)
             break
     return candidates
+
+
+def _cross_reference_body_alias_candidates(
+    blocks: list[NarrativeBlock], existing_candidates: Iterable[HeadingCandidate]
+) -> list[HeadingCandidate]:
+    existing = {(candidate.item, candidate.start) for candidate in existing_candidates}
+    aliases = {
+        "1": {"our business"},
+        "1A": {"risk factors"},
+    }
+    candidates: list[HeadingCandidate] = []
+    for index, block in enumerate(blocks):
+        normalized = " ".join(block.text.lower().split()).strip(" :")
+        item = next((candidate_item for candidate_item, labels in aliases.items() if normalized in labels), None)
+        if item is None:
+            continue
+        if _body_alias_is_toc_or_running_header(blocks, index):
+            continue
+        key = (item, block.clean_start)
+        if key in existing:
+            continue
+        text = f"Item {item}. {block.text.strip()}"
+        candidates.append(
+            HeadingCandidate(
+                item=item,
+                start=block.clean_start,
+                end=block.clean_start + len(block.text),
+                text=text,
+                normalized_text=_normalize_heading(text),
+                is_toc_like=False,
+                reasons=["CROSS_REFERENCE_BODY_ALIAS_FALLBACK", "EXPECTED_TITLE_MATCH"],
+                raw_start=block.raw_start,
+                raw_end=block.raw_end,
+                block_index=index,
+                block_tag=block.tag,
+            )
+        )
+        existing.add(key)
+    return candidates
+
+
+def _body_alias_is_toc_or_running_header(blocks: list[NarrativeBlock], index: int) -> bool:
+    prior_context = " ".join(block.text.lower() for block in blocks[max(0, index - 30) : index])
+    if "form 10-k cross-reference index" in prior_context:
+        return True
+    next_texts = [" ".join(block.text.split()) for block in blocks[index + 1 : min(len(blocks), index + 4)]]
+    if next_texts and _looks_like_page_reference(next_texts[0]):
+        return True
+    if len(next_texts) >= 2 and re.fullmatch(r"\d{1,4}", next_texts[0]) and next_texts[1].lower() == "table of contents":
+        return True
+    return False
 
 
 def _alias_is_toc_like(blocks: list[NarrativeBlock], index: int) -> bool:
