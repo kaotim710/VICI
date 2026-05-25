@@ -2423,6 +2423,8 @@ def render_detail(filing_id: str) -> str:
 
 
 def _react_page(title: str) -> str:
+    app_rev = _asset_revision(FRONTEND_DIR / "app.js")
+    css_rev = _asset_revision(FRONTEND_DIR / "styles.css")
     return f"""<!doctype html>
 <html lang="en">
 <head>
@@ -2430,15 +2432,25 @@ def _react_page(title: str) -> str:
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="Cache-Control" content="no-store">
   <title>{title}</title>
-  <link rel="stylesheet" href="/assets/styles.css">
+  <link rel="stylesheet" href="/assets/styles.css?rev={css_rev}">
 </head>
 <body>
   <div id="root"></div>
   <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-  <script src="/assets/app.js"></script>
+  <script src="/assets/app.js?rev={app_rev}"></script>
 </body>
 </html>"""
+
+
+def _asset_revision(path: Path) -> str:
+    commit = os.environ.get("VERCEL_GIT_COMMIT_SHA", "").strip()
+    if commit:
+        return commit[:12]
+    try:
+        return str(int(path.stat().st_mtime))
+    except OSError:
+        return "dev"
 
 
 def _page(title: str, body: str) -> str:

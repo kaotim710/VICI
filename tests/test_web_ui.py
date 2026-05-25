@@ -30,9 +30,18 @@ class WebUiTests(unittest.TestCase):
 
         self.assertIn('id="root"', html)
         self.assertIn("/assets/app.js", html)
+        self.assertIn("/assets/app.js?rev=", html)
+        self.assertIn("/assets/styles.css?rev=", html)
         self.assertIn("Run extraction", app)
         self.assertIn("/api/filings/", app)
         self.assertNotIn("The Company designs", html)
+
+    def test_react_shell_uses_deployment_commit_for_asset_revision(self):
+        with patch.dict("os.environ", {"VERCEL_GIT_COMMIT_SHA": "abcdef1234567890"}):
+            html = web_ui.render_upload_detail()
+
+        self.assertIn("/assets/app.js?rev=abcdef123456", html)
+        self.assertIn("/assets/styles.css?rev=abcdef123456", html)
 
     def test_detail_page_can_render_action_review_snippets(self):
         app = FRONTEND_APP.read_text(encoding="utf-8")
